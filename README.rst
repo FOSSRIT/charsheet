@@ -38,5 +38,4 @@ Blog Planet
 -----------
 
 All of us maintain active blogs which are conglomerated into a blog
-planet hosted at http://foss.rit.edu/. Unfortunately, at the time of this
-writing, the website is temporarily down due to last night's brownout.
+planet hosted at http://foss.rit.edu/planet/.
