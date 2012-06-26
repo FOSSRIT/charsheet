@@ -1,0 +1,26 @@
+Name,Platform,Language,2D/3D/Both,Development Environment,Website,Community Architecture,Researcher's Opinion ,,
+Flashpunk,"Windows, Web, Linux(sometimes), Android, OSX",AS3,2D,None,http://flashpunk.net/,5,4,3,"Engine updated in last 6 months, bugs have been around awhile, but some are fixed, community has a small gruop"
+Monogame,"Windows, Linux, OSX, iOS, Android",C#,Both,None,http://monogame.codeplex.com/,5,4,,
+Starling Framework,"Windows, OSX",AS3,2D,None,http://gamua.com/starling/,5,4,,
+OGRE,"Windows, Linux, OSX",C++,3D,None,http://www.ogre3d.org/,5,4,,
+SQLAlchemy,Python,Python,N/A,None,http://www.sqlalchemy.org/,5,4,,
+Pyramid,Web,Python,2D,None (use virtualenv),http://www.pylonsproject.org/,5,4,,
+Flexible Isometric Free Engine (FIFE),"Windows, Linux, OSX",Python,2D,None,http://fifengine.net/,4,4,2,"Possible use but due to lacks of documentation, community, or many bugs would be a great hinderance"
+Box2D,"Windows, OSX, Linux, Mobile, Web","C++,C#,Java,Python,Actionscript",2D,None,http://box2d.org/,4,4,,
+Delta 3D,"Windows, Linux",Python,3D,None,http://www.delta3d.org/index.php?topic=about,5,3,1,"Should not be used to make Fedora RPG b/c not open source, not appilicable, not enough documentation, too many issues with the tech"
+Netgore,"Windows, Linux, OSX",C#,2D,"Map editor, animation editor, database editor, etc",http://www.netgore.com/,5,3,,
+Love,"PC, Linux, Mac",Lua,2D,None,https://love2d.org/,4,3,Scale for Community Architecture,Reasons Why
+OpenAL,"Windows, Linux, OSX, and more","C, C++, Fortran, Ada, Java",,None,http://connect.creativelabs.com/openal/default.aspx,4,3,1,"Engine has not been updated for a long time, many bugs not that many fixed, community is dead"
+Away 3D,Windows,AS3,3D,Packaged with 3D editing software,http://away3d.com/,4,3,2,"Engine is updated in the last year, bugs are fixed but many remain, community is almost dead"
+3D Rad,Windows,AngelScript(C/C++ like scripting),3D,Game Engine,http://3drad.com/,4,3,4,"Engine is updated in last 2-3 months, some bugs fixed in tracker, community has some active members"
+Clanlib,"Windows, Linux, OSX",C++,2D,None,http://clanlib.org/wiki/Main_Page,4,3,Scale for Researcher's Opinion,
+OpenGL,"Windows, Linux, OSX, and more","C, C++, Fortran, Ada, Java",Both,None,http://www.opengl.org/,4,3,,
+Multiverse Platform,"Windows, Linux, OSX","Java, Python, SQL",3D,"Model Viewer, Terrain Generator, World Editor, Asset Importer,  ",http://www.multiversemmo.com/,2,3,,
+Grit,"Windows, Linux",Lua,3D,3D Model Viewer,http://gritengine.com/,5,2,3,"Not fully capable due to what is needed for Fedora RPG and would need to be reworked, having little documentation also"
+Moai,"Windows, OSX, iOS, Android",C++,"2D, 3D pending",None,http://getmoai.com/,5,2,5,Exactly what is needed to complete the project
+Allegro,"Windows, OSX, iOS, Unix",C,"2D native, 3D with libs like OpenGL",None,http://alleg.sourceforge.net/,4,2,,
+Pygame,"Windows, Linux, OSX",Python,2D (3D would be painful),None,http://www.pygame.org,1,2,,
+Adventure Game Studio (AGS),Windows,Built-in AGS Script,2D,IDE,http://www.adventuregamestudio.co.uk/,4,1,5,"Engine is updated often, bug tracked has bugs fixed swiftly, community that engages with members often and helps with others project"
+ioquake3,"Windows, Linux, OSX","C, C++",3D,Game Engine,http://ioquake3.org/,4,1,4,Exactly what is needed
+Spring Engine,"Windows, Linux, OSX",Lua,3D(Real Time Strategy View),Game Engine,http://springrts.com/,3,1,,
+WorldForge,"Windows, Linux",C++,3D,None,http://www.worldforge.org/,3,1,,
