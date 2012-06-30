@@ -2,6 +2,7 @@
 *~
 *.~
 *#
+envsurf
 
 # Keep outreach stuff out of the repo for now
 outreach/*
