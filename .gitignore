@@ -21,3 +21,6 @@ develop-eggs
 .installed.cfg
 pip-log.txt
 .coverage
+
+# Database stuff
+*.db
