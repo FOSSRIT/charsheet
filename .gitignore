@@ -6,3 +6,22 @@ envsurf
 
 # Keep outreach stuff out of the repo for now
 outreach/*
+
+# Pythonic stuff
+*.pyc
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+pip-log.txt
+.coverage
+
+# Database stuff
+*.db

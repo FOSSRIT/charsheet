@@ -1,5 +1,0 @@
-      [paste.app_factory]
-      main = charsheet:main
-      [console_scripts]
-      initialize_charsheet_db = charsheet.scripts.initializedb:main
-      
