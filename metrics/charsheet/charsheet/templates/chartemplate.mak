@@ -45,7 +45,7 @@
 		<h2>Endorsements: ${cwc.endorsements}</h2>
 		<ul class="badge-list">
 			% for badge in cwc.badges:
-				<li><img class="badge-image" src="${badge.image_uri}"/> ${badge.name}<br/><br/> ${badge.description}</li>
+				<li><img src="${badge.image_uri}"/> ${badge.name}<br/><br/> ${badge.description}</li>
 			% endfor
 		</ul>
    </body>

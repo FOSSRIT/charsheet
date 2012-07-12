@@ -18,6 +18,6 @@ progress::-moz-progress-bar {
     list-style-type: none;
 }
 
-.badge-image {
-    height: 10%;
+.badge-list img {
+    height: 75px;
 }
