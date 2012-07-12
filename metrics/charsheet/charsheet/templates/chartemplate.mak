@@ -9,7 +9,10 @@
 		<h1>${username}</h1>
 		<ul id="user-bio">
 			<li>Location: ${cwc.location}</li>
-			<li>Public Repos: ${github_data['public_repos']}</li>
+			<li>Public GitHub Repos: ${github_data['public_repos']}</li>
+			<li>Ohloh Kudos: ${ohloh_data['kudo_rank']}
+				<span style="font-size: 0.8em">
+					(Ranked no. ${ohloh_data['position']})</li>
 		</ul>
 		<!--#Dot-style attributes Mockup-->
 		<h2>Languages</h2>
