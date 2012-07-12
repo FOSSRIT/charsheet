@@ -8,9 +8,11 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
     'coderwall',
+    'elementtree',
     'pyramid',
     'SQLAlchemy',
     'transaction',
+    'pygithub3',
     'pyramid_tm',
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
@@ -20,7 +22,7 @@ requires = [
 setup(name='charsheet',
       version='0.0',
       description='charsheet',
-      long_description=README + '\n\n' +  CHANGES,
+      long_description=README + '\n\n' + CHANGES,
       classifiers=[
         "Programming Language :: Python",
         "Framework :: Pylons",
@@ -43,4 +45,3 @@ setup(name='charsheet',
       initialize_charsheet_db = charsheet.scripts.initializedb:main
       """,
       )
-

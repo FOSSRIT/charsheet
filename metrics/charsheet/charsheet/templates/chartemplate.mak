@@ -9,6 +9,7 @@
 		<h1>${username}</h1>
 		<ul id="user-bio">
 			<li>Location: ${cwc.location}</li>
+			<li>Public Repos: ${github_data['public_repos']}</li>
 		</ul>
 		<!--#Dot-style attributes Mockup-->
 		<h2>Languages</h2>

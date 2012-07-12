@@ -1,29 +1,18 @@
 from pyramid.response import Response
 from pyramid.view import view_config
 
-from sqlalchemy.exc import DBAPIError
-
-from .models import (
-    DBSession,
-    MyModel,
-    )
-
+import hashlib
 import random
+import urllib
 
-
-@view_config(route_name='home', renderer='templates/mytemplate.pt')
-def my_view(request):
-    try:
-        one = DBSession.query(MyModel).filter(MyModel.name=='one').first()
-    except DBAPIError:
-        return Response(conn_err_msg, content_type='text/plain',
-                status_int=500)
-    return {'one': one, 'project': 'charsheet'}
+from pygithub3 import Github
 
 
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
 def charsheet_view(request):
     username = request.matchdict['username']
+
+    ### Coderwall ###
     from coderwall import CoderWall
 
     cwc = CoderWall(username)
@@ -40,7 +29,51 @@ def charsheet_view(request):
     if username == 'ralphbean':
         stats = [(stats[0][0], 100) for i in range(len(stats))]
 
-    return {'username': username, 'cwc': cwc, 'stats': stats}
+    ### GitHub ###
+    gh = Github()
+    user = gh.users.get(username)
+    user_email = user.email
+    github_dict = {
+        'repos': gh.repos.list(username).all(),
+        'public_repos': user.public_repos,
+        }
+
+    ### Ohloh ###
+
+    # Import ElementTree for XML parsing (Python 2.5+)
+    import elementtree.ElementTree as ET
+
+    # Ohloh requires an API key and the account email, and returns
+    # account information in name: value pairs.
+
+    ohloh_api_key = '1Bwg3nXZa0OAD87lw1B4JA'
+    ohloh_email_hash = hashlib.md5(user_email)
+
+    params = urllib.urlencode({'api_key': ohloh_api_key, 'v': 1})
+    url = "http://www.ohloh.net/accounts/{0}.xml?{1}".format(
+        ohloh_email_hash.hexdigest(), params)
+    ohloh_response = urllib.urlopen(url)
+
+    # Parse response into XML object
+    ohloh_data = ET.parse(ohloh_response)
+
+    # Check if Ohloh returned an error
+    element = ohloh_data.getroot()
+    error = element.find("error")
+    if error:
+        error_message = ET.tostring(error)  # TODO: Make use of this
+        # There was an error. No Ohloh data for us. :(
+        ohloh_dict = None
+    else:
+        ohloh_dict = element.find("result/account")
+
+    return {
+            'username': username,
+            'cwc': cwc,
+            'stats': stats,
+            'github_data': github_dict,
+            'ohloh_data': ohloh_dict,
+           }
 
 
 conn_err_msg = """\
