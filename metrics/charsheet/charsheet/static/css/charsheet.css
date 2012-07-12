@@ -1,7 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
 
+/* Reset */
+html {
+    margin: 0px;
+    padding: 0px;
+}
+
 body {
 	font-family: 'Press Start 2p';
+}
+
+h1 {
+    color: #FFF;
+    background: #000;
+    margin: 0px;
 }
 
 progress {
@@ -14,8 +26,12 @@ progress::-moz-progress-bar {
     background-color:black
 }
 
-.badge-list {
+#user-bio {
     list-style-type: none;
+}
+
+.badge-list {
+    font-size: 0.8em;
 }
 
 .badge-list img {
