@@ -37,4 +37,3 @@ for badge in user.badges:
     print(fab)
     print(fabulous.text.Text(badge.name))
     print(badge.description)
-
