@@ -8,6 +8,8 @@ from .models import (
     MyModel,
     )
 
+import random
+
 
 @view_config(route_name='home', renderer='templates/mytemplate.pt')
 def my_view(request):
@@ -25,7 +27,16 @@ def charsheet_view(request):
     from coderwall import CoderWall
 
     cwc = CoderWall(username)
-    return {'username': username, 'cwc': cwc}
+    stats = [
+        ('274_beer', random.randint(0, 100)),
+        ('241_flash', random.randint(0, 100)),
+        ('313_ax', random.randint(0, 100)),
+        ('022_fire', random.randint(0, 100)),
+        ('012_heart', random.randint(0, 100)),
+        ('308_bomb', random.randint(0, 100)),
+        ('037_credit', random.randint(0, 100)),
+    ]
+    return {'username': username, 'cwc': cwc, 'stats': stats}
 
 
 conn_err_msg = """\

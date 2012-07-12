@@ -22,36 +22,14 @@
 			<img width="1%" src="${request.static_url('charsheet:static/icons/glyphicons_049_star.png')}">
 			<img width="1%" src="${request.static_url('charsheet:static/icons/glyphicons_048_dislikes.png')}">
 			<img width="1%" src="${request.static_url('charsheet:static/icons/glyphicons_048_dislikes.png')}"><br/><br/>
-		<table>
-		<tr>
-			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_274_beer.png')}"></td>
-			<td><progress value="22" max="100"> </progress></td>
-		</tr>
-		<tr>
-			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_241_flash.png')}"></td>
-			<td><progress value="22" max="100"> </progress></td>
-		</tr>
-		<tr>
-			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_313_ax.png')}"></td>
-			<td><progress value="22" max="100"> </progress></td>
-		</tr>
-		<tr>
-			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_022_fire.png')}"></td>
-			<td><progress value="22" max="100"> </progress></td>
-		</tr>
-		<tr>
-			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_012_heart.png')}"></td>
-			<td><progress value="22" max="100"> </progress></td>
-		</tr>
-		<tr>
-			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_308_bomb.png')}"></td>
-			<td><progress value="22" max="100"></progress></td>
-		</tr>
-		<tr>
-			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_037_credit.png')}"></td>
-			<td><progress value="22" max="100"></progress></td>
-		</tr>
-		</table>
+      <table>
+        % for stat_name, value in stats:
+          <tr>
+            <td><img src="${request.static_url('charsheet:static/icons/glyphicons_' + stat_name + '.png')}"></td>
+            <td><progress value="${value}" max="100"> </progress></td>
+          </tr>
+        % endfor
+		  </table>
 		<h2>From: ${cwc.location}</h2>
 		<h2>Endorsements: ${cwc.endorsements}</h2>
 		<ul style="list-style:none">
