@@ -8,6 +8,11 @@ import urllib
 from pygithub3 import Github
 
 
+@view_config(route_name='home', renderer='home.mak')
+def home_view(request):
+    return {}
+
+
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
 def charsheet_view(request):
     username = request.matchdict['username']

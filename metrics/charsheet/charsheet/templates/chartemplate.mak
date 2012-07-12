@@ -64,5 +64,5 @@
 				<tr><td><img src="${badge.image_uri}"/></td><td>${badge.name}</td><td>${badge.description}</td></li>
 			% endfor
 		</table>
-   </body>
+	</body>
 </html>

@@ -15,8 +15,8 @@ requires = [
     'pygithub3',
     'pyramid_tm',
     'pyramid_debugtoolbar',
-    'zope.sqlalchemy',
     'waitress',
+    'zope.sqlalchemy',
     ]
 
 setup(name='charsheet',
