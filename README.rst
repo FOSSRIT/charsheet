@@ -1,8 +1,8 @@
 ==========
-Fedora RPG
+FOSS RPG
 ==========
 
-Designing the Fedora RPG for RIT's 2012 Summer Undergraduate
+Designing the FOSS RPG for RIT's 2012 Summer Undergraduate
 Research Fellowship.
 
 --------
