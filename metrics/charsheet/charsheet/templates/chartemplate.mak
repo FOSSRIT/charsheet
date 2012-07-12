@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'				rel='stylesheet' type='text/css'>
+		<link href='${request.static_url('charsheet:static/css/charsheet.css')}' rel='stylesheet' type='text/css'>
     	<title>Character Sheet for ${username}</title>
 	</head>
     <body>
@@ -37,7 +37,8 @@
 		</p>
 		<p><strong>Coderwall Endorsements</strong>
 			% for endorsement in range(cwc.endorsements):
-				<img width="1%" src="${request.static_url('charsheet:static/icons/glyphicons_049_star.png')}">
+				<img width="1%"
+				src="${request.static_url('charsheet:static/icons/glyphicons_049_star.png')}">
 			% endfor
 		</p>
       	<table>
