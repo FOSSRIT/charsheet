@@ -1,0 +1,23 @@
+@import url(http://fonts.googleapis.com/css?family=Press+Start+2P);
+
+body {
+	font-family: 'Press Start 2p';
+}
+
+progress {
+    background-color: #FFF;
+}
+
+progress::-webkit-progress-bar-value,
+progress::-webkit-progress-value,
+progress::-moz-progress-bar {
+    background-color:black
+}
+
+.badge-list {
+    list-style-type: none;
+}
+
+.badge-image {
+    height: 10%;
+}

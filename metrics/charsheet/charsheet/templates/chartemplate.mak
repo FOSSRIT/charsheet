@@ -1,17 +1,9 @@
+<!DOCTYPE html>
 <html>
-    <title>${username} Character Sheet</title>
 	<head>
-		<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
-		<style>
-			body {
-			font-family: 'Press Start 2p';
-			}
-			progress {
-			background-color:white
-			}
-			progress::-webkit-progress-bar-value, progress::-webkit-progress-value,
-			progress::-moz-progress-bar {background-color:black}
-		</style>
+		<meta charset="UTF-8">
+		<link href='${request.static_url('charsheet:static/css/charsheet.css')}' rel='stylesheet' type='text/css'>
+    	<title>Character Sheet for ${username}</title>
 	</head>
     <body>
 		<h2 class="title">Username: ${username}</h2>
@@ -51,9 +43,9 @@
 		-->
 		<h2>From: ${cwc.location}</h2>
 		<h2>Endorsements: ${cwc.endorsements}</h2>
-		<ul style="list-style:none">
+		<ul class="badge-list">
 			% for badge in cwc.badges:
-				<li><img height="10%" src="${badge.image_uri}"/> ${badge.name}<br/><br/> ${badge.description}</li>
+				<li><img class="badge-image" src="${badge.image_uri}"/> ${badge.name}<br/><br/> ${badge.description}</li>
 			% endfor
    </body>
 </html>
