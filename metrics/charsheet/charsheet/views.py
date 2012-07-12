@@ -41,6 +41,7 @@ def charsheet_view(request):
     github_dict = {
         'repos': gh.repos.list(username).all(),
         'public_repos': user.public_repos,
+        'avatar_url': user.avatar_url,
         }
 
     ### Ohloh ###

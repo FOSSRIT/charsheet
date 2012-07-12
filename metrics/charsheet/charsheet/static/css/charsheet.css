@@ -30,6 +30,10 @@ progress::-moz-progress-bar {
     list-style-type: none;
 }
 
+.avatar {
+    border: 2px solid #000;
+}
+
 .badge-list {
     font-size: 0.8em;
 }
