@@ -15,6 +15,7 @@
 	</head>
     <body>
 		<h2 class="title">Username: ${username}</h2>
+		<!--#Dot-style attributes Mockup-->
 		<strong>Foo</strong>
 			<img width="1%" src="${request.static_url('charsheet:static/icons/glyphicons_049_star.png')}">
 			<img width="1%" src="${request.static_url('charsheet:static/icons/glyphicons_049_star.png')}">
@@ -24,25 +25,33 @@
 		<table>
 		<tr>
 			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_274_beer.png')}"></td>
-			<td><progress value="22" max="100">
-			</progress></td>
+			<td><progress value="22" max="100"> </progress></td>
 		</tr>
 		<tr>
 			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_241_flash.png')}"></td>
-			<td><progress value="22" max="100">
-			</progress></td>
+			<td><progress value="22" max="100"> </progress></td>
+		</tr>
+		<tr>
+			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_313_ax.png')}"></td>
+			<td><progress value="22" max="100"> </progress></td>
+		</tr>
+		<tr>
+			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_022_fire.png')}"></td>
+			<td><progress value="22" max="100"> </progress></td>
+		</tr>
+		<tr>
+			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_012_heart.png')}"></td>
+			<td><progress value="22" max="100"> </progress></td>
+		</tr>
+		<tr>
+			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_308_bomb.png')}"></td>
+			<td><progress value="22" max="100"></progress></td>
+		</tr>
+		<tr>
+			<td><img src="${request.static_url('charsheet:static/icons/glyphicons_037_credit.png')}"></td>
+			<td><progress value="22" max="100"></progress></td>
 		</tr>
 		</table>
-			<img src="${request.static_url('charsheet:static/icons/glyphicons_313_ax.png')}"><progress value="22" max="100">
-		</progress><br/>
-			<img src="${request.static_url('charsheet:static/icons/glyphicons_022_fire.png')}"><progress value="22" max="100">
-		</progress><br/>
-			<img src="${request.static_url('charsheet:static/icons/glyphicons_012_heart.png')}"><progress value="22" max="100">
-		</progress><br/>
-			<img src="${request.static_url('charsheet:static/icons/glyphicons_308_bomb.png')}"><progress value="22" max="100">
-		</progress><br/>
-			<img src="${request.static_url('charsheet:static/icons/glyphicons_037_credit.png')}"><progress value="22" max="100">
-		</progress>
 		<h2>From: ${cwc.location}</h2>
 		<h2>Endorsements: ${cwc.endorsements}</h2>
 		<ul style="list-style:none">
