@@ -36,6 +36,10 @@ def charsheet_view(request):
         ('308_bomb', random.randint(0, 100)),
         ('037_credit', random.randint(0, 100)),
     ]
+
+    if username == 'ralphbean':
+        stats = [(stats[0][0], 100) for i in range(len(stats))]
+
     return {'username': username, 'cwc': cwc, 'stats': stats}
 
 
