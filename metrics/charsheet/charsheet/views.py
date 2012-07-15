@@ -77,7 +77,9 @@ def charsheet_view(request):
         # There was an error. No Ohloh data for us. :(
         ohloh_dict = None
     else:
-        ohloh_dict = {}
+        ohloh_dict = {
+            'id': element.find("result/account/id").text,
+        }
         for node in element.find("result/account/kudo_score"):
             ohloh_dict[node.tag] = node.text
 

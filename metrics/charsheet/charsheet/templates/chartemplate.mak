@@ -15,7 +15,9 @@
 		<h1>Character Record Sheet</h1>
 		<div class="container_12">
 			<div class="clear"></div>
+			
 			<!-- GENERAL INFORMATION -->
+			
 			<div class="grid_4">
 				<table>
 					<tr><td>Handle:</td><td>${username}</td></tr>
@@ -38,7 +40,9 @@
 				<p>${github_data['bio']}</p>
 			</div>
 			<div class="clear"></div>
+			
 			<!-- ATTRIBUTES  -->
+			
 			<div class="grid_12">
 				<h2>Attributes</h2>
 			</div>
@@ -47,6 +51,58 @@
 			<div class="grid_4">
 			</div>
 			<div class="grid_4">
+			</div>
+			<div class="clear">
+			</div>
+			
+			<!-- SKILLS  -->
+			
+			<div class="grid_12">
+				<h2>Skills</h2>
+			</div>
+			<div class="grid_4">
+			</div>
+			<div class="grid_4">
+			</div>
+			<div class="grid_4">
+			</div>
+			<div class="clear">
+			</div>
+			
+			<!-- STATISTICS  -->
+			
+			<div class="grid_12">
+				<h2>Statistics</h2>
+			</div>
+			<div class="grid_4">
+				<table>
+					<tr><td>Public GitHub Repos:</td>
+						<td>${github_data['public_repos']}</td></tr>
+					<tr><td></td><td></td></tr>
+					<tr><td></td><td></td></tr>
+				</table>
+			</div>
+			<div class="grid_4">
+				<table>
+					<tr><td>Ohloh profile:</td><td><a href=
+						'http://www.ohloh.net/accounts/
+						${ohloh_data['id']}?ref=Detailed'
+						target='_top'>
+					<img
+						alt='Ohloh profile'
+						border='0' height='35'
+						src='http://www.ohloh.net/accounts/${ohloh_data['id']}
+							/widgets/account_detailed.gif'
+						width='191' />
+					</a></td></tr>
+					<tr><td>Ohloh Rank:</td>
+						<td>${ohloh_data['kudo_rank']}</td></tr>
+					<tr><td></td><td></td></tr>
+				</table>
+			</div>
+			<div class="grid_4">
+			</div>
+			<div class="clear">
 			</div>
 		</div>
 		<ul id="user-bio">
