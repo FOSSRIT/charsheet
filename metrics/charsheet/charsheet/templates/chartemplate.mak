@@ -47,10 +47,25 @@
 				<h2>Attributes</h2>
 			</div>
 			<div class="grid_4">
+				<table>
+					<tr><td>Attribute 1:</td><td>value</td></tr>
+					<tr><td>Attribute 2:</td><td>value</td></tr>
+					<tr><td>Attribute 3:</td><td>value</td></tr>
+				</table>
 			</div>
 			<div class="grid_4">
+				<table>
+					<tr><td>Attribute 4:</td><td>value</td></tr>
+					<tr><td>Attribute 5:</td><td>value</td></tr>
+					<tr><td>Attribute 6:</td><td>value</td></tr>
+				</table>
 			</div>
 			<div class="grid_4">
+				<table>
+					<tr><td>Attribute 7:</td><td>value</td></tr>
+					<tr><td>Attribute 8:</td><td>value</td></tr>
+					<tr><td>Attribute 9:</td><td>value</td></tr>
+				</table>
 			</div>
 			<div class="clear">
 			</div>
@@ -61,10 +76,40 @@
 				<h2>Skills</h2>
 			</div>
 			<div class="grid_4">
+				<table>
+					<tr><td>Skill 1:</td><td>value</td></tr>
+					<tr><td>Skill 2:</td><td>value</td></tr>
+					<tr><td>Skill 3:</td><td>value</td></tr>
+					<tr><td>Skill 4:</td><td>value</td></tr>
+					<tr><td>Skill 5:</td><td>value</td></tr>
+					<tr><td>Skill 6:</td><td>value</td></tr>
+					<tr><td>Skill 7:</td><td>value</td></tr>
+					<tr><td>Skill 8:</td><td>value</td></tr>
+				</table>
 			</div>
 			<div class="grid_4">
+				<table>
+					<tr><td>Skill 9:</td><td>value</td></tr>
+					<tr><td>Skill 10:</td><td>value</td></tr>
+					<tr><td>Skill 11:</td><td>value</td></tr>
+					<tr><td>Skill 12:</td><td>value</td></tr>
+					<tr><td>Skill 13:</td><td>value</td></tr>
+					<tr><td>Skill 14:</td><td>value</td></tr>
+					<tr><td>Skill 15:</td><td>value</td></tr>
+					<tr><td>Skill 16:</td><td>value</td></tr>
+				</table>
 			</div>
 			<div class="grid_4">
+				<table>
+					<tr><td>Skill 17:</td><td>value</td></tr>
+					<tr><td>Skill 18:</td><td>value</td></tr>
+					<tr><td>Skill 19:</td><td>value</td></tr>
+					<tr><td>Skill 20:</td><td>value</td></tr>
+					<tr><td>Skill 21:</td><td>value</td></tr>
+					<tr><td>Skill 22:</td><td>value</td></tr>
+					<tr><td>Skill 23:</td><td>value</td></tr>
+					<tr><td>Skill 24:</td><td>value</td></tr>
+				</table>
 			</div>
 			<div class="clear">
 			</div>
@@ -111,51 +156,15 @@
 			</div>
 			<div class="clear">
 			</div>
+			<div class="grid_12">
+				<h2>Coderwall Achievements</h2>
+				<table class="badge-list">
+					% for badge in cwc.badges:
+						<tr><td><img src="${badge.image_uri}"/></td>
+						<td>${badge.name}</td><td>${badge.description}</td></tr>
+					% endfor
+				</table>
+			</div>
 		</div>
-		<!--#Dot-style attributes Mockup-->
-		<h2>Languages</h2>
-		<div align="left" id="languages">
-		<p><strong>Foo</strong>
-			<img width="1%"
-				src="${request.static_url(
-					'charsheet:static/icons/glyphicons_049_star.png')}">
-			<img width="1%"
-				src="${request.static_url(
-					'charsheet:static/icons/glyphicons_049_star.png')}">
-			<img width="1%"
-				src="${request.static_url(
-					'charsheet:static/icons/glyphicons_049_star.png')}">
-			<img width="1%"
-				src="${request.static_url(
-					'charsheet:static/icons/glyphicons_048_dislikes.png')}">
-			<img width="1%"
-				src="${request.static_url(
-					'charsheet:static/icons/glyphicons_048_dislikes.png')}">
-		</p>
-      	<table>
-        % for stat_name, value in stats:
-          <tr>
-            <td><img src="${request.static_url('charsheet:static/icons/glyphicons_' + stat_name + '.png')}"></td>
-            <td><progress value="${value}" max="100"> </progress></td>
-          </tr>
-        % endfor
-		</table>
-		<!--
-		% for a in ['one', 'two', 'three', 'four', 'five']:
-			% if a[0] == 't':
-			<strong>its two or three</strong>
-			% elif a[0] == 'f':
-			<em>four/five</em>
-			% else:
-			one
-			% endif
-		% endfor
-		-->
-		<h2>Coderwall Achievements</h2>
-		<table class="badge-list">
-			% for badge in cwc.badges:
-				<tr><td><img src="${badge.image_uri}"/></td><td>${badge.name}</td><td>${badge.description}</td></li>
-			% endfor
-		</table>
 	</body>
 </html>
