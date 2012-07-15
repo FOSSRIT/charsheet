@@ -14,6 +14,7 @@
     <body>
 		<h1>Character Record Sheet</h1>
 		<div class="container_12">
+			<div class="clear"></div>
 			<!-- GENERAL INFORMATION -->
 			<div class="grid_4">
 				<table>
@@ -36,6 +37,7 @@
 				<img class="avatar" src="${github_data['avatar_url']}" />
 				<p>${github_data['bio']}</p>
 			</div>
+			<div class="clear"></div>
 			<!-- ATTRIBUTES  -->
 			<div class="grid_12">
 				<h2>Attributes</h2>

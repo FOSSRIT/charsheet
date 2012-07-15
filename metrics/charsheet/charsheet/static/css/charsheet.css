@@ -8,7 +8,11 @@ html {
 
 body {
 	font-family: 'Press Start 2p';
-    font-size: 10px;
+}
+
+p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul,
+pre, table, address, fieldset, figure {
+    margin-bottom: 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -18,11 +22,11 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     color: #FFF;
     background: #000;
-    margin: 0px;
 }
 
-p {
+p, table {
     line-height: 140%;
+    font-size: 10px;
 }
 
 td {
