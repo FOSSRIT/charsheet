@@ -34,6 +34,10 @@ def charsheet_view(request):
     if username == 'ralphbean':
         stats = [(stats[0][0], 100) for i in range(len(stats))]
 
+    coderwall_dict = {
+        'endorsements': cwc.endorsements,
+    }
+
     ### GitHub ###
     gh = Github()
     user = gh.users.get(username)
@@ -87,6 +91,7 @@ def charsheet_view(request):
             'username': username,
             'cwc': cwc,
             'stats': stats,
+            'coderwall_data': coderwall_dict,
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,
            }

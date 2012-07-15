@@ -84,12 +84,12 @@
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Ohloh profile:</td><td><a href=
+					<tr><td>Ohloh Profile:</td><td><a href=
 						'http://www.ohloh.net/accounts/
 						${ohloh_data['id']}?ref=Detailed'
 						target='_top'>
 					<img
-						alt='Ohloh profile'
+						alt='Ohloh Profile'
 						border='0' height='35'
 						src='http://www.ohloh.net/accounts/${ohloh_data['id']}
 							/widgets/account_detailed.gif'
@@ -101,18 +101,17 @@
 				</table>
 			</div>
 			<div class="grid_4">
+				<table>
+					<tr><td>Coderwall Endorsements:</td>
+						<td>
+						${coderwall_data['endorsements']}
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="clear">
 			</div>
 		</div>
-		<ul id="user-bio">
-			<li><img class="avatar" src="${github_data['avatar_url']}" /></li>
-			<li>Location: ${cwc.location}</li>
-			<li>Public GitHub Repos: ${github_data['public_repos']}</li>
-			<li>Ohloh Kudos: ${ohloh_data['kudo_rank']}
-				<span style="font-size: 0.8em">
-					(Ranked no. ${ohloh_data['position']})</li>
-		</ul>
 		<!--#Dot-style attributes Mockup-->
 		<h2>Languages</h2>
 		<div align="left" id="languages">
@@ -132,12 +131,6 @@
 			<img width="1%"
 				src="${request.static_url(
 					'charsheet:static/icons/glyphicons_048_dislikes.png')}">
-		</p>
-		<p><strong>Coderwall Endorsements</strong>
-			% for endorsement in range(cwc.endorsements):
-				<img width="1%"
-				src="${request.static_url('charsheet:static/icons/glyphicons_049_star.png')}">
-			% endfor
 		</p>
       	<table>
         % for stat_name, value in stats:
