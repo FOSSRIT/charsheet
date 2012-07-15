@@ -39,10 +39,12 @@ def charsheet_view(request):
     user = gh.users.get(username)
     user_email = user.email
     github_dict = {
-        'repos': gh.repos.list(username).all(),
-        'public_repos': user.public_repos,
         'avatar_url': user.avatar_url,
         'bio': user.bio,
+        'email': user.email,
+        'name': user.name,
+        'public_repos': user.public_repos,
+        'repos': gh.repos.list(username).all(),
         }
 
     ### Ohloh ###

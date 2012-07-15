@@ -13,6 +13,33 @@
 	</head>
     <body>
 		<h1>${username}</h1>
+		<div class="container_12">
+			<!-- GENERAL INFORMATION -->
+			<div class="grid_4">
+				<table>
+					<tr><td>Handle:</td><td>${username}</td></tr>
+					<tr><td>Name:</td><td>${github_data['name']}</td></tr>
+					<tr><td>Email:</td><td>${github_data['email']}</td></tr>
+				</table>
+			</div>
+			<div class="grid_4">
+				<table>
+					<tr><td>Handle:</td><td>${username}</td></tr>
+					<tr><td>Name:</td><td>${github_data['name']}</td></tr>
+					<tr><td>Email:</td><td>${github_data['email']}</td></tr>
+				</table>
+			</div>
+			<!-- ATTRIBUTES  -->
+			<div class="grid_12">
+				<h2>Attributes</h2>
+			</div>
+			<div class="grid_4">
+			</div>
+			<div class="grid_4">
+			</div>
+			<div class="grid_4">
+			</div>
+		</div>
 		<ul id="user-bio">
 			<li><img class="avatar" src="${github_data['avatar_url']}" /></li>
 			<li>Location: ${cwc.location}</li>
