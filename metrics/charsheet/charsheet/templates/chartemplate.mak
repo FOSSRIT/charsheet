@@ -12,7 +12,7 @@
     	<title>Character Sheet for ${username}</title>
 	</head>
     <body>
-		<h1>${username}</h1>
+		<h1>Character Record Sheet</h1>
 		<div class="container_12">
 			<!-- GENERAL INFORMATION -->
 			<div class="grid_4">
@@ -24,10 +24,17 @@
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Handle:</td><td>${username}</td></tr>
-					<tr><td>Name:</td><td>${github_data['name']}</td></tr>
-					<tr><td>Email:</td><td>${github_data['email']}</td></tr>
+					<tr><td>Location:</td>
+						<td>${github_data['location']}</td></tr>
+					<tr><td>Company:</td><td>${github_data['company']}</td></tr>
+					<tr><td>Blog:</td>
+						<td><a href="${github_data['blog']}">[Link]</a>
+						</td></tr>
 				</table>
+			</div>
+			<div class="grid_4">
+				<img class="avatar" src="${github_data['avatar_url']}" />
+				<p>${github_data['bio']}</p>
 			</div>
 			<!-- ATTRIBUTES  -->
 			<div class="grid_12">
