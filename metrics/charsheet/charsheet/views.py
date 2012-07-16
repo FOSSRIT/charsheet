@@ -42,16 +42,37 @@ def charsheet_view(request):
     gh = Github()
     user = gh.users.get(username)
     user_email = user.email
+
+    # Get lines written per language and number of times language is used
+    user_repos = []
+    user_languages = {}  # Structured as language: lines
+    for page in gh.repos.list(user=username):  # Results are paginated.
+        for repo in page:
+            user_repos.append(repo)
+    for repo in user_repos:
+        repo_languages = gh.repos.list_languages(user=username, repo=repo.name)
+        for language in repo_languages:
+            if language in user_languages.keys():
+                user_languages[language] += repo_languages[language]
+            else:
+                user_languages[language] = repo_languages[language]
+
+    total_lines = 0
+    for language, lines in user_languages.items():
+        total_lines += lines
+
     github_dict = {
         'avatar_url': user.avatar_url,
         'bio': user.bio,
         'blog': user.blog,
         'company': user.company,
         'email': user.email,
+        'languages': user_languages,
         'location': user.location,
         'name': user.name,
         'public_repos': user.public_repos,
         'repos': gh.repos.list(username).all(),
+        'total_lines': total_lines,
         }
 
     ### Ohloh ###

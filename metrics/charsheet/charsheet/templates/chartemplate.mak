@@ -127,7 +127,8 @@
 				<table>
 					<tr><td>Public GitHub Repos:</td>
 						<td>${github_data['public_repos']}</td></tr>
-					<tr><td></td><td></td></tr>
+					<tr><td>Total Lines in Repos:</td>
+						<td>${github_data['total_lines']}</td></tr>
 					<tr><td></td><td></td></tr>
 				</table>
 			</div>
