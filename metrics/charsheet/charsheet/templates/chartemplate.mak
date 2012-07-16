@@ -9,6 +9,10 @@
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
+		<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
+			media='all' rel='stylesheet' type='text/css'>
+		<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
+			</script>
     	<title>Character Sheet for ${username}</title>
 	</head>
     <body>
@@ -150,6 +154,12 @@
 					<tr><td>Coderwall Endorsements:</td>
 						<td>
 						${coderwall_data['endorsements']}
+						</td>
+					</tr>
+					<tr><td colspan='2'>
+						<section class="coderwall"
+							data-coderwall-username="${username}"
+							data-coderwall-orientation="vertical"></section>
 						</td>
 					</tr>
 				</table>
