@@ -1,3 +1,7 @@
+from pyramid.httpexceptions import (
+    HTTPFound,
+    HTTPNotFound,
+    )
 from pyramid.response import Response
 from pyramid.view import view_config
 
@@ -13,67 +17,72 @@ def home_view(request):
     return {}
 
 
+@view_config(route_name='error', renderer='error.mak')
+def error_view(request):
+    return {
+        'error_message': "Error"
+    }
+
+
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
 def charsheet_view(request):
     username = request.matchdict['username']
+    user_email = None
 
     ### Coderwall ###
     from coderwall import CoderWall
 
-    cwc = CoderWall(username)
-    stats = [
-        ('274_beer', random.randint(0, 100)),
-        ('241_flash', random.randint(0, 100)),
-        ('313_ax', random.randint(0, 100)),
-        ('022_fire', random.randint(0, 100)),
-        ('012_heart', random.randint(0, 100)),
-        ('308_bomb', random.randint(0, 100)),
-        ('037_credit', random.randint(0, 100)),
-    ]
-
-    if username == 'ralphbean':
-        stats = [(stats[0][0], 100) for i in range(len(stats))]
-
-    coderwall_dict = {
-        'endorsements': cwc.endorsements,
-    }
+    try:
+        cwc = CoderWall(username)
+        coderwall_dict = {
+            'endorsements': cwc.endorsements,
+        }
+    except NameError:
+        print "INVALID CODERWALL USERNAME"
+        return HTTPFound(location=request.route_url('error',
+            error_message="Username not found on Coderwall"))
 
     ### GitHub ###
     gh = Github()
-    user = gh.users.get(username)
-    user_email = user.email
+    try:
+        user = gh.users.get(username)
+        user_email = user.email
+        # Get lines written per language and number of times language is used
+        user_repos = []
+        user_languages = {}  # Structured as language: lines
+        for page in gh.repos.list(user=username):  # Results are paginated.
+            for repo in page:
+                user_repos.append(repo)
+        for repo in user_repos:
+            repo_languages = gh.repos.list_languages(
+                user=username, repo=repo.name)
+            for language in repo_languages:
+                if language in user_languages.keys():
+                    user_languages[language] += repo_languages[language]
+                else:
+                    user_languages[language] = repo_languages[language]
 
-    # Get lines written per language and number of times language is used
-    user_repos = []
-    user_languages = {}  # Structured as language: lines
-    for page in gh.repos.list(user=username):  # Results are paginated.
-        for repo in page:
-            user_repos.append(repo)
-    for repo in user_repos:
-        repo_languages = gh.repos.list_languages(user=username, repo=repo.name)
-        for language in repo_languages:
-            if language in user_languages.keys():
-                user_languages[language] += repo_languages[language]
-            else:
-                user_languages[language] = repo_languages[language]
+        total_lines = 0
+        for language, lines in user_languages.items():
+            total_lines += lines
 
-    total_lines = 0
-    for language, lines in user_languages.items():
-        total_lines += lines
-
-    github_dict = {
-        'avatar_url': user.avatar_url,
-        'bio': user.bio,
-        'blog': user.blog,
-        'company': user.company,
-        'email': user.email,
-        'languages': user_languages,
-        'location': user.location,
-        'name': user.name,
-        'public_repos': user.public_repos,
-        'repos': gh.repos.list(username).all(),
-        'total_lines': total_lines,
-        }
+        github_dict = {
+            'avatar_url': user.avatar_url,
+            'bio': user.bio,
+            'blog': user.blog,
+            'company': user.company,
+            'email': user.email,
+            'languages': user_languages,
+            'location': user.location,
+            'name': user.name,
+            'public_repos': user.public_repos,
+            'repos': gh.repos.list(username).all(),
+            'total_lines': total_lines,
+            }
+    except:
+        print "UNABLE TO CONNECT TO GITHUB WITH GIVEN USERNAME"
+        return HTTPFound(location=request.route_url('error',
+            error_message="Username not found on GitHub"))
 
     ### Ohloh ###
 
@@ -83,7 +92,7 @@ def charsheet_view(request):
     # Ohloh requires an API key and the account email, and returns
     # account information in name: value pairs.
 
-    ohloh_api_key = '1Bwg3nXZa0OAD87lw1B4JA'
+    ohloh_api_key = '1Bwg3nXZa0OAD87lw1B4JA'  # Remove before production
     ohloh_email_hash = hashlib.md5(user_email)
 
     params = urllib.urlencode({'api_key': ohloh_api_key, 'v': 1})
@@ -98,9 +107,9 @@ def charsheet_view(request):
     element = ohloh_data.getroot()
     error = element.find("error")
     if error:
-        error_message = ET.tostring(error)  # TODO: Make use of this
         # There was an error. No Ohloh data for us. :(
-        ohloh_dict = None
+        return HTTPFound(location=request.route_url('error',
+            error_message=ET.tostring(error)))
     else:
         ohloh_dict = {
             'id': element.find("result/account/id").text,
@@ -111,12 +120,10 @@ def charsheet_view(request):
     return {
             'username': username,
             'cwc': cwc,
-            'stats': stats,
             'coderwall_data': coderwall_dict,
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,
            }
-
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
