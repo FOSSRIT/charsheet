@@ -14,6 +14,7 @@ def main(global_config, **settings):
     session_factory = UnencryptedCookieSessionFactoryConfig('supasecret')
     # configuration setup
     config = Configurator(settings=settings, session_factory=session_factory)
+    config.include('pyramid_debugtoolbar')
     # static view setup
     config.add_static_view('static', 'static', cache_max_age=3600)
     # routes setup

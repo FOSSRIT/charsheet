@@ -45,6 +45,11 @@ def charsheet_view(request):
     gh = Github()
     try:
         user = gh.users.get(username)
+    except NameError:
+        request.session.flash('Error: Unable to find username on GitHub.')
+        return {}
+
+    try:
         user_email = user.email
         # Get lines written per language and number of times language is used
         user_repos = []
@@ -54,7 +59,7 @@ def charsheet_view(request):
                 user_repos.append(repo)
         for repo in user_repos:
             repo_languages = gh.repos.list_languages(
-                user=username, repo=repo.name)
+                user=repo.owner.login, repo=repo.name)
             for language in repo_languages:
                 if language in user_languages.keys():
                     user_languages[language] += repo_languages[language]
@@ -78,8 +83,8 @@ def charsheet_view(request):
             'repos': gh.repos.list(username).all(),
             'total_lines': total_lines,
             }
-    except:
-        request.session.flash('Error: Unable to find username on GitHub.')
+    except NameError:
+        request.session.flash('Error: Problem communicating with GitHub.')
         return {}
 
     ### Ohloh ###
