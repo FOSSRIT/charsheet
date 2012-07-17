@@ -38,7 +38,6 @@ def charsheet_view(request):
             'endorsements': cwc.endorsements,
         }
     except NameError:
-        print "INVALID CODERWALL USERNAME"
         query = dict(error_message="Username not found on Coderwall")
         raise HTTPFound(location=request.route_url('error', _query=query))
 
@@ -80,7 +79,6 @@ def charsheet_view(request):
             'total_lines': total_lines,
             }
     except:
-        print "UNABLE TO CONNECT TO GITHUB WITH GIVEN USERNAME"
         query = dict(error_message="Username not found on GitHub")
         raise HTTPFound(location=request.route_url('error', _query=query))
 
