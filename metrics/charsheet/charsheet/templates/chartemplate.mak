@@ -161,7 +161,7 @@
 						width='191' />
 					</a></td></tr>
 					<tr><td>Ohloh Rank:</td>
-						<td>${ohloh_data['kudo_rank']}</td></tr>
+						<td>${ohloh_data['position']}</td></tr>
 					<tr><td></td><td></td></tr>
 				</table>
 			</div>
