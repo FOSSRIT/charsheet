@@ -20,7 +20,7 @@ def home_view(request):
 @view_config(route_name='error', renderer='error.mak')
 def error_view(request):
     return {
-        'error_message': "Error"
+        'error_message': request.params.get('error_message', 'Some error.'),
     }
 
 
@@ -39,8 +39,8 @@ def charsheet_view(request):
         }
     except NameError:
         print "INVALID CODERWALL USERNAME"
-        return HTTPFound(location=request.route_url('error',
-            error_message="Username not found on Coderwall"))
+        query = dict(error_message="Username not found on Coderwall")
+        raise HTTPFound(location=request.route_url('error', _query=query))
 
     ### GitHub ###
     gh = Github()
@@ -81,8 +81,8 @@ def charsheet_view(request):
             }
     except:
         print "UNABLE TO CONNECT TO GITHUB WITH GIVEN USERNAME"
-        return HTTPFound(location=request.route_url('error',
-            error_message="Username not found on GitHub"))
+        query = dict(error_message="Username not found on GitHub")
+        raise HTTPFound(location=request.route_url('error', _query=query))
 
     ### Ohloh ###
 
@@ -108,8 +108,8 @@ def charsheet_view(request):
     error = element.find("error")
     if error:
         # There was an error. No Ohloh data for us. :(
-        return HTTPFound(location=request.route_url('error',
-            error_message=ET.tostring(error)))
+        query = dict(error_message=ET.tostring(error))
+        raise HTTPFound(location=request.route_url('error', _query=query))
     else:
         ohloh_dict = {
             'id': element.find("result/account/id").text,
