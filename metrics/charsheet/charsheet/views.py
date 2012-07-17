@@ -110,15 +110,19 @@ def charsheet_view(request):
     element = ohloh_data.getroot()
     error = element.find("error")
     if error:
-        # There was an error. No Ohloh data for us. :(
-        request.session.flash('Error: Unable to find username on Ohloh.')
+        request.session.flash('Error: Unable to connect to Ohloh.')
         return {}
     else:
-        ohloh_dict = {
-            'id': element.find("result/account/id").text,
-        }
-        for node in element.find("result/account/kudo_score"):
-            ohloh_dict[node.tag] = node.text
+        if element.find("result/account") != None:
+            ohloh_dict = {
+                'id': element.find("result/account/id").text,
+            }
+            for node in element.find("result/account/kudo_score"):
+                ohloh_dict[node.tag] = node.text
+        else:
+            request.session.flash('Error: Unable to find Ohloh account \
+                with email address {0}.'.format(user_email))
+            return {}
 
     request.session.flash("Character sheet generated.")
     return {
