@@ -13,9 +13,24 @@
 			media='all' rel='stylesheet' type='text/css'>
 		<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
 			</script>
-    	<title>Character Sheet for ${username}</title>
+    	<title>Character Sheet</title><!--# had to remove {$username} for now-->
 	</head>
     <body>
+		<% display_sheet = False %>
+		<% flash = request.session.pop_flash() %>
+		% for message in flash:
+			% if message.startswith('Error:'):
+				<div class="alert alert-error">
+					<h4 class="alert-heading">Error</h4><p>${message[7:]}</p>
+				</div>
+			% else:
+				<div class="alert alert-success">
+					<h4 class="alert-heading">Success<h4><p>${message}</p>
+				</div>
+				<% display_sheet = True %>
+			% endif
+		% endfor
+		% if display_sheet == True:
 		<h1>Character Record Sheet</h1>
 		<div class="container_12">
 			<div class="clear"></div>
@@ -177,5 +192,6 @@
 				</table>
 			</div>
 		</div>
+		% endif
 	</body>
 </html>

@@ -48,6 +48,27 @@ progress::-moz-progress-bar {
     background-color:black
 }
 
+.alert {
+    font-size: 12px;
+    width: 500px;
+    text-align: center;
+    padding: 10px 20px 10px 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alert-heading {
+    font-size: 20px;
+}
+
+.alert-error {
+    color: red;
+}
+
+.alert-success {
+    color: green;
+}
+
 #user-bio {
     list-style-type: none;
 }

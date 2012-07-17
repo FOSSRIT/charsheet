@@ -38,8 +38,8 @@ def charsheet_view(request):
             'endorsements': cwc.endorsements,
         }
     except NameError:
-        query = dict(error_message="Username not found on Coderwall")
-        raise HTTPFound(location=request.route_url('error', _query=query))
+        request.session.flash('Error: Unable to find username on Coderwall.')
+        return {}
 
     ### GitHub ###
     gh = Github()
@@ -79,8 +79,8 @@ def charsheet_view(request):
             'total_lines': total_lines,
             }
     except:
-        query = dict(error_message="Username not found on GitHub")
-        raise HTTPFound(location=request.route_url('error', _query=query))
+        request.session.flash('Error: Unable to find username on GitHub.')
+        return {}
 
     ### Ohloh ###
 
@@ -106,8 +106,8 @@ def charsheet_view(request):
     error = element.find("error")
     if error:
         # There was an error. No Ohloh data for us. :(
-        query = dict(error_message=ET.tostring(error))
-        raise HTTPFound(location=request.route_url('error', _query=query))
+        request.session.flash('Error: Unable to find username on Ohloh.')
+        return {}
     else:
         ohloh_dict = {
             'id': element.find("result/account/id").text,
@@ -115,6 +115,7 @@ def charsheet_view(request):
         for node in element.find("result/account/kudo_score"):
             ohloh_dict[node.tag] = node.text
 
+    request.session.flash("Character sheet generated.")
     return {
             'username': username,
             'cwc': cwc,
