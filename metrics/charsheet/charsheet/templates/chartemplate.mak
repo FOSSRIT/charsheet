@@ -11,10 +11,10 @@
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
 		% if coderwall_data:
-		<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
-			media='all' rel='stylesheet' type='text/css'>
-		<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
-			</script>
+			<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
+				media='all' rel='stylesheet' type='text/css'>
+			<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
+				</script>
 		% endif
     	<title>Character Sheet for ${username}</title>
 	</head>
@@ -43,30 +43,62 @@
 			<div class="grid_4">
 				<table>
 					<tr><td>Handle:</td><td>${username}</td></tr>
-					<tr><td>Name:</td><td>${github_data['name']}</td></tr>
-					<tr><td>Email:</td><td>${github_data['email']}</td></tr>
+					<tr><td>Name:</td><td>
+						% if github_data:
+							${github_data['name']}
+						% else:
+							?
+						% endif
+					</td></tr>
+					<tr><td>Email:</td><td>
+						% if github_data:
+							${github_data['email']}
+						% else:
+							?	
+						% endif
+					</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
 					<tr><td>Location:</td>
-						<td>${github_data['location']}</td></tr>
-					<tr><td>Company:</td><td>${github_data['company']}</td></tr>
-					<tr><td>Blog:</td>
-						% if github_data['blog'] != None:
-						<td><a href="${github_data['blog']}">[Link]</a>
+						<td>
+						% if github_data:
+							${github_data['location']}
 						% else:
-						<td>None
+							?
+						% endif
+						</td></tr>
+					<tr><td>Company:</td><td>
+						% if github_data:
+							${github_data['company']}
+						% else:
+							?
+						% endif
+						</td></tr>
+					<tr><td>Blog:</td><td>
+						% if github_data:
+							% if github_data['blog'] != None:
+							<a href="${github_data['blog']}">[Link]</a>
+							% else:
+							None
+							% endif
+						% else:
+							?
 						% endif
 						</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
-				<img class="avatar" src="${github_data['avatar_url']}" />
-				% if github_data['bio'] != None:
-				<p>${github_data['bio'] | n}</p>
+				% if github_data:
+					<img class="avatar" src="${github_data['avatar_url']}" />
+					% if github_data['bio'] != None:
+					<p>${github_data['bio'] | n}</p>
+					% else:
+					<p>This dev has not yet set a bio on GitHub.</p>
+					% endif
 				% else:
-				<p>This dev has not yet set a bio on GitHub.</p>
+					<p>No bio for this dev.</p>
 				% endif
 			</div>
 			<div class="clear"></div>
@@ -152,27 +184,52 @@
 			<div class="grid_4">
 				<table>
 					<tr><td>Public GitHub Repos:</td>
-						<td>${github_data['public_repos']}</td></tr>
+						<td>
+						% if github_data:
+							${github_data['public_repos']}
+						% else:
+							?
+						% endif
+						</td></tr>
 					<tr><td>Total Lines in Repos:</td>
-						<td>${github_data['total_lines']}</td></tr>
+						<td>
+						% if github_data:
+							${github_data['total_lines']}
+						% else:
+							?
+						% endif
+						</td></tr>
 					<tr><td></td><td></td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Ohloh Profile:</td><td><a href=
-						'http://www.ohloh.net/accounts/
-						${ohloh_data['id']}?ref=Detailed'
-						target='_top'>
-					<img
-						alt='Ohloh Profile'
-						border='0' height='35'
-						src='http://www.ohloh.net/accounts/${ohloh_data['id']}
-							/widgets/account_detailed.gif'
-						width='191' />
-					</a></td></tr>
+					<tr><td>Ohloh Profile:</td><td>
+						% if ohloh_data:
+							<a href=
+							'http://www.ohloh.net/accounts/
+							${ohloh_data['id']}?ref=Detailed'
+							target='_top'>
+							<img
+								alt='Ohloh Profile'
+								border='0' height='35'
+								src='http://www.ohloh.net/accounts/
+									${ohloh_data['id']}
+									/widgets/account_detailed.gif'
+								width='191' />
+							</a>
+						% else:
+						Not available.
+						% endif
+						</td></tr>
 					<tr><td>Ohloh Rank:</td>
-						<td>${ohloh_data['position']}</td></tr>
+						<td>
+						% if ohloh_data:
+							${ohloh_data['position']}
+						% else:
+							?
+						% endif
+						</td></tr>
 					<tr><td></td><td></td></tr>
 				</table>
 			</div>
