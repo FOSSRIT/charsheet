@@ -30,112 +30,126 @@ def charsheet_view(request):
         'coderwall': request.params['charsheetform:coderwall'],
     }
 
+    if usernames['github']:
+        username = usernames['github']
+    elif usernames['ohloh']:
+        username = usernames['ohloh']
+    elif usernames['coderwall']:
+        username = usernames['coderwall']
+    else:
+        username = 'Sugar Magnolia'
+
+    coderwall_dict = None
+    github_dict = None
+    ohloh_dict = None
+
     user_email = None
 
-    ### Coderwall ###
-    from coderwall import CoderWall
+    cwc = None  # Coderwall module object
 
-    try:
-        cwc = CoderWall(usernames['coderwall'])
-        coderwall_dict = {
-            'endorsements': cwc.endorsements,
-        }
-    except NameError:
-        request.session.flash('Error: Unable to find username on Coderwall.')
-        return {}
+    ### Coderwall ###
+    if usernames['coderwall']:
+        from coderwall import CoderWall
+
+        try:
+            cwc = CoderWall(usernames['coderwall'])
+            coderwall_dict = {
+                'endorsements': cwc.endorsements,
+            }
+        except NameError:
+            request.session.flash(
+                'Error: Unable to find username on Coderwall.')
 
     ### GitHub ###
-    gh = Github()
-    try:
-        user = gh.users.get(usernames['github'])
-    except NameError:
-        request.session.flash('Error: Unable to find username on GitHub.')
-        return {}
+    if usernames['github']:
+        gh = Github()
+        try:
+            user = gh.users.get(usernames['github'])
 
-    try:
-        user_email = user.email
-        # Get lines written per language and number of times language is used
-        user_repos = []
-        user_languages = {}  # Structured as language: lines
-        for page in gh.repos.list(user=usernames['github']):
-            # Results are paginated.
-            for repo in page:
-                user_repos.append(repo)
-        for repo in user_repos:
-            repo_languages = gh.repos.list_languages(
-                user=repo.owner.login, repo=repo.name)
-            for language in repo_languages:
-                if language in user_languages.keys():
-                    user_languages[language] += repo_languages[language]
-                else:
-                    user_languages[language] = repo_languages[language]
+            user_email = user.email
+            # Get lines written per language and
+            # number of times language is used
+            user_repos = []
+            user_languages = {}  # Structured as language: lines
+            for page in gh.repos.list(user=usernames['github']):
+                # Results are paginated.
+                for repo in page:
+                    user_repos.append(repo)
+            for repo in user_repos:
+                repo_languages = gh.repos.list_languages(
+                    user=repo.owner.login, repo=repo.name)
+                for language in repo_languages:
+                    if language in user_languages.keys():
+                        user_languages[language] += repo_languages[language]
+                    else:
+                        user_languages[language] = repo_languages[language]
 
-        total_lines = 0
-        for language, lines in user_languages.items():
-            total_lines += lines
+            total_lines = 0
+            for language, lines in user_languages.items():
+                total_lines += lines
 
-        github_dict = {
-            'avatar_url': user.avatar_url,
-            'bio': user.bio,
-            'blog': user.blog,
-            'company': user.company,
-            'email': user.email,
-            'languages': user_languages,
-            'location': user.location,
-            'name': user.name,
-            'public_repos': user.public_repos,
-            'repos': gh.repos.list(usernames['github']).all(),
-            'total_lines': total_lines,
-            }
-    except NameError:
-        request.session.flash('Error: Problem communicating with GitHub.')
-        return {}
+            github_dict = {
+                'avatar_url': user.avatar_url,
+                'bio': user.bio,
+                'blog': user.blog,
+                'company': user.company,
+                'email': user.email,
+                'languages': user_languages,
+                'location': user.location,
+                'name': user.name,
+                'public_repos': user.public_repos,
+                'repos': gh.repos.list(usernames['github']).all(),
+                'total_lines': total_lines,
+                }
+
+        except NameError:
+            request.session.flash('Error: Unable to find username on GitHub.')
 
     ### Ohloh ###
+    if usernames['ohloh']:
+        # Import ElementTree for XML parsing (Python 2.5+)
+        import elementtree.ElementTree as ET
 
-    # Import ElementTree for XML parsing (Python 2.5+)
-    import elementtree.ElementTree as ET
+        # Ohloh requires an API key and the account email, and returns
+        # account information in name: value pairs.
 
-    # Ohloh requires an API key and the account email, and returns
-    # account information in name: value pairs.
+        ohloh_api_key = '1Bwg3nXZa0OAD87lw1B4JA'  # Remove before production
+        #ohloh_email_hash = hashlib.md5(user_email)
 
-    ohloh_api_key = '1Bwg3nXZa0OAD87lw1B4JA'  # Remove before production
-    #ohloh_email_hash = hashlib.md5(user_email)
+        params = urllib.urlencode({'api_key': ohloh_api_key, 'v': 1})
+        url = "http://www.ohloh.net/accounts/{0}.xml?{1}".format(
+            usernames['ohloh'], params)
+        ohloh_response = urllib.urlopen(url)
 
-    params = urllib.urlencode({'api_key': ohloh_api_key, 'v': 1})
-    url = "http://www.ohloh.net/accounts/{0}.xml?{1}".format(
-        usernames['ohloh'], params)
-    ohloh_response = urllib.urlopen(url)
+        # Parse response into XML object
+        ohloh_data = ET.parse(ohloh_response)
 
-    # Parse response into XML object
-    ohloh_data = ET.parse(ohloh_response)
-
-    # Check if Ohloh returned an error
-    element = ohloh_data.getroot()
-    error = element.find("error")
-    if error:
-        request.session.flash('Error: Unable to connect to Ohloh.')
-        return {}
-    else:
-        if element.find("result/account") != None:
-            ohloh_dict = {
-                'id': element.find("result/account/id").text,
-            }
-            for node in element.find("result/account/kudo_score"):
-                ohloh_dict[node.tag] = node.text
-        else:
-            request.session.flash('Error: Unable to find Ohloh account \
-                with account name {0}.'.format(usernames['ohloh']))
+        # Check if Ohloh returned an error
+        element = ohloh_data.getroot()
+        error = element.find("error")
+        if error:
+            request.session.flash('Error: Unable to connect to Ohloh.')
             return {}
+        else:
+            if element.find("result/account") != None:
+                ohloh_dict = {
+                    'id': element.find("result/account/id").text,
+                }
+                for node in element.find("result/account/kudo_score"):
+                    ohloh_dict[node.tag] = node.text
+            else:
+                request.session.flash('Error: Unable to find Ohloh account \
+                    with account name {0}.'.format(usernames['ohloh']))
+                return {}
 
-    request.session.flash("Character sheet generated.")
-    return {
-            'username': usernames['github'],
-            'cwc': cwc,
-            'coderwall_data': coderwall_dict,
-            'github_data': github_dict,
-            'ohloh_data': ohloh_dict,
-           }
+        request.session.flash("Character sheet generated.")
+        return {
+                'username': username,
+                'cwc': cwc,
+                'coderwall_data': coderwall_dict,
+                'github_data': github_dict,
+                'ohloh_data': ohloh_dict,
+               }
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
