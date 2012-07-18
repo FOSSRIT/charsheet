@@ -50,13 +50,21 @@
 						<td>${github_data['location']}</td></tr>
 					<tr><td>Company:</td><td>${github_data['company']}</td></tr>
 					<tr><td>Blog:</td>
+						% if github_data['blog'] != None:
 						<td><a href="${github_data['blog']}">[Link]</a>
+						% else:
+						<td>None
+						% endif
 						</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<img class="avatar" src="${github_data['avatar_url']}" />
+				% if github_data['bio'] != None:
 				<p>${github_data['bio']}</p>
+				% else:
+				<p>This dev has not yet set a bio on GitHub.</p>
+				% endif
 			</div>
 			<div class="clear"></div>
 			
