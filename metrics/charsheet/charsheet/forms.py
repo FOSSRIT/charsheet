@@ -7,6 +7,6 @@ class CharsheetForm(tw2.forms.FormPage):
 
     class child(tw2.forms.TableForm):
         id = tw2.forms.HiddenField()
-        github = tw2.forms.TextField()
-        ohloh = tw2.forms.TextField()
-        coderwall = tw2.forms.TextField()
+        github = tw2.forms.TextField('github', label='GitHub')
+        ohloh = tw2.forms.TextField('ohloh', label='Ohloh')
+        coderwall = tw2.forms.TextField('coderwall', label='Coderwall')
