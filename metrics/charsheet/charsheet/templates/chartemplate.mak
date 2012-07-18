@@ -62,7 +62,7 @@
 			<div class="grid_4">
 				<img class="avatar" src="${github_data['avatar_url']}" />
 				% if github_data['bio'] != None:
-				<p>${github_data['bio']}</p>
+				<p>${github_data['bio'] | n}</p>
 				% else:
 				<p>This dev has not yet set a bio on GitHub.</p>
 				% endif
