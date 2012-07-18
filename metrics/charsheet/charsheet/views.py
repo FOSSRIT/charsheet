@@ -121,7 +121,7 @@ def charsheet_view(request):
                 ohloh_dict[node.tag] = node.text
         else:
             request.session.flash('Error: Unable to find Ohloh account \
-                with email address {0}.'.format(user_email))
+                with account name {0}.'.format(username))
             return {}
 
     request.session.flash("Character sheet generated.")
