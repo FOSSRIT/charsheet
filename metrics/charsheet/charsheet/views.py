@@ -129,7 +129,6 @@ def charsheet_view(request):
         error = element.find("error")
         if error:
             request.session.flash('Error: Unable to connect to Ohloh.')
-            return {}
         else:
             if element.find("result/account") != None:
                 ohloh_dict = {
@@ -140,16 +139,15 @@ def charsheet_view(request):
             else:
                 request.session.flash('Error: Unable to find Ohloh account \
                     with account name {0}.'.format(usernames['ohloh']))
-                return {}
 
-        request.session.flash("Character sheet generated.")
-        return {
-                'username': username,
-                'cwc': cwc,
-                'coderwall_data': coderwall_dict,
-                'github_data': github_dict,
-                'ohloh_data': ohloh_dict,
-               }
+    request.session.flash("Character sheet generated.")
+    return {
+            'username': username,
+            'cwc': cwc,
+            'coderwall_data': coderwall_dict,
+            'github_data': github_dict,
+            'ohloh_data': ohloh_dict,
+           }
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
