@@ -16,7 +16,7 @@
 		<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
 			</script>
 		% endif
-    	<title>Character Sheet</title><!--# had to remove {$username} for now-->
+    	<title>Character Sheet for ${username}</title>
 	</head>
     <body>
 		<% display_sheet = False %>
