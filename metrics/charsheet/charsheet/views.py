@@ -21,13 +21,6 @@ def home_view(request):
     }
 
 
-@view_config(route_name='error', renderer='error.mak')
-def error_view(request):
-    return {
-        'error_message': request.params.get('error_message', 'Some error.'),
-    }
-
-
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
 def charsheet_view(request):
     username = request.matchdict['username']
