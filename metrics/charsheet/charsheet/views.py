@@ -23,14 +23,20 @@ def home_view(request):
 
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
 def charsheet_view(request):
-    username = request.matchdict['username']
+
+    usernames = {
+        'github': request.params['charsheetform:github'],
+        'ohloh': request.params['charsheetform:ohloh'],
+        'coderwall': request.params['charsheetform:coderwall'],
+    }
+
     user_email = None
 
     ### Coderwall ###
     from coderwall import CoderWall
 
     try:
-        cwc = CoderWall(username)
+        cwc = CoderWall(usernames['coderwall'])
         coderwall_dict = {
             'endorsements': cwc.endorsements,
         }
@@ -41,7 +47,7 @@ def charsheet_view(request):
     ### GitHub ###
     gh = Github()
     try:
-        user = gh.users.get(username)
+        user = gh.users.get(usernames['github'])
     except NameError:
         request.session.flash('Error: Unable to find username on GitHub.')
         return {}
@@ -51,7 +57,8 @@ def charsheet_view(request):
         # Get lines written per language and number of times language is used
         user_repos = []
         user_languages = {}  # Structured as language: lines
-        for page in gh.repos.list(user=username):  # Results are paginated.
+        for page in gh.repos.list(user=usernames['github']):
+            # Results are paginated.
             for repo in page:
                 user_repos.append(repo)
         for repo in user_repos:
@@ -77,7 +84,7 @@ def charsheet_view(request):
             'location': user.location,
             'name': user.name,
             'public_repos': user.public_repos,
-            'repos': gh.repos.list(username).all(),
+            'repos': gh.repos.list(usernames['github']).all(),
             'total_lines': total_lines,
             }
     except NameError:
@@ -97,7 +104,7 @@ def charsheet_view(request):
 
     params = urllib.urlencode({'api_key': ohloh_api_key, 'v': 1})
     url = "http://www.ohloh.net/accounts/{0}.xml?{1}".format(
-        username, params)
+        usernames['ohloh'], params)
     ohloh_response = urllib.urlopen(url)
 
     # Parse response into XML object
@@ -118,12 +125,12 @@ def charsheet_view(request):
                 ohloh_dict[node.tag] = node.text
         else:
             request.session.flash('Error: Unable to find Ohloh account \
-                with account name {0}.'.format(username))
+                with account name {0}.'.format(usernames['ohloh']))
             return {}
 
     request.session.flash("Character sheet generated.")
     return {
-            'username': username,
+            'username': usernames['github'],
             'cwc': cwc,
             'coderwall_data': coderwall_dict,
             'github_data': github_dict,
