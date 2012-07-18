@@ -10,10 +10,12 @@
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
+		% if coderwall_data:
 		<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
 			media='all' rel='stylesheet' type='text/css'>
 		<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
 			</script>
+		% endif
     	<title>Character Sheet</title><!--# had to remove {$username} for now-->
 	</head>
     <body>
@@ -178,20 +180,27 @@
 				<table>
 					<tr><td>Coderwall Endorsements:</td>
 						<td>
-						${coderwall_data['endorsements']}
+						% if coderwall_data:
+							${coderwall_data['endorsements']}
+						% else:
+							?
+						% endif
 						</td>
 					</tr>
+					% if coderwall_data:
 					<tr><td colspan='2'>
 						<section class="coderwall"
 							data-coderwall-username="${username}"
 							data-coderwall-orientation="vertical"></section>
 						</td>
 					</tr>
+					% endif
 				</table>
 			</div>
 			<div class="clear">
 			</div>
 			<div class="grid_12">
+				% if coderwall_data:
 				<h2>Coderwall Achievements</h2>
 				<table class="badge-list">
 					% for badge in cwc.badges:
@@ -199,6 +208,9 @@
 						<td>${badge.name}</td><td>${badge.description}</td></tr>
 					% endfor
 				</table>
+				% else:
+				<p>Add your Coderwall username to see your badges.</p>
+				% endif
 			</div>
 		</div>
 		% endif
