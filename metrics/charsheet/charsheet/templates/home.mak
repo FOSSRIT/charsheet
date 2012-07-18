@@ -8,8 +8,8 @@
 	</head>
     <body>
 		<h1>charsheet</h1>
-		<table>
-			<tr><td>${charsheet_form.display()}</td></tr>
-		</table>
+		<div id='charsheet_form'>
+			${charsheet_form.display()}
+		</div>
    	</body>
 </html>
