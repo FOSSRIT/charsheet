@@ -8,6 +8,8 @@
 	</head>
     <body>
 		<h1>charsheet</h1>
-		<p>Visit /charsheet/your_username for a character sheet.</p>
+		<table>
+			<tr><td>${charsheet_form.display()}</td></tr>
+		</table>
    	</body>
 </html>

@@ -11,10 +11,14 @@ import urllib
 
 from pygithub3 import Github
 
+import forms
+
 
 @view_config(route_name='home', renderer='home.mak')
 def home_view(request):
-    return {}
+    return {
+        'charsheet_form': forms.CharsheetForm
+    }
 
 
 @view_config(route_name='error', renderer='error.mak')
