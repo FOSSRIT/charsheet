@@ -234,7 +234,6 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td></td><td></td></tr>
 				</table>
 			</div>
 			<div class="grid_4">

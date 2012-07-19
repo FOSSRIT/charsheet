@@ -35,8 +35,12 @@ p, table {
 }
 
 td {
-    padding: 2px 0px 2px 0px;
+    padding: 4px;
     vertical-align: middle;
+}
+
+tr {
+    border-bottom: 1px dotted #000;
 }
 
 progress {
