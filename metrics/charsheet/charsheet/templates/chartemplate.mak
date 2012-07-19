@@ -11,6 +11,8 @@
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
 		% if coderwall_data:
+			<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
 				media='all' rel='stylesheet' type='text/css'>
 			<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
@@ -256,7 +258,7 @@
 					<tr><td colspan='2'>
 						<section class="coderwall"
 							data-coderwall-username="${username}"
-							data-coderwall-orientation="vertical"></section>
+							data-coderwall-orientation="horizontal"></section>
 						</td>
 					</tr>
 					% endif
