@@ -82,6 +82,9 @@ def charsheet_view(request):
                     language_count[repo.language] = 1
                 else:
                     language_count[repo.language] += 1
+            # Don't want no None languages in mah language dict
+            if None in language_count.keys():
+                del language_count[None]
 
             # Sort languages by number of repos
             sorted_language_count = sorted(language_count.iteritems(),
