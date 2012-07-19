@@ -12,3 +12,5 @@ class CharsheetForm(tw2.forms.FormPage):
         github = tw2.forms.TextField('github', label='GitHub')
         ohloh = tw2.forms.TextField('ohloh', label='Ohloh')
         coderwall = tw2.forms.TextField('coderwall', label='Coderwall')
+        stack_exchange = tw2.forms.TextField('stack_exchange',
+            label='Stack Exchange')

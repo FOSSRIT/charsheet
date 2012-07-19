@@ -29,6 +29,7 @@ def charsheet_view(request):
         'github': request.params['charsheetform:github'],
         'ohloh': request.params['charsheetform:ohloh'],
         'coderwall': request.params['charsheetform:coderwall'],
+        'stack_exchange': request.params['charsheetform:stack_exchange'],
     }
 
     if usernames['github']:
@@ -37,12 +38,15 @@ def charsheet_view(request):
         username = usernames['ohloh']
     elif usernames['coderwall']:
         username = usernames['coderwall']
+    elif usernames['stack_exchange']:
+        username = usernames['stack_exchange']
     else:
         username = 'Sugar Magnolia'
 
     coderwall_dict = None
     github_dict = None
     ohloh_dict = None
+    stack_exchange_dict = None
 
     user_email = None
 
@@ -162,6 +166,11 @@ def charsheet_view(request):
                 request.session.flash('Error: Unable to find Ohloh account \
                     with account name {0}.'.format(usernames['ohloh']))
 
+    ### Stack Exchange ###
+    if usernames['stack_exchange']:
+        import stackexchange
+        stack_exchange_dict = {}
+
     request.session.flash("Character sheet generated.")
     return {
             'username': username,
@@ -169,6 +178,7 @@ def charsheet_view(request):
             'coderwall_data': coderwall_dict,
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,
+            'stack_exchange_data': stack_exchange_dict,
            }
 
 conn_err_msg = """\
