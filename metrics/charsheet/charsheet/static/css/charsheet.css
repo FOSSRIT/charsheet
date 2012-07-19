@@ -22,6 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     color: #FFF;
     background: #000;
+    margin-top: 0;
 }
 
 table {
@@ -34,8 +35,12 @@ p, table {
 }
 
 td {
-    padding: 2px 0px 2px 0px;
+    padding: 4px;
     vertical-align: middle;
+}
+
+tr {
+    border-bottom: 1px dotted #000;
 }
 
 progress {
@@ -46,6 +51,31 @@ progress::-webkit-progress-bar-value,
 progress::-webkit-progress-value,
 progress::-moz-progress-bar {
     background-color:black
+}
+
+#charsheet_form {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #000;
+}
+
+#charsheet_form > h1 {
+    font-size: 20px;
+    padding: 4px;
+}
+
+input#submit {
+    float: right;
+    margin-top: 20px;
+    background: #FFF;
+    color: #000;
+    border: 2px solid #000;
+}
+
+input#submit:hover {
+    background: #000;
+    color: #FFF;
 }
 
 .alert {

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,6 +8,8 @@
 	</head>
     <body>
 		<h1>charsheet</h1>
-		<p>Visit /charsheet/your_username for a character sheet.</p>
+		<div id='charsheet_form'>
+			${charsheet_form.display()}
+		</div>
    	</body>
 </html>
