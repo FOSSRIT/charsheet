@@ -109,6 +109,7 @@ def charsheet_view(request):
             sorted_languages = sorted(user_languages.iteritems(),
                 key=operator.itemgetter(1), reverse=True)
 
+            # Get total lines in all repos
             total_lines = 0
             for language, lines in user_languages.items():
                 total_lines += lines

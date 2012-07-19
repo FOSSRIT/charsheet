@@ -266,6 +266,21 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			</div>
 			<div class="clear">
 			</div>
+
+			<!-- RECENT GITHUB COMMITS -->
+
+			<div class="grid_12">
+				% if github_data:
+					<h2>Recent GitHub Commits</h2>
+					<p>Recent commits will go here.</p>
+				% else:
+					<p>Add your GitHub username to see your recent commits.</p>
+				% endif
+			</div>
+			<div class="clear"></div>
+
+			<!-- CODERWALL ACHIEVEMENTS -->
+
 			<div class="grid_12">
 				% if coderwall_data:
 				<h2>Coderwall Achievements</h2>
