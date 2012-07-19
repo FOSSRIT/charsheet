@@ -199,7 +199,7 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td>Favorite Languages by Klocs</td><td>
+					<tr><td>Top Languages by GitHub Klocs</td><td>
 					% for i in range(3):
 						${github_data['languages'][i][0]}, 
 					% endfor	
