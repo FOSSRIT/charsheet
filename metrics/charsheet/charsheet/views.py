@@ -68,14 +68,27 @@ def charsheet_view(request):
             user = gh.users.get(usernames['github'])
 
             user_email = user.email
-            # Get lines written per language and
-            # number of times language is used
+            # Get user repos
             user_repos = []
             user_languages = {}  # Structured as language: lines
             for page in gh.repos.list(user=usernames['github']):
                 # Results are paginated.
                 for repo in page:
                     user_repos.append(repo)
+            # Get number of repos per language
+            language_count = {}  # language: number of repos
+            for repo in user_repos:
+                if repo.language not in language_count.keys():
+                    language_count[repo.language] = 1
+                else:
+                    language_count[repo.language] += 1
+
+            # Sort languages by number of repos
+            sorted_language_count = sorted(language_count.iteritems(),
+                key=operator.itemgetter(1), reverse=True)
+
+            # Get lines written per language and
+            # number of times language is used
             for repo in user_repos:
                 repo_languages = gh.repos.list_languages(
                     user=repo.owner.login, repo=repo.name)
@@ -100,6 +113,7 @@ def charsheet_view(request):
                 'company': user.company,
                 'email': user.email,
                 'languages': sorted_languages,
+                'languages_count': sorted_language_count,
                 'location': user.location,
                 'name': user.name,
                 'public_repos': user.public_repos,
