@@ -199,7 +199,11 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td></td><td></td></tr>
+					<tr><td>Favorite Languages by Klocs</td><td>
+					% for i in range(3):
+						${github_data['languages'][i][0]}, 
+					% endfor	
+					</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">

@@ -6,6 +6,7 @@ from pyramid.response import Response
 from pyramid.view import view_config
 
 import hashlib
+import operator
 import random
 import urllib
 
@@ -84,6 +85,10 @@ def charsheet_view(request):
                     else:
                         user_languages[language] = repo_languages[language]
 
+            # Sort languages by lines of code in repos
+            sorted_languages = sorted(user_languages.iteritems(),
+                key=operator.itemgetter(1), reverse=True)
+
             total_lines = 0
             for language, lines in user_languages.items():
                 total_lines += lines
@@ -94,7 +99,7 @@ def charsheet_view(request):
                 'blog': user.blog,
                 'company': user.company,
                 'email': user.email,
-                'languages': user_languages,
+                'languages': sorted_languages,
                 'location': user.location,
                 'name': user.name,
                 'public_repos': user.public_repos,
