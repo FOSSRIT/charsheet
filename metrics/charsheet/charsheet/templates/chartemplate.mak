@@ -386,7 +386,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 								${event['payload']['target']['login']}</a>.
 							</li>
 						% elif event['type'] == 'GistEvent':
-							<li class="event other-event">
+							<li class="event create-event">
 								<% action = (
 									event['payload']['action'] + 'ed'
 									).capitalize() %>
@@ -395,7 +395,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 								${event['payload']['gist']['description']}</a>.
 							</li>
 						% elif event['type'] == 'PullRequestEvent':
-							<li class="event other-event">
+							<li class="event create-event">
 								<% action = (
 									event['payload']['action']
 									).capitalize() %>
