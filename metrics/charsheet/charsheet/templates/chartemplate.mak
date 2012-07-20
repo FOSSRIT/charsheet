@@ -59,6 +59,13 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 							?	
 						% endif
 					</td></tr>
+					<tr><td>IRC:</td><td>
+						% if fedora_data:
+							${fedora_data['irc']}
+						% else:
+							?
+						% endif
+					</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
@@ -294,14 +301,6 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 						<td>
 						% if fedora_data:
 							${fedora_data['status']}
-						% else:
-							?
-						% endif
-						</td></tr>
-					<tr><td>Fedora IRC Nick</td>
-						<td>
-						% if fedora_data:
-							${fedora_data['irc']}
 						% else:
 							?
 						% endif
