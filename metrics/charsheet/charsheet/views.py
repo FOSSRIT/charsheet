@@ -6,6 +6,7 @@ from pyramid.response import Response
 from pyramid.view import view_config
 
 import hashlib
+import json
 import operator
 import random
 import urllib
@@ -31,23 +32,21 @@ def charsheet_view(request):
         'ohloh': request.params['charsheetform:ohloh'],
         'coderwall': request.params['charsheetform:coderwall'],
         'stack_exchange': request.params['charsheetform:stack_exchange'],
+        'fedora': request.params['charsheetform:fedora'],
     }
 
-    if usernames['github']:
-        username = usernames['github']
-    elif usernames['ohloh']:
-        username = usernames['ohloh']
-    elif usernames['coderwall']:
-        username = usernames['coderwall']
-    elif usernames['stack_exchange']:
-        username = usernames['stack_exchange']
-    else:
-        username = 'Sugar Magnolia'
+    username = 'Sugar Magnolia'
+    for name in usernames:
+        if name != None:
+            username = name
+            break
 
+    # TODO: Put these dicts in a dict?
     coderwall_dict = None
     github_dict = None
     ohloh_dict = None
     stack_exchange_dict = None
+    fedora_dict = None
 
     user_email = None
 
@@ -70,7 +69,6 @@ def charsheet_view(request):
     if usernames['github']:
         gh = Github()
         try:
-            import json
 
             github_api = "https://api.github.com"
 
@@ -195,6 +193,11 @@ def charsheet_view(request):
             'ohloh_data': ohloh_dict,
             'stack_exchange_data': stack_exchange_dict,
            }
+
+    ### Fedora ###
+    if usernames['fedora']:
+        import fedora
+        fedora_dict = {}
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
