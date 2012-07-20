@@ -344,7 +344,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 								</a> repo.
 							</li>
 						% elif event['type'] == 'IssueCommentEvent':
-							<li class="event issue-comment-event">
+							<li class="event comment-event">
 								Commented on
 							<a href="${event['payload']['issue']['html_url']}">
 								${event['payload']['issue']['title']}</a>
@@ -404,6 +404,16 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 				"${event['payload']['pull_request']['_links']['html']['href']}">
 							${event['payload']['pull_request']['title']}</a>
 								in the
+								<a href="${repo_url}">
+								${event['repo']['name']}
+								</a> repo.
+							</li>
+						% elif event['type'] == 'CommitCommentEvent':
+							<li class="event comment-event">
+								Commented on
+							<a href=
+							"${event['payload']['comment']['html_url']}">
+								a commit</a> in the
 								<a href="${repo_url}">
 								${event['repo']['name']}
 								</a> repo.

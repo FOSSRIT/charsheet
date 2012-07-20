@@ -104,12 +104,12 @@ li.issues-event {
 
 li.issues-event a, a:visited { color: #5B0067; }
 
-li.issue-comment-event {
+li.comment-event {
     color: orange;
     background: #FFDDBD;
 }
 
-li.issue-comment-event a, a:visited { color: #636700; }
+li.comment-event a, a:visited { color: #636700; }
 
 li.create-event {
     color: blue;
