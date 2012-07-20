@@ -12,7 +12,7 @@ import random
 import urllib
 import urllib2
 
-from pygithub3 import Github
+from pygithub3 import Github, exceptions
 
 import forms
 
@@ -73,7 +73,6 @@ def charsheet_view(request):
     if usernames['github']:
         gh = Github()
         try:
-
             github_api = "https://api.github.com"
 
             user = gh.users.get(usernames['github'])
@@ -148,7 +147,7 @@ def charsheet_view(request):
                 'total_lines': total_lines,
                 }
 
-        except NameError:
+        except exceptions.NotFound:
             request.session.flash('Error: Unable to find username on GitHub.')
 
     ### Ohloh ###
@@ -183,8 +182,8 @@ def charsheet_view(request):
                 for node in element.find("result/account/kudo_score"):
                     ohloh_dict[node.tag] = node.text
             else:
-                request.session.flash('Error: Unable to find Ohloh account \
-                    with account name {0}.'.format(usernames['ohloh']))
+                request.session.flash('Error: Unable to find username on \
+                    Ohloh.')
 
     ### Stack Exchange ###
     if usernames['stack_exchange']:
@@ -208,6 +207,9 @@ def charsheet_view(request):
         except NameError:
             request.session.flash('Error: Unable to connect to the Fedora \
                 Account System.')
+        except client.AuthError:
+            request.session.flash('Error: Fedora Account System authorization \
+                failed.')
 
     request.session.flash("Character sheet generated.")
     return {
