@@ -44,22 +44,24 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			
 			<div class="grid_4">
 				<table>
-					<tr><td>Handle:</td><td>${username}</td></tr>
-					<tr><td>Name:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_070_umbrella.png')}'/> Handle:</td>
+					<td>${username}</td></tr>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/user_12x16.png')}'/> Name:</td><td>
 						% if github_data:
 							${github_data['name']}
 						% else:
 							?
 						% endif
 					</td></tr>
-					<tr><td>Email:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/mail_16x12.png')}'/> Email:</td><td>
 						% if github_data:
+						
 							${github_data['email']}
 						% else:
 							?	
 						% endif
 					</td></tr>
-					<tr><td>IRC:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/hash_14x16.png')}'/> IRC:</td><td>
 						% if fedora_data:
 							${fedora_data['irc']}
 						% else:
@@ -70,7 +72,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Location:</td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_340_globe.png')}'/> Location:</td>
 						<td>
 						% if github_data:
 							${github_data['location']}
@@ -78,14 +80,14 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 							?
 						% endif
 						</td></tr>
-					<tr><td>Company:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_341_briefcase.png')}'/> Company:</td><td>
 						% if github_data:
 							${github_data['company']}
 						% else:
 							?
 						% endif
 						</td></tr>
-					<tr><td>Blog:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
 						% if github_data:
 							% if github_data['blog'] != None:
 							<a href="${github_data['blog']}">[Link]</a>
