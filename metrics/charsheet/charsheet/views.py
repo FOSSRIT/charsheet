@@ -20,7 +20,7 @@ import forms
 @view_config(route_name='home', renderer='home.mak')
 def home_view(request):
     return {
-        'charsheet_form': forms.CharsheetForm
+        'charsheet_form': forms.CharsheetForm,
     }
 
 
@@ -35,10 +35,14 @@ def charsheet_view(request):
         'fedora': request.params['charsheetform:fedora'],
     }
 
+    passwords = {
+        'fedora': request.params['charsheetform:fedora_pass'],
+    }
+
     username = 'Sugar Magnolia'
     for name in usernames:
-        if name != None:
-            username = name
+        if usernames[name]:
+            username = str(usernames[name])
             break
 
     # TODO: Put these dicts in a dict?
@@ -119,7 +123,7 @@ def charsheet_view(request):
 
             # Get recent user activity
             api_request = urllib2.Request("{0}/users/{1}/events/public".format(
-                github_api, username))
+                github_api, usernames['github']))
             api_response = urllib2.urlopen(api_request)
             events_json = json.load(api_response)
 
@@ -184,6 +188,24 @@ def charsheet_view(request):
         import stackexchange
         stack_exchange_dict = {}
 
+    ### Fedora Account System ###
+    if usernames['fedora']:
+        from fedora import client
+        try:
+            fas = client.AccountSystem(
+                username=usernames['fedora'],
+                password=passwords['fedora']
+                )
+            user = fas.person_by_username(usernames['fedora'])
+            fedora_dict = {
+                'affiliation': user.affiliation,
+                'irc': user.ircnick,
+                'status': user.status,
+            }
+        except NameError:
+            request.session.flash('Error: Unable to connect to the Fedora \
+                Account System.')
+
     request.session.flash("Character sheet generated.")
     return {
             'username': username,
@@ -192,12 +214,8 @@ def charsheet_view(request):
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,
             'stack_exchange_data': stack_exchange_dict,
+            'fedora_data': fedora_dict,
            }
-
-    ### Fedora ###
-    if usernames['fedora']:
-        import fedora
-        fedora_dict = {}
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
