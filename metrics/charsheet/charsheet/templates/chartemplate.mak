@@ -65,7 +65,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 							?
 						% endif
 					</td></tr>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/mail_16x12.png')}'/> Email:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
 						% if github_data:
 						
 							${github_data['email']}
@@ -73,7 +73,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 							?	
 						% endif
 					</td></tr>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/hash_14x16.png')}'/> IRC:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_245_chat.png')}'/> IRC:</td><td>
 						% if fedora_data:
 							${fedora_data['irc']}
 						% else:
