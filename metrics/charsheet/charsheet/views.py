@@ -116,10 +116,13 @@ def charsheet_view(request):
             sorted_languages = sorted(user_languages.iteritems(),
                 key=operator.itemgetter(1), reverse=True)
 
-            # Get total lines in all repos
+            # Get total lines in all repos and format with thousands seperators
             total_lines = 0
             for language, lines in user_languages.items():
                 total_lines += lines
+            import locale
+            locale.setlocale(locale.LC_ALL, 'en_US')
+            total_lines = locale.format("%d", total_lines, grouping=True)
 
             # Get recent user activity
             api_request = urllib2.Request("{0}/users/{1}/events/public".format(
