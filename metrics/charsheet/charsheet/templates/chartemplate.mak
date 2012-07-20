@@ -383,7 +383,30 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 								Started following
 								<a href=
 									"${event['payload']['target']['html_url']}">
-								${event['payload']['target']['name']}</a>.
+								${event['payload']['target']['login']}</a>.
+							</li>
+						% elif event['type'] == 'GistEvent':
+							<li class="event other-event">
+								<% action = (
+									event['payload']['action'] + 'ed'
+									).capitalize() %>
+								${action} gist <a href=
+								"${event['payload']['gist']['html_url']}">
+								${event['payload']['gist']['description']}</a>.
+							</li>
+						% elif event['type'] == 'PullRequestEvent':
+							<li class="event other-event">
+								<% action = (
+									event['payload']['action']
+									).capitalize() %>
+								${action} pull request
+								<a href=
+				"${event['payload']['pull_request']['_links']['html']['href']}">
+							${event['payload']['pull_request']['title']}</a>
+								in the
+								<a href="${repo_url}">
+								${event['repo']['name']}
+								</a> repo.
 							</li>
 						% else:
 							<li class="event other-event">
