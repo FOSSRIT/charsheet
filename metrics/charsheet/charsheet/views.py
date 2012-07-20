@@ -27,28 +27,31 @@ def home_view(request):
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
 def charsheet_view(request):
 
-    usernames = {
-        'github': request.params['charsheetform:github'],
-        'ohloh': request.params['charsheetform:ohloh'],
-        'coderwall': request.params['charsheetform:coderwall'],
-        'stack_exchange': request.params['charsheetform:stack_exchange'],
-        'fedora': request.params['charsheetform:fedora'],
-    }
+    try:
+        usernames = {
+            'github': request.params['charsheetform:github'],
+            'ohloh': request.params['charsheetform:ohloh'],
+            'coderwall': request.params['charsheetform:coderwall'],
+            'stack_exchange': request.params['charsheetform:stack_exchange'],
+            'fedora': request.params['charsheetform:fedora'],
+        }
 
-    master_field = request.params['charsheetform:master']
-    if master_field:
+        master_field = request.params['charsheetform:master']
+        if master_field:
+            for name in usernames:
+                usernames[name] = master_field
+
+        passwords = {
+            'fedora': request.params['charsheetform:fedora_pass'],
+        }
+
+        username = 'Sugar Magnolia'
         for name in usernames:
-            usernames[name] = master_field
-
-    passwords = {
-        'fedora': request.params['charsheetform:fedora_pass'],
-    }
-
-    username = 'Sugar Magnolia'
-    for name in usernames:
-        if usernames[name]:
-            username = usernames[name]
-            break
+            if usernames[name]:
+                username = usernames[name]
+                break
+    except KeyError:
+        return HTTPFound(location=request.route_url('home'))
 
     # TODO: Put these dicts in a dict?
     coderwall_dict = None
