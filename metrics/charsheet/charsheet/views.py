@@ -42,7 +42,7 @@ def charsheet_view(request):
     username = 'Sugar Magnolia'
     for name in usernames:
         if usernames[name]:
-            username = str(usernames[name])
+            username = usernames[name]
             break
 
     # TODO: Put these dicts in a dict?
