@@ -110,6 +110,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<div class="grid_12">
 				<h2>Attributes</h2>
 			</div>
+			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
 					<tr><td>Attribute 1:</td><td>value</td></tr>
@@ -139,6 +140,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<div class="grid_12">
 				<h2>Skills</h2>
 			</div>
+			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
 					<tr><td>Skill 1:</td><td>value</td></tr>
@@ -183,6 +185,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<div class="grid_12">
 				<h2>Statistics</h2>
 			</div>
+			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
 					<tr><td>Public GitHub Repos:</td>
@@ -272,8 +275,48 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 					% endif
 				</table>
 			</div>
-			<div class="clear">
+			<div class="clear"></div>
+			<div class="grid_12">
+				<h2>Information</h2>
 			</div>
+			<div class="clear"></div>
+			<div class="grid_4">
+				<table>
+				<tr><td>FAS Affiliation</td>
+						<td>
+						% if fedora_data:
+							${fedora_data['affiliation']}
+						% else:
+							?
+						% endif
+						</td></tr>
+					<tr><td>FAS Status</td>
+						<td>
+						% if fedora_data:
+							${fedora_data['status']}
+						% else:
+							?
+						% endif
+						</td></tr>
+					<tr><td>Fedora IRC Nick</td>
+						<td>
+						% if fedora_data:
+							${fedora_data['irc']}
+						% else:
+							?
+						% endif
+						</td></tr>
+				</table>
+			</div>
+			<div class="grid_4">
+				<table>
+				</table>
+			</div>
+			<div class="grid_4">
+				<table>
+				</table>
+			</div>
+			<div class="clear"></div>
 
 			<!-- RECENT GITHUB ACTIVITY -->
 
