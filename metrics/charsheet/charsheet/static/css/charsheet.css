@@ -122,11 +122,11 @@ li.delete-event {
 li.delete-event a, a:visited { color: #670000; }
 
 li.social-event {
-    color: #000;
-    background: #9B9B9B;
+    color: #4A4A4A;
+    background: #E3E3E3;
 }
 
-li.social-event a, a:visited { color: #FFF; }
+li.social-event a, a:visited { color: #000; }
 
 li.other-event {
     color: #CCC;
