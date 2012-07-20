@@ -202,15 +202,23 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 						% endif
 						</td></tr>
 					<tr><td>Top Languages by Repos</td><td>
-					% for i in range(3):
-						${github_data['languages_count'][i][0]},
-					% endfor
-					</td></tr>
+						% if github_data:
+							% for i in range(3):
+								${github_data['languages_count'][i][0]},
+							% endfor
+						% else:
+							?
+						% endif
+						</td></tr>
 					<tr><td>Top Languages by Klocs</td><td>
-					% for i in range(3):
-						${github_data['languages'][i][0]}, 
-					% endfor	
-					</td></tr>
+						% if github_data:
+							% for i in range(3):
+								${github_data['languages'][i][0]}, 
+							% endfor	
+						% else:
+							?
+						% endif
+						</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
