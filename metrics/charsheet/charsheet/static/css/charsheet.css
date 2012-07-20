@@ -29,6 +29,10 @@ a {
     text-decoration: none;
 }
 
+a:visited {
+    color: blue;
+}
+
 table {
     width: 100%;
 }
@@ -123,6 +127,16 @@ li.other-event {
 }
 
 li.other-event a, a:visited { color: #FFF; }
+
+/* This has to be here so that other links (like the blog link) don't
+ * turn white (the previously set color of an a:visited, even though
+ * it was set for li.other-event, and
+ * not globally, so I don't know why it's doing that. Perhaps an issue
+ * with my one-liners' syntax.
+ */
+a:visited {
+    color: blue;
+}
 
 input#submit {
     float: right;
