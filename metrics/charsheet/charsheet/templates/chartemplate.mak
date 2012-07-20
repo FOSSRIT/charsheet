@@ -275,12 +275,27 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<div class="clear">
 			</div>
 
-			<!-- RECENT GITHUB COMMITS -->
+			<!-- RECENT GITHUB ACTIVITY -->
 
 			<div class="grid_12">
 				% if github_data:
-					<h2>Recent GitHub Commits</h2>
-					<p>Recent commits will go here.</p>
+					<h2>Recent GitHub Activity</h2>
+					<ul id="recent-activity">
+					% for event in github_data['recent_events']:
+						% if event['type'] == 'PushEvent':
+							<li class="event push-event">
+								Pushed ${event['payload']['size']} commit(s).
+							</li>
+						% elif event['type'] == 'IssuesEvent':
+							<li class="event issues-event">
+								${event['payload']['action'].capitalize()}
+								issue
+								<a href="${event['payload']['issue']['url']}">
+								${event['payload']['issue']['title']}</a>.
+							</li>
+						% endif
+					% endfor
+					</ul>
 				% else:
 					<p>Add your GitHub username to see your recent commits.</p>
 				% endif

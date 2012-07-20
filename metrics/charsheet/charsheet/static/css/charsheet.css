@@ -65,6 +65,42 @@ progress::-moz-progress-bar {
     padding: 4px;
 }
 
+ul#recent-activity {
+    font-size: 10px;
+}
+
+li.event {
+    border: 1px outset #000;
+    padding: 4px;
+    margin: 2px 0px;
+}
+
+li.push-event {
+    color: green;
+    background: #C9FFC1;
+}
+
+li.issues-event {
+    color: purple;
+    background: #FFBAF9;
+}
+
+li.issue-comment-event {
+    color: orange;
+    background: #FFDDBD;
+}
+
+li.create-event {
+    color: blue;
+    background: #C2C9FF;
+}
+
+li.delete-event {
+    color: red;
+    background: #FFC0C0;
+}
+
+
 input#submit {
     float: right;
     margin-top: 20px;

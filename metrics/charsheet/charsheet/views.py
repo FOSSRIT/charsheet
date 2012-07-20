@@ -9,6 +9,7 @@ import hashlib
 import operator
 import random
 import urllib
+import urllib2
 
 from pygithub3 import Github
 
@@ -69,6 +70,10 @@ def charsheet_view(request):
     if usernames['github']:
         gh = Github()
         try:
+            import json
+
+            github_api = "https://api.github.com"
+
             user = gh.users.get(usernames['github'])
 
             user_email = user.email
@@ -114,12 +119,48 @@ def charsheet_view(request):
             for language, lines in user_languages.items():
                 total_lines += lines
 
+            # Get recent user activity
+            api_request = urllib2.Request("{0}/users/{1}/events/public".format(
+                github_api, username))
+            api_response = urllib2.urlopen(api_request)
+            events_json = json.load(api_response)
+
+            recent_events = events_json[:5]
+
+            ''' OLD CODE (changed direction)
+            recent_events = []
+            for event in events_json:
+                if event['type'] == 'PushEvent':
+                    event_type = "push"
+                    # TODO: Description should have repo pushed to...
+                    event_description = \
+                        "{0} pushed {1} commit(s) to {2}.".format(
+                            username, event['payload']['size'], "a repo.")
+                elif event['type'] == 'IssuesEvent':
+                    event_type = "issues"
+                    event_description = "{0} {1} an issue at {2}.".format(
+                        username, event['payload']['action'],
+                        event['payload']['issue']['html_url'])
+                elif event['type'] == 'IssueCommentEvent':
+                elif event['type'] == 'DeleteEvent':
+                elif event['type'] == 'CreateEvent':
+                else:
+
+                recent_events.append( {
+                    'id': event['id'},
+                    'timestamp': event['created_at'],
+                    'type': event_type,
+                    'description': event_description,
+                } )
+            '''
+
             github_dict = {
                 'avatar_url': user.avatar_url,
                 'bio': user.bio,
                 'blog': user.blog,
                 'company': user.company,
                 'email': user.email,
+                'recent_events': recent_events,
                 'languages': sorted_languages,
                 'languages_count': sorted_language_count,
                 'location': user.location,
