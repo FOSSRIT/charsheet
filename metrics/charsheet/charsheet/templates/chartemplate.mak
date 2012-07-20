@@ -282,16 +282,53 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 					<h2>Recent GitHub Activity</h2>
 					<ul id="recent-activity">
 					% for event in github_data['recent_events']:
+						<% repo_url = "https://github.com/" \
+							+ event['repo']['name'] %>
 						% if event['type'] == 'PushEvent':
 							<li class="event push-event">
-								Pushed ${event['payload']['size']} commit(s).
+								Pushed ${event['payload']['size']} commit(s)
+								to <a href="${repo_url}">
+								${event['repo']['name']}</a>.
 							</li>
 						% elif event['type'] == 'IssuesEvent':
 							<li class="event issues-event">
 								${event['payload']['action'].capitalize()}
 								issue
-								<a href="${event['payload']['issue']['url']}">
+								<a href="
+								${event['payload']['issue']['html_url']}">
 								${event['payload']['issue']['title']}</a>.
+							</li>
+						% elif event['type'] == 'IssueCommentEvent':
+							<li class="event issue-comment-event">
+								Commented on
+								<a href="
+								${event['payload']['issue']['html_url']}">
+								${event['payload']['issue']['title']}</a>.
+							</li>
+						% elif event['type'] == 'CreateEvent':
+							<li class="event create-event">
+								Created
+								${event['payload']['ref_type']}
+								${event['payload']['ref']} in the
+								<a href="${repo_url}">
+								${event['repo']['name']}
+								</a> repo.
+							</li>
+						% elif event['type'] == 'DeleteEvent':
+							<li class="event delete-event">
+								Deleted
+								${event['payload']['ref_type']}
+								${event['payload']['ref']} in the
+								<a href="${repo_url}">
+								${event['repo']['name']}
+								</a> repo.
+							</li>
+						% else:
+							<li class="event other-event">
+								Performed
+								${event['type']}
+								on <a href="${repo_url}">
+								${event['repo']['name']}</a>.
 							</li>
 						% endif
 					% endfor

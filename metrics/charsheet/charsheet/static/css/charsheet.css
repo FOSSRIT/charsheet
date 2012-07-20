@@ -25,6 +25,10 @@ h1 {
     margin-top: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 table {
     width: 100%;
 }
@@ -75,31 +79,49 @@ li.event {
     margin: 2px 0px;
 }
 
+li.event a:hover { text-decoration: underline; }
+
 li.push-event {
     color: green;
     background: #C9FFC1;
 }
+
+li.push-event a, a:visited { color: #006700; }
 
 li.issues-event {
     color: purple;
     background: #FFBAF9;
 }
 
+li.issues-event a, a:visited { color: #5B0067; }
+
 li.issue-comment-event {
     color: orange;
     background: #FFDDBD;
 }
+
+li.issue-comment-event a, a:visited { color: #636700; }
 
 li.create-event {
     color: blue;
     background: #C2C9FF;
 }
 
+li.create-event a, a:visited { color: #001467; }
+
 li.delete-event {
     color: red;
     background: #FFC0C0;
 }
 
+li.delete-event a, a:visited { color: #670000; }
+
+li.other-event {
+    color: black;
+    background: #9B9B9B;
+}
+
+li.other-event a, a:visited { color: #FFF; }
 
 input#submit {
     float: right;

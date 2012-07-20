@@ -125,7 +125,7 @@ def charsheet_view(request):
             api_response = urllib2.urlopen(api_request)
             events_json = json.load(api_response)
 
-            recent_events = events_json[:5]
+            recent_events = events_json[:25]
 
             ''' OLD CODE (changed direction)
             recent_events = []
