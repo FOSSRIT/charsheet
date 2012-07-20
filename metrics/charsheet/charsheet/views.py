@@ -127,33 +127,6 @@ def charsheet_view(request):
 
             recent_events = events_json[:25]
 
-            ''' OLD CODE (changed direction)
-            recent_events = []
-            for event in events_json:
-                if event['type'] == 'PushEvent':
-                    event_type = "push"
-                    # TODO: Description should have repo pushed to...
-                    event_description = \
-                        "{0} pushed {1} commit(s) to {2}.".format(
-                            username, event['payload']['size'], "a repo.")
-                elif event['type'] == 'IssuesEvent':
-                    event_type = "issues"
-                    event_description = "{0} {1} an issue at {2}.".format(
-                        username, event['payload']['action'],
-                        event['payload']['issue']['html_url'])
-                elif event['type'] == 'IssueCommentEvent':
-                elif event['type'] == 'DeleteEvent':
-                elif event['type'] == 'CreateEvent':
-                else:
-
-                recent_events.append( {
-                    'id': event['id'},
-                    'timestamp': event['created_at'],
-                    'type': event_type,
-                    'description': event_description,
-                } )
-            '''
-
             github_dict = {
                 'avatar_url': user.avatar_url,
                 'bio': user.bio,
