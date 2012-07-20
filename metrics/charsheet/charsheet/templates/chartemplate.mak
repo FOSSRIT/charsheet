@@ -296,14 +296,22 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 								issue
 								<a href="
 								${event['payload']['issue']['html_url']}">
-								${event['payload']['issue']['title']}</a>.
+								${event['payload']['issue']['title']}</a>
+								in the
+								<a href="${repo_url}">
+								${event['repo']['name']}
+								</a> repo.
 							</li>
 						% elif event['type'] == 'IssueCommentEvent':
 							<li class="event issue-comment-event">
 								Commented on
 								<a href="
 								${event['payload']['issue']['html_url']}">
-								${event['payload']['issue']['title']}</a>.
+								${event['payload']['issue']['title']}</a>
+								in the
+								<a href="${repo_url}">
+								${event['repo']['name']}
+								</a> repo.
 							</li>
 						% elif event['type'] == 'CreateEvent':
 							<li class="event create-event">
