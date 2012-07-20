@@ -73,6 +73,10 @@ progress::-moz-progress-bar {
     padding: 4px;
 }
 
+#charsheetform\:master\:container {
+    color: red;
+}
+
 ul#recent-activity {
     font-size: 10px;
 }

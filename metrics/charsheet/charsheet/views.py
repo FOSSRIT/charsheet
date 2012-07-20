@@ -35,6 +35,11 @@ def charsheet_view(request):
         'fedora': request.params['charsheetform:fedora'],
     }
 
+    master_field = request.params['charsheetform:master']
+    if master_field:
+        for name in usernames:
+            usernames[name] = master_field
+
     passwords = {
         'fedora': request.params['charsheetform:fedora_pass'],
     }
