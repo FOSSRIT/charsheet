@@ -58,7 +58,7 @@ progress {
 progress::-webkit-progress-bar-value,
 progress::-webkit-progress-value,
 progress::-moz-progress-bar {
-    background-color:black
+    background-color: black;
 }
 
 #charsheet_form {
@@ -121,12 +121,19 @@ li.delete-event {
 
 li.delete-event a, a:visited { color: #670000; }
 
-li.other-event {
-    color: black;
+li.social-event {
+    color: #000;
     background: #9B9B9B;
 }
 
-li.other-event a, a:visited { color: #FFF; }
+li.social-event a, a:visited { color: #FFF; }
+
+li.other-event {
+    color: #CCC;
+    background: #000;
+}
+
+li.other-event a, a:visited { color: #868686; }
 
 /* This has to be here so that other links (like the blog link) don't
  * turn white (the previously set color of an a:visited, even though

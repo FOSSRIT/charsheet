@@ -337,8 +337,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 							<li class="event issues-event">
 								${event['payload']['action'].capitalize()}
 								issue
-								<a href="
-								${event['payload']['issue']['html_url']}">
+							<a href="${event['payload']['issue']['html_url']}">
 								${event['payload']['issue']['title']}</a>
 								in the
 								<a href="${repo_url}">
@@ -348,8 +347,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 						% elif event['type'] == 'IssueCommentEvent':
 							<li class="event issue-comment-event">
 								Commented on
-								<a href="
-								${event['payload']['issue']['html_url']}">
+							<a href="${event['payload']['issue']['html_url']}">
 								${event['payload']['issue']['title']}</a>
 								in the
 								<a href="${repo_url}">
@@ -373,6 +371,20 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 								<a href="${repo_url}">
 								${event['repo']['name']}
 								</a> repo.
+							</li>
+						% elif event['type'] == 'WatchEvent':
+							<li class="event social-event">
+								${event['payload']['action'].capitalize()}
+								watching
+								<a href="${repo_url}">
+								${event['repo']['name']}</a>.
+							</li>
+						% elif event['type'] == 'FollowEvent':
+							<li class="event social-event">
+								Started following
+								<a href=
+									"${event['payload']['target']['html_url']}">
+								${event['payload']['target']['name']}</a>.
 							</li>
 						% else:
 							<li class="event other-event">
