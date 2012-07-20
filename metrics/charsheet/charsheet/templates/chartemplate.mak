@@ -41,12 +41,24 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<div class="clear"></div>
 			
 			<!-- GENERAL INFORMATION -->
-			
+
+			<div class="grid_4">
+				% if github_data:
+					<img class="avatar" src="${github_data['avatar_url']}" />
+					% if github_data['bio'] != None:
+					<p>${github_data['bio'] | n}</p>
+					% else:
+					<p>This dev has not yet set a bio on GitHub.</p>
+					% endif
+				% else:
+					<p>No bio for this dev.</p>
+				% endif
+			</div>
 			<div class="grid_4">
 				<table>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_070_umbrella.png')}'/> Handle:</td>
 					<td>${username}</td></tr>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/user_12x16.png')}'/> Name:</td><td>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_003_user.png')}'/> Name:</td><td>
 						% if github_data:
 							${github_data['name']}
 						% else:
@@ -99,18 +111,6 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 						% endif
 						</td></tr>
 				</table>
-			</div>
-			<div class="grid_4">
-				% if github_data:
-					<img class="avatar" src="${github_data['avatar_url']}" />
-					% if github_data['bio'] != None:
-					<p>${github_data['bio'] | n}</p>
-					% else:
-					<p>This dev has not yet set a bio on GitHub.</p>
-					% endif
-				% else:
-					<p>No bio for this dev.</p>
-				% endif
 			</div>
 			<div class="clear"></div>
 			
