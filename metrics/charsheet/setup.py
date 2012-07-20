@@ -21,6 +21,7 @@ requires = [
     'pygithub3',
     'pyramid_tm',
     'pyramid_debugtoolbar',
+    'python-fedora',
     'waitress',
     'zope.sqlalchemy',
     ]
