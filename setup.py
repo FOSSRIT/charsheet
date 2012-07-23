@@ -9,6 +9,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 requires = [
     'coderwall',
     'elementtree',
+    'kitchen',
     'pyramid',
     'py-stackexchange',
     'SQLAlchemy',
@@ -25,6 +26,7 @@ requires = [
     'python-fedora',
     'waitress',
     'zope.sqlalchemy',
+    'mysql-python',
     ]
 
 setup(name='charsheet',
