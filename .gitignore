@@ -25,3 +25,6 @@ pip-log.txt
 
 # Database stuff
 *.db
+
+# Keep OpenID sstore stuff out of the repo
+sstore/

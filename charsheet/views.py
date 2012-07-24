@@ -4,6 +4,11 @@ from pyramid.httpexceptions import (
     )
 from pyramid.response import Response
 from pyramid.view import view_config
+from pyramid.security import (
+    authenticated_userid,
+    remember,
+    forget,
+)
 
 import hashlib
 import json
@@ -22,6 +27,46 @@ def home_view(request):
     return {
         'charsheet_form': forms.CharsheetForm,
     }
+
+
+@view_config(route_name='login', renderer='login.mak')
+def login(request):
+    login_url = request.resource_url(request.context, 'login')
+    referrer = request.url
+    if referrer == login_url:
+        referrer = '/'  # never use the login form as came_from
+    came_from = request.params.get('came_from', referrer)
+    request.session['came_from'] = came_from
+    return dict(
+        openid_url=request.registry.settings['openid.provider'],
+        url='http://' + request.registry.settings['charsheet.base_url'] \
+                + '/dologin.html',
+        came_from=came_from,
+        )
+
+
+@view_config(route_name='logout')
+def logout(request):
+    headers = forget(request)
+    return HTTPFound(location=request.resource_url(request.context),
+            headers=headers)
+
+
+def openid_success(context, request, *args, **kwargs):
+    identity = request.params['openid.identity']
+    email = request.params['openid.sreg.email']
+    if not identity.startswith(request.registry.settings['openid.provider']):
+        request.session.flash(
+            'Error: Invalid OpenID provider. You can only use {0}.'.format(
+                request.registry.settings['openid.provider']))
+        return HTTPFound(location=request.application_url + '/login')
+    username = identity.split('/')[-1]
+    headers = remember(request, email)
+    came_from = request.session['came_from']
+    del(request.session['came_from'])
+    response = HTTPFound(location=came_from)
+    response.headerlist.extend(headers)
+    return response
 
 
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
