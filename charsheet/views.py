@@ -105,8 +105,6 @@ def charsheet_view(request):
     stack_exchange_dict = None
     fedora_dict = None
 
-    user_email = None
-
     cwc = None  # Coderwall module object
 
     ### Coderwall ###
@@ -212,7 +210,6 @@ def charsheet_view(request):
         # account information in name: value pairs.
 
         ohloh_api_key = '1Bwg3nXZa0OAD87lw1B4JA'  # Remove before production
-        #ohloh_email_hash = hashlib.md5(user_email)
 
         params = urllib.urlencode({'api_key': ohloh_api_key, 'v': 1})
         url = "http://www.ohloh.net/accounts/{0}.xml?{1}".format(
