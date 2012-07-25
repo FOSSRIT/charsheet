@@ -15,8 +15,6 @@ import operator
 import urllib
 import urllib2
 
-from pygithub3 import Github, exceptions
-
 import forms
 
 
@@ -120,6 +118,7 @@ def charsheet_view(request):
 
     ### GitHub ###
     if usernames['github']:
+        from pygithub3 import Github, exceptions
         gh = Github()
         try:
             github_api = "https://api.github.com"
