@@ -10,10 +10,8 @@ from pyramid.security import (
     forget,
 )
 
-import hashlib
 import json
 import operator
-import random
 import urllib
 import urllib2
 
@@ -128,7 +126,6 @@ def charsheet_view(request):
 
             user = gh.users.get(usernames['github'])
 
-            user_email = user.email
             # Get user repos
             user_repos = []
             user_languages = {}  # Structured as language: lines
@@ -236,7 +233,7 @@ def charsheet_view(request):
                     Ohloh.')
 
     ### Stack Exchange ###
-    if usernames['stack_exchange']: 
+    if usernames['stack_exchange']:
         stack_exchange_dict = {}
 
     ### Fedora Account System ###
