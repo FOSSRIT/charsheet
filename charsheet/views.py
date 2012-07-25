@@ -236,8 +236,7 @@ def charsheet_view(request):
                     Ohloh.')
 
     ### Stack Exchange ###
-    if usernames['stack_exchange']:
-        import stackexchange
+    if usernames['stack_exchange']: 
         stack_exchange_dict = {}
 
     ### Fedora Account System ###
