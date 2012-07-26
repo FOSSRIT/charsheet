@@ -102,7 +102,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
 						% if github_data:
 							% if github_data['blog'] != None:
-							<a href="${github_data['blog']}">[Link]</a>
+							<a href="http://${github_data['blog']}">[Link]</a>
 							% else:
 							None
 							% endif
