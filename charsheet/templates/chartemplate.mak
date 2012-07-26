@@ -10,9 +10,9 @@
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src='${request.static_url('charsheet:static/js/charsheet.js')}'></script>
 		% if coderwall_data:
-			<script
-src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
 				media='all' rel='stylesheet' type='text/css'>
 			<script src='http://coderwall.com/javascripts/jquery.coderwall.js'>
@@ -324,6 +324,10 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 			<div class="grid_12">
 				% if github_data:
 					<h2>Recent GitHub Activity</h2>
+					<div id="activity-controls">
+					<a href="#" class="button" id="less-activity">Less</a>
+					<a href="#" class="button" id="more-activity">More</a>
+					</div>
 					<ul id="recent-activity">
 					% for event in github_data['recent_events']:
 						<% repo_url = "https://github.com/" \
