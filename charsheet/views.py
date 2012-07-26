@@ -233,6 +233,8 @@ def charsheet_view(request):
 
     ### Stack Exchange ###
     if usernames['stack_exchange']:
+        from stackpy import API, Site
+        # TODO: Do Stack Exchange stuff here.
         stack_exchange_dict = {}
 
     ### Fedora Account System ###

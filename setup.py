@@ -24,6 +24,7 @@ requires = [
     'pyramid_debugtoolbar',
     'pyramid_openid',
     'python-fedora',
+    'stackpy',
     'waitress',
     'zope.sqlalchemy',
     'mysql-python',
