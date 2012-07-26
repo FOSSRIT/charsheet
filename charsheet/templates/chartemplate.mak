@@ -30,7 +30,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 				</div>
 			% else:
 				<div class="alert alert-success">
-					<h4 class="alert-heading">Success<h4><p>${message}</p>
+					<h4 class="alert-heading">Success</h4><p>${message}</p>
 				</div>
 				<% display_sheet = True %>
 			% endif
