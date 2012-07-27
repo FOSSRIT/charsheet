@@ -122,23 +122,20 @@
 			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Attribute 1:</td><td>value</td></tr>
-					<tr><td>Attribute 2:</td><td>value</td></tr>
-					<tr><td>Attribute 3:</td><td>value</td></tr>
+					<tr><td>Strength:</td><td>value</td></tr>
+					<tr><td>Dexterity:</td><td>value</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Attribute 4:</td><td>value</td></tr>
-					<tr><td>Attribute 5:</td><td>value</td></tr>
-					<tr><td>Attribute 6:</td><td>value</td></tr>
+					<tr><td>Wisdom:</td><td>value</td></tr>
+					<tr><td>Leadership:</td><td>value</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Attribute 7:</td><td>value</td></tr>
-					<tr><td>Attribute 8:</td><td>value</td></tr>
-					<tr><td>Attribute 9:</td><td>value</td></tr>
+					<tr><td>Determination:</td><td>value</td></tr>
+					<tr><td>Popularity:</td><td>value</td></tr>
 				</table>
 			</div>
 			<div class="clear">
@@ -152,23 +149,23 @@
 			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Skill 1:</td><td>value</td></tr>
-					<tr><td>Skill 2:</td><td>value</td></tr>
-					<tr><td>Skill 3:</td><td>value</td></tr>
-					<tr><td>Skill 4:</td><td>value</td></tr>
-					<tr><td>Skill 5:</td><td>value</td></tr>
-					<tr><td>Skill 6:</td><td>value</td></tr>
-					<tr><td>Skill 7:</td><td>value</td></tr>
-					<tr><td>Skill 8:</td><td>value</td></tr>
+					<tr><td>C</td><td>value</td></tr>
+					<tr><td>C++</td><td>value</td></tr>
+					<tr><td>Java</td><td>value</td></tr>
+					<tr><td>HTML</td><td>value</td></tr>
+					<tr><td>XML</td><td>value</td></tr>
+					<tr><td>Python</td><td>value</td></tr>
+					<tr><td>PHP</td><td>value</td></tr>
+					<tr><td>Javascript</td><td>value</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Skill 9:</td><td>value</td></tr>
-					<tr><td>Skill 10:</td><td>value</td></tr>
-					<tr><td>Skill 11:</td><td>value</td></tr>
-					<tr><td>Skill 12:</td><td>value</td></tr>
-					<tr><td>Skill 13:</td><td>value</td></tr>
+					<tr><td>Perl</td><td>value</td></tr>
+					<tr><td>Shell</td><td>value</td></tr>
+					<tr><td>Objective-C</td><td>value</td></tr>
+					<tr><td>Ruby</td><td>value</td></tr>
+					<tr><td>Haskell</td><td>value</td></tr>
 					<tr><td>Skill 14:</td><td>value</td></tr>
 					<tr><td>Skill 15:</td><td>value</td></tr>
 					<tr><td>Skill 16:</td><td>value</td></tr>
