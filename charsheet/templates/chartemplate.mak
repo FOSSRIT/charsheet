@@ -122,7 +122,7 @@
 			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Strength:</td><td>value</td></tr>
+					<tr><td>Strength:</td><td>${stats['strength']}</td></tr>
 					<tr><td>Dexterity:</td><td>value</td></tr>
 				</table>
 			</div>

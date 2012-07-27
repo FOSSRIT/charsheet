@@ -16,7 +16,7 @@ class CharsheetForm(tw2.forms.FormPage):
         ohloh = tw2.forms.TextField('ohloh', label='Ohloh')
         coderwall = tw2.forms.TextField('coderwall', label='Coderwall')
         stack_exchange = tw2.forms.TextField('stack_exchange',
-                label='Stack Exchange')
+                label='Stack Exchange ID')
         fas_label = tw2.forms.Label(text='We cannot authenticate FAS using \
                 OpenID at this time.')
         fedora = tw2.forms.TextField(

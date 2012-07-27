@@ -168,7 +168,8 @@ def charsheet_view(request):
                 total_lines += lines
             import locale
             locale.setlocale(locale.LC_ALL, 'en_US')
-            total_lines = locale.format("%d", total_lines, grouping=True)
+            total_lines_formatted = locale.format(
+                    "%d", total_lines, grouping=True)
 
             # Get recent user activity
             api_request = urllib2.Request("{0}/users/{1}/events/public".format(
@@ -191,7 +192,7 @@ def charsheet_view(request):
                 'name': user.name,
                 'public_repos': user.public_repos,
                 'repos': gh.repos.list(usernames['github']).all(),
-                'total_lines': total_lines,
+                'total_lines': total_lines_formatted,
                 }
 
         except exceptions.NotFound:
@@ -233,9 +234,22 @@ def charsheet_view(request):
 
     ### Stack Exchange ###
     if usernames['stack_exchange']:
-        from stackpy import API, Site
-        # TODO: Do Stack Exchange stuff here.
-        stack_exchange_dict = {}
+        stack_exchange_api = 'https://api.stackexchange.com/2.1'
+        request_url = "{0}/users/{1}/associated".format(
+            stack_exchange_api, usernames['stack_exchange'])
+        api_request = urllib2.Request(
+            request_url,
+            headers={"Accept": "application/json"})
+        api_response = urllib2.urlopen(api_request)
+        se_accounts_json = json.load(api_response)
+        se_answers = 0  # Number of answers given on SE sites
+        pprint.pprint(se_accounts_json)
+        for site in se_accounts_json['items']:
+            se_answers += site['answer_count']
+
+        stack_exchange_dict = {
+            'answers': se_answers,
+        }
 
     ### Fedora Account System ###
     if usernames['fedora']:
@@ -258,6 +272,16 @@ def charsheet_view(request):
             request.session.flash('Error: Fedora Account System authorization \
                 failed.')
 
+    ### Stat calculation ###
+    import stats
+
+    stats_dict = {
+        'strength': stats.calculate_strength(
+            lines=total_lines,
+            answers=0,
+            badges=len(cwc.badges))
+    }
+
     request.session.flash("Character sheet generated.")
     return {
             'username': username,
@@ -267,6 +291,7 @@ def charsheet_view(request):
             'ohloh_data': ohloh_dict,
             'stack_exchange_data': stack_exchange_dict,
             'fedora_data': fedora_dict,
+            'stats': stats_dict,
            }
 
 conn_err_msg = """\
