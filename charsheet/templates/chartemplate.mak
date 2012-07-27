@@ -324,9 +324,9 @@
 			<div class="grid_12">
 				% if github_data:
 					<h2>Recent GitHub Activity</h2>
-					<div id="activity-controls">
-					<a href="#" class="button" id="less-activity">Less</a>
-					<a href="#" class="button" id="more-activity">More</a>
+					<div class="activity-controls">
+					<a href="#" class="button less-activity">Less</a>
+					<a href="#" class="button more-activity">More</a>
 					</div>
 					<ul id="recent-activity">
 					% for event in github_data['recent_events']:
@@ -440,6 +440,10 @@
 						% endif
 					% endfor
 					</ul>
+					<div class="activity-controls">
+					<a href="#" class="button less-activity">Less</a>
+					<a href="#" class="button more-activity">More</a>
+					</div>
 				% else:
 					<p>Add your GitHub username to see your recent commits.</p>
 				% endif

@@ -61,9 +61,12 @@ progress::-moz-progress-bar {
     background-color: black;
 }
 
-#activity-controls { margin-bottom: 10px; }
+.activity-controls {
+    margin-bottom: 10px;
+    margin-top: -13px;
+}
 
-#activity-controls > a {
+.activity-controls > a {
     color: #000;
     font-size: 0.8em;
     background: #FFF;
@@ -71,7 +74,7 @@ progress::-moz-progress-bar {
     border: 1px solid #000;
 }
 
-#activity-controls > a:hover {
+.activity-controls > a:hover {
     background: #000;
     color: #FFF;
 }
@@ -88,9 +91,7 @@ progress::-moz-progress-bar {
     padding: 4px;
 }
 
-#charsheetform\:master\:container {
-    color: red;
-}
+#charsheetform\:master\:container { color: red; }
 
 ul#recent-activity {
     font-size: 10px;
@@ -154,14 +155,13 @@ li.other-event {
 
 li.other-event a, a:visited { color: #868686; }
 
-/* This has to be here so that other links (like the blog link) don't
- * turn white (the previously set color of an a:visited, even though
- * it was set for li.other-event, and
- * not globally, so I don't know why it's doing that. Perhaps an issue
- * with my one-liners' syntax.
+/* There is something absolutely ridiculous going on with the CSS that I
+ * can't figure out. This control somehow decides the color of the link
+ * in the "more" and "less" GitHub activity buttons, but does not control
+ * the blog link at all. Obviously have to fix this.
  */
 a:visited {
-    color: blue;
+    color: #000;
 }
 
 input#submit {

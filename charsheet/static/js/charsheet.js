@@ -6,7 +6,7 @@ $(document).ready(function() {
     // Handle "more" and "less" buttons
     var showing = 5; // number of items showing
     
-    $('#less-activity').on('click', function() {
+    $('.less-activity').on('click', function() {
         if (showing <= 5) return false;
         
         // Hide 5 more items
@@ -15,7 +15,7 @@ $(document).ready(function() {
         return false; // don't move to the top of the page
     });
 
-    $('#more-activity').on('click', function() {
+    $('.more-activity').on('click', function() {
         console.log('test')
         if (showing >= 25) return false;
         console.log(showing)
