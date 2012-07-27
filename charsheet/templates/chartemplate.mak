@@ -424,6 +424,12 @@
 								${event['repo']['name']}
 								</a> repo.
 							</li>
+						% elif event['type'] == "ForkEvent":
+							<li class="event create-event">
+								Forked
+								<a href="${repo_url}">
+								${event['repo']['name']}</a>.
+							</li>
 						% else:
 							<li class="event other-event">
 								Performed
