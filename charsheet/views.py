@@ -234,16 +234,17 @@ def charsheet_view(request):
 
     ### Stack Exchange ###
     if usernames['stack_exchange']:
-        stack_exchange_api = 'https://api.stackexchange.com/2.1'
+        stack_exchange_api = 'http://api.stackexchange.com/2.1'
         request_url = "{0}/users/{1}/associated".format(
             stack_exchange_api, usernames['stack_exchange'])
         api_request = urllib2.Request(
             request_url,
             headers={"Accept": "application/json"})
-        api_response = urllib2.urlopen(api_request)
-        se_accounts_json = json.load(api_response)
+        api_z_response = urllib2.urlopen(api_request)
+        from zlib import decompress, MAX_WBITS
+        api_response = decompress(api_z_response.read(), 16 + MAX_WBITS)
+        se_accounts_json = json.loads(api_response)
         se_answers = 0  # Number of answers given on SE sites
-        pprint.pprint(se_accounts_json)
         for site in se_accounts_json['items']:
             se_answers += site['answer_count']
 
