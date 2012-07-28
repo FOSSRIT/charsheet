@@ -276,12 +276,25 @@ def charsheet_view(request):
     ### Stat calculation ###
     import stats
 
-    stats_dict = {
-        'strength': stats.calculate_strength(
-            lines=total_lines,
-            answers=0,
-            badges=len(cwc.badges))
-    }
+    stats_dict = {}
+
+    if github_dict:
+        lines = total_lines
+    else:
+        lines = 0
+    if stack_exchange_dict:
+        answers = 0  # TODO: Update this
+    else:
+        answers = 0
+    if coderwall_dict:
+        badges = len(cwc.badges)
+    else:
+        badges = 0
+
+    stats_dict['strength'] = stats.calculate_strength(
+        lines=lines,
+        answers=answers,
+        badges=badges)
 
     request.session.flash("Character sheet generated.")
     return {
