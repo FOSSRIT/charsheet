@@ -111,6 +111,7 @@ def charsheet_view(request):
             cwc = CoderWall(usernames['coderwall'])
             coderwall_dict = {
                 'endorsements': cwc.endorsements,
+                'badges': len(cwc.badges),
             }
         except NameError:
             request.session.flash(
@@ -192,7 +193,8 @@ def charsheet_view(request):
                 'name': user.name,
                 'public_repos': user.public_repos,
                 'repos': gh.repos.list(usernames['github']).all(),
-                'total_lines': total_lines_formatted,
+                'total_lines': total_lines,
+                'total_lines_formatted': total_lines_formatted,
                 }
 
         except exceptions.NotFound:
@@ -246,7 +248,10 @@ def charsheet_view(request):
         se_accounts_json = json.loads(api_response)
         se_answers = 0  # Number of answers given on SE sites
         for site in se_accounts_json['items']:
-            se_answers += site['answer_count']
+            try:
+                se_answers += site['answer_count']
+            except KeyError:
+                pass  # No answers from that site
 
         stack_exchange_dict = {
             'answers': se_answers,
@@ -276,25 +281,11 @@ def charsheet_view(request):
     ### Stat calculation ###
     import stats
 
-    stats_dict = {}
-
-    if github_dict:
-        lines = total_lines
-    else:
-        lines = 0
-    if stack_exchange_dict:
-        answers = 0  # TODO: Update this
-    else:
-        answers = 0
-    if coderwall_dict:
-        badges = len(cwc.badges)
-    else:
-        badges = 0
-
-    stats_dict['strength'] = stats.calculate_strength(
-        lines=lines,
-        answers=answers,
-        badges=badges)
+    stats_dict = stats.calculate_stats(
+            github_dict,
+            ohloh_dict,
+            coderwall_dict,
+            stack_exchange_dict)
 
     request.session.flash("Character sheet generated.")
     return {

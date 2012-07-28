@@ -205,7 +205,7 @@
 					<tr><td>Total Lines in Repos:</td>
 						<td>
 						% if github_data:
-							${github_data['total_lines']}
+							${github_data['total_lines_formatted']}
 						% else:
 							?
 						% endif

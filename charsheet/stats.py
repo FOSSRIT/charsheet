@@ -61,3 +61,40 @@ def calculate_language_skill(lines=0):
     Equal to 1 skill point per 2000 lines of code.
     """
     return lines / 2000
+
+
+### Overarching calculation ###
+
+
+def calculate_stats(gh, oh, cw, se):
+    """
+    Takes GitHub, Stack Exchange, Coderwall, and Ohloh
+    dictionaries and generates a stats dict.
+    """
+
+    stats = {}
+
+    data = {
+        'total_lines': 0,
+        'cw_badges': 0,
+        'se_answers': 0,
+    }
+
+    if gh:
+        data['total_lines'] = gh['total_lines']
+
+    if oh:
+        pass
+
+    if cw:
+        data['cw_badges'] = cw['badges']
+
+    if se:
+        data['se_answers'] = se['answers']
+
+    stats['strength'] = calculate_strength(
+            data['total_lines'],
+            data['se_answers'],
+            data['cw_badges'])
+
+    return stats
