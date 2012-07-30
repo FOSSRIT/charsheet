@@ -136,6 +136,7 @@ def charsheet_view(request):
                 # Results are paginated.
                 for repo in page:
                     user_repos.append(repo)
+            # TODO: Consolidate this loop into the loop a few blocks below
             # Get number of repos per language
             language_count = {}  # language: number of repos
             for repo in user_repos:
@@ -151,11 +152,17 @@ def charsheet_view(request):
             sorted_language_count = sorted(language_count.iteritems(),
                 key=operator.itemgetter(1), reverse=True)
 
-            # Get lines written per language and
-            # number of times language is used
+            # Get lines written per language and number of times
+            # language is used. Also get number of forks of user's original
+            # repos.
+            gh_forks = 0
             for repo in user_repos:
                 repo_languages = gh.repos.list_languages(
                     user=repo.owner.login, repo=repo.name)
+                # The owner of an original repo counts as having a fork it
+                # seems, so we want to make sure not to count that.
+                if repo.forks > 1:
+                    gh_forks += repo.forks - 1
                 for language in repo_languages:
                     if language in user_languages.keys():
                         user_languages[language] += repo_languages[language]
@@ -194,9 +201,12 @@ def charsheet_view(request):
                 'blog': user.blog,
                 'company': user.company,
                 'email': user.email,
+                'followers': user.followers,
+                'forks': gh_forks,
                 'recent_events': recent_events,
                 'languages': sorted_languages,
                 'languages_count': sorted_language_count,
+                'num_languages': len(user_languages),
                 'location': user.location,
                 'name': user.name,
                 'public_repos': user.public_repos,
@@ -259,35 +269,67 @@ def charsheet_view(request):
     ### Stack Exchange ###
     if usernames['stack_exchange']:
         stack_exchange_api = 'http://api.stackexchange.com/2.1'
-        request_url = "{0}/users/{1}/associated".format(
-            stack_exchange_api, usernames['stack_exchange'])
-        api_request = urllib2.Request(
-            request_url,
-            headers={"Accept": "application/json"})
-        api_z_response = urllib2.urlopen(api_request)
-        from zlib import decompress, MAX_WBITS
-        api_response = decompress(api_z_response.read(), 16 + MAX_WBITS)
-        se_accounts_json = json.loads(api_response)
+
+        def get_se_json(path, **kwargs):
+            if kwargs.get('site'):
+                params = urllib.urlencode({'site': kwargs.get('site')})
+                request_url = "{0}{1}?{2}".format(
+                        stack_exchange_api, path, params)
+            else:
+                request_url = "{0}{1}".format(stack_exchange_api, path)
+            api_request = urllib2.Request(
+                    request_url,
+                    headers={"Accept": "application/json"})
+            api_z_response = urllib2.urlopen(api_request)
+            from zlib import decompress, MAX_WBITS
+            api_response = decompress(api_z_response.read(), 16 + MAX_WBITS)
+            return json.loads(api_response)
+
+        se_accounts_json = get_se_json("/users/{0}/associated".format(
+                usernames['stack_exchange']))
         se_answers = 0  # Number of answers given on SE sites
+        se_top_answers = 0  # Number of accepted answers on SE sites
+        se_reputation = 0  # Total rep on all SE sites
+        se_tags = set()  # All of the tags in all answered SE questions
         # Oldest acc. creation date, in Unix time:
         se_oldest_creation_unix = 9999999999
         for site in se_accounts_json['items']:
+            # Answer count
             try:
                 se_answers += site['answer_count']
             except KeyError:
                 pass  # No answers from that site
             se_oldest_creation_unix = min(
                     site['creation_date'], se_oldest_creation_unix)
+            # Top answer count
+            site_param = site['site_name'].lower().replace(' ', '')
+            # Special case for metastackoverflow... *sigh*
+            if site_param == 'metastackoverflow':
+                site_param = 'meta'
+            se_answers_json = get_se_json("/users/{0}/answers".format(
+                    site['user_id']), site=site_param)
+            for answer in se_answers_json['items']:
+                if answer['is_accepted'] == True:
+                    se_top_answers += 1
+                # Tags
+                se_question_json = get_se_json("/questions/{0}".format(
+                        answer['question_id']), site=site_param)
+                se_tags.update(se_question_json['items'][0]['tags'])
+            # Reputation
+            se_reputation += site['reputation']
+
+        # Get age, in months, of oldest SE account
         oldest_se_datetime = datetime.utcfromtimestamp(se_oldest_creation_unix)
         se_age_months = abs(relativedelta.relativedelta(
                 utc.localize(oldest_se_datetime),
                 utc.localize(datetime.now())).months)
 
-        # Get age, in months, of Stack Exchange
-
         stack_exchange_dict = {
             'answers': se_answers,
+            'top_answers': se_top_answers,
             'age_months': se_age_months,
+            'reputation': se_reputation,
+            'tags_count': len(se_tags),
         }
 
     ### Fedora Account System ###
