@@ -108,6 +108,8 @@ def charsheet_view(request):
 
     cwc = None  # Coderwall module object
 
+    utc = pytz.UTC  # For datetime handling
+
     ### Coderwall ###
     if usernames['coderwall']:
         from coderwall import CoderWall
@@ -258,7 +260,6 @@ def charsheet_view(request):
                     ohloh_dict[node.tag] = node.text
 
                 # Get age of account, in months
-                utc = pytz.UTC
                 ohloh_creation_datetime = parser.parse(
                         ohloh_dict['created_at'])
                 ohloh_age_months = abs(relativedelta.relativedelta(
