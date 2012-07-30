@@ -82,8 +82,9 @@ def charsheet_view(request):
 
         master_field = request.params['charsheetform:master']
         if master_field:
-            for name in usernames:
-                usernames[name] = master_field
+            usernames['github'] = master_field
+            usernames['ohloh'] = master_field
+            usernames['coderwall'] = master_field
 
         passwords = {
             'fedora': request.params['charsheetform:fedora_pass'],
@@ -284,55 +285,63 @@ def charsheet_view(request):
                     headers={"Accept": "application/json"})
             api_z_response = urllib2.urlopen(api_request)
             from zlib import decompress, MAX_WBITS
-            api_response = decompress(api_z_response.read(), 16 + MAX_WBITS)
+            api_response = decompress(
+                    api_z_response.read(), 16 + MAX_WBITS)
             return json.loads(api_response)
 
-        se_accounts_json = get_se_json("/users/{0}/associated".format(
-                usernames['stack_exchange']))
-        se_answers = 0  # Number of answers given on SE sites
-        se_top_answers = 0  # Number of accepted answers on SE sites
-        se_reputation = 0  # Total rep on all SE sites
-        se_tags = set()  # All of the tags in all answered SE questions
-        # Oldest acc. creation date, in Unix time:
-        se_oldest_creation_unix = 9999999999
-        for site in se_accounts_json['items']:
-            # Answer count
-            try:
-                se_answers += site['answer_count']
-            except KeyError:
-                pass  # No answers from that site
-            se_oldest_creation_unix = min(
-                    site['creation_date'], se_oldest_creation_unix)
-            # Top answer count
-            site_param = site['site_name'].lower().replace(' ', '')
-            # Special case for metastackoverflow... *sigh*
-            if site_param == 'metastackoverflow':
-                site_param = 'meta'
-            se_answers_json = get_se_json("/users/{0}/answers".format(
-                    site['user_id']), site=site_param)
-            for answer in se_answers_json['items']:
-                if answer['is_accepted'] == True:
-                    se_top_answers += 1
-                # Tags
-                se_question_json = get_se_json("/questions/{0}".format(
-                        answer['question_id']), site=site_param)
-                se_tags.update(se_question_json['items'][0]['tags'])
-            # Reputation
-            se_reputation += site['reputation']
+        try:
+            se_accounts_json = get_se_json("/users/{0}/associated".format(
+                    usernames['stack_exchange']))
 
-        # Get age, in months, of oldest SE account
-        oldest_se_datetime = datetime.utcfromtimestamp(se_oldest_creation_unix)
-        se_age_months = abs(relativedelta.relativedelta(
-                utc.localize(oldest_se_datetime),
-                utc.localize(datetime.now())).months)
+            se_answers = 0  # Number of answers given on SE sites
+            se_top_answers = 0  # Number of accepted answers on SE sites
+            se_reputation = 0  # Total rep on all SE sites
+            se_tags = set()  # All of the tags in all answered SE questions
+            # Oldest acc. creation date, in Unix time:
+            se_oldest_creation_unix = 9999999999
+            for site in se_accounts_json['items']:
+                # Answer count
+                try:
+                    se_answers += site['answer_count']
+                except KeyError:
+                    pass  # No answers from that site
+                se_oldest_creation_unix = min(
+                        site['creation_date'], se_oldest_creation_unix)
+                # Top answer count
+                site_param = site['site_name'].lower().replace(' ', '')
+                # Special case for metastackoverflow... *sigh*
+                if site_param == 'metastackoverflow':
+                    site_param = 'meta'
+                # TODO: Make this get ALL answers, not just one page worth
+                se_answers_json = get_se_json("/users/{0}/answers".format(
+                        site['user_id']), site=site_param)
+                for answer in se_answers_json['items']:
+                    if answer['is_accepted'] == True:
+                        se_top_answers += 1
+                    # Tags
+                    se_question_json = get_se_json("/questions/{0}".format(
+                            answer['question_id']), site=site_param)
+                    se_tags.update(se_question_json['items'][0]['tags'])
+                # Reputation
+                se_reputation += site['reputation']
 
-        stack_exchange_dict = {
-            'answers': se_answers,
-            'top_answers': se_top_answers,
-            'age_months': se_age_months,
-            'reputation': se_reputation,
-            'tags_count': len(se_tags),
-        }
+            # Get age, in months, of oldest SE account
+            oldest_se_datetime = datetime.utcfromtimestamp(
+                    se_oldest_creation_unix)
+            se_age_months = abs(relativedelta.relativedelta(
+                    utc.localize(oldest_se_datetime),
+                    utc.localize(datetime.now())).months)
+
+            stack_exchange_dict = {
+                'answers': se_answers,
+                'top_answers': se_top_answers,
+                'age_months': se_age_months,
+                'reputation': se_reputation,
+                'tags_count': len(se_tags),
+            }
+        except:
+            request.session.flash('Error: Problem communicating with \
+                    Stack Exchange API.')
 
     ### Fedora Account System ###
     if usernames['fedora']:
