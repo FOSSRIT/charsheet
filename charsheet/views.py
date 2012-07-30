@@ -203,6 +203,7 @@ def charsheet_view(request):
                 'email': user.email,
                 'followers': user.followers,
                 'forks': gh_forks,
+                'hireable': user.hireable,
                 'recent_events': recent_events,
                 'languages': sorted_languages,
                 'languages_count': sorted_language_count,

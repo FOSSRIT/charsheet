@@ -110,6 +110,15 @@
 							?
 						% endif
 						</td></tr>
+					<tr><td>Hireable?</td><td>
+						% if github_data:
+							% if github_data['hireable'] == True:
+							Yes!
+							% else:
+							No...
+							% endif
+						% endif
+						</td></tr>
 				</table>
 			</div>
 			<div class="clear"></div>
