@@ -10,8 +10,11 @@ from pyramid.security import (
     forget,
 )
 
+from datetime import datetime
+from dateutil import parser, relativedelta
 import json
 import operator
+import pytz
 import urllib
 import urllib2
 
@@ -172,6 +175,10 @@ def charsheet_view(request):
             total_lines_formatted = locale.format(
                     "%d", total_lines, grouping=True)
 
+            # Get age of account, in months
+            gh_age_months = abs(relativedelta.relativedelta(user.created_at,
+                    user.created_at.now()).months)
+
             # Get recent user activity
             api_request = urllib2.Request("{0}/users/{1}/events/public".format(
                 github_api, usernames['github']))
@@ -181,6 +188,7 @@ def charsheet_view(request):
             recent_events = events_json[:25]
 
             github_dict = {
+                'age_months': gh_age_months,
                 'avatar_url': user.avatar_url,
                 'bio': user.bio,
                 'blog': user.blog,
@@ -225,11 +233,25 @@ def charsheet_view(request):
             request.session.flash('Error: Unable to connect to Ohloh.')
         else:
             if element.find("result/account") != None:
+                # If there's no error and we've got the account, let's get
+                # some data.
                 ohloh_dict = {
                     'id': element.find("result/account/id").text,
+                    'created_at': element.find(
+                            "result/account/created_at").text,
                 }
                 for node in element.find("result/account/kudo_score"):
                     ohloh_dict[node.tag] = node.text
+
+                # Get age of account, in months
+                utc = pytz.UTC
+                ohloh_creation_datetime = parser.parse(
+                        ohloh_dict['created_at'])
+                ohloh_age_months = abs(relativedelta.relativedelta(
+                        ohloh_creation_datetime,
+                        utc.localize(datetime.now())).months)
+                ohloh_dict['age_months'] = ohloh_age_months
+
             else:
                 request.session.flash('Error: Unable to find username on \
                     Ohloh.')
@@ -247,14 +269,25 @@ def charsheet_view(request):
         api_response = decompress(api_z_response.read(), 16 + MAX_WBITS)
         se_accounts_json = json.loads(api_response)
         se_answers = 0  # Number of answers given on SE sites
+        # Oldest acc. creation date, in Unix time:
+        se_oldest_creation_unix = 9999999999
         for site in se_accounts_json['items']:
             try:
                 se_answers += site['answer_count']
             except KeyError:
                 pass  # No answers from that site
+            se_oldest_creation_unix = min(
+                    site['creation_date'], se_oldest_creation_unix)
+        oldest_se_datetime = datetime.utcfromtimestamp(se_oldest_creation_unix)
+        se_age_months = abs(relativedelta.relativedelta(
+                utc.localize(oldest_se_datetime),
+                utc.localize(datetime.now())).months)
+
+        # Get age, in months, of Stack Exchange
 
         stack_exchange_dict = {
             'answers': se_answers,
+            'age_months': se_age_months,
         }
 
     ### Fedora Account System ###

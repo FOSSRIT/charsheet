@@ -128,13 +128,14 @@
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Wisdom:</td><td>value</td></tr>
+					<tr><td>Wisdom:</td><td>${stats['wisdom']}</td></tr>
 					<tr><td>Leadership:</td><td>value</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Determination:</td><td>value</td></tr>
+					<tr><td>Determination:</td><td>${stats['determination']}
+						</td></tr>
 					<tr><td>Popularity:</td><td>value</td></tr>
 				</table>
 			</div>

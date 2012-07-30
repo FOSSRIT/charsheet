@@ -78,23 +78,34 @@ def calculate_stats(gh, oh, cw, se):
         'total_lines': 0,
         'cw_badges': 0,
         'se_answers': 0,
+        'repos': 0,
+        'age_months': 0,
     }
 
     if gh:
-        data['total_lines'] = gh['total_lines']
+        data['total_lines'] += gh['total_lines']
+        data['repos'] += gh['public_repos']
+        data['age_months'] = max(data['age_months'], gh['age_months'])
 
     if oh:
-        pass
+        data['age_months'] = max(data['age_months'], oh['age_months'])
 
     if cw:
         data['cw_badges'] = cw['badges']
 
     if se:
         data['se_answers'] = se['answers']
+        data['age_months'] = max(data['age_months'], se['age_months'])
 
     stats['strength'] = calculate_strength(
             data['total_lines'],
             data['se_answers'],
             data['cw_badges'])
+
+    stats['wisdom'] = calculate_wisdom(
+            data['age_months'])
+
+    stats['determination'] = calculate_determination(
+            data['repos'])
 
     return stats
