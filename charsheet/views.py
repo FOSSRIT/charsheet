@@ -206,6 +206,7 @@ def charsheet_view(request):
                 'recent_events': recent_events,
                 'languages': sorted_languages,
                 'languages_count': sorted_language_count,
+                'languages_lines': user_languages,
                 'num_languages': len(user_languages),
                 'location': user.location,
                 'name': user.name,

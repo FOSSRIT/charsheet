@@ -72,7 +72,29 @@ def calculate_stats(gh, oh, cw, se):
     dictionaries and generates a stats dict.
     """
 
-    stats = {}
+    stats = {
+        'strength': 0,
+        'dexterity': 0,
+        'wisdom': 0,
+        'leadership': 0,
+        'determination': 0,
+        'popularity': 0,
+        'skills': {
+            'c': 0,
+            'c++': 0,
+            'java': 0,
+            'html': 0,
+            'xml': 0,
+            'python': 0,
+            'php': 0,
+            'javascript': 0,
+            'perl': 0,
+            'shell': 0,
+            'objective-c': 0,
+            'ruby': 0,
+            'haskell': 0,
+        },
+    }
 
     data = {
         'total_lines': 0,
@@ -95,6 +117,7 @@ def calculate_stats(gh, oh, cw, se):
         data['forks'] = gh['forks']
         data['followers'] = gh['followers']
         data['languages'] = gh['num_languages']
+        data['languages_dict'] = gh['languages_lines']  # language: lines
 
     if oh:
         data['age_months'] = max(data['age_months'], oh['age_months'])
@@ -131,5 +154,13 @@ def calculate_stats(gh, oh, cw, se):
     stats['popularity'] = calculate_popularity(
             followers=data['followers'],
             reputation=data['se_reputation'])
+
+    # Skills
+    from pprint import pprint
+    print "Languages dict: "
+    pprint(data['languages_dict'])
+    for language in data['languages_dict']:
+        stats['skills'][language.lower()] = calculate_language_skill(
+                lines=data['languages_dict'][language])
 
     return stats
