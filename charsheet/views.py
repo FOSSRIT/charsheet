@@ -12,6 +12,7 @@ from pyramid.security import (
 
 from datetime import datetime
 from dateutil import parser, relativedelta
+from httplib import BadStatusLine
 import json
 import operator
 import pytz
@@ -283,7 +284,10 @@ def charsheet_view(request):
             api_request = urllib2.Request(
                     request_url,
                     headers={"Accept": "application/json"})
-            api_z_response = urllib2.urlopen(api_request)
+            try:
+                api_z_response = urllib2.urlopen(api_request)
+            except:
+                raise
             from zlib import decompress, MAX_WBITS
             api_response = decompress(
                     api_z_response.read(), 16 + MAX_WBITS)
@@ -339,9 +343,9 @@ def charsheet_view(request):
                 'reputation': se_reputation,
                 'tags_count': len(se_tags),
             }
-        except:
-            request.session.flash('Error: Problem communicating with \
-                    Stack Exchange API.')
+        except BadStatusLine, urllib2.HTTPError:
+            request.session.flash('Error: Communication with \
+                    Stack Exchange API denied.')
 
     ### Fedora Account System ###
     if usernames['fedora']:
