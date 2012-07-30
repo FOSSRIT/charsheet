@@ -156,9 +156,6 @@ def calculate_stats(gh, oh, cw, se):
             reputation=data['se_reputation'])
 
     # Skills
-    from pprint import pprint
-    print "Languages dict: "
-    pprint(data['languages_dict'])
     for language in data['languages_dict']:
         stats['skills'][language.lower()] = calculate_language_skill(
                 lines=data['languages_dict'][language])
