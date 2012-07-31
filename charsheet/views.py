@@ -53,6 +53,9 @@ def logout(request):
 
 
 def openid_success(context, request, *args, **kwargs):
+    """
+    Incomplete OpenID attempt.
+    """
     identity = request.params['openid.identity']
     email = request.params['openid.sreg.email']
     if not identity.startswith(request.registry.settings['openid.provider']):
@@ -60,7 +63,7 @@ def openid_success(context, request, *args, **kwargs):
             'Error: Invalid OpenID provider. You can only use {0}.'.format(
                 request.registry.settings['openid.provider']))
         return HTTPFound(location=request.application_url + '/login')
-    username = identity.split('/')[-1]
+    #username = identity.split('/')[-1]  # Not sure what this is for
     headers = remember(request, email)
     came_from = request.session['came_from']
     del(request.session['came_from'])
@@ -106,8 +109,6 @@ def charsheet_view(request):
     stack_exchange_dict = None
     fedora_dict = None
 
-    cwc = None  # Coderwall module object
-
     utc = pytz.UTC  # For datetime handling
 
     def calculate_age_months(dt1, dt2):
@@ -118,33 +119,46 @@ def charsheet_view(request):
         age_delta = relativedelta.relativedelta(dt1, dt2)
         return abs((age_delta.years * 12) + age_delta.months)
 
-    ### Coderwall ###
-    if usernames['coderwall']:
+    def handle_coderwall(username):
+        """
+        Get data from CoderWall.
+        """
         from coderwall import CoderWall
 
         try:
-            cwc = CoderWall(usernames['coderwall'])
-            coderwall_dict = {
+            cwc = CoderWall(username)
+            return {
                 'endorsements': cwc.endorsements,
                 'badges': len(cwc.badges),
+                'cwc': cwc,
             }
         except NameError:
             request.session.flash(
                 'Error: Unable to find username on Coderwall.')
+            return None
 
-    ### GitHub ###
-    if usernames['github']:
+    def handle_github(username):
+        """
+        Get data from GitHub.
+        """
         from pygithub3 import Github, exceptions
         gh = Github()
+        github_api = "https://api.github.com"
         try:
-            github_api = "https://api.github.com"
+            user = gh.users.get(username)
 
-            user = gh.users.get(usernames['github'])
+            # Handle organizations, because everything breaks if one is
+            # passed in, including but not limited to user.bio and
+            # user.hireable.
+            if user.type == 'Organization':
+                request.session.flash(
+                    'Error: Charsheet does not yet support \
+                            GitHub organizations.')
 
             # Get user repos
             user_repos = []
             user_languages = {}  # Structured as language: lines
-            for page in gh.repos.list(user=usernames['github']):
+            for page in gh.repos.list(user=username):
                 # Results are paginated.
                 for repo in page:
                     user_repos.append(repo)
@@ -200,7 +214,7 @@ def charsheet_view(request):
 
             # Get recent user activity
             api_request = urllib2.Request("{0}/users/{1}/events/public".format(
-                github_api, usernames['github']))
+                github_api, username))
             api_response = urllib2.urlopen(api_request)
             events_json = json.load(api_response)
 
@@ -212,7 +226,7 @@ def charsheet_view(request):
             elif user.blog.startswith('https://'):
                 gh_blog_url = user.blog[8:]
 
-            github_dict = {
+            return {
                 'age_months': gh_age_months,
                 'avatar_url': user.avatar_url,
                 'bio': user.bio,
@@ -230,16 +244,16 @@ def charsheet_view(request):
                 'location': user.location,
                 'name': user.name,
                 'public_repos': user.public_repos,
-                'repos': gh.repos.list(usernames['github']).all(),
+                'repos': gh.repos.list(username).all(),
                 'total_lines': total_lines,
                 'total_lines_formatted': total_lines_formatted,
                 }
 
         except exceptions.NotFound:
             request.session.flash('Error: Unable to find username on GitHub.')
+            return None
 
-    ### Ohloh ###
-    if usernames['ohloh']:
+    def handle_ohloh(username):
         # Import ElementTree for XML parsing (Python 2.5+)
         import elementtree.ElementTree as ET
 
@@ -250,7 +264,7 @@ def charsheet_view(request):
 
         params = urllib.urlencode({'api_key': ohloh_api_key, 'v': 1})
         url = "http://www.ohloh.net/accounts/{0}.xml?{1}".format(
-            usernames['ohloh'], params)
+            username, params)
         ohloh_response = urllib.urlopen(url)
 
         # Parse response into XML object
@@ -261,6 +275,7 @@ def charsheet_view(request):
         error = element.find("error")
         if error:
             request.session.flash('Error: Unable to connect to Ohloh.')
+            return None
         else:
             if element.find("result/account") != None:
                 # If there's no error and we've got the account, let's get
@@ -280,13 +295,16 @@ def charsheet_view(request):
                         ohloh_creation_datetime,
                         utc.localize(datetime.now()))
                 ohloh_dict['age_months'] = ohloh_age_months
-
+                return ohloh_dict
             else:
                 request.session.flash('Error: Unable to find username on \
                     Ohloh.')
+                return None
 
-    ### Stack Exchange ###
-    if usernames['stack_exchange']:
+    def handle_stack_exchange(user_id):
+        """
+        Get data from Stack Exchange.
+        """
         stack_exchange_api = 'http://api.stackexchange.com/2.1'
 
         def get_se_json(path, **kwargs):
@@ -310,7 +328,7 @@ def charsheet_view(request):
 
         try:
             se_accounts_json = get_se_json("/users/{0}/associated".format(
-                    usernames['stack_exchange']))
+                    username))
 
             se_answers = 0  # Number of answers given on SE sites
             se_top_answers = 0  # Number of accepted answers on SE sites
@@ -351,7 +369,7 @@ def charsheet_view(request):
                     utc.localize(oldest_se_datetime),
                     utc.localize(datetime.now()))
 
-            stack_exchange_dict = {
+            return {
                 'answers': se_answers,
                 'top_answers': se_top_answers,
                 'age_months': se_age_months,
@@ -361,17 +379,15 @@ def charsheet_view(request):
         except BadStatusLine, urllib2.HTTPError:
             request.session.flash('Error: Communication with \
                     Stack Exchange API denied.')
+            return None
 
-    ### Fedora Account System ###
-    if usernames['fedora']:
+    def handle_fedora(username, password):
         from fedora import client
         try:
             fas = client.AccountSystem(
-                username=usernames['fedora'],
-                password=passwords['fedora']
-                )
+                    username=username, password=password)
             user = fas.person_by_username(usernames['fedora'])
-            fedora_dict = {
+            return {
                 'affiliation': user.affiliation,
                 'irc': user.ircnick,
                 'status': user.status,
@@ -379,9 +395,35 @@ def charsheet_view(request):
         except NameError:
             request.session.flash('Error: Unable to connect to the Fedora \
                 Account System.')
+            return None
         except client.AuthError:
             request.session.flash('Error: Fedora Account System authorization \
                 failed.')
+            return None
+
+        
+    ### Coderwall ###
+    if usernames['coderwall']:
+        coderwall_dict = handle_coderwall(usernames['coderwall'])
+
+    ### GitHub ###
+    if usernames['github']:
+        github_dict = handle_github(usernames['github'])
+
+    ### Ohloh ###
+    if usernames['ohloh']:
+        ohloh_dict = handle_ohloh(usernames['ohloh'])
+
+    ### Stack Exchange ###
+    if usernames['stack_exchange']:
+        stack_exchange_dict = handle_stack_exchange(
+                usernames['stack_exchange'])
+
+    ### Fedora Account System ###
+    if usernames['fedora']:
+        fedora_dict = handle_fedora(
+                usernames['fedora'],
+                passwords['fedora'])
 
     ### Stat calculation ###
     import stats
@@ -395,7 +437,6 @@ def charsheet_view(request):
     request.session.flash("Character sheet generated.")
     return {
             'username': username,
-            'cwc': cwc,
             'coderwall_data': coderwall_dict,
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,

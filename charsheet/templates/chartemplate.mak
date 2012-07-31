@@ -497,7 +497,7 @@
 				% if coderwall_data:
 				<h2>Coderwall Achievements</h2>
 				<table class="badge-list">
-					% for badge in cwc.badges:
+					% for badge in coderwall_data['cwc'].badges:
 						<tr><td><img src="${badge.image_uri}"/></td>
 						<td>${badge.name}</td><td>${badge.description}</td></tr>
 					% endfor
