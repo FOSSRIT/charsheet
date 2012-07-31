@@ -131,21 +131,38 @@
 			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Strength:</td><td>${stats['strength']}</td></tr>
-					<tr><td>Dexterity:</td><td>${stats['dexterity']}</td></tr>
+					<tr><td>Strength:</td>
+						<td>${int(stats['strength'])}<progress max="1"
+								value="${stats['strength'] % 1}">
+						</progress></td></tr>
+					<tr><td>Dexterity:</td>
+						<td>${int(stats['dexterity'])}<progress max="1"
+								value="${stats['dexterity'] % 1}">
+						</progress></td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Wisdom:</td><td>${stats['wisdom']}</td></tr>
-					<tr><td>Leadership:</td><td>${stats['leadership']}</td></tr>
+					<tr><td>Wisdom:</td>
+						<td>${int(stats['wisdom'])}<progress max="1"
+								value="${stats['wisdom'] % 1}">
+						</progress></td></tr>
+					<tr><td>Leadership:</td>
+						<td>${int(stats['leadership'])}<progress max="1"
+								value="${stats['leadership'] % 1}">
+						</progress></td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Determination:</td><td>${stats['determination']}
-						</td></tr>
-					<tr><td>Popularity:</td><td>${stats['popularity']}</td></tr>
+					<tr><td>Determination:</td>
+						<td>${int(stats['determination'])}<progress max="1"
+								value="${stats['determination'] % 1}">
+						</progress></td></tr>
+					<tr><td>Popularity:</td>
+						<td>${int(stats['popularity'])}<progress max="1"
+								value="${stats['popularity'] % 1}">
+						</progress></td></tr>
 				</table>
 			</div>
 			<div class="clear">

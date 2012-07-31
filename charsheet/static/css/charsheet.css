@@ -53,13 +53,13 @@ tr {
 }
 
 progress {
-    background-color: #FFF;
+    width: 100%;
 }
 
 progress::-webkit-progress-bar-value,
 progress::-webkit-progress-value,
 progress::-moz-progress-bar {
-    background-color: black;
+    /* Zippo! */
 }
 
 .activity-controls {
