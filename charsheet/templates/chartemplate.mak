@@ -441,6 +441,16 @@
 								<a href="${repo_url}">
 								${event['repo']['name']}</a>.
 							</li>
+						% elif event['type'] == "PullRequestReviewCommentEvent":
+							<li class="event comment-event">
+								Commented on
+								<a href=
+								"${event['payload']['comment']['html_url']}">
+								a pull request</a> in the
+								<a href="${repo_url}">
+								${event['repo']['name']}
+								</a> repo.
+							</li>
 						% else:
 							<li class="event other-event">
 								Performed
