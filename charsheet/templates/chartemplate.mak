@@ -12,6 +12,20 @@
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='${request.static_url('charsheet:static/js/charsheet.js')}'></script>
+		<script type='text/javascript'
+	src='${request.static_url('charsheet:static/js/jquery.dimensions.js')}'>
+		</script>
+		<script type='text/javascript'
+	src='${request.static_url('charsheet:static/js/jquery.delegate.js')}'>
+		</script>
+		<script type='text/javascript'
+	src='${request.static_url('charsheet:static/js/jquery.bgiframe.js')}'>
+		</script>
+		<script type='text/javascript'
+		src='${request.static_url('charsheet:static/js/jquery.tooltip.js')}'>
+		</script>
+<link href='${request.static_url('charsheet:static/css/jquery.tooltip.css')}'
+			rel='stylesheet' type='text/css'>
 		% if coderwall_data:
 			<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
 				media='all' rel='stylesheet' type='text/css'>
@@ -131,11 +145,19 @@
 			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Strength:</td>
+					<tr class="tooltip"
+						title="Strength - 
+						Determined by lines in GitHub repos, questions answered
+						on Stack Exchange, and CoderWall badges.">
+						<td>Strength:</td>
 						<td>${int(stats['strength'])}<progress max="1"
 								value="${stats['strength'] % 1}">
 						</progress></td></tr>
-					<tr><td>Dexterity:</td>
+					<tr class="tooltip"
+						title="Dexterity - 
+						Determined by GitHub language variety and variety of
+						tags on all answered Stack Exchange questions.">
+						<td>Dexterity:</td>
 						<td>${int(stats['dexterity'])}<progress max="1"
 								value="${stats['dexterity'] % 1}">
 						</progress></td></tr>
@@ -143,11 +165,20 @@
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Wisdom:</td>
+					<tr class="tooltip"
+						title="Wisdom - 
+						Determined by age of oldest linked account, between
+						GitHub, Ohloh, and Stack Exchange.">
+						<td>Wisdom:</td>
 						<td>${int(stats['wisdom'])}<progress max="1"
 								value="${stats['wisdom'] % 1}">
 						</progress></td></tr>
-					<tr><td>Leadership:</td>
+					<tr class="tooltip"
+						title="Leadership - 
+						Determined by number of times your GitHub repos have
+						been forked and amount of top answers on
+						Stack Exchange.">
+						<td>Leadership:</td>
 						<td>${int(stats['leadership'])}<progress max="1"
 								value="${stats['leadership'] % 1}">
 						</progress></td></tr>
@@ -155,11 +186,18 @@
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Determination:</td>
+					<tr class="tooltip"
+						title="Determination - 
+						Determined (ha-ha) by number of repos in your
+						GitHub account.">
+						<td>Determination:</td>
 						<td>${int(stats['determination'])}<progress max="1"
 								value="${stats['determination'] % 1}">
 						</progress></td></tr>
-					<tr><td>Popularity:</td>
+					<tr class="tooltip"
+						title="Popularity - 
+						Determined by number of GitHub followers and Stack
+						Exchange reputation."><td>Popularity:</td>
 						<td>${int(stats['popularity'])}<progress max="1"
 								value="${stats['popularity'] % 1}">
 						</progress></td></tr>
@@ -212,7 +250,7 @@
 					<tr><td>Arduino</td><td>coming soon</td></tr>
 					<tr><td>Erlang</td><td>coming soon</td></tr>
 					<tr><td>Go</td><td>coming soon</td></tr>
-					<tr><td>Coffee Script</td><td>coming soon</td></tr>
+					<tr><td>CoffeeScript</td><td>coming soon</td></tr>
 					<tr><td>Emacs Lisp</td><td>coming soon</td></tr>
 					<tr><td>Vim Script</td><td>coming soon</td></tr>
 				</table>

@@ -156,7 +156,8 @@ li.other-event {
 
 li.other-event a, a:visited { color: #868686; }
 
-/* There is something absolutely ridiculous going on with the CSS that I
+/* ISSUE #42
+ * There is something absolutely ridiculous going on with the CSS that I
  * can't figure out. This control somehow decides the color of the link
  * in the "more" and "less" GitHub activity buttons, but does not control
  * the blog link at all. Obviously have to fix this.
@@ -197,6 +198,21 @@ input#submit:hover {
 
 .alert-success {
     color: green;
+}
+
+.tooltip-stat {
+    width: 300px;
+    line-height: 1.2em;
+    font-family: "Helvetica", "sans";
+}
+
+.tooltip-stat h3 {
+    font-size: 16px;
+}
+
+.tooltip-stat div {
+    font-size: 12px;
+    text-align: left;
 }
 
 #user-bio {

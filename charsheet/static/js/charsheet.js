@@ -26,4 +26,15 @@ $(document).ready(function() {
         console.log(showing)
         return false; // don't move to the top of the page
     });
+
+    $('.tooltip').tooltip({
+        track: true,
+        delay: 0,
+        showURL: false,
+        showBody: " - ",
+        extraClass: "tooltip-stat",
+        fixPNG: true,
+        opacity: 0.90,
+        right: 60
+    });
 });
