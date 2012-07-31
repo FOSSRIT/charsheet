@@ -154,6 +154,7 @@ def charsheet_view(request):
                 request.session.flash(
                     'Error: Charsheet does not yet support \
                             GitHub organizations.')
+                return None
 
             # Get user repos
             user_repos = []
@@ -401,7 +402,6 @@ def charsheet_view(request):
                 failed.')
             return None
 
-        
     ### Coderwall ###
     if usernames['coderwall']:
         coderwall_dict = handle_coderwall(usernames['coderwall'])
