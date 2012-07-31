@@ -176,7 +176,10 @@
 			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
-					<tr><td>C</td><td>${stats['skills']['c']}</td></tr>
+					<tr><td>C</td>
+						<td>${int(stats['skills']['c'])}<progress max="1"
+							value="${stats['skills']['c'] % 1}">
+							</progress></td></tr>
 					<tr><td>C++</td><td>${stats['skills']['c++']}</td></tr>
 					<tr><td>Java</td><td>${stats['skills']['java']}</td></tr>
 					<tr><td>HTML</td><td>${stats['skills']['html']}</td></tr>
