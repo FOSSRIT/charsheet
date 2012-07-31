@@ -206,11 +206,17 @@ def charsheet_view(request):
 
             recent_events = events_json[:25]
 
+            # Blog/URL handling
+            if user.blog.startswith('http://'):
+                gh_blog_url = user.blog[7:]
+            elif user.blog.startswith('https://'):
+                gh_blog_url = user.blog[8:]
+
             github_dict = {
                 'age_months': gh_age_months,
                 'avatar_url': user.avatar_url,
                 'bio': user.bio,
-                'blog': user.blog,
+                'blog': gh_blog_url,
                 'company': user.company,
                 'email': user.email,
                 'followers': user.followers,
