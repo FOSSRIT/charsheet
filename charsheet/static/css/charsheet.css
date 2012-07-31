@@ -59,7 +59,7 @@ progress {
 progress::-webkit-progress-bar-value,
 progress::-webkit-progress-value,
 progress::-moz-progress-bar {
-    /* Zippo! */
+    width: 100%
 }
 
 .activity-controls {
