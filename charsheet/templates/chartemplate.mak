@@ -200,21 +200,21 @@
 					<tr><td>Ruby</td><td>${stats['skills']['ruby']}</td></tr>
 					<tr><td>Haskell</td>
 						<td>${stats['skills']['haskell']}</td></tr>
-					<tr><td>Skill 14:</td><td>value</td></tr>
-					<tr><td>Skill 15:</td><td>value</td></tr>
-					<tr><td>Skill 16:</td><td>value</td></tr>
+					<tr><td>Lua</td><td>coming soon</td></tr>
+					<tr><td>Assembly</td><td>coming soon</td></tr>
+					<tr><td>Common Lisp</td><td>coming soon</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Skill 17:</td><td>value</td></tr>
-					<tr><td>Skill 18:</td><td>value</td></tr>
-					<tr><td>Skill 19:</td><td>value</td></tr>
-					<tr><td>Skill 20:</td><td>value</td></tr>
-					<tr><td>Skill 21:</td><td>value</td></tr>
-					<tr><td>Skill 22:</td><td>value</td></tr>
-					<tr><td>Skill 23:</td><td>value</td></tr>
-					<tr><td>Skill 24:</td><td>value</td></tr>
+					<tr><td>Scala</td><td>coming soon</td></tr>
+					<tr><td>Visual Basic</td><td>coming soon</td></tr>
+					<tr><td>Arduino</td><td>coming soon</td></tr>
+					<tr><td>Erlang</td><td>coming soon</td></tr>
+					<tr><td>Go</td><td>coming soon</td></tr>
+					<tr><td>Coffee Script</td><td>coming soon</td></tr>
+					<tr><td>Emacs Lisp</td><td>coming soon</td></tr>
+					<tr><td>Vim Script</td><td>coming soon</td></tr>
 				</table>
 			</div>
 			<div class="clear">
