@@ -110,6 +110,14 @@ def charsheet_view(request):
 
     utc = pytz.UTC  # For datetime handling
 
+    def calculate_age_months(dt1, dt2):
+        """
+        Pass this function two tz-aware datetimes and get
+        the difference in months!
+        """
+        age_delta = relativedelta.relativedelta(dt1, dt2)
+        return abs((age_delta.years * 12) + age_delta.months)
+
     ### Coderwall ###
     if usernames['coderwall']:
         from coderwall import CoderWall
@@ -187,8 +195,8 @@ def charsheet_view(request):
                     "%d", total_lines, grouping=True)
 
             # Get age of account, in months
-            gh_age_months = abs(relativedelta.relativedelta(user.created_at,
-                    user.created_at.now()).months)
+            gh_age_months = calculate_age_months(
+                    user.created_at, user.created_at.now())
 
             # Get recent user activity
             api_request = urllib2.Request("{0}/users/{1}/events/public".format(
@@ -262,9 +270,9 @@ def charsheet_view(request):
                 # Get age of account, in months
                 ohloh_creation_datetime = parser.parse(
                         ohloh_dict['created_at'])
-                ohloh_age_months = abs(relativedelta.relativedelta(
+                ohloh_age_months = calculate_age_months(
                         ohloh_creation_datetime,
-                        utc.localize(datetime.now())).months)
+                        utc.localize(datetime.now()))
                 ohloh_dict['age_months'] = ohloh_age_months
 
             else:
@@ -333,9 +341,9 @@ def charsheet_view(request):
             # Get age, in months, of oldest SE account
             oldest_se_datetime = datetime.utcfromtimestamp(
                     se_oldest_creation_unix)
-            se_age_months = abs(relativedelta.relativedelta(
+            se_age_months = calculate_age_months(
                     utc.localize(oldest_se_datetime),
-                    utc.localize(datetime.now())).months)
+                    utc.localize(datetime.now()))
 
             stack_exchange_dict = {
                 'answers': se_answers,
