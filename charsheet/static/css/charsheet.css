@@ -200,6 +200,10 @@ input#submit:hover {
     color: green;
 }
 
+.tooltip {
+    /* Zippo! */
+}
+
 .tooltip-stat {
     width: 300px;
     line-height: 1.2em;

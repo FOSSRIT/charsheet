@@ -29,12 +29,13 @@ $(document).ready(function() {
 
     $('.tooltip').tooltip({
         track: true,
-        delay: 0,
+        delay: 250,
         showURL: false,
         showBody: " - ",
         extraClass: "tooltip-stat",
         fixPNG: true,
-        opacity: 0.90,
+        opacity: 0.95,
+        fade: 250,
         right: 60
     });
 });
