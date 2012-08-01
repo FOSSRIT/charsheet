@@ -17,10 +17,12 @@ utc = pytz.UTC  # For datetime handling
 def calculate_age_months(dt1, dt2):
     """
     Pass this function two tz-aware datetimes and get
-    the difference in months!
+    the difference in months and fractions of a month!
     """
     age_delta = relativedelta.relativedelta(dt1, dt2)
-    return abs((age_delta.years * 12) + age_delta.months)
+    # The below works well enough to get an approximate decimal.
+    fraction_of_month = float(age_delta.days) / 31
+    return abs((age_delta.years * 12) + age_delta.months + fraction_of_month)
 
 
 def handle_coderwall(request, username):
