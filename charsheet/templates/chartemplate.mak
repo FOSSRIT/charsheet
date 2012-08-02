@@ -282,7 +282,7 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td>Top Languages by Repos</td><td>
+					<tr><td>Top Languages by Repos:</td><td>
 						% if github_data:
 							% for i in range(3):
 								${github_data['languages_count'][i][0]},
@@ -291,7 +291,7 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td>Top Languages by Klocs</td><td>
+					<tr><td>Top Languages by Klocs:</td><td>
 						% if github_data:
 							% for i in range(3):
 								${github_data['languages'][i][0]}, 
@@ -360,7 +360,7 @@
 			<div class="clear"></div>
 			<div class="grid_4">
 				<table>
-				<tr><td>FAS Affiliation</td>
+				<tr><td>FAS Affiliation:</td>
 						<td>
 						% if fedora_data:
 							${fedora_data['affiliation']}
@@ -368,7 +368,7 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td>FAS Status</td>
+					<tr><td>FAS Status:</td>
 						<td>
 						% if fedora_data:
 							${fedora_data['status']}
