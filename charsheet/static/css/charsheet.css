@@ -200,22 +200,18 @@ input#submit:hover {
     color: green;
 }
 
-.tooltip {
-    /* Zippo! */
-}
-
-.tooltip-stat {
-    width: 300px;
-    line-height: 1.2em;
+#tooltip {
     font-family: "Helvetica", "sans";
+    line-height: 1.2em;
+    width: 300px;
+    font-size: 12px;
 }
 
-.tooltip-stat h3 {
+#tooltip h3 {
     font-size: 16px;
 }
 
-.tooltip-stat div {
-    font-size: 12px;
+#tooltip div {
     text-align: left;
 }
 
