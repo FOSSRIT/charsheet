@@ -225,7 +225,7 @@
 					<tr><td>Python</td>
 						<td>${stats['skills']['python']}</td></tr>
 					<tr><td>PHP</td><td>${stats['skills']['php']}</td></tr>
-					<tr><td>Javascript</td>
+					<tr><td>JavaScript</td>
 						<td>${stats['skills']['javascript']}</td></tr>
 				</table>
 			</div>
