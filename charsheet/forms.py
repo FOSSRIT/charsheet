@@ -21,13 +21,10 @@ class CharsheetForm(tw2.forms.FormPage):
                 label='Stack Exchange ID')
         se_label = tw2.forms.Label(text='stackexchange.com/users/ID/USERNAME')
 
-        """
-        spacer2 = tw2.forms.Spacer()
-        """
         fedora = tw2.forms.HiddenField(
-            'fedora', label='Fedora Account System (FAS)')
+                'fedora', label='Fedora Account System (FAS)')
         fedora_pass = tw2.forms.HiddenField(
-            'fedora_pass', label='FAS password')
-        """
-        fas_label = tw2.forms.Label(text='No OpenID at this time. :(')
-        """
+                'fedora_pass', label='FAS password')
+        spacer2 = tw2.forms.Spacer()
+        fas_label = tw2.forms.Label(text='FAS is not available at \
+                this time.')
