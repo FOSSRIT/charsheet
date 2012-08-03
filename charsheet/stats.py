@@ -93,6 +93,17 @@ def calculate_stats(gh, oh, cw, se):
             'objective-c': 0,
             'ruby': 0,
             'haskell': 0,
+            'lua': 0,
+            'assembly': 0,
+            'commonlisp': 0,
+            'scala': 0,
+            'visualbasic': 0,
+            'arduino': 0,
+            'erlang': 0,
+            'go': 0,
+            'coffeescript': 0,
+            'emacslisp': 0,
+            'vimscript': 0,
         },
     }
 
