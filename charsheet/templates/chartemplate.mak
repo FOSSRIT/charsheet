@@ -133,7 +133,16 @@
 							% endif
 						% endif
 						</td></tr>
-				</table>
+					<tr><td>GitTip</td><td>
+						% if github_data:
+							<iframe style="border: 0; margin: 0; padding: 0;"
+							src="https://www.gittip.com/${username}/widget.html"
+							width="48pt" height="20pt"></iframe>
+						% else:
+							Unavailable
+						% endif
+					</td></tr>
+			</table>
 			</div>
 			<div class="clear"></div>
 			
