@@ -500,8 +500,7 @@
 							${event['payload']['pull_request']['title']}</a>
 								in the
 								<a href="${repo_url}">
-								${event['repo']['name']}
-								</a> repo.
+								${event['repo']['name']}</a> repo.
 							</li>
 						% elif event['type'] == 'CommitCommentEvent':
 							<li class="event comment-event">
@@ -510,14 +509,43 @@
 							"${event['payload']['comment']['html_url']}">
 								a commit</a> in the
 								<a href="${repo_url}">
-								${event['repo']['name']}
-								</a> repo.
+								${event['repo']['name']}</a> repo.
+							</li>
+						% elif event['type'] == 'DownloadEvent':
+							<li class="event push-event">
+								Created a download in the
+								<a href="${repo_url}">
+								${event['repo']['name']}</a> repo.
 							</li>
 						% elif event['type'] == "ForkEvent":
 							<li class="event create-event">
 								Forked
 								<a href="${repo_url}">
 								${event['repo']['name']}</a>.
+							</li>
+						% elif event['type'] == 'ForkApplyEvent':
+							<li class="event create-event">
+								Applied a patch in the fork queue for the
+								<a href="${repo_url}">
+								${event['repo']['name']}</a> repo.
+							</li>
+						% elif event['type'] == "GollumEvent":
+							<li class="event comment-event">
+								Edited the wiki of the
+								<a href="${repo_url}">
+								${event['repo']['name']}</a> repo.
+							</li>
+						% elif event['type'] == "MemberEvent":
+							<li class="event social-event">
+								Was added as a collaborator in the
+								<a href="${repo_url}">
+								${event['repo']['name']}</a> repo.
+							</li>
+						% elif event['type'] == "PublicEvent":
+							<li class="event create-event">
+								Open-sourced the
+								<a href="${repo_url}">
+								${event['repo']['name']}</a> repo!!!
 							</li>
 						% elif event['type'] == "PullRequestReviewCommentEvent":
 							<li class="event comment-event">
@@ -528,6 +556,10 @@
 								<a href="${repo_url}">
 								${event['repo']['name']}
 								</a> repo.
+							</li>
+						% elif event['type'] == "TeamAddEvent":
+							<li class="event social-event">
+								Modified a team.
 							</li>
 						% else:
 							<li class="event other-event">
