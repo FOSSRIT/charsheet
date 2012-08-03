@@ -262,8 +262,8 @@
 						<td>${stats['skills']['coffeescript']}</td></tr>
 					<tr><td>Emacs Lisp</td>
 						<td>${stats['skills']['emacslisp']}</td></tr>
-					<tr><td>Vim Script</td>
-						<td>${stats['skills']['vimscript']}</td></tr>
+					<tr><td>VimL</td>
+						<td>${stats['skills']['viml']}</td></tr>
 				</table>
 			</div>
 			<div class="clear">

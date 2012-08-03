@@ -103,7 +103,7 @@ def calculate_stats(gh, oh, cw, se):
             'go': 0,
             'coffeescript': 0,
             'emacslisp': 0,
-            'vimscript': 0,
+            'viml': 0,
         },
     }
 
