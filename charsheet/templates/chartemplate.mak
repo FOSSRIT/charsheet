@@ -69,11 +69,14 @@
 				% endif
 				<table>
 				<tr class="tooltip" id="foo" title="Foo - Foo is the average
-					of your six attribute scores.">
+					of your six attribute scores.<br />
+					<strong>${int((stats['foo'] % 1) * 100)}%</strong>
+					to next level">
 					<td>Foo:</td><td>${int(stats['foo'])}</td></tr>
-				<tr class="tooltip" title="Foo Bar - Your Foo Bar, as with
-					all bars on this sheet, show your progress towards the
-					next point increase."><td>Foo Bar:</td>
+				<tr class="tooltip" title="Foo Bar - Your Foo Bar shows
+					your progress towards the next level of Foo.<br />
+					<strong>${int((stats['foo'] % 1) * 100)}%</strong>
+					to next level"><td>Foo Bar:</td>
 					<td><progress max="1" value="${stats['foo'] % 1}">
 						</progress></td></tr>
 				</table>
@@ -171,7 +174,7 @@
 						on Stack Exchange, and CoderWall badges.">
 						<td>Strength:</td>
 						<td>${int(stats['strength'])}<progress max="1"
-								value="${stats['strength'] % 1}">
+								value="${stats['strength'] % 1}">%
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="Dexterity - 
