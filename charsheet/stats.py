@@ -65,6 +65,17 @@ def calculate_language_skill(lines=0):
 
 ### Overarching calculation ###
 
+def calculate_foo(stats):
+    stats_to_average = [
+            stats['strength'],
+            stats['dexterity'],
+            stats['wisdom'],
+            stats['leadership'],
+            stats['determination'],
+            stats['popularity']
+            ]
+    return sum(stats_to_average) / float(len(stats_to_average))
+
 
 def calculate_stats(gh, oh, cw, se):
     """
@@ -73,6 +84,7 @@ def calculate_stats(gh, oh, cw, se):
     """
 
     stats = {
+        'foo': 0,
         'strength': 0,
         'dexterity': 0,
         'wisdom': 0,
@@ -171,5 +183,8 @@ def calculate_stats(gh, oh, cw, se):
         for language in data['languages_dict']:
             stats['skills'][language.lower()] = calculate_language_skill(
                     lines=data['languages_dict'][language])
+
+    # Foo
+    stats['foo'] = calculate_foo(stats)
 
     return stats

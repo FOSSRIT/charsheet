@@ -80,6 +80,10 @@ progress::-moz-progress-bar {
     color: #FFF;
 }
 
+#foo {
+    font-size: 1.6em;
+}
+
 #charsheet_form {
     width: 400px;
     margin-left: auto;

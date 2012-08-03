@@ -67,6 +67,12 @@
 				% else:
 					<p>No bio for this dev.</p>
 				% endif
+				<table>
+				<tr id="foo"><td>Foo:</td><td>${int(stats['foo'])}</td></tr>
+				<tr><td>Foo Bar:</td>
+					<td><progress max="1" value="${stats['foo'] % 1}">
+						</progress></td></tr>
+				</table>
 			</div>
 			<div class="grid_4">
 				<table>
