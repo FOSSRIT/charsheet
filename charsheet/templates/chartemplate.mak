@@ -371,18 +371,14 @@
 						</td></tr>
 					<tr><td>Top Languages by Repos:</td><td>
 						% if github_data:
-							% for i in range(3):
-								${github_data['languages_count'][i][0]},
-							% endfor
+			${", ".join([x[0] for x in github_data['languages_count'][:3]])}
 						% else:
 							?
 						% endif
 						</td></tr>
 					<tr><td>Top Languages by Klocs:</td><td>
 						% if github_data:
-							% for i in range(3):
-								${github_data['languages'][i][0]}, 
-							% endfor	
+					${", ".join([x[0] for x in github_data['languages'][:3]])}
 						% else:
 							?
 						% endif
