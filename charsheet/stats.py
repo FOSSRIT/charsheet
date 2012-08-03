@@ -11,7 +11,7 @@ def calculate_strength(lines=0, answers=0, badges=0):
     Strength is determined by lines in repos, questions answered on
     Stack Exchange, and Coderwall badges.
     """
-    return float((0.01 * (lines / 1000)) + (0.5 * answers) + (2 * badges))
+    return float(((lines / 100000)) + (0.05 * answers) + (2 * badges))
 
 
 def calculate_dexterity(languages=0, tags=0):
@@ -26,13 +26,13 @@ def calculate_leadership(forks=0, top_answers=0):
     """
     Leadership is based on project forks and top answers on Stack Exchange.
     """
-    return float((0.1 * forks) + (2.0 * top_answers))
+    return float((1 * forks) + (0.5 * top_answers))
 
 
 def calculate_wisdom(months=0):
     """
-    Wisdom is equal to the age, in months, of the user's oldest linked
-    account.
+    Wisdom is equal to the age, in months and fractions of a month,
+    of the user's oldest linked account.
     """
     return float(months)
 
@@ -50,7 +50,7 @@ def calculate_popularity(followers=0, reputation=0):
     Popularity is determined by number of followers and Stack Exchange
     reputation.
     """
-    return float(followers + (0.5 * reputation))
+    return float(followers + (0.01 * reputation))
 
 
 ### Skills ###
