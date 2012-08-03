@@ -135,7 +135,8 @@
 						</td></tr>
 					<tr><td>GitTip</td><td>
 						% if github_data:
-							<iframe style="border: 0; margin: 0; padding: 0;"
+							<iframe style="vertical-align: middle;
+									border: 0; margin: 0; padding: 0;"
 							src="https://www.gittip.com/${username}/widget.html"
 							width="48pt" height="20pt"></iframe>
 						% else:
