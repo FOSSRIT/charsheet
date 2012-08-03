@@ -238,21 +238,32 @@
 					<tr><td>Ruby</td><td>${stats['skills']['ruby']}</td></tr>
 					<tr><td>Haskell</td>
 						<td>${stats['skills']['haskell']}</td></tr>
-					<tr><td>Lua</td><td>coming soon</td></tr>
-					<tr><td>Assembly</td><td>coming soon</td></tr>
-					<tr><td>Common Lisp</td><td>coming soon</td></tr>
+					<tr><td>Lua</td>
+						<td>${stats['skills']['lua']}</td></tr>
+					<tr><td>Assembly</td>
+						<td>${stats['skills']['assembly']}</td></tr>
+					<tr><td>Common Lisp</td>
+						<td>${stats['skills']['commonlisp']}</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td>Scala</td><td>coming soon</td></tr>
-					<tr><td>Visual Basic</td><td>coming soon</td></tr>
-					<tr><td>Arduino</td><td>coming soon</td></tr>
-					<tr><td>Erlang</td><td>coming soon</td></tr>
-					<tr><td>Go</td><td>coming soon</td></tr>
-					<tr><td>CoffeeScript</td><td>coming soon</td></tr>
-					<tr><td>Emacs Lisp</td><td>coming soon</td></tr>
-					<tr><td>Vim Script</td><td>coming soon</td></tr>
+					<tr><td>Scala</td>
+						<td>${stats['skills']['scala']}</td></tr>
+					<tr><td>Visual Basic</td>
+						<td>${stats['skills']['visualbasic']}</td></tr>
+					<tr><td>Arduino</td>
+						<td>${stats['skills']['arduino']}</td></tr>
+					<tr><td>Erlang</td>
+						<td>${stats['skills']['erlang']}</td></tr>
+					<tr><td>Go</td>
+						<td>${stats['skills']['go']}</td></tr>
+					<tr><td>CoffeeScript</td>
+						<td>${stats['skills']['coffeescript']}</td></tr>
+					<tr><td>Emacs Lisp</td>
+						<td>${stats['skills']['emacslisp']}</td></tr>
+					<tr><td>Vim Script</td>
+						<td>${stats['skills']['vimscript']}</td></tr>
 				</table>
 			</div>
 			<div class="clear">
