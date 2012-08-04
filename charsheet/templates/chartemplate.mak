@@ -171,7 +171,9 @@
 					<tr class="tooltip"
 						title="Strength - 
 						Determined by lines in GitHub repos, questions answered
-						on Stack Exchange, and CoderWall badges.">
+						on Stack Exchange, and CoderWall badges.<br />
+						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
+						to next level">
 						<td>Strength:</td>
 						<td>${int(stats['strength'])}<progress max="1"
 								value="${stats['strength'] % 1}">%
@@ -179,7 +181,9 @@
 					<tr class="tooltip"
 						title="Dexterity - 
 						Determined by GitHub language variety and variety of
-						tags on all answered Stack Exchange questions.">
+						tags on all answered Stack Exchange questions.<br />
+					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
+					to next level">
 						<td>Dexterity:</td>
 						<td>${int(stats['dexterity'])}<progress max="1"
 								value="${stats['dexterity'] % 1}">
@@ -191,7 +195,9 @@
 					<tr class="tooltip"
 						title="Wisdom - 
 						Determined by age of oldest linked account, between
-						GitHub, Ohloh, and Stack Exchange.">
+						GitHub, Ohloh, and Stack Exchange.<br />
+					<strong>${int((stats['wisdom'] % 1) * 100)}%</strong>
+					to next level">
 						<td>Wisdom:</td>
 						<td>${int(stats['wisdom'])}<progress max="1"
 								value="${stats['wisdom'] % 1}">
@@ -200,7 +206,9 @@
 						title="Leadership - 
 						Determined by number of times your GitHub repos have
 						been forked and amount of top answers on
-						Stack Exchange.">
+						Stack Exchange.<br />
+					<strong>${int((stats['leadership'] % 1) * 100)}%</strong>
+					to next level">
 						<td>Leadership:</td>
 						<td>${int(stats['leadership'])}<progress max="1"
 								value="${stats['leadership'] % 1}">
@@ -212,7 +220,9 @@
 					<tr class="tooltip"
 						title="Determination - 
 						Determined (ha-ha) by number of repos in your
-						GitHub account.">
+						GitHub account.<br />
+					<strong>${int((stats['determination'] % 1) * 100)}%</strong>
+					to next level">
 						<td>Determination:</td>
 						<td>${int(stats['determination'])}<progress max="1"
 								value="${stats['determination'] % 1}">
@@ -220,7 +230,9 @@
 					<tr class="tooltip"
 						title="Popularity - 
 						Determined by number of GitHub followers and Stack
-						Exchange reputation."><td>Popularity:</td>
+						Exchange reputation.<br />
+					<strong>${int((stats['popularity'] % 1) * 100)}%</strong>
+					to next level"><td>Popularity:</td>
 						<td>${int(stats['popularity'])}<progress max="1"
 								value="${stats['popularity'] % 1}">
 						</progress></td></tr>

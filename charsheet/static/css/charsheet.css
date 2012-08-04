@@ -54,12 +54,14 @@ tr {
 
 progress {
     width: 100%;
+    border: 1px outset #000;
 }
 
 progress::-webkit-progress-bar-value,
 progress::-webkit-progress-value,
 progress::-moz-progress-bar {
     width: 100%
+    border: 1px outset #000;
 }
 
 .activity-controls {
