@@ -144,6 +144,8 @@
 							% else:
 							No...
 							% endif
+						% else:
+							Unknown
 						% endif
 						</td></tr>
 					<tr><td>GitTip</td><td>
