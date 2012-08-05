@@ -2,11 +2,25 @@
 Charsheet
 ===========
 
+Charsheet is an open-source web application built on Pyramid
+and currently in development.
+It generates a FOSS developer "character sheet" based on
+data from sites like GitHub, Ohloh, and Stack Exchange.
+
 Authors
 -------
 
 -   David Gay (oddshocks)
 -   Remy DeCausemaker (decause)
+
+APIs Currently Utilized
+-----------------------
+
+-   GitHub
+-   Coderwall
+-   Ohloh
+-   Stack Exchange
+-   Fedora Accounts System
 
 Hacking on Charsheet
 --------------------
