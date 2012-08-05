@@ -660,7 +660,7 @@
 					<a href="#" class="button more-activity">More</a>
 					</div>
 				% else:
-					<p>Add your GitHub username to see your recent commits.</p>
+					<p>Add your GitHub username to see your recent activity.</p>
 				% endif
 			</div>
 			<div class="clear"></div>
