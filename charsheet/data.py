@@ -204,6 +204,12 @@ def handle_ohloh(request, username):
                     ohloh_creation_datetime,
                     utc.localize(datetime.now()))
             ohloh_dict['age_months'] = ohloh_age_months
+
+            # Obtain account language data
+            ohloh_language_elements = []
+            for language in element.find("result/account/languages"):
+                ohloh_language_elements.append(language)
+
             return ohloh_dict
         else:
             request.session.flash('Error: Unable to find username on \
