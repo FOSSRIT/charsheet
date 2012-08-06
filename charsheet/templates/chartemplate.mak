@@ -57,17 +57,15 @@
 			<!-- GENERAL INFORMATION -->
 
 			<div class="grid_4">
+				<table>
+				<tr>
+				<td>
 				% if github_data:
 					<img class="avatar" src="${github_data['avatar_url']}" />
-					% if github_data['bio'] != None:
-					<p>${github_data['bio'] | n}</p>
-					% else:
-					<p>This dev has not yet set a bio on GitHub.</p>
-					% endif
-				% else:
-					<p>No bio for this dev.</p>
 				% endif
-				<table>
+				</td>
+					<td>${username}</td>
+				</tr>
 				<tr class="tooltip" id="foo" title="Foo - Foo is the average
 					of your six attribute scores.<br />
 					<strong>${int((stats['foo'] % 1) * 100)}%</strong>
@@ -83,8 +81,6 @@
 			</div>
 			<div class="grid_4">
 				<table>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_070_umbrella.png')}'/> Handle:</td>
-					<td>${username}</td></tr>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_003_user.png')}'/> Name:</td><td>
 						% if github_data:
 							${github_data['name']}
