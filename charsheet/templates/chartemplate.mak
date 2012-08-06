@@ -447,14 +447,6 @@
 						% endif
 						</td>
 					</tr>
-					% if coderwall_data:
-					<tr><td colspan='2'>
-						<section class="coderwall"
-							data-coderwall-username="${username}"
-							data-coderwall-orientation="horizontal"></section>
-						</td>
-					</tr>
-					% endif
 				</table>
 			</div>
 			<div class="clear"></div>
@@ -671,10 +663,17 @@
 				% if coderwall_data:
 				<h2>Coderwall Achievements</h2>
 				<table class="badge-list">
+					<% badges_printed = 0 %>
+					<tr>
 					% for badge in coderwall_data['cwc'].badges:
-						<tr><td><img src="${badge.image_uri}"/></td>
-						<td>${badge.name}</td><td>${badge.description}</td></tr>
+						<td class="tooltip" title="${badge.name} - ${badge.description}.">
+							<img src="${badge.image_uri}"/></td>
+						<% badges_printed += 1 %>
+						% if (badges_printed % 8 == 0) and badges_printed > 0:
+							</tr><tr>
+						% endif
 					% endfor
+					</tr>
 				</table>
 				% else:
 				<p>Add your Coderwall username to see your badges.</p>

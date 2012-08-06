@@ -82,6 +82,30 @@ progress::-moz-progress-bar {
     color: #FFF;
 }
 
+.badge-list td {
+    text-align: center;
+}
+
+.badge-list tr {
+    border: 0px;
+}
+
+.badge-list img {
+    margin: 5px;
+    -webkit-transition: margin 0.5s ease-out;
+    -moz-transition: margin 0.5s ease-out;
+    -o-transition: margin 0.5s ease-out;
+}
+
+.badge-list img:hover {
+    margin-top: -15px;
+    -moz-border-radius: 38px;
+    border-radius: 38px;
+    -moz-box-shadow: 0 10px 5px 0px #CCC;
+    -webkit-box-shadow: 0 10px 5px 0px #CCC;
+    box-shadow: 0 10px 5px 0px #CCC;
+}
+
 #foo {
     font-size: 1.6em;
 }
