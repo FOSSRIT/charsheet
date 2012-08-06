@@ -317,7 +317,7 @@
 						<td>${int(stats['skills']['assembly'])}<progress max="1"
 							value="${stats['skills']['assembly'] % 1}">
 							</progress></td></tr>
-					<tr><td>Lua</td>
+					<tr><td>Common Lisp</td>
 						<td>${int(stats['skills']['commonlisp'])}
 							<progress max="1"
 							value="${stats['skills']['commonlisp'] % 1}">
