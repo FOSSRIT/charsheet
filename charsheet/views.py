@@ -133,6 +133,8 @@ def charsheet_view(request):
     ### Gravatar ###
     if github_dict:
         gravatar_url = data.get_gravatar_url(github_dict['email'])
+    else:
+        gravatar_url = None
 
     ### Stat calculation ###
     import stats
