@@ -133,6 +133,8 @@ def handle_github(request, username):
             gh_blog_url = user.blog[7:]
         elif user.blog.startswith('https://'):
             gh_blog_url = user.blog[8:]
+        else:
+            gh_blog_url = user.blog
 
         return {
             'age_months': gh_age_months,
