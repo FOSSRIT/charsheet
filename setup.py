@@ -10,6 +10,7 @@ requires = [
     'coderwall',
     'elementtree',
     'kitchen',
+    'hashlib',
     'pyramid',
     'py-stackexchange',
     'SQLAlchemy',

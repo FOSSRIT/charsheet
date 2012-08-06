@@ -252,11 +252,6 @@ input#submit:hover {
 .avatar {
     border: 2px solid #000;
     float: left;
-    margin-right: 4px;
-}
-
-img.avatar {
-    height: 40px;
 }
 
 .widget {

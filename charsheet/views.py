@@ -130,6 +130,10 @@ def charsheet_view(request):
                 usernames['fedora'],
                 passwords['fedora'])
 
+    ### Gravatar ###
+    if github_dict:
+        gravatar_url = data.get_gravatar_url(github_dict['email'])
+
     ### Stat calculation ###
     import stats
 
@@ -142,6 +146,7 @@ def charsheet_view(request):
     request.session.flash("Character sheet generated.")
     return {
             'username': username,
+            'avatar_url': gravatar_url,
             'coderwall_data': coderwall_dict,
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,

@@ -61,7 +61,7 @@
 				<tr>
 				<td>
 				% if github_data:
-					<img class="avatar" src="${github_data['avatar_url']}" />
+					<img class="avatar" src="${avatar_url}" />
 				% endif
 				</td>
 					<td>${username}</td>

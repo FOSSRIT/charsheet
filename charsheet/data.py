@@ -5,6 +5,7 @@ This module contains the functions used to get data from various APIs.
 from datetime import datetime
 from dateutil import parser, relativedelta
 from httplib import BadStatusLine
+import hashlib
 import operator
 import json
 import pytz
@@ -23,6 +24,15 @@ def calculate_age_months(dt1, dt2):
     # The below works well enough to get an approximate decimal.
     fraction_of_month = float(age_delta.days) / 31
     return abs((age_delta.years * 12) + age_delta.months + fraction_of_month)
+
+
+def get_gravatar_url(email):
+    # Gravatar
+    gravatar_url = 'http://www.gravatar.com/avatar/'
+    gravatar_size = 60  # in pixels
+    gravatar_url += hashlib.md5(email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'s': str(gravatar_size)})
+    return gravatar_url
 
 
 def handle_coderwall(request, username):
@@ -138,7 +148,6 @@ def handle_github(request, username):
 
         return {
             'age_months': gh_age_months,
-            'avatar_url': user.avatar_url,
             'bio': user.bio,
             'blog': gh_blog_url,
             'company': user.company,
