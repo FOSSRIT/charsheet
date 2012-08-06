@@ -482,6 +482,31 @@
 				<table>
 				</table>
 			</div>
+			
+			<div class="clear"></div>
+
+			<!-- CODERWALL ACHIEVEMENTS -->
+
+			<div class="grid_12">
+				% if coderwall_data:
+				<h2>Coderwall Achievements</h2>
+				<table class="badge-list">
+					<% badges_printed = 0 %>
+					<tr>
+					% for badge in coderwall_data['cwc'].badges:
+						<td class="tooltip" title="${badge.name} - ${badge.description}.">
+							<img src="${badge.image_uri}"/></td>
+						<% badges_printed += 1 %>
+						% if (badges_printed % 8 == 0) and badges_printed > 0:
+							</tr><tr>
+						% endif
+					% endfor
+					</tr>
+				</table>
+				% else:
+				<p>Add your Coderwall username to see your badges.</p>
+				% endif
+			</div>
 			<div class="clear"></div>
 
 			<!-- RECENT GITHUB ACTIVITY -->
@@ -653,30 +678,6 @@
 					</div>
 				% else:
 					<p>Add your GitHub username to see your recent activity.</p>
-				% endif
-			</div>
-			<div class="clear"></div>
-
-			<!-- CODERWALL ACHIEVEMENTS -->
-
-			<div class="grid_12">
-				% if coderwall_data:
-				<h2>Coderwall Achievements</h2>
-				<table class="badge-list">
-					<% badges_printed = 0 %>
-					<tr>
-					% for badge in coderwall_data['cwc'].badges:
-						<td class="tooltip" title="${badge.name} - ${badge.description}.">
-							<img src="${badge.image_uri}"/></td>
-						<% badges_printed += 1 %>
-						% if (badges_printed % 8 == 0) and badges_printed > 0:
-							</tr><tr>
-						% endif
-					% endfor
-					</tr>
-				</table>
-				% else:
-				<p>Add your Coderwall username to see your badges.</p>
 				% endif
 			</div>
 		</div>
