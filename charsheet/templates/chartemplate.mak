@@ -532,8 +532,7 @@
 								${event['payload']['issue']['title']}</a>
 								in the
 								<a href="${repo_url}">
-								${event['repo']['name']}
-								</a> repo.
+								${event['repo']['name']}</a> repo.
 							</li>
 						% elif event['type'] == 'IssueCommentEvent':
 							<li class="event comment-event">
@@ -541,9 +540,8 @@
 							<a href="${event['payload']['issue']['html_url']}">
 								${event['payload']['issue']['title']}</a>
 								in the
-								<a href="${repo_url}">
-								${event['repo']['name']}
-								</a> repo.
+								<a href="${repo_url}">${event['repo']['name']}</a>
+								repo.
 							</li>
 						% elif event['type'] == 'CreateEvent':
 							<li class="event create-event">
@@ -551,8 +549,7 @@
 								${event['payload']['ref_type']}
 								${event['payload']['ref']} in the
 								<a href="${repo_url}">
-								${event['repo']['name']}
-								</a> repo.
+								${event['repo']['name']}</a> repo.
 							</li>
 						% elif event['type'] == 'DeleteEvent':
 							<li class="event delete-event">
@@ -560,8 +557,7 @@
 								${event['payload']['ref_type']}
 								${event['payload']['ref']} in the
 								<a href="${repo_url}">
-								${event['repo']['name']}
-								</a> repo.
+								${event['repo']['name']}</a> repo.
 							</li>
 						% elif event['type'] == 'WatchEvent':
 							<li class="event social-event">
@@ -651,8 +647,7 @@
 					"${event['payload']['comment']['_links']['html']['href']}">
 								a pull request</a> in the
 								<a href="${repo_url}">
-								${event['repo']['name']}
-								</a> repo.
+								${event['repo']['name']}</a> repo.
 							</li>
 						% elif event['type'] == "TeamAddEvent":
 							<li class="event social-event">
