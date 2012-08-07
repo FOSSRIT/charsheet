@@ -5,8 +5,9 @@ from pyramid import testing
 
 from .models import DBSession
 
-"""
+
 class TestCharsheet(unittest.TestCase):
+
     def setUp(self):
         self.config = testing.setUp()
         from sqlalchemy import create_engine
@@ -28,6 +29,4 @@ class TestCharsheet(unittest.TestCase):
         from .views import charsheet
         request = testing.DummyRequest()
         info = charsheet(request)
-        self.assertEqual(info['one'].name, 'one')
         self.assertEqual(info['project'], 'charsheet')
-"""
