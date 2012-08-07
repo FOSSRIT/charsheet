@@ -2,7 +2,7 @@
     font-family: "Press Start 2P";
     font-style: normal;
     font-weight: 400;
-    src: url("../fonts/PressStart2P.ttf") format('tff');
+    src: local('Press Start 2P'), local('PressStart2P-Regular'), url("../fonts/PressStart2P.woff") format('woff');
 }
 
 /* Reset */
