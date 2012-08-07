@@ -103,6 +103,12 @@ progress::-moz-progress-bar {
     box-shadow: 0 10px 5px 0px #CCC;
 }
 
+.footer {
+    font-size: 0.4em;
+    font-color: #CCC;
+    text-align: center;
+}
+
 #foo {
     font-size: 1.6em;
 }
