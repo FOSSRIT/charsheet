@@ -71,7 +71,7 @@ progress::-moz-progress-bar {
     font-size: 0.8em;
     background: #FFF;
     padding: 4px;
-    border: 1px solid #000;
+    border: 2px outset #000;
 }
 
 .activity-controls > a:hover {

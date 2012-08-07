@@ -75,7 +75,8 @@
 					your progress towards the next level of Foo.<br />
 					<strong>${int((stats['foo'] % 1) * 100)}%</strong>
 					to next level"><td>Foo Bar:</td>
-					<td><progress max="1" value="${stats['foo'] % 1}">
+					<td>
+					<progress max="1" value="${stats['foo'] % 1}">
 						</progress></td></tr>
 				</table>
 			</div>
