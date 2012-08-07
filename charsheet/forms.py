@@ -9,7 +9,6 @@ class CharsheetForm(tw2.forms.FormPage):
         buttons = [tw2.forms.SubmitButton(id='submit', value='Generate')]
         action = '/charsheet'
         id = tw2.forms.HiddenField()
-        optional_label = tw2.forms.Label(text="All services optional.")
         master = tw2.forms.TextField('master', label='Master')
         master_label = tw2.forms.Label(text='Master field autocompletes \
                 next three.')
