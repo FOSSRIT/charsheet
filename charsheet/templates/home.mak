@@ -47,17 +47,16 @@
 			alt="Charsheet screenshot"
 					/>
 				</div>
+				<div class="footer">
+				<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+				Code freely available <a href="https://github.com/FOSSRIT/surf-2012/tree/openshift">on GitHub</a>.
+				</div>
 			</div>
 			<div class="grid_6">
 				<div id='charsheet_form'>
 					${charsheet_form.display()}
 					<!-- <a href="/login">Login with OpenID for FAS</a> -->
 				</div>
-			</div>
-			<div class="clear"></div>
-			<div class="grid_12 footer">
-				<a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
-				Code freely available <a href="https://github.com/FOSSRIT/surf-2012/tree/openshift">on GitHub</a>.
 			</div>
 		</div>
    	</body>
