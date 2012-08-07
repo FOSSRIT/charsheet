@@ -24,6 +24,16 @@
 					<a href="https://github.com/FOSSRIT/surf-2012/issues">
 					here</a>.
 				</p>
+				<img
+		src="${request.static_url('charsheet:static/img/screenshot1.png')}"
+		alt="Charsheet screenshot #1"
+		width="382" height="231"
+				/>
+				<img
+		src="${request.static_url('charsheet:static/img/screenshot2.png')}"
+		alt="Charsheet screenshot #2"
+		width="398" height="131"
+				/>
 			</div>
 			<div class="grid_6">
 				<div id='charsheet_form'>
