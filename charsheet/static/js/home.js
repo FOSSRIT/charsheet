@@ -2,8 +2,8 @@ $(document).ready(function() {
     
     // jQuery cycle plugin usage
     $('.slideshow').cycle({
-        fx:     'scrollRight',
-        speed: 300,
-        timeout: 4000,
+        fx:     'fade',
+        speed: 1000,
+        timeout: 6000,
     });
 });
