@@ -12,7 +12,6 @@ requires = [
     'kitchen',
     'hashlib',
     'pyramid',
-    'py-stackexchange',
     'SQLAlchemy',
     'transaction',
     'tw2.core',
