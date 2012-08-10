@@ -91,15 +91,22 @@
 					</td></tr>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
 						% if github_data:
-						
-							${github_data['email']}
+							% if github_data['email']:
+								${github_data['email']}
+							% else:
+								None
+							% endif
 						% else:
 							?	
 						% endif
 					</td></tr>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_245_chat.png')}'/> IRC:</td><td>
 						% if fedora_data:
-							${fedora_data['irc']}
+							% if fedora_data['irc']:
+								${fedora_data['irc']}
+							% else:
+								None
+							% endif
 						% else:
 							?
 						% endif
@@ -111,14 +118,22 @@
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_340_globe.png')}'/> Location:</td>
 						<td>
 						% if github_data:
-							${github_data['location']}
+							% if github_data['location']:
+								${github_data['location']}
+							% else:
+								None
+							% endif
 						% else:
 							?
 						% endif
 						</td></tr>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_341_briefcase.png')}'/> Company:</td><td>
 						% if github_data:
-							${github_data['company']}
+							% if github_data['company']:
+								${github_data['company']}
+							% else:
+								None
+							% endif
 						% else:
 							?
 						% endif
@@ -136,10 +151,14 @@
 						</td></tr>
 					<tr><td>Hireable?</td><td>
 						% if github_data:
-							% if github_data['hireable'] == True:
-							Yes!
+							% if github_data['hireable']:
+								% if github_data['hireable'] == True:
+								Yes!
+								% else:
+								No...
+								% endif
 							% else:
-							No...
+								Undeclared
 							% endif
 						% else:
 							Unknown

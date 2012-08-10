@@ -139,12 +139,15 @@ def handle_github(request, username):
         recent_events = events_json[:25]
 
         # Blog/URL handling
-        if user.blog.startswith('http://'):
-            gh_blog_url = user.blog[7:]
-        elif user.blog.startswith('https://'):
-            gh_blog_url = user.blog[8:]
+        if user.blog:
+            if user.blog.startswith('http://'):
+                gh_blog_url = user.blog[7:]
+            elif user.blog.startswith('https://'):
+                gh_blog_url = user.blog[8:]
+            else:
+                gh_blog_url = user.blog
         else:
-            gh_blog_url = user.blog
+            gh_blog_url = None
 
         return {
             'age_months': gh_age_months,
