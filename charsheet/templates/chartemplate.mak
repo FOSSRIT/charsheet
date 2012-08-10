@@ -100,6 +100,17 @@
 							?	
 						% endif
 					</td></tr>
+					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
+						% if github_data:
+							% if github_data['blog'] != None:
+							<a href="http://${github_data['blog']}">[Link]</a>
+							% else:
+							None
+							% endif
+						% else:
+							?
+						% endif
+						</td></tr>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_245_chat.png')}'/> IRC:</td><td>
 						% if fedora_data:
 							% if fedora_data['irc']:
@@ -133,17 +144,6 @@
 								${github_data['company']}
 							% else:
 								None
-							% endif
-						% else:
-							?
-						% endif
-						</td></tr>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
-						% if github_data:
-							% if github_data['blog'] != None:
-							<a href="http://${github_data['blog']}">[Link]</a>
-							% else:
-							None
 							% endif
 						% else:
 							?
