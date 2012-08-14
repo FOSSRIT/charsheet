@@ -29,6 +29,8 @@ requires = [
     'waitress',
     'zope.sqlalchemy',
     'mysql-python',
+    'nose',
+    'coverage',
     ]
 
 setup(name='charsheet',
