@@ -34,7 +34,7 @@ requires = [
     ]
 
 setup(name='charsheet',
-      version='0.0',
+      version='0.1',
       description='charsheet',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
@@ -45,7 +45,7 @@ setup(name='charsheet',
         ],
       author='David Gay',
       author_email='oddshocks@gmail.com',
-      url='http://github.com/FOSSRIT/surf-2012/tree/openshift',
+      url='http://github.com/FOSSRIT/charsheet',
       keywords='web wsgi bfg pylons pyramid foss charsheet',
       packages=find_packages(),
       include_package_data=True,
