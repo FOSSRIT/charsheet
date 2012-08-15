@@ -7,6 +7,15 @@ and currently in development.
 It generates a FOSS developer "character sheet" based on
 data from sites like GitHub, Ohloh, and Stack Exchange.
 
+Charsheet was developed in conjunction with the 2012 RIT
+undergraduate research symposium, where I was part of a team
+researching gamification of FOSS development. The content we
+generated can be found at https://github.com/FOSSRIT/surf-2012.
+
+I plan to continue hacking on this app throughout the coming
+days. If I can get off from work for BarCampRoc, I will be
+presenting on this app there.
+
 Authors
 -------
 
@@ -35,4 +44,3 @@ running these commands:
 - $venv/bin/populate_charsheet development.ini
 
 - $venv/bin/pserve development.ini
-
