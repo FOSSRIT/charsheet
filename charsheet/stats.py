@@ -6,27 +6,26 @@ This module contains calculations used to generate stats for charsheet.
 ### Attributes ###
 
 
-def calculate_strength(lines=0, answers=0, badges=0):
+def calculate_strength(lines=0, badges=0):
     """
-    Strength is determined by lines in repos, questions answered on
-    Stack Exchange, and Coderwall badges.
+    Strength is determined by lines in repos
+    and Coderwall badges.
     """
-    return float(((lines / 100000)) + (0.05 * answers) + (2 * badges))
+    return float((lines / 100000) + (2 * badges))
 
 
-def calculate_dexterity(languages=0, tags=0):
+def calculate_dexterity(languages=0):
     """
-    Dexterity is determined by language variety in repos
-    and sum of tags on all answered Stack Exchange questions.
+    Dexterity is determined by language variety in repos.
     """
-    return float((5 * languages) + (0.2 * tags))
+    return float(5 * languages)
 
 
 def calculate_leadership(forks=0, top_answers=0):
     """
-    Leadership is based on project forks and top answers on Stack Exchange.
+    Leadership is based on repos forked on GitHub.
     """
-    return float((1 * forks) + (0.5 * top_answers))
+    return float(1 * forks)
 
 
 def calculate_wisdom(months=0):
@@ -45,12 +44,11 @@ def calculate_determination(projects=0):
     return float(projects)
 
 
-def calculate_popularity(followers=0, reputation=0):
+def calculate_popularity(followers=0):
     """
-    Popularity is determined by number of followers and Stack Exchange
-    reputation.
+    Popularity is determined by number of GitHub followers.
     """
-    return float(followers + (0.01 * reputation))
+    return float(followers)
 
 
 ### Skills ###
@@ -77,9 +75,9 @@ def calculate_foo(stats):
     return sum(stats_to_average) / float(len(stats_to_average))
 
 
-def calculate_stats(gh, oh, cw, se):
+def calculate_stats(gh, oh, cw):
     """
-    Takes GitHub, Stack Exchange, Coderwall, and Ohloh
+    Takes GitHub, Coderwall, and Ohloh
     dictionaries and generates a stats dict.
     """
 
@@ -122,14 +120,10 @@ def calculate_stats(gh, oh, cw, se):
     data = {
         'total_lines': 0,
         'cw_badges': 0,
-        'se_answers': 0,
-        'se_top_answers': 0,
-        'se_reputation': 0,
         'repos': 0,
         'age_months': 0,
         'forks': 0,
         'followers': 0,
-        'tags': 0,
         'languages': 0,
     }
 
@@ -148,35 +142,24 @@ def calculate_stats(gh, oh, cw, se):
     if cw:
         data['cw_badges'] = cw['badges']
 
-    if se:
-        data['se_answers'] = se['answers']
-        data['age_months'] = max(data['age_months'], se['age_months'])
-        data['se_top_answers'] = se['top_answers']
-        data['tags'] = se['tags_count']
-        data['se_reputation'] = se['reputation']
-
     stats['strength'] = calculate_strength(
             lines=data['total_lines'],
-            answers=data['se_answers'],
             badges=data['cw_badges'])
 
     stats['dexterity'] = calculate_dexterity(
-            languages=data['languages'],
-            tags=data['tags'])
+            languages=data['languages'])
 
     stats['wisdom'] = calculate_wisdom(
             months=data['age_months'])
 
     stats['leadership'] = calculate_leadership(
-            forks=data['forks'],
-            top_answers=data['se_top_answers'])
+            forks=data['forks'])
 
     stats['determination'] = calculate_determination(
             projects=data['repos'])
 
     stats['popularity'] = calculate_popularity(
-            followers=data['followers'],
-            reputation=data['se_reputation'])
+            followers=data['followers'])
 
     # Skills
     if data.get('languages_dict'):

@@ -111,17 +111,6 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_245_chat.png')}'/> IRC:</td><td>
-						% if fedora_data:
-							% if fedora_data['irc']:
-								${fedora_data['irc']}
-							% else:
-								None
-							% endif
-						% else:
-							?
-						% endif
-					</td></tr>
 				</table>
 			</div>
 			<div class="grid_4">
@@ -188,8 +177,8 @@
 				<table>
 					<tr class="tooltip"
 						title="Strength - 
-						Determined by lines in GitHub repos, questions answered
-						on Stack Exchange, and CoderWall badges.<br />
+						Determined by lines in GitHub repos
+						and CoderWall badges.<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
 						to next level">
 						<td>Strength:</td>
@@ -198,8 +187,8 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="Dexterity - 
-						Determined by GitHub language variety and variety of
-						tags on all answered Stack Exchange questions.<br />
+						Determined by GitHub language variety.
+						<br />
 					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Dexterity:</td>
@@ -213,7 +202,7 @@
 					<tr class="tooltip"
 						title="Wisdom - 
 						Determined by age of oldest linked account, between
-						GitHub, Ohloh, and Stack Exchange.<br />
+						GitHub and Ohloh.<br />
 					<strong>${int((stats['wisdom'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Wisdom:</td>
@@ -223,8 +212,7 @@
 					<tr class="tooltip"
 						title="Leadership - 
 						Determined by number of times your GitHub repos have
-						been forked and amount of top answers on
-						Stack Exchange.<br />
+						been forked.<br />
 					<strong>${int((stats['leadership'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Leadership:</td>
@@ -247,8 +235,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="Popularity - 
-						Determined by number of GitHub followers and Stack
-						Exchange reputation.<br />
+						Determined by number of GitHub followers.<br />
 					<strong>${int((stats['popularity'] % 1) * 100)}%</strong>
 					to next level"><td>Popularity:</td>
 						<td>${int(stats['popularity'])}<progress max="1"
@@ -463,39 +450,6 @@
 						% endif
 						</td>
 					</tr>
-				</table>
-			</div>
-			<div class="clear"></div>
-			<div class="grid_12">
-				<h2>Information</h2>
-			</div>
-			<div class="clear"></div>
-			<div class="grid_4">
-				<table>
-				<tr><td>FAS Affiliation:</td>
-						<td>
-						% if fedora_data:
-							${fedora_data['affiliation']}
-						% else:
-							?
-						% endif
-						</td></tr>
-					<tr><td>FAS Status:</td>
-						<td>
-						% if fedora_data:
-							${fedora_data['status']}
-						% else:
-							?
-						% endif
-						</td></tr>
-				</table>
-			</div>
-			<div class="grid_4">
-				<table>
-				</table>
-			</div>
-			<div class="grid_4">
-				<table>
 				</table>
 			</div>
 			

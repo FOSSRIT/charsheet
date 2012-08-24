@@ -72,8 +72,6 @@ def charsheet_view(request):
             'github': request.params['charsheetform:github'],
             'ohloh': request.params['charsheetform:ohloh'],
             'coderwall': request.params['charsheetform:coderwall'],
-            'stack_exchange': request.params['charsheetform:stack_exchange'],
-            'fedora': request.params['charsheetform:fedora'],
         }
 
         master_field = request.params['charsheetform:master']
@@ -81,10 +79,6 @@ def charsheet_view(request):
             usernames['github'] = master_field
             usernames['ohloh'] = master_field
             usernames['coderwall'] = master_field
-
-        passwords = {
-            'fedora': request.params['charsheetform:fedora_pass'],
-        }
 
         username = 'Sugar Magnolia'
         for name in usernames:
@@ -98,8 +92,6 @@ def charsheet_view(request):
     coderwall_dict = None
     github_dict = None
     ohloh_dict = None
-    stack_exchange_dict = None
-    fedora_dict = None
 
     import data
 
@@ -118,18 +110,6 @@ def charsheet_view(request):
         ohloh_dict = data.handle_ohloh(
                 request, usernames['ohloh'])
 
-    ### Stack Exchange ###
-    if usernames['stack_exchange']:
-        stack_exchange_dict = data.handle_stack_exchange(
-                request, usernames['stack_exchange'])
-
-    ### Fedora Account System ###
-    if usernames['fedora']:
-        fedora_dict = data.handle_fedora(
-                request,
-                usernames['fedora'],
-                passwords['fedora'])
-
     ### Gravatar ###
     if github_dict:
         gravatar_url = data.get_gravatar_url(github_dict['email'])
@@ -142,8 +122,7 @@ def charsheet_view(request):
     stats_dict = stats.calculate_stats(
             github_dict,
             ohloh_dict,
-            coderwall_dict,
-            stack_exchange_dict)
+            coderwall_dict)
 
     request.session.flash("Character sheet generated.")
     return {
@@ -152,8 +131,6 @@ def charsheet_view(request):
             'coderwall_data': coderwall_dict,
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,
-            'stack_exchange_data': stack_exchange_dict,
-            'fedora_data': fedora_dict,
             'stats': stats_dict,
            }
 
