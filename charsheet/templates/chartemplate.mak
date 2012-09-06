@@ -91,11 +91,7 @@
 					</td></tr>
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
 						% if github_data:
-							% if github_data['email']:
-								${github_data['email']}
-							% else:
-								None
-							% endif
+							${github_data.get('email', "")}
 						% else:
 							?	
 						% endif
