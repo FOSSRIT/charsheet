@@ -219,9 +219,18 @@ def handle_ohloh(request, username):
             ohloh_dict['age_months'] = ohloh_age_months
 
             # Obtain account language data
-            ohloh_language_elements = []
+            ohloh_languages = []  # User languages
             for language in element.find("result/account/languages"):
-                ohloh_language_elements.append(language)
+                lang_name = language.find("name").text
+                lang_lines = language.find("total_lines_changed").text
+                lang_exp = language.find("experience_months").text
+                lang_commits = language.find("total_commits").text
+                ohloh_languages.append(dict(
+                        name=lang_name,
+                        lines=lang_lines,
+                        exp=lang_exp,
+                        commits=lang_commits))
+            ohloh_dict['languages'] = ohloh_languages
 
             return ohloh_dict
         else:
