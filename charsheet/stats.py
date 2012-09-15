@@ -2,6 +2,7 @@
 This module contains calculations used to generate stats for charsheet.
 """
 
+import re
 
 ### Attributes ###
 
@@ -54,11 +55,17 @@ def calculate_popularity(followers=0):
 ### Skills ###
 
 
-def calculate_language_skill(lines=0):
+def calculate_language_skill(lines=0, exp=0, commits=0):
     """
-    Equal to 1 skill point per 2000 lines of code.
+    2000 lines of code = 1 skill point
+    1 month of exp = 2 skill points
+    20 commits = 1 skill point
     """
-    return float(lines / 2000.0)
+    # Remove commas from value strings and convert them to floats
+    lines = float(re.sub(',', '', lines))
+    exp = float(re.sub(',', '', exp))
+    commits = float(re.sub(',', '', commits))
+    return float(lines / 2000.0) + float(exp * 2.0) + float(commits / 20.0)
 
 
 ### Overarching calculation ###
@@ -138,6 +145,7 @@ def calculate_stats(gh, oh, cw):
 
     if oh:
         data['age_months'] = max(data['age_months'], oh['age_months'])
+        data['languages'] = oh['languages']
 
     if cw:
         data['cw_badges'] = cw['badges']
@@ -147,7 +155,7 @@ def calculate_stats(gh, oh, cw):
             badges=data['cw_badges'])
 
     stats['dexterity'] = calculate_dexterity(
-            languages=data['languages'])
+            languages=len(data['languages']))
 
     stats['wisdom'] = calculate_wisdom(
             months=data['age_months'])
@@ -162,10 +170,13 @@ def calculate_stats(gh, oh, cw):
             followers=data['followers'])
 
     # Skills
-    if data.get('languages_dict'):
-        for language in data['languages_dict']:
-            stats['skills'][language.lower()] = calculate_language_skill(
-                    lines=data['languages_dict'][language])
+    if data.get('languages'):
+        for language in data['languages']:
+            stats['skills'][language['name'].lower()] = \
+                    calculate_language_skill(
+                        lines=language['lines'],
+                        exp=language['exp'],
+                        commits=language['commits'])
 
     # Foo
     stats['foo'] = calculate_foo(stats)
