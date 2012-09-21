@@ -90,6 +90,7 @@ progress::-moz-progress-bar {
 
 .badge-list tr {
     border: 0px;
+    line-height: 90px;
 }
 
 .badge-list img {
