@@ -132,6 +132,7 @@ def calculate_stats(gh, oh, cw):
         'forks': 0,
         'followers': 0,
         'languages': 0,
+        'ohloh_languages': {},
     }
 
     if gh:
@@ -145,7 +146,7 @@ def calculate_stats(gh, oh, cw):
 
     if oh:
         data['age_months'] = max(data['age_months'], oh['age_months'])
-        data['languages'] = oh['languages']
+        data['ohloh_languages'] = oh['languages']
 
     if cw:
         data['cw_badges'] = cw['badges']
@@ -155,7 +156,7 @@ def calculate_stats(gh, oh, cw):
             badges=data['cw_badges'])
 
     stats['dexterity'] = calculate_dexterity(
-            languages=len(data['languages']))
+            languages=len(data['ohloh_languages']))
 
     stats['wisdom'] = calculate_wisdom(
             months=data['age_months'])
@@ -170,8 +171,8 @@ def calculate_stats(gh, oh, cw):
             followers=data['followers'])
 
     # Skills
-    if data.get('languages'):
-        for language in data['languages']:
+    if data.get('ohloh_languages'):
+        for language in data['ohloh_languages']:
             stats['skills'][language['name'].lower()] = \
                     calculate_language_skill(
                         lines=language['lines'],
