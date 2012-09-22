@@ -2,8 +2,6 @@
 This module contains calculations used to generate stats for charsheet.
 """
 
-import re
-
 ### Attributes ###
 
 
@@ -62,9 +60,9 @@ def calculate_language_skill(lines=0, exp=0, commits=0):
     20 commits = 1 skill point
     """
     # Remove commas from value strings and convert them to floats
-    lines = float(re.sub(',', '', lines))
-    exp = float(re.sub(',', '', exp))
-    commits = float(re.sub(',', '', commits))
+    lines = float(lines)
+    exp = float(exp)
+    commits = float(commits)
     return float(lines / 2000.0) + float(exp * 2.0) + float(commits / 20.0)
 
 

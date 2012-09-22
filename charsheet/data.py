@@ -8,6 +8,7 @@ import hashlib
 import operator
 import json
 import pytz
+import re
 import urllib
 import urllib2
 
@@ -222,9 +223,12 @@ def handle_ohloh(request, username):
             ohloh_languages = []  # User languages
             for language in element.find("result/account/languages"):
                 lang_name = language.find("name").text
-                lang_lines = language.find("total_lines_changed").text
-                lang_exp = language.find("experience_months").text
-                lang_commits = language.find("total_commits").text
+                lang_lines = int(re.sub(',', '',
+                        language.find("total_lines_changed").text))
+                lang_exp = int(re.sub(',', '',
+                        language.find("experience_months").text))
+                lang_commits = int(re.sub(',', '',
+                        language.find("total_commits").text))
                 ohloh_languages.append(dict(
                         name=lang_name,
                         lines=lang_lines,
