@@ -50,6 +50,7 @@
 			% endif
 		% endfor
 		% if display_sheet == True:
+		<div class="sheet">
 		<h1>Character Record Sheet</h1>
 		<div class="container_12">
 			<div class="clear"></div>
@@ -645,6 +646,7 @@
 					<p>Add your GitHub username to see your recent activity.</p>
 				% endif
 			</div>
+	 	</div>
 		</div>
 		% endif
 	</body>
