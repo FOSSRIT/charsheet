@@ -1,4 +1,9 @@
 $(document).ready(function() {
+
+    // Hide flashed messages after a moment
+    setTimeout(function() {
+        $('.alert').fadeOut(2000);
+    }, 2000);
     
     // Hide 20 of the 25 events displayed by default
     $("#recent-activity li").slice(5).hide();
