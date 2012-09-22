@@ -25,8 +25,8 @@ class TestCharsheet(unittest.TestCase):
         DBSession.remove()
         testing.tearDown()
 
-    def basic_test(self):
-        from .views import charsheet
+    def test_basic(self):
+        from .views import home_view
         request = testing.DummyRequest()
-        info = charsheet(request)
+        info = home_view(request)
         self.assertEqual(info['project'], 'charsheet')
