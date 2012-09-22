@@ -117,15 +117,6 @@ def handle_github(request, username):
         sorted_languages = sorted(user_languages.iteritems(),
             key=operator.itemgetter(1), reverse=True)
 
-        # Get total lines in all repos and format with thousands seperators
-        total_lines = 0
-        for language, lines in user_languages.items():
-            total_lines += lines
-        import locale
-        locale.setlocale(locale.LC_ALL, 'en_US')
-        total_lines_formatted = locale.format(
-                "%d", total_lines, grouping=True)
-
         # Get age of account, in months
         gh_age_months = calculate_age_months(
                 user.created_at, user.created_at.now())
@@ -167,8 +158,6 @@ def handle_github(request, username):
             'name': user.name,
             'public_repos': user.public_repos,
             'repos': gh.repos.list(username).all(),
-            'total_lines': total_lines,
-            'total_lines_formatted': total_lines_formatted,
             }
 
     except exceptions.NotFound:

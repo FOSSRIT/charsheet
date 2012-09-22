@@ -381,10 +381,14 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td>Total Lines in Repos:</td>
+					<tr><td>Lines written:</td>
 						<td>
-						% if github_data:
-							${github_data['total_lines_formatted']}
+						% if ohloh_data:
+							<% import locale %>
+							<% locale.setlocale(locale.LC_ALL, 'en_US') %>
+							<% lines_written = locale.format(
+									"%d", ohloh_data['lines'], grouping=True)%>
+							${lines_written}
 						% else:
 							?
 						% endif
