@@ -231,6 +231,9 @@ def handle_ohloh(request, username):
                         exp=lang_exp,
                         commits=lang_commits))
             ohloh_dict['languages'] = ohloh_languages
+            ohloh_dict['num_languages'] = len(ohloh_languages)
+            ohloh_dict['lines'] = \
+                    sum([lang['lines'] for lang in ohloh_languages])
 
             return ohloh_dict
         else:

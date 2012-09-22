@@ -136,17 +136,17 @@ def calculate_stats(gh, oh, cw):
     }
 
     if gh:
-        data['total_lines'] += gh['total_lines']
         data['repos'] += gh['public_repos']
         data['age_months'] = max(data['age_months'], gh['age_months'])
         data['forks'] = gh['forks']
         data['followers'] = gh['followers']
-        data['languages'] = gh['num_languages']
         data['languages_dict'] = gh['languages_lines']  # language: lines
 
     if oh:
         data['age_months'] = max(data['age_months'], oh['age_months'])
         data['ohloh_languages'] = oh['languages']
+        data['total_lines'] = oh['lines']
+        data['languages'] = oh['num_languages']
 
     if cw:
         data['cw_badges'] = cw['badges']
