@@ -227,6 +227,10 @@ def handle_ohloh(request, username):
             ohloh_dict['num_languages'] = len(ohloh_languages)
             ohloh_dict['lines'] = \
                     sum([lang['lines'] for lang in ohloh_languages])
+            # Sort languages by lines
+            sorted_ohloh_languages = sorted(ohloh_languages,
+                    key=lambda lang: lang['lines'], reverse=True)
+            ohloh_dict['languages'] = sorted_ohloh_languages
 
             return ohloh_dict
         else:

@@ -400,9 +400,9 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td>Top Languages by Klocs:</td><td>
-						% if github_data:
-					${", ".join([x[0] for x in github_data['languages'][:3]])}
+					<tr><td>Top Languages by Lines:</td><td>
+						% if ohloh_data:
+			${", ".join([lang['name'] for lang in ohloh_data['languages'][:3]])}
 						% else:
 							?
 						% endif
