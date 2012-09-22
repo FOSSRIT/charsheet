@@ -120,8 +120,11 @@ progress::-moz-progress-bar {
     margin-left: auto;
     margin-right: auto;
     border: 1px double #000;
+    -moz-box-shadow: 10px 10px 5px #888;
+    -webkit-box-shadow: 10px 10px 5px #888;
     box-shadow: 10px 10px 5px #888;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .slideshow {
@@ -237,8 +240,15 @@ input#submit:hover {
     width: 500px;
     text-align: center;
     padding: 10px 20px 10px 20px;
-    margin-left: auto;
-    margin-right: auto;
+    position: fixed;
+    top: 10%;
+    right: 10%;
+    border: 1px solid #000;
+    -moz-box-shadow: 10px 10px 5px #888;
+    -webkit-box-shadow: 10px 10px 5px #888;
+    box-shadow: 10px 10px 5px #888;
+    background: #FFF;
+
 }
 
 .alert-heading {
