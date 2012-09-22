@@ -7,7 +7,7 @@ This module contains calculations used to generate stats for charsheet.
 
 def calculate_strength(lines=0, badges=0):
     """
-    Strength is determined by lines in repos
+    Strength is determined by lines written (Ohloh)
     and Coderwall badges.
     """
     return float((lines / 100000) + (2 * badges))
@@ -15,7 +15,7 @@ def calculate_strength(lines=0, badges=0):
 
 def calculate_dexterity(languages=0):
     """
-    Dexterity is determined by language variety in repos.
+    Dexterity is determined by language variety on Ohloh.
     """
     return float(5 * languages)
 

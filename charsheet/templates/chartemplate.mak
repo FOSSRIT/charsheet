@@ -173,8 +173,8 @@
 				<table>
 					<tr class="tooltip"
 						title="Strength - 
-						Determined by lines in GitHub repos
-						and CoderWall badges.<br />
+						Determined by lines written and 
+						and number of CoderWall badges.<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
 						to next level">
 						<td>Strength:</td>
@@ -183,7 +183,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="Dexterity - 
-						Determined by GitHub language variety.
+						Determined by language variety on Ohloh.
 						<br />
 					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
 					to next level">
