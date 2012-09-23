@@ -11,6 +11,7 @@ from pyramid.security import (
 )
 
 
+import datetime
 import forms
 
 
@@ -126,6 +127,7 @@ def charsheet_view(request):
 
     request.session.flash("Character sheet generated.")
     return {
+            'timestamp': datetime.datetime.now().strftime("%Y.%m.%d %H:%M"),
             'username': username,
             'avatar_url': gravatar_url,
             'coderwall_data': coderwall_dict,

@@ -49,6 +49,19 @@
 				<% display_sheet = True %>
 			% endif
 		% endfor
+		<h1>Charsheet</h1>
+		<div class="container_12">
+			<div class="grid_6">
+			<h2>Your Charsheet</h2>
+			<p>If all went well, your developer character sheet has been
+				generated below. In the future, you will be able easily save
+				and share your charsheet.</p>
+			</div>
+			<div class="grid_6">
+			<h2>Information</h2>
+			<p>Charsheet generated at ${timestamp}.</p>
+			</div>
+		</div>
 		% if display_sheet == True:
 		<div class="sheet">
 		<h1>Character Record Sheet</h1>
