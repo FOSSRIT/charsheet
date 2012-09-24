@@ -168,7 +168,7 @@
 						% if github_data:
 							<iframe style="vertical-align: middle;
 									border: 0; margin: 0; padding: 0;"
-							src="https://www.gittip.com/${username}/widget.html"
+				src="https://www.gittip.com/${usernames['github']}/widget.html"
 							width="48pt" height="20pt"></iframe>
 						% else:
 							Unavailable
@@ -459,7 +459,10 @@
 					<tr><td>Coderwall Endorsements:</td>
 						<td>
 						% if coderwall_data:
-							${coderwall_data['endorsements']}
+					<a href="http://coderwall.com/${usernames['coderwall']}">
+						<img alt="Endorse ${usernames['coderwall']}
+								on Coderwall"
+src="http://api.coderwall.com/${usernames['coderwall']}/endorsecount.png" />
 						% else:
 							?
 						% endif

@@ -129,6 +129,7 @@ def charsheet_view(request):
     return {
             'timestamp': datetime.datetime.now().strftime("%Y.%m.%d %H:%M"),
             'username': username,
+            'usernames': usernames,
             'avatar_url': gravatar_url,
             'coderwall_data': coderwall_dict,
             'github_data': github_dict,
