@@ -10,21 +10,21 @@ def calculate_strength(lines=0, badges=0):
     Strength is determined by lines written (Ohloh)
     and Coderwall badges.
     """
-    return float((lines / 100000) + (2 * badges))
+    return float(lines) / float(100000) + 2.0 * float(badges)
 
 
 def calculate_dexterity(languages=0):
     """
     Dexterity is determined by language variety on Ohloh.
     """
-    return float(5 * languages)
+    return float(5) * float(languages)
 
 
 def calculate_leadership(forks=0, top_answers=0):
     """
     Leadership is based on repos forked on GitHub.
     """
-    return float(1 * forks)
+    return float(1) * float(forks)
 
 
 def calculate_wisdom(months=0):
@@ -63,7 +63,8 @@ def calculate_language_skill(lines=0, exp=0, commits=0):
     lines = float(lines)
     exp = float(exp)
     commits = float(commits)
-    return float(lines / 2000.0) + float(exp * 2.0) + float(commits / 20.0)
+    return (float(lines) / 2000.0) + (float(exp) * 2.0) + \
+            (float(commits) / 20.0)
 
 
 ### Overarching calculation ###
