@@ -28,8 +28,14 @@ APIs Currently Utilized
 -   GitHub
 -   Coderwall
 -   Ohloh
--   Stack Exchange
--   Fedora Accounts System
+-   Stack Exchange (disabled)
+-   Fedora Accounts System (disabled)
+
+History
+-------
+
+Charsheet was previously developed in the FOSSRIT/surf-2012 repo on GitHub.
+You can still visit this repo to see old issues.
 
 Hacking on Charsheet
 --------------------
