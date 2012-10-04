@@ -96,7 +96,7 @@
 				</table>
 			</div>
 			<div class="grid_4">
-				<table>
+				<table class="one-line">
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_003_user.png')}'/> Name:</td><td>
 						% if github_data:
 							${github_data['name']}
@@ -104,7 +104,7 @@
 							?
 						% endif
 					</td></tr>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
+					<tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
 						% if github_data:
 							${github_data.get('email', "")}
 						% else:
@@ -125,8 +125,8 @@
 				</table>
 			</div>
 			<div class="grid_4">
-				<table>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_340_globe.png')}'/> Location:</td>
+				<table class="one-line">
+					<tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_340_globe.png')}'/> Location:</td>
 						<td>
 						% if github_data:
 							% if github_data['location']:
@@ -138,7 +138,7 @@
 							?
 						% endif
 						</td></tr>
-					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_341_briefcase.png')}'/> Company:</td><td>
+					<tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_341_briefcase.png')}'/> Company:</td><td>
 						% if github_data:
 							% if github_data['company']:
 								${github_data['company']}

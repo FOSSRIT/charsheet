@@ -48,6 +48,9 @@ p, table {
 td {
     padding: 4px;
     vertical-align: middle;
+}
+
+.one-line tr {
     white-space: nowrap;
     overflow: hidden;
 }
