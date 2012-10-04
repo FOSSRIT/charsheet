@@ -125,6 +125,17 @@ def charsheet_view(request):
             ohloh_dict,
             coderwall_dict)
 
+    # Completion percent
+    linked_services = 0
+    total_services = 3
+    if github_dict:
+        linked_services += 1
+    if ohloh_dict:
+        linked_services += 1
+    if coderwall_dict:
+        linked_services += 1
+    percent_complete = float(linked_services) / float(total_services)
+
     request.session.flash("Character sheet generated.")
     return {
             'timestamp': datetime.datetime.now().strftime("%Y.%m.%d %H:%M"),
@@ -135,6 +146,7 @@ def charsheet_view(request):
             'github_data': github_dict,
             'ohloh_data': ohloh_dict,
             'stats': stats_dict,
+            'percent_complete': percent_complete,
            }
 
 conn_err_msg = """\

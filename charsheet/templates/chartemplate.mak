@@ -114,7 +114,8 @@
 					<tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
 						% if github_data:
 							% if github_data['blog'] != None:
-							<a href="http://${github_data['blog']}">[Link]</a>
+							<a href="http://${github_data['blog']}">
+								${github_data['blog'].strip('/')}</a>
 							% else:
 							None
 							% endif
@@ -122,6 +123,11 @@
 							?
 						% endif
 						</td></tr>
+					<tr>
+					<td colspan="2">
+					Charsheet ${int(percent_complete * 100)}% complete.
+					</td>
+					</tr>
 				</table>
 			</div>
 			<div class="grid_4">
