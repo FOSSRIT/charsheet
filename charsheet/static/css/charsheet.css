@@ -48,6 +48,8 @@ p, table {
 td {
     padding: 4px;
     vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 tr {
