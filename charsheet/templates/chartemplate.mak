@@ -12,20 +12,11 @@
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='${request.static_url('charsheet:static/js/charsheet.js')}'></script>
-		<script type='text/javascript'
-	src='${request.static_url('charsheet:static/js/jquery.dimensions.js')}'>
+		<script
+		src='${request.static_url('charsheet:static/js/jquery.tipTip.js')}'>
 		</script>
-		<script type='text/javascript'
-	src='${request.static_url('charsheet:static/js/jquery.delegate.js')}'>
-		</script>
-		<script type='text/javascript'
-	src='${request.static_url('charsheet:static/js/jquery.bgiframe.js')}'>
-		</script>
-		<script type='text/javascript'
-		src='${request.static_url('charsheet:static/js/jquery.tooltip.js')}'>
-		</script>
-<link href='${request.static_url('charsheet:static/css/jquery.tooltip.css')}'
-			rel='stylesheet' type='text/css'>
+		<link href='${request.static_url('charsheet:static/css/tipTip.css')}'
+				media='all' rel='stylesheet' type='text/css'>
 		% if coderwall_data:
 			<link href='http://coderwall.com/stylesheets/jquery.coderwall.css'
 				media='all' rel='stylesheet' type='text/css'>

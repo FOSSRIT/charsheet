@@ -29,16 +29,7 @@ $(document).ready(function() {
         return false; // don't move to the top of the page
     });
 
-    // jQuery tooltip plugin stuff
-    $('.tooltip').tooltip({
-        track: true,
-        delay: 250,
-        showURL: false,
-        showBody: " - ",
-        extraClass: "tooltip-stat",
-        fixPNG: true,
-        opacity: 0.95,
-        fade: 250,
-        right: 60
-    });
+    // TipTip tooltips
+    $(".tooltip").tipTip();
+
 });
