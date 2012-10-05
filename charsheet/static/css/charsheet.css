@@ -277,21 +277,6 @@ input#submit:hover {
     margin: -50px 0 0 -100px;
 }
 
-#tooltip {
-    font-family: "Helvetica", "sans";
-    line-height: 1.2em;
-    width: 300px;
-    font-size: 12px;
-}
-
-#tooltip h3 {
-    font-size: 16px;
-}
-
-#tooltip div {
-    text-align: left;
-}
-
 #user-bio {
     list-style-type: none;
 }

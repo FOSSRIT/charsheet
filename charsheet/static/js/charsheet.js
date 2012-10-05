@@ -30,6 +30,6 @@ $(document).ready(function() {
     });
 
     // TipTip tooltips
-    $(".tooltip").tipTip();
+    $(".tooltip").tipTip({defaultPosition: "top", maxWidth: "250px"});
 
 });
