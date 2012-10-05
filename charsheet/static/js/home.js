@@ -12,6 +12,6 @@ $(document).ready(function() {
 
     // Show GNU-cat when the submit button is pressed
     $('input#submit').click(function() {
-        $('#loading').show();
+        $('#loading').fadeIn(1000);
     });
 });
