@@ -269,6 +269,14 @@ input#submit:hover {
     color: green;
 }
 
+#loading {
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    margin: -50px 0 0 -100px;
+}
+
 #tooltip {
     font-family: "Helvetica", "sans";
     line-height: 1.2em;

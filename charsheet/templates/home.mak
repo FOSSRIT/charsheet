@@ -14,10 +14,17 @@
 		<script
 	src='${request.static_url('charsheet:static/js/home.js')}'>
 		</script>
+		<script type='text/javascript'
+				src='${request.static_url('charsheet:static/js/charsheet.js')}'>
+		</script>
     	<title>Charsheet</title>
 	</head>
     <body>
 		<h1>Charsheet</h1>
+		<div id="loading">
+			<img
+			src="${request.static_url('charsheet:static/gif/gnu-cat.gif')}" />
+		</div>
 		<div class="container_12">
 			<div class="clear"></div>
 			
