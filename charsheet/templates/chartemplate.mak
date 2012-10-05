@@ -72,12 +72,14 @@
 				</td>
 					<td>${username}</td>
 				</tr>
-				<tr class="tooltip" id="foo" title="Foo - Foo is the average
+				<tr class="tooltip" id="foo" title="<strong>Foo</strong>
+					- Foo is the average
 					of your six attribute scores.<br />
 					<strong>${int((stats['foo'] % 1) * 100)}%</strong>
 					to next level">
 					<td>Foo:</td><td>${int(stats['foo'])}</td></tr>
-				<tr class="tooltip" title="Foo Bar - Your Foo Bar shows
+				<tr class="tooltip" title="<strong>Foo Bar</strong>
+					- Your Foo Bar shows
 					your progress towards the next level of Foo.<br />
 					<strong>${int((stats['foo'] % 1) * 100)}%</strong>
 					to next level"><td>Foo Bar:</td>
@@ -184,7 +186,7 @@
 			<div class="grid_4">
 				<table>
 					<tr class="tooltip"
-						title="Strength - 
+						title="<strong>Strength</strong> - 
 						Determined by lines written and 
 						and number of CoderWall badges.<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
@@ -194,7 +196,7 @@
 								value="${stats['strength'] % 1}">%
 						</progress></td></tr>
 					<tr class="tooltip"
-						title="Dexterity - 
+						title="<strong>Dexterity</strong> - 
 						Determined by language variety on Ohloh.
 						<br />
 					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
@@ -208,7 +210,7 @@
 			<div class="grid_4">
 				<table>
 					<tr class="tooltip"
-						title="Wisdom - 
+						title="<strong>Wisdom</strong> - 
 						Determined by age of oldest linked account, between
 						GitHub and Ohloh.<br />
 					<strong>${int((stats['wisdom'] % 1) * 100)}%</strong>
@@ -218,7 +220,7 @@
 								value="${stats['wisdom'] % 1}">
 						</progress></td></tr>
 					<tr class="tooltip"
-						title="Leadership - 
+						title="<strong>Leadership</strong> - 
 						Determined by number of times your GitHub repos have
 						been forked.<br />
 					<strong>${int((stats['leadership'] % 1) * 100)}%</strong>
@@ -232,7 +234,7 @@
 			<div class="grid_4">
 				<table>
 					<tr class="tooltip"
-						title="Determination - 
+						title="<strong>Determination</strong> - 
 						Determined (ha-ha) by number of repos in your
 						GitHub account.<br />
 					<strong>${int((stats['determination'] % 1) * 100)}%</strong>
@@ -242,7 +244,7 @@
 								value="${stats['determination'] % 1}">
 						</progress></td></tr>
 					<tr class="tooltip"
-						title="Popularity - 
+						title="<strong>Popularity</strong> - 
 						Determined by number of GitHub followers.<br />
 					<strong>${int((stats['popularity'] % 1) * 100)}%</strong>
 					to next level"><td>Popularity:</td>
