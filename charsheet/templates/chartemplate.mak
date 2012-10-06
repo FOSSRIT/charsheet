@@ -187,7 +187,7 @@
 				<table>
 					<tr class="tooltip"
 						title="<strong>Strength</strong><br />
-						(${ohloh_data['lines']} lines / 1000000)
+						(${stats['lines']} lines / 1000000)
 							+ (2 * ${coderwall_data['badges']} badges)<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
 						to next level">
@@ -197,7 +197,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Dexterity</strong><br />
-						5 * ${ohloh_data['num_languages']} languages
+						5 * ${stats['num_languages']} languages
 						<br />
 					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
 					to next level">
@@ -399,7 +399,7 @@
 							<% import locale %>
 							<% locale.setlocale(locale.LC_ALL, 'en_US') %>
 							<% lines_written = locale.format(
-									"%d", ohloh_data['lines'], grouping=True)%>
+									"%d", stats['lines'], grouping=True)%>
 							${lines_written}
 						% else:
 							?

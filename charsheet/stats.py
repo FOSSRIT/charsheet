@@ -174,6 +174,11 @@ def calculate_stats(gh, oh, cw):
     # purpose of displaying the Wisdom formula in the tooltip.
     stats['age_months'] = data['age_months']
 
+    # Also store these for reference... probs should restructure
+    # all of this soon.
+    stats['lines'] = data['total_lines']
+    stats['num_languages'] = data['languages']
+
     # Skills
     if data.get('ohloh_languages'):
         for language in data['ohloh_languages']:
