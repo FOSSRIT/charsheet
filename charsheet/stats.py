@@ -169,6 +169,11 @@ def calculate_stats(gh, oh, cw):
     stats['popularity'] = calculate_popularity(
             followers=data['followers'])
 
+    # Add age in months to the stats dict, just so that we can
+    # use the age of the oldest account in the mako template for the
+    # purpose of displaying the Wisdom formula in the tooltip.
+    stats['age_months'] = data['age_months']
+
     # Skills
     if data.get('ohloh_languages'):
         for language in data['ohloh_languages']:

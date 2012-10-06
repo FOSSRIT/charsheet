@@ -186,9 +186,9 @@
 			<div class="grid_4">
 				<table>
 					<tr class="tooltip"
-						title="<strong>Strength</strong> - 
-						Determined by lines written and 
-						and number of CoderWall badges.<br />
+						title="<strong>Strength</strong><br />
+						(${ohloh_data['lines']} lines / 1000000)
+							+ (2 * ${coderwall_data['badges']} badges)<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
 						to next level">
 						<td>Strength:</td>
@@ -196,8 +196,8 @@
 								value="${stats['strength'] % 1}">%
 						</progress></td></tr>
 					<tr class="tooltip"
-						title="<strong>Dexterity</strong> - 
-						Determined by language variety on Ohloh.
+						title="<strong>Dexterity</strong><br />
+						5 * ${ohloh_data['num_languages']} languages
 						<br />
 					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
 					to next level">
@@ -210,9 +210,9 @@
 			<div class="grid_4">
 				<table>
 					<tr class="tooltip"
-						title="<strong>Wisdom</strong> - 
-						Determined by age of oldest linked account, between
-						GitHub and Ohloh.<br />
+						title="<strong>Wisdom</strong><br />
+						${round(stats['age_months'], 2)} months
+						<br />
 					<strong>${int((stats['wisdom'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Wisdom:</td>
@@ -220,9 +220,8 @@
 								value="${stats['wisdom'] % 1}">
 						</progress></td></tr>
 					<tr class="tooltip"
-						title="<strong>Leadership</strong> - 
-						Determined by number of times your GitHub repos have
-						been forked.<br />
+						title="<strong>Leadership</strong><br />
+						${github_data['forks']} forks<br />
 					<strong>${int((stats['leadership'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Leadership:</td>
@@ -234,9 +233,8 @@
 			<div class="grid_4">
 				<table>
 					<tr class="tooltip"
-						title="<strong>Determination</strong> - 
-						Determined (ha-ha) by number of repos in your
-						GitHub account.<br />
+						title="<strong>Determination</strong><br />
+						${github_data['public_repos']} public repos<br />
 					<strong>${int((stats['determination'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Determination:</td>
@@ -244,8 +242,8 @@
 								value="${stats['determination'] % 1}">
 						</progress></td></tr>
 					<tr class="tooltip"
-						title="<strong>Popularity</strong> - 
-						Determined by number of GitHub followers.<br />
+						title="<strong>Popularity</strong><br />
+						${github_data['followers']} followers <br />
 					<strong>${int((stats['popularity'] % 1) * 100)}%</strong>
 					to next level"><td>Popularity:</td>
 						<td>${int(stats['popularity'])}<progress max="1"
