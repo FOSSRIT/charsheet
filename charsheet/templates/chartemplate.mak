@@ -479,7 +479,9 @@ src="http://api.coderwall.com/${usernames['coderwall']}/endorsecount.png" />
 					<% badges_printed = 0 %>
 					<tr>
 					% for badge in coderwall_data['cwc'].badges:
-						<td class="tooltip" title="${badge.name} - ${badge.description}.">
+						<td class="tooltip"
+							title="<strong>${badge.name}</strong>
+							- ${badge.description}.">
 							<img src="${badge.image_uri}"/></td>
 						<% badges_printed += 1 %>
 						% if (badges_printed % 8 == 0) and badges_printed > 0:
