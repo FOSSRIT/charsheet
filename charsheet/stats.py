@@ -121,6 +121,7 @@ def calculate_stats(gh, oh, cw):
             'emacslisp': 0,
             'viml': 0,
         },
+        'badges': 0,
     }
 
     data = {
@@ -192,3 +193,7 @@ def calculate_stats(gh, oh, cw):
     stats['foo'] = calculate_foo(stats)
 
     return stats
+
+    # Other stuff
+    if cw:
+        stats['badges'] = cw['badges']
