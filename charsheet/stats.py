@@ -122,6 +122,9 @@ def calculate_stats(gh, oh, cw):
             'viml': 0,
         },
         'badges': 0,
+        'forks': 0,
+        'public_repos': 0,
+        'followers': 0,
     }
 
     data = {
@@ -197,3 +200,7 @@ def calculate_stats(gh, oh, cw):
     # Other stuff
     if cw:
         stats['badges'] = cw['badges']
+    if gh:
+        stats['forks'] = gh['forks']
+        stats['public_repos'] = gh['public_repos']
+        stats['followers'] = gh['followers']

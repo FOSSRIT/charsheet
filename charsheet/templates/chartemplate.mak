@@ -221,7 +221,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Leadership</strong><br />
-						${github_data['forks']} forks<br />
+						${stats['forks']} forks<br />
 					<strong>${int((stats['leadership'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Leadership:</td>
@@ -234,7 +234,7 @@
 				<table>
 					<tr class="tooltip"
 						title="<strong>Determination</strong><br />
-						${github_data['public_repos']} public repos<br />
+						${stats['public_repos']} public repos<br />
 					<strong>${int((stats['determination'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Determination:</td>
@@ -243,7 +243,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Popularity</strong><br />
-						${github_data['followers']} followers <br />
+						${stats['followers']} followers <br />
 					<strong>${int((stats['popularity'] % 1) * 100)}%</strong>
 					to next level"><td>Popularity:</td>
 						<td>${int(stats['popularity'])}<progress max="1"
