@@ -2,6 +2,18 @@
 This module contains calculations used to generate stats for charsheet.
 """
 
+import struct
+
+### Utilities ###
+
+
+def calculate_color(level):
+    """
+    Determine hex color from cold to warm based on skill level.
+    Will be replaced once statefulness is introduced.
+    """
+    pass
+
 ### Attributes ###
 
 
