@@ -132,6 +132,47 @@ def charsheet_view(request):
         linked_services += 1
     percent_complete = float(linked_services) / float(total_services)
 
+    ### Knowledgedb integration ###
+    from kitchen.text.converters import to_unicode
+    from sqlalchemy import create_engine
+    from knowledge.model import Fact, Entity, DBSession, init_model, metadata
+
+    engine = create_engine('sqlite:///knowledge.db')
+    init_model(engine)
+    metadata.create_all(engine)
+
+    def inject_knowledge():
+        knowledge = DBSession
+        #for each stats dict, add a fact to an Entity that is named the URL of
+        #the page visited
+        character = Entity(u'%s' % username)
+        character[u'name'] = (u'%s' % username)
+        for key, value in stats_dict.items():
+            character[key] = value
+            #character[key] = to_unicode(value)
+        knowledge.add(character)
+        knowledge.commit()
+
+    def the_facts():
+        # Get the Knowledge Session
+        knowledge = DBSession
+        # Make the base Query, all Entities
+        knowledge_query = knowledge.query(Entity).all()
+        # Print out each Entity, and the values of each of their facts
+        for entities in knowledge_query:
+            from pprint import pprint
+            pprint(entities)
+            pprint(entities.facts.values())
+
+    inject_knowledge()
+    the_facts()
+    #Issue pyramid badges using tahrir_db_api (with fact entity as a backend???)
+    #If user visits /charsheet/username, check the knowledge.db for
+    #'current_stats' fact. If the user has 'current_stats' in the knowledge.db, save their
+    #old stats as 'old_stats" or create a new fact called u'current_stats'
+    #that has an updated version #git commit the version???
+
+
     request.session.flash("Character sheet generated.")
     return {
             'timestamp': datetime.datetime.now().strftime("%Y.%m.%d %H:%M"),
@@ -144,6 +185,7 @@ def charsheet_view(request):
             'stats': stats_dict,
             'percent_complete': percent_complete,
            }
+
 
 conn_err_msg = """\
 Pyramid is having a problem using your SQL database.  The problem
