@@ -11,6 +11,8 @@ requires = [
     'elementtree',
 #    'kitchen',
     'hashlib',
+    'kitchen',
+    'knowledge',
     'pyramid',
     'SQLAlchemy',
     'transaction',
