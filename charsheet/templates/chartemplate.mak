@@ -188,7 +188,7 @@
 					<tr class="tooltip"
 						title="<strong>Strength</strong><br />
 						(${stats['lines']} lines / 1000000)
-							+ (2 * ${stats['badges']} badge(s))<br />
+							<br />+ (2 * ${stats['badges']} badge(s))<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
 						to next level">
 						<td>Strength:</td>
