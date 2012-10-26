@@ -16,8 +16,8 @@ I plan to continue hacking on this app throughout the coming
 days. If I can get off from work for BarCampRoc, I will be
 presenting on this app there.
 
-Authors
--------
+Contributors
+------------
 
 -   David Gay (oddshocks)
 -   Remy DeCausemaker (decause)
