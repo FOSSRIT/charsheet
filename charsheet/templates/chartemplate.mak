@@ -188,7 +188,7 @@
 					<tr class="tooltip"
 						title="<strong>Strength</strong><br />
 						(${stats['lines']} lines / 1000000)
-							+ (2 * ${stats['badges']} badges)<br />
+							+ (2 * ${stats['badges']} badge(s))<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
 						to next level">
 						<td>Strength:</td>
@@ -197,7 +197,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Dexterity</strong><br />
-						5 * ${stats['num_languages']} languages
+						5 * ${stats['num_languages']} language(s)
 						<br />
 					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
 					to next level">
@@ -211,7 +211,7 @@
 				<table>
 					<tr class="tooltip"
 						title="<strong>Wisdom</strong><br />
-						${round(stats['age_months'], 2)} months
+						${round(stats['age_months'], 2)} month(s)
 						<br />
 					<strong>${int((stats['wisdom'] % 1) * 100)}%</strong>
 					to next level">
@@ -221,7 +221,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Leadership</strong><br />
-						${stats['forks']} forks<br />
+						${stats['forks']} fork(s)<br />
 					<strong>${int((stats['leadership'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Leadership:</td>
@@ -234,7 +234,7 @@
 				<table>
 					<tr class="tooltip"
 						title="<strong>Determination</strong><br />
-						${stats['public_repos']} public repos<br />
+						${stats['public_repos']} public repo(s)<br />
 					<strong>${int((stats['determination'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Determination:</td>
@@ -243,7 +243,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Popularity</strong><br />
-						${stats['followers']} followers <br />
+						${stats['followers']} follower(s)<br />
 					<strong>${int((stats['popularity'] % 1) * 100)}%</strong>
 					to next level"><td>Popularity:</td>
 						<td>${int(stats['popularity'])}<progress max="1"
