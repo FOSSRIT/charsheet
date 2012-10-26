@@ -206,13 +206,11 @@ def calculate_stats(gh, oh, cw):
 
     # Foo
     stats['foo'] = calculate_foo(stats)
+    
+    # Other stuff
+    stats['badges'] = data['cw_badges']
+    stats['forks'] = data['forks']
+    stats['public_repos'] = data['repos']
+    stats['followers'] = data['followers']
 
     return stats
-
-    # Other stuff
-    if cw:
-        stats['badges'] = cw['badges']
-    if gh:
-        stats['forks'] = gh['forks']
-        stats['public_repos'] = gh['public_repos']
-        stats['followers'] = gh['followers']
