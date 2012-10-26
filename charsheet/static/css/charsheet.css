@@ -120,6 +120,10 @@ progress::-moz-progress-bar {
     text-align: center;
 }
 
+.footer img {
+    padding: 4px;
+}
+
 .sheet {
     width: 1000px;
     margin-left: auto;
