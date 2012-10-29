@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="64px"
@@ -16,7 +17,40 @@
    inkscape:version="0.48.3.1 r9886"
    sodipodi:docname="icon_64x64.svg">
   <defs
-     id="defs2987" />
+     id="defs2987">
+    <linearGradient
+       id="linearGradient5406">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop5408" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop5410" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3802">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.75;"
+         offset="0"
+         id="stop3804" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop3806" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3802"
+       id="linearGradient3952"
+       x1="17.089157"
+       y1="43.6875"
+       x2="46.839157"
+       y2="43.6875"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-75.651657,-11.723347)" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,9 +58,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
-     inkscape:cx="5.9411765"
-     inkscape:cy="32.466866"
+     inkscape:zoom="8"
+     inkscape:cx="29.461041"
+     inkscape:cy="34.641217"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
@@ -35,7 +69,11 @@
      inkscape:window-height="747"
      inkscape:window-x="0"
      inkscape:window-y="19"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     inkscape:snap-global="true"
+     inkscape:snap-bbox="false"
+     inkscape:snap-grids="true"
+     inkscape:snap-to-guides="true" />
   <metadata
      id="metadata2990">
     <rdf:RDF>
@@ -53,14 +91,14 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <rect
-       style="fill:none;stroke:#000000;stroke-width:3.53076005"
+       style="fill:none;stroke:#000000;stroke-width:3.38983893"
        id="rect3012"
-       width="49.148014"
-       height="63.0797"
-       x="8.4601507"
-       y="-63.539848"
-       rx="11.519067"
-       ry="14.784305"
+       width="47.148933"
+       height="60.610161"
+       x="8.3896894"
+       y="-62.30508"
+       rx="11.050532"
+       ry="14.205506"
        transform="scale(1,-1)" />
     <text
        xml:space="preserve"
@@ -87,21 +125,79 @@
     <text
        xml:space="preserve"
        style="font-size:10.6987524px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
-       x="24.245989"
-       y="16.465538"
+       x="22.294533"
+       y="15.215538"
        id="text3022"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3024"
-         x="24.245989"
-         y="16.465538">Foo</tspan></text>
+         x="22.294533"
+         y="15.215538">Foo</tspan></text>
     <rect
-       style="fill:none;stroke:#000000;stroke-width:22.42637634"
-       id="rect3028"
-       width="15.573624"
-       height="8.0736237"
-       x="-61.786812"
-       y="-45.786812"
+       style="fill:none;stroke:#000000;stroke-width:1.03448272;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3030"
+       width="35.689655"
+       height="6.465517"
+       x="14.119328"
+       y="-26.232759"
        transform="scale(1,-1)" />
+    <text
+       xml:space="preserve"
+       style="font-size:6px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="16.685837"
+       y="34.675884"
+       id="text3818"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="34.675884"
+         id="tspan3830">01000110</tspan><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="42.175884"
+         id="tspan3832">01001111</tspan><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="49.675884"
+         id="tspan3834">01010011</tspan><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="57.175884"
+         id="tspan3846">01010011</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="104.6518"
+       y="53.305012"
+       id="text3822"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3824"
+         x="104.6518"
+         y="53.305012" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="134.75"
+       y="55.25"
+       id="text3826"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3828"></tspan></text>
+    <rect
+       style="fill:#0066ff;stroke:none;filter:url(#filter3918);fill-opacity:1"
+       id="rect3816"
+       width="26.383921"
+       height="5.5173874"
+       x="14.628272"
+       y="20.210459" />
+    <rect
+       style="fill:url(#linearGradient3952);fill-opacity:1;stroke:none"
+       id="rect3944"
+       width="29.75"
+       height="31.625"
+       x="-58.5625"
+       y="16.151657"
+       transform="matrix(0,-1,1,0,0,0)" />
   </g>
 </svg>
