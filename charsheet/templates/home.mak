@@ -6,7 +6,7 @@
 		<link href='${request.static_url(
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
-		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'				rel='stylesheet' type='text/css'>
+		<link href='${request.static_url('charsheet:static/css/home.css')}'				rel='stylesheet' type='text/css'>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type='text/javascript'
 	src='${request.static_url('charsheet:static/js/jquery.cycle.all.js')}'>
@@ -38,6 +38,7 @@
 					<a href="https://github.com/FOSSRIT/charsheet/issues">
 					here</a>.
 				</p>
+				<!-- SLIDESHOW COMMENTED OUT
 				<div class="slideshow">
 					<img
 			src="${request.static_url('charsheet:static/img/screenshot3.png')}"
@@ -54,6 +55,7 @@
 			alt="Charsheet screenshot"
 					/>
 				</div>
+				-->
 			</div>
 			<div class="grid_6">
 				<div id='charsheet_form'>
