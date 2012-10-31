@@ -74,7 +74,7 @@ def charsheet_view(request):
             'ohloh': request.params['charsheetform:ohloh'],
             'coderwall': request.params['charsheetform:coderwall'],
         }
-        
+
         username = '???'  # Set default username
         # Cycle through usernames available, use first one that exists
         for name in usernames:
@@ -107,7 +107,7 @@ def charsheet_view(request):
                 request, usernames['ohloh'])
 
     ### Gravatar ###
-    if github_dict:
+    if github_dict['email']:
         gravatar_url = data.get_gravatar_url(github_dict['email'])
     else:
         gravatar_url = None
