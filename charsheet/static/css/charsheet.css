@@ -4,11 +4,6 @@ table {
     font-size: 0.8em;
 }
 
-
-tr {
-    border-bottom: 1px solid #CCC;
-}
-
 .activity-controls {
     margin-bottom: 10px;
     margin-top: -13px;
@@ -53,13 +48,10 @@ tr {
     padding-bottom: 40px;
 }
 
-
 #foo {
     font-size: 1.6em;
     font-family: 'Press Start 2P';
 }
-
-
 
 ul#recent-activity {
     font-size: 10px;
