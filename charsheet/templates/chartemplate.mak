@@ -9,6 +9,7 @@
 		<link href='${request.static_url(
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
+		<link href='${request.static_url('charsheet:static/css/app.css')}'			rel='stylesheet' type='text/css'>
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='${request.static_url('charsheet:static/js/charsheet.js')}'></script>
