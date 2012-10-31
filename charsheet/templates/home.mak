@@ -62,8 +62,7 @@
 			<div class="grid_6">
 					<div id='charsheet_form'>
 					${charsheet_form.display() | n}
-					<!-- <a href="/login">Login with OpenID for FAS</a> -->
-				</div>
+					</div>
 			</div>
 			<div class="clear"></div>
 			<div class="grid_12">
