@@ -99,8 +99,9 @@ progress::-moz-progress-bar {
     padding: 4px;
 }
 
-
-
+/* Remove dotted outline on buttons */
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
 
 #charsheetform\:master\:container { color: red; }
 
