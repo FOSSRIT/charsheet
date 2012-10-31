@@ -1,15 +1,13 @@
 
 
 table {
-    font-size: 10px;
+    font-size: 0.8em;
 }
 
 
 tr {
     border-bottom: 1px solid #CCC;
 }
-
-
 
 .activity-controls {
     margin-bottom: 10px;

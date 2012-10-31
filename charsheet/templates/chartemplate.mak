@@ -166,7 +166,7 @@
 							Unknown
 						% endif
 						</td></tr>
-					<tr><td>GitTip</td><td>
+					<tr><td>GitTip:</td><td>
 						% if github_data:
 							<iframe style="vertical-align: middle;
 									border: 0; margin: 0; padding: 0;"
