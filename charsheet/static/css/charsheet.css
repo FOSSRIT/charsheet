@@ -56,7 +56,7 @@ table {
     height: 10px;
     content: ' ';
     left: 12px;
-    bottom: 12px;
+    bottom: 18px;
     background: transparent;
     -webkit-transform: skew(-5deg) rotate(-5deg);
     -moz-transform: skew(-5deg) rotate(-5deg);
