@@ -74,14 +74,9 @@ def charsheet_view(request):
             'ohloh': request.params['charsheetform:ohloh'],
             'coderwall': request.params['charsheetform:coderwall'],
         }
-
-        master_field = request.params['charsheetform:master']
-        if master_field:
-            usernames['github'] = master_field
-            usernames['ohloh'] = master_field
-            usernames['coderwall'] = master_field
-
-        username = 'Sugar Magnolia'
+        
+        username = '???'  # Set default username
+        # Cycle through usernames available, use first one that exists
         for name in usernames:
             if usernames[name]:
                 username = usernames[name]

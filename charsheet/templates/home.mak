@@ -14,9 +14,6 @@
 		<script
 	src='${request.static_url('charsheet:static/js/home.js')}'>
 		</script>
-		<script type='text/javascript'
-				src='${request.static_url('charsheet:static/js/charsheet.js')}'>
-		</script>
     	<title>Charsheet</title>
 	</head>
     <body>
