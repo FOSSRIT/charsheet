@@ -29,6 +29,9 @@
 			<div class="clear"></div>
 			
 			<div class="grid_6">
+				<p><strong>Status:</strong> Charsheet is currently experiencing
+					issues communicating with GitHub. Please bear with me as I
+					fix the app following the recent GitHub API changes. -- odd</p>
 				<p>Generate your developer character sheet by completing
 					fields in the form to the right.
 				</p>
