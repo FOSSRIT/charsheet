@@ -58,11 +58,11 @@
 			</div>
 		</div>
 		% if display_sheet == True:
-		<div class="container_12">
+		<div class="container_12 sheet_parent">
 		<div class="sheet">
 		<h1>Character Record Sheet</h1>
 			<div class="clear"></div>
-			
+
 			<!-- GENERAL INFORMATION -->
 
 			<div class="grid_4">

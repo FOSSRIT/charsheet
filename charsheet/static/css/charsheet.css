@@ -32,17 +32,22 @@ table {
     box-shadow: 0 10px 5px 0px #CCC;
 }
 
-.sheet {
-    position: relative;
-    width: 1000px;
-    margin: 0 auto;
-    padding: 40px;
+.sheet_parent {
     -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2),
         inset 0 0 50px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2),
         inset 0 0 50px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2),
         inset 0 0 50px rgba(0, 0, 0, 0.1);
+    width: 1080px;
+    background-color: white;
+}
+
+.sheet {
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
 }
 
 .sheet:before, .sheet:after {
