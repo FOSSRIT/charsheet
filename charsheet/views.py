@@ -107,8 +107,9 @@ def charsheet_view(request):
                 request, usernames['ohloh'])
 
     ### Gravatar ###
-    if github_dict['email']:
-        gravatar_url = data.get_gravatar_url(github_dict['email'])
+    if github_dict:
+        if github_dict['email']:
+            gravatar_url = data.get_gravatar_url(github_dict['email'])
     else:
         gravatar_url = None
 
