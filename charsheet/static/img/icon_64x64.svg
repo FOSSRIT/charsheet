@@ -76,22 +76,22 @@
   </defs>
   <sodipodi:namedview
      id="base"
-     pagecolor="#ffffff"
+     pagecolor="#000000"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.265625"
-     inkscape:cx="32"
-     inkscape:cy="32"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="25.645433"
+     inkscape:cy="34.663003"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
-     inkscape:window-width="1364"
-     inkscape:window-height="747"
+     inkscape:window-width="1278"
+     inkscape:window-height="1003"
      inkscape:window-x="0"
-     inkscape:window-y="1043"
+     inkscape:window-y="19"
      inkscape:window-maximized="0"
      inkscape:snap-global="true"
      inkscape:snap-bbox="false"
@@ -105,7 +105,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

@@ -18,8 +18,13 @@ html {
     padding: 0px;
 }
 
+
 body {
     font-family: 'Open Sans';
+}
+
+h1 {
+    font-size: 40px;
 }
 
 h1, h2, h3 {
@@ -38,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a, a:visited {
     text-decoration: none;
-    color: blue;
+    color: #0066FF;
 }
 
 p {
@@ -48,7 +53,6 @@ p {
 table {
     width: 100%;
     line-height: 200%;
-    font-size: 10px;
 }
 
 td {
@@ -61,8 +65,9 @@ td {
     overflow: hidden;
 }
 
-tr {
-    border-bottom: 1px solid #CCC;
+.logo {
+    vertical-align: middle;
+    margin-top: -10px;
 }
 
 progress {
@@ -79,7 +84,7 @@ progress::-moz-progress-bar {
 
 
 .footer {
-    font-size: 0.4em;
+    font-size: 0.6em;
     font-color: #CCC;
     text-align: center;
 }

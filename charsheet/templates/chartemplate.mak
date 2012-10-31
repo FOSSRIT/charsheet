@@ -40,7 +40,9 @@
 				<% display_sheet = True %>
 			% endif
 		% endfor
-		<h1>Charsheet</h1>
+		<h1><img class='logo' alt='Charsheet logo'
+			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
+		Charsheet</h1>
 		<div class="container_12">
 			<div class="grid_6">
 			<h2>Your Charsheet</h2>
@@ -55,9 +57,9 @@
 			</div>
 		</div>
 		% if display_sheet == True:
+		<div class="container_12">
 		<div class="sheet">
 		<h1>Character Record Sheet</h1>
-		<div class="container_12">
 			<div class="clear"></div>
 			
 			<!-- GENERAL INFORMATION -->
@@ -662,7 +664,23 @@ src="http://api.coderwall.com/${usernames['coderwall']}/endorsecount.png" />
 					<p>Add your GitHub username to see your recent activity.</p>
 				% endif
 			</div>
-	 	</div>
+		</div>
+			<div class="clear"></div>
+			<div class="grid_12">
+				<div class="footer">
+				<a rel="license"
+					href="http://creativecommons.org/licenses/by/3.0/">
+						<img alt="Creative Commons License"
+						style="border-width:0"
+					src="${request.static_url('charsheet:static/img/cc30.png')}" />
+				</a>
+				<br />This work is licensed under a
+				<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">
+				Creative Commons Attribution 3.0 Unported License</a>.
+				Code freely available
+				<a href="https://github.com/FOSSRIT/charsheet">on GitHub</a>.
+				</div>
+			</div>
 		</div>
 		% endif
 	</body>

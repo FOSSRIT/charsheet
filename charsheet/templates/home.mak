@@ -20,7 +20,9 @@
     	<title>Charsheet</title>
 	</head>
     <body>
-		<h1>Charsheet</h1>
+		<h1><img class='logo' alt='Charsheet logo'
+			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
+		Charsheet</h1>
 		<div id="loading">
 			<img
 			src="${request.static_url('charsheet:static/gif/gnu-cat.gif')}" />
@@ -58,12 +60,13 @@
 				-->
 			</div>
 			<div class="grid_6">
-				<div id='charsheet_form'>
+					<div id='charsheet_form'>
 					${charsheet_form.display()}
 					<!-- <a href="/login">Login with OpenID for FAS</a> -->
 				</div>
 			</div>
 			<div class="clear"></div>
+			<div class="grid_12">
 				<div class="footer">
 				<a rel="license"
 					href="http://creativecommons.org/licenses/by/3.0/">
@@ -76,7 +79,6 @@
 				Code freely available
 				<a href="https://github.com/FOSSRIT/charsheet">on GitHub</a>.
 				</div>
-			<div class="grid_12">
 			</div>
 		</div>
    	</body>

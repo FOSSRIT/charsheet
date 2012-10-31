@@ -14,12 +14,16 @@
 
 /* Reset */
 html {
-    margin: 0px;
+    margin: 10px;
     padding: 0px;
 }
 
 body {
     font-family: 'Open Sans';
+}
+
+h1 {
+    font-size: 40px;
 }
 
 h1, h2, h3 {
@@ -36,22 +40,20 @@ h1, h2, h3, h4, h5, h6 {
     padding: 4px;
 }
 
-h1 {
-    color: #FFF;
-    background: #000;
-    margin-top: 0;
-}
-
 a, a:visited {
     text-decoration: none;
-    color: blue;
+    color: #0066FF;
 }
 
 table {
     width: 100%;
 }
 
-p, table {
+p {
+    font-size: 16px;
+}
+
+table {
     line-height: 200%;
     font-size: 10px;
 }
@@ -125,8 +127,13 @@ progress::-moz-progress-bar {
     box-shadow: 0 10px 5px 0px #CCC;
 }
 
+.logo {
+    vertical-align: middle;
+    margin-top: -10px;
+}
+
 .footer {
-    font-size: 0.4em;
+    font-size: 0.6em;
     font-color: #CCC;
     text-align: center;
 }
@@ -145,7 +152,8 @@ progress::-moz-progress-bar {
     box-shadow: 5px 5px 5px #888;
     margin-bottom: 20px;
     margin-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
+    padding-bottom: 40px;
 }
 
 .slideshow {
@@ -165,6 +173,7 @@ progress::-moz-progress-bar {
 
 #foo {
     font-size: 1.6em;
+    font-family: 'Press Start 2P';
 }
 
 #charsheet_form {
