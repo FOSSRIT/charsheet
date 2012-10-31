@@ -54,7 +54,7 @@
 			<div class="grid_6">
 			<h2>Information</h2>
 			<p>Charsheet generated at ${timestamp}.</p>
-			<p><a href="..">Generate another.</a></p>
+			<p><a class='button' href="..">New Sheet</a></p>
 			</div>
 		</div>
 		% if display_sheet == True:

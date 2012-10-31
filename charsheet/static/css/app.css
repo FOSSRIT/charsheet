@@ -106,16 +106,15 @@ progress::-moz-progress-bar {
 #charsheetform\:master\:container { color: red; }
 
 .button, input#submit {
-    color: #333
+    color: #0066FF;
     background: #e3e3e3;
     border: 1px solid #bbb;
     border-radius: 3px;
     -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
     box-shadow: inset 0 0 1px 1px #f6f6f6;
-    padding: 8px 0 9px;
+    padding: 10px 20px;
     text-align: center;
     text-shadow: 0 1px 0 #fff;
-    width: 150px;
     font: bold 12px/1 "helvetica neue", helvetica, "Open Sans", sans;
 }
 
