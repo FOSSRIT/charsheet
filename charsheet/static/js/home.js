@@ -14,4 +14,12 @@ $(document).ready(function() {
     $('input#submit').click(function() {
         $('#loading').fadeIn(1000);
     });
+
+    // Have master account input field update all other fields
+    /* THIS CODE IS BROKEN -- I will be fixing it ASAP
+    $('input#charsheetform:master').keyup(function () {
+        $('input#charsheetform:github').val(this.val());
+        $('input#charsheetform:ohloh').val(this.val());
+        $('input#charsheetform:coderwall').val(this.val());
+    }); */
 });
