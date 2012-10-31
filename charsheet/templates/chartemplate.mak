@@ -666,7 +666,8 @@ src="http://api.coderwall.com/${usernames['coderwall']}/endorsecount.png" />
 				% endif
 			</div>
 		</div>
-			<div class="clear"></div>
+		</div>
+		<div class="container_12">
 			<div class="grid_12">
 				<div class="footer">
 				<a rel="license"
@@ -682,6 +683,7 @@ src="http://api.coderwall.com/${usernames['coderwall']}/endorsecount.png" />
 				<a href="https://github.com/FOSSRIT/charsheet">on GitHub</a>.
 				</div>
 			</div>
+		</div>
 		</div>
 		% endif
 	</body>
