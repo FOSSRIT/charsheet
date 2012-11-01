@@ -41,6 +41,7 @@ def global_stats(request):
 
         knowledge = DBSession
         knowledge_query = knowledge.query(Entity).all()
+
         for entity in knowledge_query:
             data['users'][entity.name] = dict()
             for fact in entity.facts.values():
@@ -57,6 +58,8 @@ def global_stats(request):
             'avg_num_languages': average_value(data, 'num_languages'),
             'avg_badges': average_value(data, 'badges'),
             'top_foo': top_users(data, 'foo'),
+            'sheets_generated': len(knowledge_query),
+            'sheets_unique': len(data['users']),
         }
 
     except:  # TODO: Make this more specific.
@@ -207,7 +210,9 @@ def charsheet_view(request):
             pprint(entities)
             pprint(entities.facts.values())
 
-    inject_knowledge()
+    if username != '???':
+        inject_knowledge()
+
     the_facts()
     """
     Issue pyramid badges using tahrir_db_api

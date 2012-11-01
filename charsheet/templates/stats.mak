@@ -11,7 +11,7 @@
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/app.css')}'			rel='stylesheet' type='text/css'>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    	<title>Charsheet Global Stats</title>
+    	<title>Charsheet | Global Stats</title>
 	</head>
     <body>
 		
@@ -40,6 +40,33 @@
 			% else:
 			<div class="grid_6">
 				<h3>General Info</h3>
+				<table>
+					<tr>
+						<td>Sheets Generated</td>
+						<td>${stats['sheets_generated']}</td>
+					</tr>
+					<tr>
+						<td>Unique Sheets</td>
+						<td>${stats['sheets_unique']}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="grid_6">
+				<h3>Top Foo</h3>
+				<table>
+				<% i = 1 %>
+				% for user in stats['top_foo']:
+					<tr>
+						<td><strong>${i}.</strong> ${user[0]}</td>
+						<td>${user[1]}</td>
+					</tr>
+					<% i += 1 %>
+				% endfor
+				</table>
+			</div>
+			<div class="clear"></div>
+			<div class="grid_6">
+				<h3>Average Stats</h3>
 				<table>
 				<tr>
 					<td>Average Foo</td>
@@ -76,16 +103,7 @@
 				</table>
 			</div>
 			<div class="grid_6">
-				<h3>Top Foo</h3>
 				<table>
-				<% i = 1 %>
-				% for user in stats['top_foo']:
-					<tr>
-						<td><strong>${i}.</strong> ${user[0]}</td>
-						<td>${user[1]}</td>
-					</tr>
-					<% i += 1 %>
-				% endfor
 				</table>
 			</div>
 			% endif <!-- End stats area -->
