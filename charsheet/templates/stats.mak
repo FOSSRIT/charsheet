@@ -43,18 +43,48 @@
 				<table>
 				<tr>
 					<td>Average Foo</td>
-					<td>${stats['average_foo']}</td>
+					<td>${stats['avg_foo']}</td>
+				</tr>
+				<tr>
+					<td>Average Strength</td>
+					<td>${stats['avg_strength']}</td>
+				</tr>
+				<tr>
+					<td>Average Dexterity</td>
+					<td>${stats['avg_dexterity']}</td>
+				</tr>
+				<tr>
+					<td>Average Wisdom</td>
+					<td>${stats['avg_wisdom']}</td>
+				</tr>
+				<tr>
+					<td>Average Leadership</td>
+					<td>${stats['avg_leadership']}</td>
+				</tr>
+				<tr>
+					<td>Average Determination</td>
+					<td>${stats['avg_determination']}</td>
+				</tr>
+				<tr>
+					<td>Average Number of Languages</td>
+					<td>${stats['avg_num_languages']}</td>
+				</tr>
+				<tr>
+					<td>Average Coderwall Badges</td>
+					<td>${stats['avg_badges']}</td>
 				</tr>
 				</table>
 			</div>
 			<div class="grid_6">
 				<h3>Top Foo</h3>
 				<table>
+				<% i = 1 %>
 				% for user in stats['top_foo']:
-				<tr>
-					<td>${user[0]}</td>
-					<td>${user[1]}</td>
-				</tr>
+					<tr>
+						<td><strong>${i}.</strong> ${user[0]}</td>
+						<td>${user[1]}</td>
+					</tr>
+					<% i += 1 %>
 				% endfor
 				</table>
 			</div>

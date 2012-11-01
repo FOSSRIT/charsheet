@@ -12,6 +12,8 @@ import re
 import urllib
 import urllib2
 
+from requests import HTTPError
+
 utc = pytz.UTC  # For datetime handling
 
 
@@ -198,6 +200,9 @@ def handle_github(request, username):
 
     except exceptions.NotFound:
         request.session.flash('Error: Unable to find username on GitHub.')
+        return None
+    except HTTPError:
+        request.session.flash('Error: GitHub denied our request!')
         return None
 
 
