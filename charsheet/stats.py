@@ -14,6 +14,7 @@ def calculate_color(level):
     """
     pass
 
+
 ### Attributes ###
 
 
@@ -206,7 +207,7 @@ def calculate_stats(gh, oh, cw):
 
     # Foo
     stats['foo'] = calculate_foo(stats)
-    
+
     # Other stuff
     stats['badges'] = data['cw_badges']
     stats['forks'] = data['forks']
