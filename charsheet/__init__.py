@@ -27,6 +27,10 @@ def main(global_config, **settings):
     # static view setup
     config.add_static_view('static', 'static', cache_max_age=3600)
 
+    # velruse
+    config.include('velruse.providers.github')
+    config.add_github_login_from_settings(prefix='velruse.github.')
+
     # routes setup
     config.add_route('home', '/')
     config.add_route('charsheet', '/charsheet')

@@ -32,6 +32,7 @@ requires = [
     'zope.sqlalchemy',
     'nose',
     'coverage',
+    'velruse',
     ]
 
 if os.environ.get("OPENSHIFT_APP_NAME"):

@@ -28,3 +28,6 @@ pip-log.txt
 
 # Keep OpenID sstore stuff out of the repo
 sstore/
+
+# Keep secret keys out the repo
+secret.ini
