@@ -58,6 +58,7 @@ table {
 td {
     padding: 4px;
     vertical-align: middle;
+    min-width: 100px
 }
 
 .one-line tr {

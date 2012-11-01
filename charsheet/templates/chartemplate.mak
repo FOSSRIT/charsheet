@@ -71,6 +71,8 @@
 				<td>
 				% if github_data:
 					<img class="avatar" src="${avatar_url}" />
+				% else:
+					Username:
 				% endif
 				</td>
 					<td>${username}</td>
