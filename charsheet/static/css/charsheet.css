@@ -3,6 +3,7 @@ table {
 }
 
 .activity-controls {
+    padding: 20px 0;
     margin-bottom: 10px;
     margin-top: -13px;
 }
@@ -78,10 +79,6 @@ table {
 #foo {
     font-weight: bold;
     font-size: 1.6em;
-}
-
-ul#recent-activity {
-    font-size: 10px;
 }
 
 li.event {
