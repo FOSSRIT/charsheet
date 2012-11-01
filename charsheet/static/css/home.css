@@ -20,8 +20,7 @@
 }
 
 #charsheet_form > h1 {
-    font-size: 20px;
-    padding: 4px;
+    font-size: 24px; /* Make h1 into an h2 b/c sets the title to be h1 */
 }
 
 #charsheetform\:master\:container { color: red; }

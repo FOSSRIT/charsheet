@@ -4,6 +4,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href='${request.static_url(
+			'charsheet:static/css/reset.css')}'
+			rel='stylesheet' type='text/css' media='all'>
+		<link href='${request.static_url(
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/app.css')}'			rel='stylesheet' type='text/css'>
@@ -18,8 +21,9 @@
     	<title>Charsheet</title>
 	</head>
     <body>
-		<h1><img class='logo' alt='Charsheet logo'
+		<h1><a href="."><img class='logo' alt='Charsheet logo'
 			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
+			</a>
 		Charsheet</h1>
 		<div id="loading">
 			<img
@@ -27,21 +31,32 @@
 		</div>
 		<div class="container_12">
 			<div class="clear"></div>
+		
+			<div class="grid_12 navbar">
+				<a class="button" href="../stats">Global Stats</a>
+			</div>
+			
+			<div class="clear"></div>
 			
 			<div class="grid_6">
-				<p><strong>Status:</strong> Charsheet is currently experiencing
-					issues communicating with GitHub. Please bear with me as I
-					fix the app following the recent GitHub API changes. -- odd</p>
+				<p>Charsheet is an <a href="https://github.com/FOSSRIT/charsheet">
+					open-source</a> web app that generates hacker character sheets
+					based on data from sites like <a href="https://github.com/">
+					GitHub</a>, <a href="http://www.ohloh.net">Ohloh</a>, and
+					<a href="http://coderwall.com/">Coderwall</a>.
+				</p>
 				<p>Generate your developer character sheet by completing
-					fields in the form to the right.
+					fields in the form to the right. Skip services you do not
+					have an account with.
 				</p>
-				<p>Skip services you do not have an account for.
-				</p>
-				<p>Report bugs and submit feature requests
+				<p>Please report bugs and submit feature requests
 					<a href="https://github.com/FOSSRIT/charsheet/issues">
 					here</a>.
 				</p>
-				<a class="button" href="../stats">Global Stats</a>
+				<h2>Status</h2>
+				<p>Charsheet is currently experiencing
+					issues communicating with GitHub. Please bear with me as I
+					fix the app following the recent GitHub API changes. -- odd</p>
 				<!-- SLIDESHOW COMMENTED OUT UNTIL I FINISH REDESIGN
 				<div class="slideshow">
 					<img
