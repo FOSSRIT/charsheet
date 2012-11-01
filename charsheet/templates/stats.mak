@@ -31,7 +31,13 @@
 			<h2>Global Stats</h2>
 			</div>
 			<div class="clear"></div>
-			
+			<!-- Begin stats area -->
+			% if not stats:
+			<div class="grid_12">
+			<h3>Stats are currently unavailable.</h3>
+			<p>It pains me to say it; it really does.</p>
+			</div>
+			% else:
 			<div class="grid_6">
 				<h3>General Info</h3>
 				<table>
@@ -52,6 +58,7 @@
 				% endfor
 				</table>
 			</div>
+			% endif <!-- End stats area -->
 			<div class="clear"></div>
 			<div class="grid_12">
 				<div class="footer">
