@@ -41,6 +41,7 @@
 					<a href="https://github.com/FOSSRIT/charsheet/issues">
 					here</a>.
 				</p>
+				<a class="button" href="../stats">Global Stats</a>
 				<!-- SLIDESHOW COMMENTED OUT UNTIL I FINISH REDESIGN
 				<div class="slideshow">
 					<img
