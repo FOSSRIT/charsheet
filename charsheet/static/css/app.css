@@ -3,17 +3,11 @@
  */
 
 @font-face {
-    font-family: "Press Start 2P";
+    font-family: "Jura Light";
     font-style: normal;
     font-weight: 400;
-    src: local('Press Start 2P'), local('PressStart2P-Regular'), url("../fonts/PressStart2P.woff") format('woff');
-}
-
-@font-face {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 400;
-    src: local('Open Sans'), local('OpenSans-Regular'), url("../fonts/OpenSans-Regular.woff") format('woff');
+    src: local('Jura Light'), local('JuraLight'), url("../fonts/JuraLight.woff")
+            format('woff');
 }
 
 /* Reset */
@@ -24,7 +18,7 @@ html {
 
 
 body {
-    font-family: 'Open Sans';
+    font-family: 'Jura Light';
 }
 
 h1 {
@@ -32,7 +26,7 @@ h1 {
 }
 
 h1, h2, h3 {
-    font-family: 'Press Start 2P';
+    font-family: 'Jura Light';
 }
 
 p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul,
@@ -90,6 +84,7 @@ progress::-moz-progress-bar {
 
 
 .footer {
+    padding: 4px;
     font-size: 0.6em;
     font-color: #CCC;
     text-align: center;
@@ -115,7 +110,7 @@ progress::-moz-progress-bar {
     padding: 10px 20px;
     text-align: center;
     text-shadow: 0 1px 0 #fff;
-    font: bold 12px/1 "helvetica neue", helvetica, "Open Sans", sans;
+    font-family: "Jura Light", "helvetica neue", helvetica, sans;
 }
 
 .button:hover, input#submit:hover {
@@ -140,13 +135,13 @@ input#submit {
 }
 
 .alert {
-    font-size: 12px;
-    width: 500px;
+    font-size: 10px;
+    width: 300px;
     text-align: center;
-    padding: 10px 20px 10px 20px;
+    padding: 5px;
     position: fixed;
-    top: 10%;
-    right: 10%;
+    top: 2%;
+    right: 2%;
     border: 1px solid #000;
     -moz-box-shadow: 10px 10px 5px #888;
     -webkit-box-shadow: 10px 10px 5px #888;
