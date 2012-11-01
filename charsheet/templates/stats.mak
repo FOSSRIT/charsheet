@@ -22,8 +22,24 @@
 			<div class="clear"></div>
 			
 			<div class="grid_6">
+				<h3>General Info</h3>
+				<table>
+				<tr>
+					<td>Average Foo</td>
+					<td>${stats['average_foo']}</td>
+				</tr>
+				</table>
 			</div>
 			<div class="grid_6">
+				<h3>Top Foo</h3>
+				<table>
+				% for user in stats['top_foo']:
+				<tr>
+					<td>${user[0]}</td>
+					<td>${user[1]}</td>
+				</tr>
+				% endfor
+				</table>
 			</div>
 			<div class="clear"></div>
 			<div class="grid_12">

@@ -10,9 +10,13 @@ from pyramid.security import (
     forget,
 )
 
+from kitchen.text.converters import to_unicode
+from sqlalchemy import create_engine
+from knowledge.model import Fact, Entity, DBSession, init_model, metadata
 
 import datetime
 import forms
+import operator
 
 
 @view_config(route_name='home', renderer='home.mak')
@@ -24,7 +28,59 @@ def home_view(request):
 
 @view_config(route_name='stats', renderer='stats.mak')
 def global_stats(request):
+    engine = create_engine('sqlite:///knowledge.db')
+    init_model(engine)
+    metadata.create_all(engine)
+
+    data = {
+        'users': dict(),
+    }
+
+    knowledge = DBSession
+    knowledge_query = knowledge.query(Entity).all()
+    for entity in knowledge_query:
+        data['users'][entity.name] = dict()
+        for fact in entity.facts.values():
+            data['users'][entity.name][fact.key] = fact.value
+
+    def average_value(stat):
+        """
+        Determine the average value of a stat among all users
+        in the db.
+        """
+        # TODO: Check if passed stat is average-able
+        values = int()
+        values_sum = float()
+        for username in data['users']:
+            values_sum += float(data['users'][username][stat])
+            values += 1
+        # Return average value rounded to two decimal places
+        return round(values_sum / float(values), 2)
+
+    def top_users(stat):
+        """
+        Returns top 10 users in a stat, sorted in desc order.
+        """
+        # TODO: Check if stat can be ranked
+        # TODO: Hopefully use knowledge to pull sorted list soon
+        scoreboard = dict()
+
+        for username in data['users']:
+            scoreboard[username] = round(data['users'][username][stat], 2)
+
+        # sort users by stat value
+        scoreboard_sorted = sorted(scoreboard.iteritems(),
+            key=operator.itemgetter(1), reverse=True)
+
+        return scoreboard_sorted[:10]
+
+    stats = {
+        'average_foo': average_value('foo'),
+        'top_foo': top_users('foo'),
+    }
+
     return {
+        'stats': stats,
     }
 
 
@@ -139,9 +195,6 @@ def charsheet_view(request):
     percent_complete = float(linked_services) / float(total_services)
 
     ### Knowledgedb integration ###
-    from kitchen.text.converters import to_unicode
-    from sqlalchemy import create_engine
-    from knowledge.model import Fact, Entity, DBSession, init_model, metadata
 
     engine = create_engine('sqlite:///knowledge.db')
     init_model(engine)
@@ -149,8 +202,8 @@ def charsheet_view(request):
 
     def inject_knowledge():
         knowledge = DBSession
-        #for each stats dict, add a fact to an Entity that is named the URL of
-        #the page visited
+        # for each stats dict, add a fact to an Entity that is
+        # named the username
         character = Entity(u'%s' % username)
         character[u'name'] = (u'%s' % username)
         for key, value in stats_dict.items():
