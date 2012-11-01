@@ -14,9 +14,13 @@
     	<title>Charsheet Global Stats</title>
 	</head>
     <body>
-		<h1><img class='logo' alt='Charsheet logo'
+		
+		<!-- Header logo -->
+		<a href=".."><h1 class='logo-text'><img class='logo' alt='Charsheet logo'
 			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
-		Charsheet</h1>
+		Charsheet</h1></a>
+		<!-- End header logo -->
+	
 		<div class="container_12">
 			<div class="clear"></div>
 			<div class="grid_12">

@@ -41,10 +41,13 @@
 				<% display_sheet = True %>
 			% endif
 		% endfor
-		<h1><a href=".."><img class='logo' alt='Charsheet logo'
+	
+		<!-- Header logo -->
+		<a href=".."><h1 class="logo-text"><img class='logo' alt='Charsheet logo'
 			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
-			
-		Charsheet</a></h1>
+		Charsheet</h1></a>
+		<!-- End header logo -->
+		
 		<div class="container_12">
 			<div class="grid_6">
 			<h2>Your Charsheet</h2>
