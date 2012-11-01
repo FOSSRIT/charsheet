@@ -22,6 +22,12 @@ def home_view(request):
     }
 
 
+@view_config(route_name='stats', renderer='stats.mak')
+def global_stats(request):
+    return {
+    }
+
+
 @view_config(route_name='login', renderer='login.mak')
 def login(request):
     login_url = request.resource_url(request.context, 'login')
@@ -166,12 +172,15 @@ def charsheet_view(request):
 
     inject_knowledge()
     the_facts()
-    #Issue pyramid badges using tahrir_db_api (with fact entity as a backend???)
-    #If user visits /charsheet/username, check the knowledge.db for
-    #'current_stats' fact. If the user has 'current_stats' in the knowledge.db, save their
-    #old stats as 'old_stats" or create a new fact called u'current_stats'
-    #that has an updated version #git commit the version???
-
+    """
+    Issue pyramid badges using tahrir_db_api
+    (with fact entity as a backend???)
+    If user visits /charsheet/username, check the knowledge.db for
+    'current_stats' fact. If the user has 'current_stats' in the knowledge.db,
+    save their
+    old stats as 'old_stats" or create a new fact called u'current_stats'
+    that has an updated version #git commit the version???
+    """
 
     request.session.flash("Character sheet generated.")
     return {

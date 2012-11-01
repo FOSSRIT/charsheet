@@ -102,6 +102,7 @@ progress::-moz-progress-bar {
 #charsheetform\:master\:container { color: red; }
 
 .button, input#submit {
+    padding: 4px;
     color: #0066FF;
     background: #e3e3e3;
     border: 1px solid #bbb;
