@@ -4,6 +4,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<link href='${request.static_url(
+			'charsheet:static/css/reset.css')}'
+			rel='stylesheet' type='text/css' media='all'>
+		<link href='${request.static_url(
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
 		<link href='${request.static_url('charsheet:static/css/app.css')}'			rel='stylesheet' type='text/css'>
@@ -15,6 +18,10 @@
 			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
 		Charsheet</h1>
 		<div class="container_12">
+			<div class="clear"></div>
+			<div class="grid_12">
+				<a class="button" href="..">Back</a>
+			</div>
 			<div class="clear"></div>
 			<div class="grid_12">
 			<h2>Global Stats</h2>

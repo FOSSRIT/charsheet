@@ -12,10 +12,8 @@
 
 /* Reset */
 html {
-    margin: 10px;
-    padding: 0px;
+    margin: 20px;
 }
-
 
 body {
     font-family: 'Jura Light';
@@ -100,6 +98,10 @@ progress::-moz-progress-bar {
 ::-moz-focus-inner {border:0;}
 
 #charsheetform\:master\:container { color: red; }
+
+.navbar {
+    margin: 15px 0;
+}
 
 .button, input#submit {
     padding: 4px;
