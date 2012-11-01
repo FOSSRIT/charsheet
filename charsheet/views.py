@@ -47,7 +47,15 @@ def global_stats(request):
                 data['users'][entity.name][fact.key] = fact.value
 
         stats = {
-            'average_foo': average_value(data, 'foo'),
+            'avg_foo': average_value(data, 'foo'),
+            'avg_dexterity': average_value(data, 'dexterity'),
+            'avg_strength': average_value(data, 'strength'),
+            'avg_wisdom': average_value(data, 'wisdom'),
+            'avg_leadership': average_value(data, 'leadership'),
+            'avg_determination': average_value(data, 'determination'),
+            'avg_popularity': average_value(data, 'popularity'),
+            'avg_num_languages': average_value(data, 'num_languages'),
+            'avg_badges': average_value(data, 'badges'),
             'top_foo': top_users(data, 'foo'),
         }
 

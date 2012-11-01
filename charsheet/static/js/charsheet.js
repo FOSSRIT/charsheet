@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     // Hide flashed messages after a moment
     setTimeout(function() {
-        $('.alert').fadeOut(2000);
+        $('.alert').fadeOut(4000);
     }, 2000);
 
     // Handle "more" and "less" buttons
