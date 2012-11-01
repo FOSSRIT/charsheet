@@ -17,6 +17,7 @@ html {
 
 body {
     font-family: 'Jura Light';
+    color: #1a1a1a;
 }
 
 h1 {
@@ -67,6 +68,10 @@ td {
 .logo {
     vertical-align: middle;
     margin-top: -10px;
+}
+
+.logo-text {
+    color: #1a1a1a; /* Body font color */
 }
 
 progress {

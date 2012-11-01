@@ -21,10 +21,13 @@
     	<title>Charsheet</title>
 	</head>
     <body>
-		<h1><a href="."><img class='logo' alt='Charsheet logo'
+		
+		<!-- Header logo -->
+		<a href=".."><h1 class="logo-text"><img class='logo' alt='Charsheet logo'
 			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
-			</a>
-		Charsheet</h1>
+		Charsheet</h1></a>
+		<!-- End header logo -->
+	
 		<div id="loading">
 			<img
 			src="${request.static_url('charsheet:static/gif/gnu-cat.gif')}" />
@@ -54,9 +57,9 @@
 					here</a>.
 				</p>
 				<h2>Status</h2>
-				<p>Charsheet is currently experiencing
-					issues communicating with GitHub. Please bear with me as I
-					fix the app following the recent GitHub API changes. -- odd</p>
+				<p>Charsheet is currently able to process only 60 GitHub
+					requests an hour. Please bear with me as I add OAuth
+					following the recent GitHub API changes.-- odd</p>
 				<!-- SLIDESHOW COMMENTED OUT UNTIL I FINISH REDESIGN
 				<div class="slideshow">
 					<img
