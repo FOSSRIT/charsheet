@@ -59,7 +59,7 @@
 				<h2>Status</h2>
 				<p>Charsheet is currently able to process only 60 GitHub
 					requests an hour. Please bear with me as I add OAuth
-					following the recent GitHub API changes.-- odd</p>
+					following the recent GitHub API changes. -- odd</p>
 				<!-- SLIDESHOW COMMENTED OUT UNTIL I FINISH REDESIGN
 				<div class="slideshow">
 					<img
