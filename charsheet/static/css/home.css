@@ -1,0 +1,27 @@
+.slideshow {
+    height: 250px;
+    width: 400px;
+    padding: 0;
+    margin: 0px auto;
+}
+
+.slideshow img {
+    border: 1px outset #000;
+    width: 360px;
+    height: 210px;
+    top: 0;
+    left: 0;
+}
+
+#charsheet_form {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#charsheet_form > h1 {
+    font-size: 20px;
+    padding: 4px;
+}
+
+#charsheetform\:master\:container { color: red; }

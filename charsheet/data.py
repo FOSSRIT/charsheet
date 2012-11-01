@@ -130,32 +130,68 @@ def handle_github(request, username):
         recent_events = events_json[:25]
 
         # Blog/URL handling
-        if user.blog:
+        try:
             if user.blog.startswith('http://'):
                 gh_blog_url = user.blog[7:]
             elif user.blog.startswith('https://'):
                 gh_blog_url = user.blog[8:]
             else:
                 gh_blog_url = user.blog
-        else:
-            gh_blog_url = None
+        except AttributeError:
+            gh_blog_url = "?"
+
+        # Bio handling
+        try:
+            gh_bio = user.bio
+        except AttributeError:
+            gh_bio = "?"
+
+        # Company handling
+        try:
+            gh_company = user.company
+        except AttributeError:
+            gh_company = "?"
+
+        # Email handling
+        try:
+            gh_email = user.email
+        except AttributeError:
+            gh_email = "?"
+
+        # Hirable handling
+        try:
+            gh_hireable = user.hireable
+        except AttributeError:
+            gh_hireable = "?"
+
+        # Location handling
+        try:
+            gh_location = user.location
+        except AttributeError:
+            gh_location = "?"
+
+        # Name handling
+        try:
+            gh_name = user.name
+        except AttributeError:
+            gh_name = "?"
 
         return {
             'age_months': gh_age_months,
-            'bio': user.bio,
+            'bio': gh_bio,
             'blog': gh_blog_url,
-            'company': user.company,
-            'email': user.email,
+            'company': gh_company,
+            'email': gh_email,
             'followers': user.followers,
             'forks': gh_forks,
-            'hireable': user.hireable,
+            'hireable': gh_hireable,
             'recent_events': recent_events,
             'languages': sorted_languages,
             'languages_count': sorted_language_count,
             'languages_lines': user_languages,
             'num_languages': len(user_languages),
-            'location': user.location,
-            'name': user.name,
+            'location': gh_location,
+            'name': gh_name,
             'public_repos': user.public_repos,
             'repos': gh.repos.list(username).all(),
             }

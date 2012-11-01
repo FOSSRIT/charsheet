@@ -75,13 +75,8 @@ def charsheet_view(request):
             'coderwall': request.params['charsheetform:coderwall'],
         }
 
-        master_field = request.params['charsheetform:master']
-        if master_field:
-            usernames['github'] = master_field
-            usernames['ohloh'] = master_field
-            usernames['coderwall'] = master_field
-
-        username = 'Sugar Magnolia'
+        username = '???'  # Set default username
+        # Cycle through usernames available, use first one that exists
         for name in usernames:
             if usernames[name]:
                 username = usernames[name]
@@ -113,7 +108,8 @@ def charsheet_view(request):
 
     ### Gravatar ###
     if github_dict:
-        gravatar_url = data.get_gravatar_url(github_dict['email'])
+        if github_dict['email']:
+            gravatar_url = data.get_gravatar_url(github_dict['email'])
     else:
         gravatar_url = None
 

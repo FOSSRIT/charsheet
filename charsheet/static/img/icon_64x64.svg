@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="icon_64x64.svg"
+   inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs2987">
+    <linearGradient
+       id="linearGradient5406">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop5408" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop5410" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3802">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0.75;"
+         offset="0"
+         id="stop3804" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop3806" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3802"
+       id="linearGradient3952"
+       x1="17.089157"
+       y1="43.6875"
+       x2="46.839157"
+       y2="43.6875"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-75.651657,-11.723347)" />
+    <filter
+       id="filter3034"
+       inkscape:label="Glow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Glow of object's own color at the edges"
+       color-interpolation-filters="sRGB"
+       height="2.3199999999999936"
+       y="-0.64000000000000035"
+       width="1.4000000000000001"
+       x="-0.23000000000000009">
+      <feGaussianBlur
+         id="feGaussianBlur3036"
+         stdDeviation="1.6000000000000001"
+         result="result91" />
+      <feComposite
+         id="feComposite3038"
+         operator="over"
+         in="SourceGraphic"
+         in2="result91" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="25.645433"
+     inkscape:cy="34.663003"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1278"
+     inkscape:window-height="1003"
+     inkscape:window-x="0"
+     inkscape:window-y="19"
+     inkscape:window-maximized="0"
+     inkscape:snap-global="true"
+     inkscape:snap-bbox="false"
+     inkscape:snap-grids="true"
+     inkscape:snap-to-guides="true" />
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:#0066ff;fill-opacity:1;stroke:none;filter:url(#filter3034)"
+       id="rect3816"
+       width="26.383921"
+       height="5.5173874"
+       x="14.628272"
+       y="20.210459"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:3.38983893"
+       id="rect3012"
+       width="47.148933"
+       height="60.610161"
+       x="8.3896894"
+       y="-62.30508"
+       rx="11.050532"
+       ry="14.205506"
+       transform="scale(1,-1)"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-46.07843"
+       y="42.431374"
+       id="text3014"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3016"
+         x="-46.07843"
+         y="42.431374" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="-87.254906"
+       y="11.058824"
+       id="text3018"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3020"
+         x="-87.254906"
+         y="11.058824" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:10.6987524px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="22.294533"
+       y="15.215538"
+       id="text3022"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3024"
+         x="22.294533"
+         y="15.215538">Foo</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.03448272;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect3030"
+       width="35.689655"
+       height="6.465517"
+       x="14.119328"
+       y="-26.232759"
+       transform="scale(1,-1)"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:6px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="16.685837"
+       y="34.675884"
+       id="text3818"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="34.675884"
+         id="tspan3830">01000110</tspan><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="42.175884"
+         id="tspan3832">01001111</tspan><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="49.675884"
+         id="tspan3834">01010011</tspan><tspan
+         sodipodi:role="line"
+         x="16.685837"
+         y="57.175884"
+         id="tspan3846">01010011</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="104.6518"
+       y="53.305012"
+       id="text3822"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3824"
+         x="104.6518"
+         y="53.305012" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Monospaced;-inkscape-font-specification:Monospaced"
+       x="134.75"
+       y="55.25"
+       id="text3826"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3828" /></text>
+    <rect
+       style="fill:url(#linearGradient3952);fill-opacity:1;stroke:none"
+       id="rect3944"
+       width="29.75"
+       height="31.625"
+       x="-58.5625"
+       y="16.151657"
+       transform="matrix(0,-1,1,0,0,0)"
+       inkscape:export-filename="/home/david/Devel/charsheet-openshift/wsgi/charsheet/charsheet/static/img/icon_64x64.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+  </g>
+</svg>

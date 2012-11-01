@@ -1,92 +1,11 @@
-@font-face {
-    font-family: "Press Start 2P";
-    font-style: normal;
-    font-weight: 400;
-    src: local('Press Start 2P'), local('PressStart2P-Regular'), url("../fonts/PressStart2P.woff") format('woff');
-}
-
-/* Reset */
-html {
-    margin: 0px;
-    padding: 0px;
-}
-
-body {
-	font-family: 'Press Start 2P', Georgia, sans;
-}
-
-p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul,
-pre, table, address, fieldset, figure {
-    margin-bottom: 20px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    text-align: center;
-    padding: 4px;
-}
-
-h1 {
-    color: #FFF;
-    background: #000;
-    margin-top: 0;
-}
-
-a, a:visited {
-    text-decoration: none;
-    color: blue;
-}
-
 table {
-    width: 100%;
-}
-
-p, table {
-    line-height: 200%;
-    font-size: 10px;
-}
-
-td {
-    padding: 4px;
-    vertical-align: middle;
-}
-
-.one-line tr {
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-tr {
-    border-bottom: 1px solid #CCC;
-}
-
-progress {
-    width: 100%;
-    border: 1px outset #000;
-}
-
-progress::-webkit-progress-bar-value,
-progress::-webkit-progress-value,
-progress::-moz-progress-bar {
-    width: 100%
-    border: 1px outset #000;
+    font-size: 0.8em;
 }
 
 .activity-controls {
+    padding: 20px 0;
     margin-bottom: 10px;
     margin-top: -13px;
-}
-
-.activity-controls > a {
-    color: #000;
-    font-size: 0.8em;
-    background: #FFF;
-    padding: 4px;
-    border: 2px outset #000;
-}
-
-.activity-controls > a:hover {
-    background: #000;
-    color: #FFF;
 }
 
 .badge-list td {
@@ -114,60 +33,52 @@ progress::-moz-progress-bar {
     box-shadow: 0 10px 5px 0px #CCC;
 }
 
-.footer {
-    font-size: 0.4em;
-    font-color: #CCC;
-    text-align: center;
+.sheet_parent {
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2),
+        inset 0 0 50px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2),
+        inset 0 0 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2),
+        inset 0 0 50px rgba(0, 0, 0, 0.1);
+    width: 1080px;
+    background-color: white;
 }
 
 .sheet {
+    position: relative;
     width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px double #000;
-    -moz-box-shadow: 5px 5px 5px #888;
-    -webkit-box-shadow: 5px 5px 5px #888;
-    box-shadow: 5px 5px 5px #888;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    padding-bottom: 20px;
+    margin: 0 auto;
+    padding: 40px;
 }
 
-.slideshow {
-    height: 250px;
-    width: 400px;
-    padding: 0;
-    margin: 0px auto;
+.sheet:before, .sheet:after {
+    position: absolute;
+    width: 40%;
+    height: 10px;
+    content: ' ';
+    left: 12px;
+    bottom: 18px;
+    background: transparent;
+    -webkit-transform: skew(-5deg) rotate(-5deg);
+    -moz-transform: skew(-5deg) rotate(-5deg);
+    -ms-transform: skew(-5deg) rotate(-5deg);
+    -o-transform: skew(-5deg) rotate(-5deg);
+    transform: skew(-5deg) rotate(-5deg);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    z-index: -1;
 }
 
-.slideshow img {
-    border: 1px outset #000;
-    width: 360px;
-    height: 210px;
-    top: 0;
-    left: 0;
+.sheet:after {
+    left: auto;
+    right: 12px;
+    transform: skew(5deg) rotate(5deg);
 }
 
 #foo {
+    font-weight: bold;
     font-size: 1.6em;
-}
-
-#charsheet_form {
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 2px outset #000;
-}
-
-#charsheet_form > h1 {
-    font-size: 20px;
-    padding: 4px;
-}
-
-#charsheetform\:master\:container { color: red; }
-
-ul#recent-activity {
-    font-size: 10px;
 }
 
 li.event {
@@ -228,66 +139,8 @@ li.other-event {
 
 li.other-event a, li.other-event a:visited { color: #868686; }
 
-input#submit {
-    float: right;
-    margin-top: 20px;
-    background: #FFF;
-    color: #000;
-    border: 2px outset #000;
-}
-
-input#submit:hover {
-    background: #000;
-    color: #FFF;
-}
-
-.alert {
-    font-size: 12px;
-    width: 500px;
-    text-align: center;
-    padding: 10px 20px 10px 20px;
-    position: fixed;
-    top: 10%;
-    right: 10%;
-    border: 1px solid #000;
-    -moz-box-shadow: 10px 10px 5px #888;
-    -webkit-box-shadow: 10px 10px 5px #888;
-    box-shadow: 10px 10px 5px #888;
-    background: #FFF;
-    background-color: rgba(255, 255, 255, 0.85);
-}
-
-.alert-heading {
-    font-size: 20px;
-}
-
-.alert-error {
-    color: red;
-}
-
-.alert-success {
-    color: green;
-}
-
-#loading {
-    position: fixed;
-    z-index: 100;
-    left: 50%;
-    top: 50%;
-    margin: -50px 0 0 -100px;
-}
-
 #user-bio {
     list-style-type: none;
-}
-
-.avatar {
-    border: 2px solid #000;
-    float: left;
-}
-
-.widget {
-    text-align: center;
 }
 
 .badge-list {

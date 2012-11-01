@@ -9,6 +9,7 @@
 		<link href='${request.static_url(
 			'charsheet:static/css/960_12_col.css')}'
 			rel='stylesheet' type='text/css' media="all">
+		<link href='${request.static_url('charsheet:static/css/app.css')}'			rel='stylesheet' type='text/css'>
 		<link href='${request.static_url('charsheet:static/css/charsheet.css')}'			rel='stylesheet' type='text/css'>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src='${request.static_url('charsheet:static/js/charsheet.js')}'></script>
@@ -40,7 +41,9 @@
 				<% display_sheet = True %>
 			% endif
 		% endfor
-		<h1>Charsheet</h1>
+		<h1><img class='logo' alt='Charsheet logo'
+			src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
+		Charsheet</h1>
 		<div class="container_12">
 			<div class="grid_6">
 			<h2>Your Charsheet</h2>
@@ -51,15 +54,15 @@
 			<div class="grid_6">
 			<h2>Information</h2>
 			<p>Charsheet generated at ${timestamp}.</p>
-			<p><a href="..">Generate another.</a></p>
+			<p><a class='button' href="..">New Sheet</a></p>
 			</div>
 		</div>
 		% if display_sheet == True:
+		<div class="container_12 sheet_parent">
 		<div class="sheet">
 		<h1>Character Record Sheet</h1>
-		<div class="container_12">
 			<div class="clear"></div>
-			
+
 			<!-- GENERAL INFORMATION -->
 
 			<div class="grid_4">
@@ -68,6 +71,8 @@
 				<td>
 				% if github_data:
 					<img class="avatar" src="${avatar_url}" />
+				% else:
+					Username:
 				% endif
 				</td>
 					<td>${username}</td>
@@ -163,7 +168,7 @@
 							Unknown
 						% endif
 						</td></tr>
-					<tr><td>GitTip</td><td>
+					<tr><td>GitTip:</td><td>
 						% if github_data:
 							<iframe style="vertical-align: middle;
 									border: 0; margin: 0; padding: 0;"
@@ -188,7 +193,7 @@
 					<tr class="tooltip"
 						title="<strong>Strength</strong><br />
 						(${stats['lines']} lines / 1000000)
-							+ (2 * ${stats['badges']} badges)<br />
+							<br />+ (2 * ${stats['badges']} badge(s))<br />
 						<strong>${int((stats['strength'] % 1) * 100)}%</strong>
 						to next level">
 						<td>Strength:</td>
@@ -197,7 +202,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Dexterity</strong><br />
-						5 * ${stats['num_languages']} languages
+						5 * ${stats['num_languages']} language(s)
 						<br />
 					<strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
 					to next level">
@@ -211,7 +216,7 @@
 				<table>
 					<tr class="tooltip"
 						title="<strong>Wisdom</strong><br />
-						${round(stats['age_months'], 2)} months
+						${round(stats['age_months'], 2)} month(s)
 						<br />
 					<strong>${int((stats['wisdom'] % 1) * 100)}%</strong>
 					to next level">
@@ -221,7 +226,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Leadership</strong><br />
-						${stats['forks']} forks<br />
+						${stats['forks']} fork(s)<br />
 					<strong>${int((stats['leadership'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Leadership:</td>
@@ -234,7 +239,7 @@
 				<table>
 					<tr class="tooltip"
 						title="<strong>Determination</strong><br />
-						${stats['public_repos']} public repos<br />
+						${stats['public_repos']} public repo(s)<br />
 					<strong>${int((stats['determination'] % 1) * 100)}%</strong>
 					to next level">
 						<td>Determination:</td>
@@ -243,7 +248,7 @@
 						</progress></td></tr>
 					<tr class="tooltip"
 						title="<strong>Popularity</strong><br />
-						${stats['followers']} followers <br />
+						${stats['followers']} follower(s)<br />
 					<strong>${int((stats['popularity'] % 1) * 100)}%</strong>
 					to next level"><td>Popularity:</td>
 						<td>${int(stats['popularity'])}<progress max="1"
@@ -662,7 +667,25 @@ src="http://api.coderwall.com/${usernames['coderwall']}/endorsecount.png" />
 					<p>Add your GitHub username to see your recent activity.</p>
 				% endif
 			</div>
-	 	</div>
+		</div>
+		</div>
+		<div class="container_12">
+			<div class="grid_12">
+				<div class="footer">
+				<a rel="license"
+					href="http://creativecommons.org/licenses/by/3.0/">
+						<img alt="Creative Commons License"
+						style="border-width:0"
+					src="${request.static_url('charsheet:static/img/cc30.png')}" />
+				</a>
+				<br />This work is licensed under a
+				<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">
+				Creative Commons Attribution 3.0 Unported License</a>.
+				Code freely available
+				<a href="https://github.com/FOSSRIT/charsheet">on GitHub</a>.
+				</div>
+			</div>
+		</div>
 		</div>
 		% endif
 	</body>
