@@ -14,6 +14,8 @@ from kitchen.text.converters import to_unicode
 from sqlalchemy import create_engine
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata
 
+from velruse import login_url
+
 import datetime
 import forms
 
@@ -24,6 +26,7 @@ from facts import average_value, top_users
 def home_view(request):
     return {
         'charsheet_form': forms.CharsheetForm,
+        'github_login_url': login_url(request, 'github'),
     }
 
 

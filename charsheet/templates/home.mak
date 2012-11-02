@@ -82,6 +82,9 @@
 			<div class="grid_6">
 					<div id='charsheet_form'>
 					${charsheet_form.display() | n}
+					<form action="${github_login_url}" method="post">
+						<input type="submit" value="Login with GitHub" />
+					</form>
 					</div>
 			</div>
 			<div class="clear"></div>
