@@ -56,5 +56,8 @@ def main(global_config, **settings):
     config.add_route('logout', '/logout')
     config.add_route('verify_openid', pattern="/dologin.html",
             view='pyramid_openid.verify_openid')
+    # TODO: make this service-agnostic
+    config.add_route('service_login_complete', 'login/github/callback')
+    config.add_route('service_login_denied', 
     config.scan()
     return config.make_wsgi_app()

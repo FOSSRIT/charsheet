@@ -30,6 +30,28 @@ def home_view(request):
     }
 
 
+@view_config(route_name='service_login_complete',
+                context='velruse.AuthenticationComplete')
+def service_login_complete(request):
+    context = request.context
+    return {
+        'result': {
+            'provider_type': context.provider_type,
+            'provider_name': context.provider_name,
+            'profile': context.profile,
+            'credentials': context.credentials,
+        }
+    }
+
+
+@view_config(route_name='service_login_denied',
+                context='velruse.AuthenticationDenied')
+def service_login_denied(request):
+    return {
+        'result': 'denied',
+    }
+
+
 @view_config(route_name='stats', renderer='stats.mak')
 def global_stats(request):
 
