@@ -30,9 +30,7 @@ def home_view(request):
     }
 
 
-@view_config(route_name='service_login_complete',
-                context='velruse.AuthenticationComplete',
-                renderer='service_login_result.mak')
+@view_config(context='velruse.AuthenticationComplete')
 def service_login_complete(request):
     context = request.context
     from pprint import pprint
@@ -50,9 +48,7 @@ def service_login_complete(request):
     }
 
 
-@view_config(route_name='service_login_denied',
-                context='velruse.AuthenticationDenied',
-                renderer='service_login_result.mak')
+@view_config(context='velruse.AuthenticationDenied', renderer='json')
 def service_login_denied(request):
     return {
         'result': 'denied',
