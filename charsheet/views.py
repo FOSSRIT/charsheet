@@ -38,6 +38,12 @@ def service_login_complete(request):
     pprint(context.profile)
     print "creds --"
     pprint(context.credentials)
+
+    response = HTTPFound(location="/")
+
+    return response
+
+    """
     return {
         'result': {
             'provider_type': context.provider_type,
@@ -46,6 +52,7 @@ def service_login_complete(request):
             'credentials': context.credentials,
         }
     }
+    """
 
 
 @view_config(context='velruse.AuthenticationDenied', renderer='json')
