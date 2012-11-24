@@ -49,8 +49,10 @@ def service_login_complete(request):
     response = HTTPFound(location="/")
 
     oauth_token = context.credentials['oauthAccessToken']
-    response.headerlist.append(('github_username', username))
-    response.headerlist.append(('github_token', oauth_token))
+    response.headerlist.append(('github_username', username.encode('ascii',
+                                                                    'ignore')))
+    response.headerlist.append(('github_token', oauth_token.encode('ascii',
+                                                                    'ignore')))
 
     return response
 
