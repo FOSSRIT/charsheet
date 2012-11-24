@@ -11,5 +11,6 @@ class CharsheetForm(tw2.forms.FormPage):
         id = tw2.forms.HiddenField()
         master = tw2.forms.TextField('master', label='All')
         github = tw2.forms.TextField('github', label='GitHub')
+        github_token = tw2.forms.HiddenField('github_token')
         ohloh = tw2.forms.TextField('ohloh', label='Ohloh')
         coderwall = tw2.forms.TextField('coderwall', label='Coderwall')

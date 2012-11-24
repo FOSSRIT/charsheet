@@ -21,38 +21,38 @@ import forms
 
 from facts import average_value, top_users
 
+from pprint import pprint
+
 
 @view_config(route_name='home', renderer='home.mak')
 def home_view(request):
+
+    pprint(request.headers)
+
     return {
         'charsheet_form': forms.CharsheetForm,
         'github_login_url': login_url(request, 'github'),
     }
 
 
-@view_config(context='velruse.AuthenticationComplete')
+@view_config(context='velruse.AuthenticationComplete', renderer='home.mak')
 def service_login_complete(request):
     context = request.context
-    from pprint import pprint
     print "profile --"
     pprint(context.profile)
     print "creds --"
     pprint(context.credentials)
 
+    username = context.profile['accounts'][0]['username']
+    print "username -- " + username
+
     response = HTTPFound(location="/")
 
-    return response
+    oauth_token = context.credentials['oauthAccessToken']
+    response.headerlist.append(('github_username', username))
+    response.headerlist.append(('github_token', oauth_token))
 
-    """
-    return {
-        'result': {
-            'provider_type': context.provider_type,
-            'provider_name': context.provider_name,
-            'profile': context.profile,
-            'credentials': context.credentials,
-        }
-    }
-    """
+    return response
 
 
 @view_config(context='velruse.AuthenticationDenied', renderer='json')

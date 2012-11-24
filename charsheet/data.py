@@ -56,7 +56,7 @@ def handle_coderwall(request, username):
         return None
 
 
-def handle_github(request, username):
+def handle_github(request, username, token):
     """
     Get data from GitHub.
     """
@@ -64,7 +64,7 @@ def handle_github(request, username):
     gh = Github()
     github_api = "https://api.github.com"
     try:
-        user = gh.users.get(username)
+        user = gh.users.get(username, token)
 
         # Handle organizations, because everything breaks if one is
         # passed in, including but not limited to user.bio and
