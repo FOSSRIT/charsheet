@@ -27,7 +27,13 @@ from pprint import pprint
 @view_config(route_name='home', renderer='home.mak')
 def home_view(request):
 
-    pprint(request.headers)
+    """
+    if 'github_username' in request.headers:
+        pprint(request.headers['github_username'])
+    """
+    
+    for k in request.headers.iteritems():
+        print "header - " + str(k)
 
     return {
         'charsheet_form': forms.CharsheetForm,
@@ -35,7 +41,7 @@ def home_view(request):
     }
 
 
-@view_config(context='velruse.AuthenticationComplete', renderer='home.mak')
+@view_config(context='velruse.AuthenticationComplete')
 def service_login_complete(request):
     context = request.context
     print "profile --"
@@ -49,6 +55,8 @@ def service_login_complete(request):
     response = HTTPFound(location="/")
 
     oauth_token = context.credentials['oauthAccessToken']
+
+    # convert to ascii because waitress is sensitve about unicode
     response.headerlist.append(('github_username', username.encode('ascii',
                                                                     'ignore')))
     response.headerlist.append(('github_token', oauth_token.encode('ascii',
