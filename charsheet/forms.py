@@ -7,7 +7,7 @@ class CharsheetForm(tw2.forms.FormPage):
 
     class child(tw2.forms.TableForm):
         buttons = [tw2.forms.SubmitButton(id='submit', value='Generate')]
-        action = '/charsheet'
+        action = '/submit'
         id = tw2.forms.HiddenField()
         master = tw2.forms.TextField('master', label='All')
         github = tw2.forms.TextField('github', label='GitHub')
