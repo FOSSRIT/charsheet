@@ -9,10 +9,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 requires = [
     'coderwall',
     'elementtree',
-    'kitchen',
-    'hashlib',
-    'kitchen',
-    'knowledge',
+    'knowledge>=0.3',
     'pyramid',
     'SQLAlchemy',
     'transaction',
@@ -26,11 +23,9 @@ requires = [
     'pyramid_debugtoolbar',
     'pyramid_openid',
     'python-dateutil',
-    'python-fedora',
     'pytz',
     'waitress',
     'zope.sqlalchemy',
-    'mysql-python',
     'nose',
     'coverage',
     ]
