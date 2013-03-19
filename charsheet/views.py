@@ -10,9 +10,12 @@ from pyramid.security import (
     forget,
 )
 
-from kitchen.text.converters import to_unicode
 from sqlalchemy import create_engine
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata
+### Knowledgedb integration ###
+engine = create_engine('sqlite:///knowledge.db')
+init_model(engine)
+metadata.create_all(engine)
 
 import datetime
 import forms
@@ -31,10 +34,6 @@ def home_view(request):
 def global_stats(request):
 
     try:
-        engine = create_engine('sqlite:///knowledge.db')
-        init_model(engine)
-        metadata.create_all(engine)
-
         data = {
             'users': dict(),
         }
@@ -113,10 +112,8 @@ def openid_success(context, request, *args, **kwargs):
     response.headerlist.extend(headers)
     return response
 
-
-@view_config(route_name='charsheet', renderer='chartemplate.mak')
-def charsheet_view(request):
-
+@view_config(route_name='submit')
+def fetch_data(request):
     try:
         usernames = {
             'github': request.params['charsheetform:github'],
@@ -169,51 +166,30 @@ def charsheet_view(request):
             github_dict,
             ohloh_dict,
             coderwall_dict)
-
-    # Completion percent
-    linked_services = 0
-    total_services = 3
-    if github_dict:
-        linked_services += 1
-    if ohloh_dict:
-        linked_services += 1
-    if coderwall_dict:
-        linked_services += 1
-    percent_complete = float(linked_services) / float(total_services)
-
-    ### Knowledgedb integration ###
-
-    engine = create_engine('sqlite:///knowledge.db')
-    init_model(engine)
-    metadata.create_all(engine)
+    stats_dict['usernames'] = usernames
+    stats_dict['gravatar'] = gravatar_url
 
     def inject_knowledge():
         knowledge = DBSession
         # for each stats dict, add a fact to an Entity that is
         # named the username
-        character = Entity(u'%s' % username)
-        character[u'name'] = (u'%s' % username)
+        character = Entity.by_name(u'%s' % username)
+        if not character:
+            character = Entity(u'%s' % username)
+            character[u'name'] = (u'%s' % username)
+
         for key, value in stats_dict.items():
             character[key] = value
-            #character[key] = to_unicode(value)
         knowledge.add(character)
         knowledge.commit()
-
-    def the_facts():
-        # Get the Knowledge Session
-        knowledge = DBSession
-        # Make the base Query, all Entities
-        knowledge_query = knowledge.query(Entity).all()
-        # Print out each Entity, and the values of each of their facts
-        for entities in knowledge_query:
-            from pprint import pprint
-            pprint(entities)
-            pprint(entities.facts.values())
+        return character
 
     if username != '???':
         inject_knowledge()
+        return HTTPFound(location=request.application_url + '/charsheet/' + username)
 
-    the_facts()
+@view_config(route_name='charsheet', renderer='chartemplate.mak')
+def charsheet_view(request):
     """
     Issue pyramid badges using tahrir_db_api
     (with fact entity as a backend???)
@@ -224,17 +200,15 @@ def charsheet_view(request):
     that has an updated version #git commit the version???
     """
 
+    engine = create_engine('sqlite:///knowledge.db')
+    init_model(engine)
+    metadata.create_all(engine)
+    user = Entity.by_name(request.matchdict.get('username'))
+
     request.session.flash("Character sheet generated.")
     return {
             'timestamp': datetime.datetime.now().strftime("%Y.%m.%d %H:%M"),
-            'username': username,
-            'usernames': usernames,
-            'avatar_url': gravatar_url,
-            'coderwall_data': coderwall_dict,
-            'github_data': github_dict,
-            'ohloh_data': ohloh_dict,
-            'stats': stats_dict,
-            'percent_complete': percent_complete,
+            'stats': user,
            }
 
 
