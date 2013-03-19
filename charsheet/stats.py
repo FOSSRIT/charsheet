@@ -1,6 +1,7 @@
 """
 This module contains calculations used to generate stats for charsheet.
 """
+from __future__ import unicode_literals
 
 import struct
 
@@ -151,7 +152,13 @@ def calculate_stats(gh, oh, cw):
         'ohloh_languages': {},
     }
 
+    # Completion percent
+    linked_services = 0
+    total_services = 3
+
     if gh:
+        linked_services += 1
+        stats['gh'] = gh
         data['repos'] += gh['public_repos']
         data['age_months'] = max(data['age_months'], gh['age_months'])
         data['forks'] = gh['forks']
@@ -159,13 +166,19 @@ def calculate_stats(gh, oh, cw):
         data['languages_dict'] = gh['languages_lines']  # language: lines
 
     if oh:
+        linked_services += 1
+        stats['oh'] = oh
         data['age_months'] = max(data['age_months'], oh['age_months'])
         data['ohloh_languages'] = oh['languages']
         data['total_lines'] = oh['lines']
         data['languages'] = oh['num_languages']
 
     if cw:
+        linked_services += 1
+        stats['cw'] = cw
         data['cw_badges'] = cw['badges']
+
+    stats['percent_complete'] = float(linked_services) / float(total_services)
 
     stats['strength'] = calculate_strength(
             lines=data['total_lines'],
