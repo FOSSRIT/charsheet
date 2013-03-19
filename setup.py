@@ -9,7 +9,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 requires = [
     'coderwall',
     'elementtree',
-    'kitchen',
+#    'kitchen',
     'hashlib',
     'pyramid',
     'SQLAlchemy',
@@ -28,10 +28,12 @@ requires = [
     'pytz',
     'waitress',
     'zope.sqlalchemy',
-    'mysql-python',
     'nose',
     'coverage',
     ]
+
+if os.environ.get("OPENSHIFT_APP_NAME"):
+    requires.append('mysql-python')
 
 setup(name='charsheet',
       version='0.1',
