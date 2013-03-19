@@ -168,6 +168,7 @@ def fetch_data(request):
             coderwall_dict)
     stats_dict['usernames'] = usernames
     stats_dict['gravatar'] = gravatar_url
+    stats_dict['timestamp'] = datetime.datetime.now().strftime("%Y.%m.%d %H:%M")
 
     def inject_knowledge():
         knowledge = DBSession
@@ -207,7 +208,6 @@ def charsheet_view(request):
 
     request.session.flash("Character sheet generated.")
     return {
-            'timestamp': datetime.datetime.now().strftime("%Y.%m.%d %H:%M"),
             'stats': user,
            }
 

@@ -59,7 +59,7 @@
             </div>
             <div class="grid_6">
             <h2>Information</h2>
-            <p>Charsheet generated at ${timestamp}.</p>
+            <p>Charsheet generated at ${stats['timestamp']}.</p>
             <p><a class='button' href="..">Back</a></p>
             </div>
         </div>
