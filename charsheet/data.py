@@ -56,15 +56,16 @@ def handle_coderwall(request, username):
         return None
 
 
-def handle_github(request, username, token):
+def handle_github(request, username):
     """
     Get data from GitHub.
     """
     from pygithub3 import Github, exceptions
-    gh = Github()
     github_api = "https://api.github.com"
+    token = request.session['token']
+    gh = Github(token=token)
     try:
-        user = gh.users.get(username, token)
+        user = gh.users.get()
 
         # Handle organizations, because everything breaks if one is
         # passed in, including but not limited to user.bio and
@@ -124,12 +125,20 @@ def handle_github(request, username, token):
                 user.created_at, user.created_at.now())
 
         # Get recent user activity
+        """ Commentin' this stuff out to use pygithub3 instead!
         api_request = urllib2.Request("{0}/users/{1}/events/public".format(
             github_api, username))
-        api_response = urllib2.urlopen(api_request)
-        events_json = json.load(api_response)
-
+        api_response = urllib2.urlopen(api_request, data=urllib.urlencode({
+            'access_token': token}))
+        events_json = json.load(gh.events.users.list_performed_public())
         recent_events = events_json[:25]
+        """
+        recent_events = list()
+        result = gh.events.users.list_performed_public(user='oddshocks')
+        for page in result:
+            for event in page:
+                recent_events.append(event)
+        recent_events = recent_events[:25]
 
         # Blog/URL handling
         try:

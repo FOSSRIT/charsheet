@@ -519,148 +519,148 @@ src="http://api.coderwall.com/${usernames['coderwall']}/endorsecount.png" />
 					<ul id="recent-activity">
 					% for event in github_data['recent_events']:
 						<% repo_url = "https://github.com/" \
-							+ event['repo']['name'] %>
-						% if event['type'] == 'PushEvent':
+							+ event.repo.name %>
+						% if event.type == 'PushEvent':
 							<li class="event push-event">
-								Pushed ${event['payload']['size']} commit(s)
+								Pushed ${event.payload['size']} commit(s)
 								to <a href="${repo_url}">
-								${event['repo']['name']}</a>.
+								${event.repo.name}</a>.
 							</li>
-						% elif event['type'] == 'IssuesEvent':
+						% elif event.type == 'IssuesEvent':
 							<li class="event issues-event">
-								${event['payload']['action'].capitalize()}
+								${event.payload['action'].capitalize()}
 								issue
-							<a href="${event['payload']['issue']['html_url']}">
-								${event['payload']['issue']['title']}</a>
+							<a href="${event.payload['issue']['html_url']}">
+								${event.payload['issue']['title']}</a>
 								in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == 'IssueCommentEvent':
+						% elif event.type == 'IssueCommentEvent':
 							<li class="event comment-event">
 								Commented on
-							<a href="${event['payload']['issue']['html_url']}">
-								${event['payload']['issue']['title']}</a>
+							<a href="${event.payload['issue']['html_url']}">
+								${event.payload['issue']['title']}</a>
 								in the
-								<a href="${repo_url}">${event['repo']['name']}</a>
+								<a href="${repo_url}">${event.repo.name}</a>
 								repo.
 							</li>
-						% elif event['type'] == 'CreateEvent':
+						% elif event.type == 'CreateEvent':
 							<li class="event create-event">
 								Created
-								${event['payload']['ref_type']}
-								${event['payload']['ref']} in the
+								${event.payload['ref_type']}
+								${event.payload['ref']} in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == 'DeleteEvent':
+						% elif event.type == 'DeleteEvent':
 							<li class="event delete-event">
 								Deleted
-								${event['payload']['ref_type']}
-								${event['payload']['ref']} in the
+								${event.payload['ref_type']}
+								${event.payload['ref']} in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == 'WatchEvent':
+						% elif event.type == 'WatchEvent':
 							<li class="event social-event">
-								${event['payload']['action'].capitalize()}
+								${event.payload['action'].capitalize()}
 								watching
 								<a href="${repo_url}">
-								${event['repo']['name']}</a>.
+								${event.repo.name}</a>.
 							</li>
-						% elif event['type'] == 'FollowEvent':
+						% elif event.type == 'FollowEvent':
 							<li class="event social-event">
 								Started following
 								<a href=
-									"${event['payload']['target']['html_url']}">
-								${event['payload']['target']['login']}</a>.
+									"${event.payload['target']['html_url']}">
+								${event.payload['target']['login']}</a>.
 							</li>
-						% elif event['type'] == 'GistEvent':
+						% elif event.type == 'GistEvent':
 							<li class="event create-event">
 								<% action = (
-									event['payload']['action'] + 'ed'
+									event.payload['action'] + 'ed'
 									).capitalize() %>
 								${action} gist <a href=
-								"${event['payload']['gist']['html_url']}">
-								${event['payload']['gist']['description']}</a>.
+								"${event.payload['gist']['html_url']}">
+								${event.payload['gist']['description']}</a>.
 							</li>
-						% elif event['type'] == 'PullRequestEvent':
+						% elif event.type == 'PullRequestEvent':
 							<li class="event create-event">
 								<% action = (
-									event['payload']['action']
+									event.payload['action']
 									).capitalize() %>
 								${action} pull request
 								<a href=
-				"${event['payload']['pull_request']['_links']['html']['href']}">
-							${event['payload']['pull_request']['title']}</a>
+				"${event.payload['pull_request']['_links']['html']['href']}">
+							${event.payload['pull_request']['title']}</a>
 								in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == 'CommitCommentEvent':
+						% elif event.type == 'CommitCommentEvent':
 							<li class="event comment-event">
 								Commented on
 							<a href=
-							"${event['payload']['comment']['html_url']}">
+							"${event.payload['comment']['html_url']}">
 								a commit</a> in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == 'DownloadEvent':
+						% elif event.type == 'DownloadEvent':
 							<li class="event push-event">
 								Created a download in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == "ForkEvent":
+						% elif event.type == "ForkEvent":
 							<li class="event create-event">
 								Forked
 								<a href="${repo_url}">
-								${event['repo']['name']}</a>.
+								${event.repo.name}</a>.
 							</li>
-						% elif event['type'] == 'ForkApplyEvent':
+						% elif event.type == 'ForkApplyEvent':
 							<li class="event create-event">
 								Applied a patch in the fork queue for the
 								<a href="${repo_url}">
 								${event['repo']['name']}</a> repo.
 							</li>
-						% elif event['type'] == "GollumEvent":
+						% elif event.type == "GollumEvent":
 							<li class="event comment-event">
 								Edited the wiki of the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == "MemberEvent":
+						% elif event.type == "MemberEvent":
 							<li class="event social-event">
 								Was added as a collaborator in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == "PublicEvent":
+						% elif event.type == "PublicEvent":
 							<li class="event create-event">
 								Open-sourced the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo!!!
+								${event.repo.name}</a> repo!!!
 							</li>
-						% elif event['type'] == "PullRequestReviewCommentEvent":
+						% elif event.type == "PullRequestReviewCommentEvent":
 							<li class="event comment-event">
 								Commented on
 					<a href=
-					"${event['payload']['comment']['_links']['html']['href']}">
+					"${event.payload['comment']['_links']['html']['href']}">
 								a pull request</a> in the
 								<a href="${repo_url}">
-								${event['repo']['name']}</a> repo.
+								${event.repo.name}</a> repo.
 							</li>
-						% elif event['type'] == "TeamAddEvent":
+						% elif event.type == "TeamAddEvent":
 							<li class="event social-event">
 								Modified a team.
 							</li>
 						% else:
 							<li class="event other-event">
 								Performed
-								${event['type']}
+								${event.type}
 								on <a href="${repo_url}">
-								${event['repo']['name']}</a>.
+								${event.repo.name}</a>.
 							</li>
 						% endif
 					% endfor

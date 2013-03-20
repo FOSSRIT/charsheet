@@ -31,7 +31,7 @@ def home_view(request):
     if 'github_username' in request.headers:
         pprint(request.headers['github_username'])
     """
-    
+
     for k in request.headers.iteritems():
         print "header - " + str(k)
 
@@ -52,15 +52,21 @@ def service_login_complete(request):
     username = context.profile['accounts'][0]['username']
     print "username -- " + username
 
-    response = HTTPFound(location="/")
 
     oauth_token = context.credentials['oauthAccessToken']
 
+
     # convert to ascii because waitress is sensitve about unicode
-    response.headerlist.append(('github_username', username.encode('ascii',
-                                                                    'ignore')))
-    response.headerlist.append(('github_token', oauth_token.encode('ascii',
-                                                                    'ignore')))
+    #response.headerlist.append(('github_username', username.encode('ascii',
+    #                                                            'ignore')))
+    #response.headerlist.append(('github_token', oauth_token.encode('ascii',
+    #                                                           'ignore')))
+
+    headers = remember(request, username)
+
+    request.session['token'] = request.context.credentials['oauthAccessToken']
+
+    response = HTTPFound(location=request.route_url('charsheet'), headers=headers)
 
     return response
 
