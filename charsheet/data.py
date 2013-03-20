@@ -117,21 +117,16 @@ def handle_github(request, username):
         # Get lines written per language and number of times
         # language is used. Also get number of forks of user's original
         # repos.
-        gh_forks = 0
         user_languages = {}
         for repo in data['public_repos']:
             repo_languages = gh.repos.list_languages(
                 user=repo.owner.login, repo=repo.name)
-            # The owner of an original repo counts as having a fork it
-            # seems, so we want to make sure not to count that.
-            if repo.forks > 1:
-                gh_forks += repo.forks - 1
+            data['forks'] += repo.forks
             for language in repo_languages:
                 if language in user_languages.keys():
                     user_languages[language] += 1
                 else:
                     user_languages[language] = 1
-        data['forks'] = gh_forks
 
         # Sort languages by lines of code in repos
         data['languages_by_repos'] = sorted(user_languages,
