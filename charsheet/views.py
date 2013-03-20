@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from pyramid.httpexceptions import (
     HTTPFound,
     HTTPNotFound,
@@ -11,16 +13,12 @@ from pyramid.security import (
 )
 
 from sqlalchemy import create_engine
-from knowledge.model import Fact, Entity, DBSession, init_model, metadata
-### Knowledgedb integration ###
-engine = create_engine('sqlite:///knowledge.db')
-init_model(engine)
-metadata.create_all(engine)
 
 import datetime
 import forms
 
 from facts import average_value, top_users
+import data
 
 
 @view_config(route_name='home', renderer='home.mak')
@@ -112,6 +110,7 @@ def openid_success(context, request, *args, **kwargs):
     response.headerlist.extend(headers)
     return response
 
+
 @view_config(route_name='submit')
 def fetch_data(request):
     try:
@@ -130,86 +129,24 @@ def fetch_data(request):
     except KeyError:
         return HTTPFound(location=request.route_url('home'))
 
-    # TODO: Put these dicts in a dict?
-    coderwall_dict = None
-    github_dict = None
-    ohloh_dict = None
-
-    import data
-
-    ### Coderwall ###
-    if usernames['coderwall']:
-        coderwall_dict = data.handle_coderwall(
-                request, usernames['coderwall'])
-
-    ### GitHub ###
-    if usernames['github']:
-        github_dict = data.handle_github(
-                request, usernames['github'])
-
-    ### Ohloh ###
-    if usernames['ohloh']:
-        ohloh_dict = data.handle_ohloh(
-                request, usernames['ohloh'])
-
-    ### Gravatar ###
-    if github_dict:
-        if github_dict['email']:
-            gravatar_url = data.get_gravatar_url(github_dict['email'])
-    else:
-        gravatar_url = None
-
-    ### Stat calculation ###
-    import stats
-
-    stats_dict = stats.calculate_stats(
-            github_dict,
-            ohloh_dict,
-            coderwall_dict)
-    stats_dict['usernames'] = usernames
-    stats_dict['gravatar'] = gravatar_url
-    stats_dict['timestamp'] = datetime.datetime.now().strftime("%Y.%m.%d %H:%M")
-
-    def inject_knowledge():
-        knowledge = DBSession
-        # for each stats dict, add a fact to an Entity that is
-        # named the username
-        character = Entity.by_name(u'%s' % username)
-        if not character:
-            character = Entity(u'%s' % username)
-            character[u'name'] = (u'%s' % username)
-
-        for key, value in stats_dict.items():
-            character[key] = value
-        knowledge.add(character)
-        knowledge.commit()
-        return character
+    stats_dict = data.handle_all(request, usernames)
 
     if username != '???':
-        inject_knowledge()
-        return HTTPFound(location=request.application_url + '/charsheet/' + username)
+        data.inject_knowledge(username, stats_dict)
+        return HTTPFound(location=request.route_url('charsheet', username=username))
+    return HTTPFound(location=request.route_url('home'))
+
 
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
 def charsheet_view(request):
-    """
-    Issue pyramid badges using tahrir_db_api
-    (with fact entity as a backend???)
-    If user visits /charsheet/username, check the knowledge.db for
-    'current_stats' fact. If the user has 'current_stats' in the knowledge.db,
-    save their
-    old stats as 'old_stats" or create a new fact called u'current_stats'
-    that has an updated version #git commit the version???
-    """
-
-    engine = create_engine('sqlite:///knowledge.db')
-    init_model(engine)
-    metadata.create_all(engine)
-    user = Entity.by_name(request.matchdict.get('username'))
-
-    request.session.flash("Character sheet generated.")
-    return {
-            'stats': user,
-           }
+    """Render stats for a user."""
+    username = request.matchdict.get('username')
+    user = data.get_user(username)
+    if user:
+        request.session.flash("Character sheet generated.")
+        return dict(stats=user)
+    else:
+        return HTTPFound(location=request.route_url('home'))
 
 
 conn_err_msg = """\

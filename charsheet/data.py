@@ -12,35 +12,45 @@ import re
 import urllib
 import urllib2
 
+
+from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
+engine = create_engine('sqlite:///knowledge.db')
+init_model(engine)
+metadata.create_all(engine)
+
 from requests import HTTPError
+
+import stats
 
 utc = pytz.UTC  # For datetime handling
 
 
-def calculate_age_months(dt1, dt2):
-    """
-    Pass this function two tz-aware datetimes and get
-    the difference in months and fractions of a month!
-    """
-    age_delta = relativedelta.relativedelta(dt1, dt2)
-    # The below works well enough to get an approximate decimal.
-    fraction_of_month = float(age_delta.days) / 31
-    return abs((age_delta.years * 12) + age_delta.months + fraction_of_month)
+def handle_all(request, usernames):
+    """Handle looking at all of the backends."""
 
+    data = dict(
+        usernames=usernames,
+        timestamp=datetime.now().strftime("%Y.%m.%d %H:%M"),
+    )
 
-def get_gravatar_url(email):
-    # Gravatar
-    gravatar_url = 'http://www.gravatar.com/avatar/'
-    gravatar_size = 60  # in pixels
-    gravatar_url += hashlib.md5(email.lower()).hexdigest() + "?"
-    gravatar_url += urllib.urlencode({'s': str(gravatar_size)})
-    return gravatar_url
+    for backend, username in usernames.items():
+        data[backend] = globals()['handle_' + backend](request, username)
+
+    if data.get('github'):
+        if data['github'].get('email'):
+            data['gravatar'] = get_gravatar_url(data['github']['email'])
+
+    data['stats'] =  stats.calculate_stats(
+        gh=data['github'],
+        oh=data['ohloh'],
+        cw=data['coderwall']
+    )
+
+    return data
 
 
 def handle_coderwall(request, username):
-    """
-    Get data from CoderWall.
-    """
+    """Get data from CoderWall."""
     from coderwall import CoderWall
 
     try:
@@ -278,3 +288,42 @@ def handle_ohloh(request, username):
             request.session.flash('Error: Unable to find username on \
                 Ohloh.')
             return None
+
+
+def get_gravatar_url(email):
+    # Gravatar
+    gravatar_url = 'http://www.gravatar.com/avatar/'
+    gravatar_size = 60  # in pixels
+    gravatar_url += hashlib.md5(email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'s': str(gravatar_size)})
+    return gravatar_url
+
+
+def inject_knowledge(username, data_dict):
+    character = Entity.by_name(username)
+    if not character:
+        character = Entity(username)
+        character[u'name'] = username
+
+    for key, value in data_dict.items():
+        if isinstance(value, str):
+            value = value.decode('utf8')
+        character[key] = value
+    DBSession.add(character)
+    DBSession.commit()
+    return character
+
+
+def get_user(username):
+    return Entity.by_name(username)
+
+
+def calculate_age_months(dt1, dt2):
+    """
+    Pass this function two tz-aware datetimes and get
+    the difference in months and fractions of a month!
+    """
+    age_delta = relativedelta.relativedelta(dt1, dt2)
+    # The below works well enough to get an approximate decimal.
+    fraction_of_month = float(age_delta.days) / 31
+    return abs((age_delta.years * 12) + age_delta.months + fraction_of_month)
