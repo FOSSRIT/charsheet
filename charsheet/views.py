@@ -22,18 +22,12 @@ import data
 
 @view_config(route_name='home', renderer='home.mak')
 def home_view(request):
-    return {
-        'charsheet_form': forms.CharsheetForm,
-    }
+    return {'charsheet_form': forms.CharsheetForm}
 
 
 @view_config(route_name='stats', renderer='stats.mak')
 def global_stats(request):
-
-
-    return {
-        'stats': data.global_stats(),
-    }
+    return {'stats': data.global_stats()}
 
 
 @view_config(route_name='login', renderer='login.mak')
