@@ -37,9 +37,8 @@ def handle_all(request, usernames):
     for backend, username in usernames.items():
         data[backend] = globals()['handle_' + backend](request, username)
 
-    if data.get('github'):
-        if data['github'].get('email'):
-            data['gravatar'] = get_gravatar_url(data['github']['email'])
+    if data['github'].get('email'):
+        data['gravatar'] = get_gravatar_url(data['github']['email'])
 
     data['stats'] =  stats.calculate_stats(
         gh=data['github'],
