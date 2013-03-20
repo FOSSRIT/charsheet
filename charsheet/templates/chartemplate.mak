@@ -60,7 +60,12 @@
             <div class="grid_6">
             <h2>Information</h2>
             <p>Charsheet generated at ${stats['timestamp']}.</p>
-            <p><a class='button' href="..">Back</a></p>
+            <p>
+              <a class='button' href="/">Back</a>
+              <a
+                href='/submit?${'&'.join(['charsheetform:'+backend+'='+username for backend, username in stats['usernames'].items()])}'
+                class='button'>Refresh</a>
+            </p>
             </div>
         </div>
         % if display_sheet == True:
