@@ -77,6 +77,23 @@ def handle_github(request, username):
     from pygithub3 import Github, exceptions
     gh = Github()
     github_api = "https://api.github.com"
+    data = {
+        'age_months': 0,
+        'bio': '',
+        'blog': '',
+        'company': '',
+        'email': '',
+        'followers': 0,
+        'forks': 0,
+        'hireable': False,
+        'recent_events': [],
+        'languages': [],
+        'languages_lines': [],
+        'location': '',
+        'name': '',
+        'public_repos': [],
+        'repos': [],
+     }
     try:
         user = gh.users.get(username)
 
@@ -87,7 +104,7 @@ def handle_github(request, username):
             request.session.flash(
                 'Error: Charsheet does not yet support \
                         GitHub organizations.')
-            return None
+            return data
 
         # Get user repos
         user_repos = []
@@ -156,68 +173,20 @@ def handle_github(request, username):
         except AttributeError:
             gh_blog_url = "?"
 
-        # Bio handling
-        try:
-            gh_bio = user.bio
-        except AttributeError:
-            gh_bio = "?"
+        for tag in ['bio', 'company', 'email', 'hireable', 'location', 'name']:
+            try:
+                data['gh_'+tag, getattr(user, tag)]
+            except AttributeError:
+                data['gh_'+tag, '?']
 
-        # Company handling
-        try:
-            gh_company = user.company
-        except AttributeError:
-            gh_company = "?"
-
-        # Email handling
-        try:
-            gh_email = user.email
-        except AttributeError:
-            gh_email = "?"
-
-        # Hirable handling
-        try:
-            gh_hireable = user.hireable
-        except AttributeError:
-            gh_hireable = "?"
-
-        # Location handling
-        try:
-            gh_location = user.location
-        except AttributeError:
-            gh_location = "?"
-
-        # Name handling
-        try:
-            gh_name = user.name
-        except AttributeError:
-            gh_name = "?"
-
-        return {
-            'age_months': gh_age_months,
-            'bio': gh_bio,
-            'blog': gh_blog_url,
-            'company': gh_company,
-            'email': gh_email,
-            'followers': user.followers,
-            'forks': gh_forks,
-            'hireable': gh_hireable,
-            'recent_events': recent_events,
-            'languages': sorted_languages,
-            'languages_count': sorted_language_count,
-            'languages_lines': user_languages,
-            'num_languages': len(user_languages),
-            'location': gh_location,
-            'name': gh_name,
-            'public_repos': user.public_repos,
-            'repos': gh.repos.list(username).all(),
-            }
+        return data
 
     except exceptions.NotFound:
         request.session.flash('Error: Unable to find username on GitHub.')
-        return None
+        return data
     except HTTPError:
         request.session.flash('Error: GitHub denied our request!')
-        return None
+        return data
 
 
 def handle_ohloh(request, username):
