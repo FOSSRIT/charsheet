@@ -89,8 +89,7 @@ def calculate_foo(stats):
             stats['wisdom'],
             stats['leadership'],
             stats['determination'],
-            stats['popularity']
-            ]
+            stats['popularity']]
     return sum(stats_to_average) / float(len(stats_to_average))
 
 

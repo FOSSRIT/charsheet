@@ -66,7 +66,8 @@ def service_login_complete(request):
 
     request.session['token'] = request.context.credentials['oauthAccessToken']
 
-    response = HTTPFound(location=request.route_url('charsheet'), headers=headers)
+    response = HTTPFound(location=request.route_url('charsheet'),
+                         headers=headers)
 
     return response
 
