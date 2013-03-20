@@ -42,8 +42,8 @@
 			<div class="clear"></div>
 			
 			<div class="grid_6">
-				<p>Charsheet is an <a href="https://github.com/FOSSRIT/charsheet">
-					open-source</a> web app that generates hacker character sheets
+				<p>Charsheet is a <a href="https://github.com/FOSSRIT/charsheet">
+					free and open-source</a> web app that generates hacker character sheets
 					based on data from sites like <a href="https://github.com/">
 					GitHub</a>, <a href="http://www.ohloh.net">Ohloh</a>, and
 					<a href="http://coderwall.com/">Coderwall</a>.
