@@ -109,7 +109,7 @@ def handle_github(request, username):
             return data
 
         # Get user repos
-        for page in gh.repos.list(user=username):
+        for page in gh.repos.list(user=username, type='public'):
             # Results are paginated.
             for repo in page:
                 data['public_repos'].append(repo)
