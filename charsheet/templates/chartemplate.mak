@@ -498,7 +498,7 @@
                     <a href="#" class="button more-activity">More</a>
                     </div>
                     <ul id="recent-activity">
-                    % for event in stats.get('recent_events', []):
+                    % for event in stats['github'].get('recent_events'):
                         <% repo_url = "https://github.com/" \
                             + event['repo']['name'] %>
                         % if event['type'] == 'PushEvent':
