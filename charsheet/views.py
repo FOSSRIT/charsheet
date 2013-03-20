@@ -31,40 +31,9 @@ def home_view(request):
 @view_config(route_name='stats', renderer='stats.mak')
 def global_stats(request):
 
-    try:
-        data = {
-            'users': dict(),
-        }
-
-        knowledge = DBSession
-        knowledge_query = knowledge.query(Entity).all()
-
-        for entity in knowledge_query:
-            data['users'][entity.name] = dict()
-            for fact in entity.facts.values():
-                data['users'][entity.name][fact.key] = fact.value
-
-        stats = {
-            'avg_foo': average_value(data, 'foo'),
-            'avg_dexterity': average_value(data, 'dexterity'),
-            'avg_strength': average_value(data, 'strength'),
-            'avg_wisdom': average_value(data, 'wisdom'),
-            'avg_leadership': average_value(data, 'leadership'),
-            'avg_determination': average_value(data, 'determination'),
-            'avg_popularity': average_value(data, 'popularity'),
-            'avg_num_languages': average_value(data, 'num_languages'),
-            'avg_badges': average_value(data, 'badges'),
-            'top_foo': top_users(data, 'foo'),
-            'sheets_generated': len(knowledge_query),
-            'sheets_unique': len(data['users']),
-        }
-
-    except:  # TODO: Make this more specific.
-        data = None
-        stats = None
 
     return {
-        'stats': stats,
+        'stats': data.global_stats(),
     }
 
 
