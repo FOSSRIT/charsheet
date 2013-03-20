@@ -135,21 +135,7 @@ def calculate_stats(gh, oh, cw):
             'emacslisp': 0,
             'viml': 0,
         },
-        'badges': 0,
-        'forks': 0,
-        'public_repos': 0,
-        'followers': 0,
-    }
-
-    data = {
-        'total_lines': 0,
-        'cw_badges': 0,
-        'repos': 0,
-        'age_months': 0,
-        'forks': 0,
-        'followers': 0,
-        'languages': 0,
-        'ohloh_languages': {},
+        'age_months': 0
     }
 
     # Completion percent
@@ -158,57 +144,43 @@ def calculate_stats(gh, oh, cw):
 
     if gh:
         linked_services += 1
-        stats['gh'] = gh
-        data['age_months'] = max(data['age_months'], gh['age_months'])
-        data['followers'] = gh['followers']
-        data['languages_dict'] = gh['languages_lines']  # language: lines
+        stats['age_months'] = max(stats['age_months'], gh['age_months'])
 
     if oh:
         linked_services += 1
-        stats['oh'] = oh
-        data['age_months'] = max(data['age_months'], oh['age_months'])
-        data['ohloh_languages'] = oh['languages']
-        data['total_lines'] = oh['lines']
-        data['languages'] = oh['num_languages']
+        stats['age_months'] = max(stats['age_months'], oh['age_months'])
 
     if cw:
         linked_services += 1
-        stats['cw'] = cw
 
     stats['percent_complete'] = float(linked_services) / float(total_services)
 
     stats['strength'] = calculate_strength(
-            lines=data['total_lines'],
-            badges=data['cw_badges'])
+            lines=oh['lines'],
+            badges=cw['badges'])
 
     stats['dexterity'] = calculate_dexterity(
-            languages=len(data['ohloh_languages']))
+            languages=len(oh['languages']))
 
     stats['wisdom'] = calculate_wisdom(
-            months=data['age_months'])
+            months=stats['age_months'])
 
     stats['leadership'] = calculate_leadership(
-            forks=data['forks'])
+            forks=gh['forks'])
 
     stats['determination'] = calculate_determination(
-            projects=data['repos'])
+            projects=gh['public_repos'])
 
     stats['popularity'] = calculate_popularity(
-            followers=data['followers'])
-
-    # Add age in months to the stats dict, just so that we can
-    # use the age of the oldest account in the mako template for the
-    # purpose of displaying the Wisdom formula in the tooltip.
-    stats['age_months'] = data['age_months']
+            followers=gh['followers'])
 
     # Also store these for reference... probs should restructure
     # all of this soon.
-    stats['lines'] = data['total_lines']
-    stats['num_languages'] = data['languages']
+    stats['num_languages'] = len(oh['languages'])
 
     # Skills
-    if data.get('ohloh_languages'):
-        for language in data['ohloh_languages']:
+    if oh:
+        for language in oh['languages']:
             stats['skills'][language['name'].lower()] = \
                     calculate_language_skill(
                         lines=language['lines'],
@@ -217,10 +189,5 @@ def calculate_stats(gh, oh, cw):
 
     # Foo
     stats['foo'] = calculate_foo(stats)
-
-    # Other stuff
-    stats['forks'] = data['forks']
-    stats['public_repos'] = data['repos']
-    stats['followers'] = data['followers']
 
     return stats
