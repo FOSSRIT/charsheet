@@ -420,16 +420,13 @@
                 <table>
                     <tr><td>Ohloh Profile:</td><td>
                         % if stats['ohloh'].get('id'):
-                            <a href=
-                            'http://www.ohloh.net/accounts/
-                            ${stats['ohloh']['id']}?ref=Detailed'
-                            target='_top'>
+                            <a
+                                href='http://www.ohloh.net/accounts/${stats['ohloh']['id']}?ref=Detailed'
+                                target='_top'>
                             <img
                                 alt='Ohloh Profile'
                                 border='0' height='35'
-                                src='http://www.ohloh.net/accounts/
-                                    ${stats['ohloh']['id']}
-                                    /widgets/account_detailed.gif'
+                                src='http://www.ohloh.net/accounts/${stats['ohloh']['id']}/widgets/account_detailed.gif'
                                 width='191' />
                             </a>
                         % else:
