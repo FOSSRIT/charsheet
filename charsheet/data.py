@@ -114,21 +114,6 @@ def handle_github(request, username):
             for repo in page:
                 data['public_repos'].append(repo)
 
-        # TODO: Consolidate this loop into the loop a few blocks below
-        # Get number of repos per language
-        language_count = {}  # language: number of repos
-        for repo in data['public_repos']:
-            if not repo.language:
-                continue
-            if repo.language not in language_count.keys():
-                language_count[repo.language] = 1
-            else:
-                language_count[repo.language] += 1
-
-        # Sort languages by number of repos
-        sorted_language_count = sorted(language_count.iteritems(),
-            key=operator.itemgetter(1), reverse=True)
-
         # Get lines written per language and number of times
         # language is used. Also get number of forks of user's original
         # repos.
