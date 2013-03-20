@@ -10,7 +10,6 @@ import json
 import pytz
 import re
 import urllib
-import urllib2
 
 
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
@@ -137,11 +136,12 @@ def handle_github(request, username):
                 user.created_at, user.created_at.now())
 
         # Get recent user activity
-        api_request = urllib2.Request("{0}/users/{1}/events/public".format(
-            github_api, username))
-        api_response = urllib2.urlopen(api_request)
-        events_json = json.load(api_response)
-        data['recent_events'] = events_json[:25]
+        recent_events = list()
+        result = gh.events.users.list_performed_public(user=username)
+        for page in result:
+            for event in page:
+                recent_events.append(event)
+        data['recent_events'] = recent_events[:25]
 
         # Blog/URL handling
         try:
