@@ -450,7 +450,7 @@
                 <table>
                     <tr><td>Coderwall Endorsements:</td>
                         <td>
-                        % if stats['usernames']['coderwall']:
+                        % if stats['usernames'].get('coderwall'):
                     <a href="http://coderwall.com/${stats['usernames']['coderwall']}">
                         <img alt="Endorse ${stats['usernames']['coderwall']}
                                 on Coderwall"
@@ -468,16 +468,16 @@
             <!-- CODERWALL ACHIEVEMENTS -->
 
             <div class="grid_12">
-                % if coderwall_data:
+                % if stats['coderwall'].get('badges'):
                 <h2>Coderwall Achievements</h2>
                 <table class="badge-list">
                     <% badges_printed = 0 %>
                     <tr>
                     % for badge in stats['coderwall']['badges']:
                         <td class="tooltip"
-                            title="<strong>${badge.name}</strong>
-                            - ${badge.description}.">
-                            <img src="${badge.image_uri}"/></td>
+                            title="<strong>${badge['name']}</strong>
+                            - ${badge['description']}.">
+                            <img src="${badge['image_uri']}"/></td>
                         <% badges_printed += 1 %>
                         % if (badges_printed % 8 == 0) and badges_printed > 0:
                             </tr><tr>
