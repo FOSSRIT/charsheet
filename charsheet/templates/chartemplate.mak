@@ -109,17 +109,17 @@
                         % endif
                     </td></tr>
                     <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
-                        % if stats:
-                            ${stats.get('email')}
+                        % if stats['github'].get('email'):
+                            ${stats['github']['email']}
                         % else:
                             ?
                         % endif
                     </td></tr>
                     <tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
                         % if stats:
-                            % if stats.get('blog') != None:
-                            <a href="http://${stats['blog']}">
-                                ${stats['blog'].strip('/')}</a>
+                            % if stats['github'].get('blog_url'):
+                            <a href="http://${stats['github']['blog_url']}">
+                                ${stats['github']['blog_url'].strip('/')}</a>
                             % else:
                             None
                             % endif
@@ -138,22 +138,22 @@
                 <table class="one-line">
                     <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_340_globe.png')}'/> Location:</td>
                         <td>
-                        % if stats:
-                            ${stats.get('location')}
+                        % if stats['github'].get('location'):
+                            ${stats['github']['location']}
                         % else:
                             ?
                         % endif
                         </td></tr>
                     <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_341_briefcase.png')}'/> Company:</td><td>
-                        % if stats:
-                            ${stats.get('company')}
+                        % if stats['github'].get('company'):
+                            ${stats['github']['company']}
                         % else:
                             ?
                         % endif
                         </td></tr>
                     <tr><td>Hireable?</td><td>
                         % if stats:
-                            % if stats.get('hireable') == True:
+                            % if stats['github'].get('hireable'):
                                 Yes!
                             % else:
                                 No...
@@ -419,7 +419,7 @@
             <div class="grid_4">
                 <table>
                     <tr><td>Ohloh Profile:</td><td>
-                        % if stats['ohloh']:
+                        % if stats['ohloh'].get('id'):
                             <a href=
                             'http://www.ohloh.net/accounts/
                             ${stats['ohloh']['id']}?ref=Detailed'
@@ -438,7 +438,7 @@
                         </td></tr>
                     <tr><td>Ohloh Rank:</td>
                         <td>
-                        % if stats['ohloh']:
+                        % if stats['ohloh'].get('position'):
                             ${stats['ohloh']['position']}
                         % else:
                             ?
@@ -450,7 +450,7 @@
                 <table>
                     <tr><td>Coderwall Endorsements:</td>
                         <td>
-                        % if coderwall_data:
+                        % if stats['usernames']['coderwall']:
                     <a href="http://coderwall.com/${stats['usernames']['coderwall']}">
                         <img alt="Endorse ${stats['usernames']['coderwall']}
                                 on Coderwall"

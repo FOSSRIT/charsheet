@@ -114,6 +114,7 @@ def handle_github(request, username):
             # Results are paginated.
             for repo in page:
                 user_repos.append(repo)
+
         # TODO: Consolidate this loop into the loop a few blocks below
         # Get number of repos per language
         language_count = {}  # language: number of repos
@@ -122,6 +123,7 @@ def handle_github(request, username):
                 language_count[repo.language] = 1
             else:
                 language_count[repo.language] += 1
+
         # Don't want no None languages in mah language dict
         if None in language_count.keys():
             del language_count[None]
@@ -148,11 +150,11 @@ def handle_github(request, username):
                     user_languages[language] = repo_languages[language]
 
         # Sort languages by lines of code in repos
-        sorted_languages = sorted(user_languages.iteritems(),
+        data['sorted_languages'] = sorted(user_languages.iteritems(),
             key=operator.itemgetter(1), reverse=True)
 
         # Get age of account, in months
-        gh_age_months = calculate_age_months(
+        data['age_months'] = calculate_age_months(
                 user.created_at, user.created_at.now())
 
         # Get recent user activity
@@ -160,25 +162,19 @@ def handle_github(request, username):
             github_api, username))
         api_response = urllib2.urlopen(api_request)
         events_json = json.load(api_response)
-
-        recent_events = events_json[:25]
+        data['recent_events'] = events_json[:25]
 
         # Blog/URL handling
         try:
-            if user.blog.startswith('http://'):
-                gh_blog_url = user.blog[7:]
-            elif user.blog.startswith('https://'):
-                gh_blog_url = user.blog[8:]
-            else:
-                gh_blog_url = user.blog
+            data['blog_url'] = user.blog.split('://')[-1]
         except AttributeError:
-            gh_blog_url = "?"
+            data['blog_url'] = "?"
 
         for tag in ['bio', 'company', 'email', 'hireable', 'location', 'name']:
             try:
-                data['gh_'+tag, getattr(user, tag)]
+                data[tag] = getattr(user, tag)
             except AttributeError:
-                data['gh_'+tag, '?']
+                data[tag] = '?'
 
         return data
 

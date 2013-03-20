@@ -159,9 +159,7 @@ def calculate_stats(gh, oh, cw):
     if gh:
         linked_services += 1
         stats['gh'] = gh
-        data['repos'] += gh['public_repos']
         data['age_months'] = max(data['age_months'], gh['age_months'])
-        data['forks'] = gh['forks']
         data['followers'] = gh['followers']
         data['languages_dict'] = gh['languages_lines']  # language: lines
 
@@ -176,7 +174,6 @@ def calculate_stats(gh, oh, cw):
     if cw:
         linked_services += 1
         stats['cw'] = cw
-        data['cw_badges'] = cw['badges']
 
     stats['percent_complete'] = float(linked_services) / float(total_services)
 
@@ -222,7 +219,6 @@ def calculate_stats(gh, oh, cw):
     stats['foo'] = calculate_foo(stats)
 
     # Other stuff
-    stats['badges'] = data['cw_badges']
     stats['forks'] = data['forks']
     stats['public_repos'] = data['repos']
     stats['followers'] = data['followers']
