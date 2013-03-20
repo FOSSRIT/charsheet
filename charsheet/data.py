@@ -51,23 +51,25 @@ def handle_all(request, usernames):
 
 def handle_coderwall(request, username):
     """Get data from CoderWall."""
-    from coderwall import CoderWall
+    data = {
+        'endorsements': 0,
+        'badges': [],
+    }
+    if not username:
+        return data
 
+    from coderwall import CoderWall
     try:
         cwc = CoderWall(username)
-        return {
-            'endorsements': cwc.endorsements,
-            'badges': [dict(name=badge.name,
-                            description=badge.description,
-                            image_uri=badge.image_uri)
-                        for badge in cwc.badges],
-        }
+        data['endorsements'] = cwc.endorsements
+        data['badges'] = [dict(name=badge.name,
+                               description=badge.description,
+                               image_uri=badge.image_uri)
+                          for badge in cwc.badges]
+        return data
     except NameError:
         request.session.flash('Error: Unable to find username on Coderwall.')
-        return {
-            'endorsements': 0,
-            'badges': [],
-        }
+        return
 
 
 def handle_github(request, username):
