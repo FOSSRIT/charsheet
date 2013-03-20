@@ -166,9 +166,9 @@ def handle_github(request, username):
 
         # Blog/URL handling
         try:
-            data['blog_url'] = user.blog.split('://')[-1]
+            data['blog'] = user.blog.split('://')[-1]
         except AttributeError:
-            data['blog_url'] = "?"
+            data['blog'] = "?"
 
         for tag in ['bio', 'company', 'email', 'hireable', 'location', 'name']:
             try:

@@ -117,9 +117,9 @@
                     </td></tr>
                     <tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
                         % if stats:
-                            % if stats['github'].get('blog_url'):
-                            <a href="http://${stats['github']['blog_url']}">
-                                ${stats['github']['blog_url'].strip('/')}</a>
+                            % if stats['github'].get('blog'):
+                            <a href="http://${stats['github']['blog']}">
+                                ${stats['github']['blog'].strip('/')}</a>
                             % else:
                             None
                             % endif
