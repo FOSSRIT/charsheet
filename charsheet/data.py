@@ -94,8 +94,9 @@ def handle_github(request, username):
         'location': '',
         'name': '',
         'public_repos': [],
-        'repos': [],
      }
+    if not username:
+        return data
     try:
         user = gh.users.get(username)
 
@@ -110,7 +111,6 @@ def handle_github(request, username):
 
         # Get user repos
         user_repos = []
-        user_languages = {}  # Structured as language: lines
         for page in gh.repos.list(user=username):
             # Results are paginated.
             for repo in page:
@@ -137,6 +137,7 @@ def handle_github(request, username):
         # language is used. Also get number of forks of user's original
         # repos.
         gh_forks = 0
+        user_languages = {}
         for repo in user_repos:
             repo_languages = gh.repos.list_languages(
                 user=repo.owner.login, repo=repo.name)
