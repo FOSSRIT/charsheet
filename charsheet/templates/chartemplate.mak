@@ -187,7 +187,7 @@
                     <tr class="tooltip"
                         title="<strong>Strength</strong><br />
                         (${stats['ohloh']['lines']} lines / 1000000)
-                            <br />+ (2 * ${stats['coderwall']['badges']} badge(s))<br />
+                            <br />+ (2 * ${len(stats['coderwall']['badges'])} badge(s))<br />
                         <strong>${int((stats['stats']['strength'] % 1) * 100)}%</strong>
                         to next level">
                         <td>Strength:</td>
@@ -233,7 +233,7 @@
                 <table>
                     <tr class="tooltip"
                         title="<strong>Determination</strong><br />
-                        ${stats['github']['public_repos']} public repo(s)<br />
+                        ${len(stats['github']['public_repos'])} public repo(s)<br />
                     <strong>${int((stats['stats']['determination'] % 1) * 100)}%</strong>
                     to next level">
                         <td>Determination:</td>

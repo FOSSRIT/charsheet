@@ -110,16 +110,15 @@ def handle_github(request, username):
             return data
 
         # Get user repos
-        user_repos = []
         for page in gh.repos.list(user=username):
             # Results are paginated.
             for repo in page:
-                user_repos.append(repo)
+                data['public_repos'].append(repo)
 
         # TODO: Consolidate this loop into the loop a few blocks below
         # Get number of repos per language
         language_count = {}  # language: number of repos
-        for repo in user_repos:
+        for repo in data['public_repos']:
             if not repo.language:
                 continue
             if repo.language not in language_count.keys():
@@ -136,7 +135,7 @@ def handle_github(request, username):
         # repos.
         gh_forks = 0
         user_languages = {}
-        for repo in user_repos:
+        for repo in data['public_repos']:
             repo_languages = gh.repos.list_languages(
                 user=repo.owner.login, repo=repo.name)
             # The owner of an original repo counts as having a fork it
