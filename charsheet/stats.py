@@ -160,7 +160,7 @@ def calculate_stats(gh, oh, cw):
             badges=cw['badges'])
 
     stats['dexterity'] = calculate_dexterity(
-            languages=len(oh['languages']))
+            languages=len(oh['languages_by_lines']))
 
     stats['wisdom'] = calculate_wisdom(
             months=stats['age_months'])
@@ -174,13 +174,9 @@ def calculate_stats(gh, oh, cw):
     stats['popularity'] = calculate_popularity(
             followers=gh['followers'])
 
-    # Also store these for reference... probs should restructure
-    # all of this soon.
-    stats['num_languages'] = len(oh['languages'])
-
     # Skills
     if oh:
-        for language in oh['languages']:
+        for language in oh['languages_by_lines']:
             stats['skills'][language['name'].lower()] = \
                     calculate_language_skill(
                         lines=language['lines'],

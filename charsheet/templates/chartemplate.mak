@@ -401,15 +401,15 @@
                         % endif
                         </td></tr>
                     <tr><td>Most Repos:</td><td>
-                        % if stats['ohloh'].get('languages'):
-            ${", ".join([x['name'] for x in stats['ohloh']['languages'][:3]])}
+                        % if stats['github'].get('languages_by_repos'):
+            ${", ".join([lang for lang in stats['github']['languages_by_repos'][:3]])}
                         % else:
                             ?
                         % endif
                         </td></tr>
                     <tr><td>Most Code:</td><td>
-                        % if stats['ohloh']:
-            ${", ".join([lang['name'] for lang in stats['ohloh']['languages'][:3]])}
+                        % if stats['ohloh'].get('languages_by_lines'):
+            ${", ".join([lang['name'] for lang in stats['ohloh']['languages_by_lines'][:3]])}
                         % else:
                             ?
                         % endif

@@ -89,8 +89,7 @@ def handle_github(request, username):
         'forks': 0,
         'hireable': False,
         'recent_events': [],
-        'languages': [],
-        'languages_lines': [],
+        'language_by_repos': [],
         'location': '',
         'name': '',
         'public_repos': [],
@@ -144,14 +143,14 @@ def handle_github(request, username):
                 gh_forks += repo.forks - 1
             for language in repo_languages:
                 if language in user_languages.keys():
-                    user_languages[language] += repo_languages[language]
+                    user_languages[language] += 1
                 else:
-                    user_languages[language] = repo_languages[language]
+                    user_languages[language] = 1
         data['forks'] = gh_forks
 
         # Sort languages by lines of code in repos
-        data['sorted_languages'] = sorted(user_languages.iteritems(),
-            key=operator.itemgetter(1), reverse=True)
+        data['languages_by_repos'] = sorted(user_languages,
+            key=lambda lang: user_languages[lang], reverse=True)
 
         # Get age of account, in months
         data['age_months'] = calculate_age_months(
@@ -254,7 +253,7 @@ def handle_ohloh(request, username):
             data['lines'] = \
                     sum([lang['lines'] for lang in ohloh_languages])
             # Sort languages by lines
-            data['languages'] = sorted(ohloh_languages,
+            data['languages_by_lines'] = sorted(ohloh_languages,
                     key=lambda lang: lang['lines'], reverse=True)
 
             return data
