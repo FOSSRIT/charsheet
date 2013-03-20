@@ -186,7 +186,7 @@
                 <table>
                     <tr class="tooltip"
                         title="<strong>Strength</strong><br />
-                        (${stats['stats']['lines']} lines / 1000000)
+                        (${stats['ohloh']['lines']} lines / 1000000)
                             <br />+ (2 * ${stats['coderwall']['badges']} badge(s))<br />
                         <strong>${int((stats['stats']['strength'] % 1) * 100)}%</strong>
                         to next level">
@@ -196,7 +196,7 @@
                         </progress></td></tr>
                     <tr class="tooltip"
                         title="<strong>Dexterity</strong><br />
-                        5 * ${stats['stats']['num_languages']} language(s)
+                        5 * ${len(stats['ohloh']['languages'])} language(s)
                         <br />
                     <strong>${int((stats['stats']['dexterity'] % 1) * 100)}%</strong>
                     to next level">
@@ -220,7 +220,7 @@
                         </progress></td></tr>
                     <tr class="tooltip"
                         title="<strong>Leadership</strong><br />
-                        ${stats['stats']['forks']} fork(s)<br />
+                        ${stats['github']['forks']} fork(s)<br />
                     <strong>${int((stats['stats']['leadership'] % 1) * 100)}%</strong>
                     to next level">
                         <td>Leadership:</td>
@@ -242,7 +242,7 @@
                         </progress></td></tr>
                     <tr class="tooltip"
                         title="<strong>Popularity</strong><br />
-                        ${stats['stats']['followers']} follower(s)<br />
+                        ${stats['github']['followers']} follower(s)<br />
                     <strong>${int((stats['stats']['popularity'] % 1) * 100)}%</strong>
                     to next level"><td>Popularity:</td>
                         <td>${int(stats['stats']['popularity'])}<progress max="1"
@@ -386,8 +386,8 @@
                 <table>
                     <tr><td>Public GitHub Repos:</td>
                         <td>
-                        % if stats:
-                            ${stats['github']['public_repos']}
+                        % if stats['github'].get('public_repos'):
+                            ${len(stats['github']['public_repos'])}
                         % else:
                             ?
                         % endif
@@ -401,7 +401,7 @@
                         % endif
                         </td></tr>
                     <tr><td>Most Repos:</td><td>
-                        % if stats:
+                        % if stats['ohloh'].get('languages'):
             ${", ".join([x['name'] for x in stats['ohloh']['languages'][:3]])}
                         % else:
                             ?
