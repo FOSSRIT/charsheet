@@ -76,7 +76,7 @@
                 <tr>
                 <td>
                 % if stats:
-                    <img class="avatar" src="${stats.get('gravatar_url')}" />
+                    <img class="avatar" src="${stats.get('gravatar')}" />
                 % else:
                     Username:
                 % endif
@@ -86,16 +86,16 @@
                 <tr class="tooltip" id="foo" title="<strong>Foo</strong>
                     - Foo is the average
                     of your six attribute scores.<br />
-                    <strong>${int((stats['foo'] % 1) * 100)}%</strong>
+                    <strong>${int((stats['stats']['foo'] % 1) * 100)}%</strong>
                     to next level">
-                    <td>Foo:</td><td>${int(stats['foo'])}</td></tr>
+                    <td>Foo:</td><td>${int(stats['stats']['foo'])}</td></tr>
                 <tr class="tooltip" title="<strong>Foo Bar</strong>
                     - Your Foo Bar shows
                     your progress towards the next level of Foo.<br />
-                    <strong>${int((stats['foo'] % 1) * 100)}%</strong>
+                    <strong>${int((stats['stats']['foo'] % 1) * 100)}%</strong>
                     to next level"><td>Foo Bar:</td>
                     <td>
-                    <progress max="1" value="${stats['foo'] % 1}">
+                    <progress max="1" value="${stats['stats']['foo'] % 1}">
                         </progress></td></tr>
                 </table>
             </div>
@@ -129,7 +129,7 @@
                         </td></tr>
                     <tr>
                     <td colspan="2">
-                    Charsheet ${int(stats['percent_complete'] * 100)}% complete.
+                    Charsheet ${int(stats['stats']['percent_complete'] * 100)}% complete.
                     </td>
                     </tr>
                 </table>
@@ -186,23 +186,23 @@
                 <table>
                     <tr class="tooltip"
                         title="<strong>Strength</strong><br />
-                        (${stats['lines']} lines / 1000000)
-                            <br />+ (2 * ${stats['badges']} badge(s))<br />
-                        <strong>${int((stats['strength'] % 1) * 100)}%</strong>
+                        (${stats['stats']['lines']} lines / 1000000)
+                            <br />+ (2 * ${stats['coderwall']['badges']} badge(s))<br />
+                        <strong>${int((stats['stats']['strength'] % 1) * 100)}%</strong>
                         to next level">
                         <td>Strength:</td>
-                        <td>${int(stats['strength'])}<progress max="1"
-                                value="${stats['strength'] % 1}">%
+                        <td>${int(stats['stats']['strength'])}<progress max="1"
+                                value="${stats['stats']['strength'] % 1}">%
                         </progress></td></tr>
                     <tr class="tooltip"
                         title="<strong>Dexterity</strong><br />
-                        5 * ${stats['num_languages']} language(s)
+                        5 * ${stats['stats']['num_languages']} language(s)
                         <br />
-                    <strong>${int((stats['dexterity'] % 1) * 100)}%</strong>
+                    <strong>${int((stats['stats']['dexterity'] % 1) * 100)}%</strong>
                     to next level">
                         <td>Dexterity:</td>
-                        <td>${int(stats['dexterity'])}<progress max="1"
-                                value="${stats['dexterity'] % 1}">
+                        <td>${int(stats['stats']['dexterity'])}<progress max="1"
+                                value="${stats['stats']['dexterity'] % 1}">
                         </progress></td></tr>
                 </table>
             </div>
@@ -210,22 +210,22 @@
                 <table>
                     <tr class="tooltip"
                         title="<strong>Wisdom</strong><br />
-                        ${round(stats['age_months'], 2)} month(s)
+                        ${round(stats['stats']['age_months'], 2)} month(s)
                         <br />
-                    <strong>${int((stats['wisdom'] % 1) * 100)}%</strong>
+                    <strong>${int((stats['stats']['wisdom'] % 1) * 100)}%</strong>
                     to next level">
                         <td>Wisdom:</td>
-                        <td>${int(stats['wisdom'])}<progress max="1"
-                                value="${stats['wisdom'] % 1}">
+                        <td>${int(stats['stats']['wisdom'])}<progress max="1"
+                                value="${stats['stats']['wisdom'] % 1}">
                         </progress></td></tr>
                     <tr class="tooltip"
                         title="<strong>Leadership</strong><br />
-                        ${stats['forks']} fork(s)<br />
-                    <strong>${int((stats['leadership'] % 1) * 100)}%</strong>
+                        ${stats['stats']['forks']} fork(s)<br />
+                    <strong>${int((stats['stats']['leadership'] % 1) * 100)}%</strong>
                     to next level">
                         <td>Leadership:</td>
-                        <td>${int(stats['leadership'])}<progress max="1"
-                                value="${stats['leadership'] % 1}">
+                        <td>${int(stats['stats']['leadership'])}<progress max="1"
+                                value="${stats['stats']['leadership'] % 1}">
                         </progress></td></tr>
                 </table>
             </div>
@@ -233,20 +233,20 @@
                 <table>
                     <tr class="tooltip"
                         title="<strong>Determination</strong><br />
-                        ${stats['public_repos']} public repo(s)<br />
-                    <strong>${int((stats['determination'] % 1) * 100)}%</strong>
+                        ${stats['github']['public_repos']} public repo(s)<br />
+                    <strong>${int((stats['stats']['determination'] % 1) * 100)}%</strong>
                     to next level">
                         <td>Determination:</td>
-                        <td>${int(stats['determination'])}<progress max="1"
-                                value="${stats['determination'] % 1}">
+                        <td>${int(stats['stats']['determination'])}<progress max="1"
+                                value="${stats['stats']['determination'] % 1}">
                         </progress></td></tr>
                     <tr class="tooltip"
                         title="<strong>Popularity</strong><br />
-                        ${stats['followers']} follower(s)<br />
-                    <strong>${int((stats['popularity'] % 1) * 100)}%</strong>
+                        ${stats['stats']['followers']} follower(s)<br />
+                    <strong>${int((stats['stats']['popularity'] % 1) * 100)}%</strong>
                     to next level"><td>Popularity:</td>
-                        <td>${int(stats['popularity'])}<progress max="1"
-                                value="${stats['popularity'] % 1}">
+                        <td>${int(stats['stats']['popularity'])}<progress max="1"
+                                value="${stats['stats']['popularity'] % 1}">
                         </progress></td></tr>
                 </table>
             </div>
@@ -262,114 +262,114 @@
             <div class="grid_4">
                 <table>
                     <tr><td>C</td>
-                        <td>${int(stats['skills']['c'])}<progress max="1"
-                            value="${stats['skills']['c'] % 1}">
+                        <td>${int(stats['stats']['skills']['c'])}<progress max="1"
+                            value="${stats['stats']['skills']['c'] % 1}">
                             </progress></td></tr>
                     <tr><td>C++</td>
-                        <td>${int(stats['skills']['c++'])}<progress max="1"
-                            value="${stats['skills']['c++'] % 1}">
+                        <td>${int(stats['stats']['skills']['c++'])}<progress max="1"
+                            value="${stats['stats']['skills']['c++'] % 1}">
                             </progress></td></tr>
                     <tr><td>Java</td>
-                        <td>${int(stats['skills']['java'])}<progress max="1"
-                            value="${stats['skills']['java'] % 1}">
+                        <td>${int(stats['stats']['skills']['java'])}<progress max="1"
+                            value="${stats['stats']['skills']['java'] % 1}">
                             </progress></td></tr>
                     <tr><td>HTML</td>
-                        <td>${int(stats['skills']['html'])}<progress max="1"
-                            value="${stats['skills']['html'] % 1}">
+                        <td>${int(stats['stats']['skills']['html'])}<progress max="1"
+                            value="${stats['stats']['skills']['html'] % 1}">
                             </progress></td></tr>
                     <tr><td>XML</td>
-                        <td>${int(stats['skills']['xml'])}<progress max="1"
-                            value="${stats['skills']['xml'] % 1}">
+                        <td>${int(stats['stats']['skills']['xml'])}<progress max="1"
+                            value="${stats['stats']['skills']['xml'] % 1}">
                             </progress></td></tr>
                     <tr><td>Python</td>
-                        <td>${int(stats['skills']['python'])}<progress max="1"
-                            value="${stats['skills']['python'] % 1}">
+                        <td>${int(stats['stats']['skills']['python'])}<progress max="1"
+                            value="${stats['stats']['skills']['python'] % 1}">
                             </progress></td></tr>
                     <tr><td>PHP</td>
-                        <td>${int(stats['skills']['php'])}<progress max="1"
-                            value="${stats['skills']['php'] % 1}">
+                        <td>${int(stats['stats']['skills']['php'])}<progress max="1"
+                            value="${stats['stats']['skills']['php'] % 1}">
                             </progress></td></tr>
                     <tr><td>JavaScript</td>
-                        <td>${int(stats['skills']['javascript'])}
+                        <td>${int(stats['stats']['skills']['javascript'])}
                             <progress max="1"
-                            value="${stats['skills']['javascript'] % 1}">
+                            value="${stats['stats']['skills']['javascript'] % 1}">
                             </progress></td></tr>
                 </table>
             </div>
             <div class="grid_4">
                 <table>
                     <tr><td>Perl</td>
-                        <td>${int(stats['skills']['perl'])}<progress max="1"
-                            value="${stats['skills']['perl'] % 1}">
+                        <td>${int(stats['stats']['skills']['perl'])}<progress max="1"
+                            value="${stats['stats']['skills']['perl'] % 1}">
                             </progress></td></tr>
                     <tr><td>Shell</td>
-                        <td>${int(stats['skills']['shell'])}<progress max="1"
-                            value="${stats['skills']['shell'] % 1}">
+                        <td>${int(stats['stats']['skills']['shell'])}<progress max="1"
+                            value="${stats['stats']['skills']['shell'] % 1}">
                             </progress></td></tr>
                     <tr><td>Objective-C</td>
-                        <td>${int(stats['skills']['objective-c'])}
+                        <td>${int(stats['stats']['skills']['objective-c'])}
                             <progress max="1"
-                            value="${stats['skills']['objective-c'] % 1}">
+                            value="${stats['stats']['skills']['objective-c'] % 1}">
                             </progress></td></tr>
                     <tr><td>Ruby</td>
-                        <td>${int(stats['skills']['ruby'])}<progress max="1"
-                            value="${stats['skills']['ruby'] % 1}">
+                        <td>${int(stats['stats']['skills']['ruby'])}<progress max="1"
+                            value="${stats['stats']['skills']['ruby'] % 1}">
                             </progress></td></tr>
                     <tr><td>Haskell</td>
-                        <td>${int(stats['skills']['haskell'])}<progress max="1"
-                            value="${stats['skills']['haskell'] % 1}">
+                        <td>${int(stats['stats']['skills']['haskell'])}<progress max="1"
+                            value="${stats['stats']['skills']['haskell'] % 1}">
                             </progress></td></tr>
                     <tr><td>Lua</td>
-                        <td>${int(stats['skills']['lua'])}<progress max="1"
-                            value="${stats['skills']['lua'] % 1}">
+                        <td>${int(stats['stats']['skills']['lua'])}<progress max="1"
+                            value="${stats['stats']['skills']['lua'] % 1}">
                             </progress></td></tr>
                     <tr><td>Assembly</td>
-                        <td>${int(stats['skills']['assembly'])}<progress max="1"
-                            value="${stats['skills']['assembly'] % 1}">
+                        <td>${int(stats['stats']['skills']['assembly'])}<progress max="1"
+                            value="${stats['stats']['skills']['assembly'] % 1}">
                             </progress></td></tr>
                     <tr><td>Common Lisp</td>
-                        <td>${int(stats['skills']['commonlisp'])}
+                        <td>${int(stats['stats']['skills']['commonlisp'])}
                             <progress max="1"
-                            value="${stats['skills']['commonlisp'] % 1}">
+                            value="${stats['stats']['skills']['commonlisp'] % 1}">
                             </progress></td></tr>
                 </table>
             </div>
             <div class="grid_4">
                 <table>
                     <tr><td>Scala</td>
-                        <td>${int(stats['skills']['scala'])}<progress max="1"
-                            value="${stats['skills']['scala'] % 1}">
+                        <td>${int(stats['stats']['skills']['scala'])}<progress max="1"
+                            value="${stats['stats']['skills']['scala'] % 1}">
                             </progress></td></tr>
                     <tr><td>Visual Basic</td>
-                        <td>${int(stats['skills']['visualbasic'])}
+                        <td>${int(stats['stats']['skills']['visualbasic'])}
                             <progress max="1"
-                            value="${stats['skills']['visualbasic'] % 1}">
+                            value="${stats['stats']['skills']['visualbasic'] % 1}">
                             </progress></td></tr>
                     <tr><td>Arduino</td>
-                        <td>${int(stats['skills']['arduino'])}<progress max="1"
-                            value="${stats['skills']['arduino'] % 1}">
+                        <td>${int(stats['stats']['skills']['arduino'])}<progress max="1"
+                            value="${stats['stats']['skills']['arduino'] % 1}">
                             </progress></td></tr>
                     <tr><td>Erlang</td>
-                        <td>${int(stats['skills']['erlang'])}<progress max="1"
-                            value="${stats['skills']['erlang'] % 1}">
+                        <td>${int(stats['stats']['skills']['erlang'])}<progress max="1"
+                            value="${stats['stats']['skills']['erlang'] % 1}">
                             </progress></td></tr>
                     <tr><td>Go</td>
-                        <td>${int(stats['skills']['go'])}<progress max="1"
-                            value="${stats['skills']['go'] % 1}">
+                        <td>${int(stats['stats']['skills']['go'])}<progress max="1"
+                            value="${stats['stats']['skills']['go'] % 1}">
                             </progress></td></tr>
                     <tr><td>CoffeeScript</td>
-                        <td>${int(stats['skills']['coffeescript'])}
+                        <td>${int(stats['stats']['skills']['coffeescript'])}
                             <progress max="1"
-                            value="${stats['skills']['coffeescript'] % 1}">
+                            value="${stats['stats']['skills']['coffeescript'] % 1}">
                             </progress></td></tr>
                     <tr><td>Emacs Lisp</td>
-                        <td>${int(stats['skills']['emacslisp'])}
+                        <td>${int(stats['stats']['skills']['emacslisp'])}
                             <progress max="1"
-                            value="${stats['skills']['emacslisp'] % 1}">
+                            value="${stats['stats']['skills']['emacslisp'] % 1}">
                             </progress></td></tr>
                     <tr><td>VimL</td>
-                        <td>${int(stats['skills']['viml'])}<progress max="1"
-                            value="${stats['skills']['viml'] % 1}">
+                        <td>${int(stats['stats']['skills']['viml'])}<progress max="1"
+                            value="${stats['stats']['skills']['viml'] % 1}">
                             </progress></td></tr>
                 </table>
             </div>
@@ -387,29 +387,29 @@
                     <tr><td>Public GitHub Repos:</td>
                         <td>
                         % if stats:
-                            ${stats['public_repos']}
+                            ${stats['github']['public_repos']}
                         % else:
                             ?
                         % endif
                         </td></tr>
                     <tr><td>Lines Committed:</td>
                         <td>
-                        % if stats.get('oh'):
-                            ${stats['lines']}
+                        % if stats['ohloh'].get('lines'):
+                            ${stats['ohloh']['lines']}
                         % else:
                             ?
                         % endif
                         </td></tr>
                     <tr><td>Most Repos:</td><td>
                         % if stats:
-            ${", ".join([x['name'] for x in stats['oh']['languages'][:3]])}
+            ${", ".join([x['name'] for x in stats['ohloh']['languages'][:3]])}
                         % else:
                             ?
                         % endif
                         </td></tr>
                     <tr><td>Most Code:</td><td>
-                        % if stats.get('oh'):
-            ${", ".join([lang['name'] for lang in stats['oh']['languages'][:3]])}
+                        % if stats['ohloh']:
+            ${", ".join([lang['name'] for lang in stats['ohloh']['languages'][:3]])}
                         % else:
                             ?
                         % endif
@@ -419,16 +419,16 @@
             <div class="grid_4">
                 <table>
                     <tr><td>Ohloh Profile:</td><td>
-                        % if stats.get('oh'):
+                        % if stats['ohloh']:
                             <a href=
                             'http://www.ohloh.net/accounts/
-                            ${stats['oh']['id']}?ref=Detailed'
+                            ${stats['ohloh']['id']}?ref=Detailed'
                             target='_top'>
                             <img
                                 alt='Ohloh Profile'
                                 border='0' height='35'
                                 src='http://www.ohloh.net/accounts/
-                                    ${stats['oh']['id']}
+                                    ${stats['ohloh']['id']}
                                     /widgets/account_detailed.gif'
                                 width='191' />
                             </a>
@@ -438,8 +438,8 @@
                         </td></tr>
                     <tr><td>Ohloh Rank:</td>
                         <td>
-                        % if stats.get('oh'):
-                            ${stats['oh']['position']}
+                        % if stats['ohloh']:
+                            ${stats['ohloh']['position']}
                         % else:
                             ?
                         % endif
@@ -473,7 +473,7 @@
                 <table class="badge-list">
                     <% badges_printed = 0 %>
                     <tr>
-                    % for badge in coderwall_data['cwc'].badges:
+                    % for badge in stats['coderwall']['badges']:
                         <td class="tooltip"
                             title="<strong>${badge.name}</strong>
                             - ${badge.description}.">
