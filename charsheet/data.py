@@ -20,6 +20,7 @@ metadata.create_all(engine)
 
 from requests import HTTPError
 
+from facts import average_value, top_users
 import stats
 
 utc = pytz.UTC  # For datetime handling
@@ -300,16 +301,16 @@ def global_stats():
             data['users'][user.name][fact.key] = fact.value
 
     stats = {
-        'avg_foo': average_value(data.stats, 'foo'),
-        'avg_dexterity': average_value(data.stats, 'dexterity'),
-        'avg_strength': average_value(data.stats, 'strength'),
-        'avg_wisdom': average_value(data.stats, 'wisdom'),
-        'avg_leadership': average_value(data.stats, 'leadership'),
-        'avg_determination': average_value(data.stats, 'determination'),
-        'avg_popularity': average_value(data.stats, 'popularity'),
-        'avg_num_languages': average_value(data.stats, 'num_languages'),
-        'avg_badges': average_value(data.stats, 'badges'),
-        'top_foo': top_users(data.stats, 'foo'),
+        'avg_foo': average_value(data, 'foo'),
+        'avg_dexterity': average_value(data, 'dexterity'),
+        'avg_strength': average_value(data, 'strength'),
+        'avg_wisdom': average_value(data, 'wisdom'),
+        'avg_leadership': average_value(data, 'leadership'),
+        'avg_determination': average_value(data, 'determination'),
+        'avg_popularity': average_value(data, 'popularity'),
+        'avg_num_languages': average_value(data, 'num_languages'),
+        'avg_badges': average_value(data, 'badges'),
+        'top_foo': top_users(data, 'foo'),
         'sheets_generated': len(users),
         'sheets_unique': len(data['users']),
     }

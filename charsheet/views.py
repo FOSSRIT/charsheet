@@ -17,7 +17,6 @@ from sqlalchemy import create_engine
 import datetime
 import forms
 
-from facts import average_value, top_users
 import data
 
 
