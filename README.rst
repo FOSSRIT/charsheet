@@ -21,6 +21,8 @@ Contributors
 
 -   David Gay (oddshocks)
 -   Remy DeCausemaker (decause)
+-   Nate Case (qalthos)
+-   Ralph Bean (threebean)
 
 APIs Currently Utilized
 -----------------------
@@ -47,6 +49,8 @@ running these commands:
 
 - $venv/bin/python setup.py develop
 
-- $venv/bin/populate_charsheet development.ini
+- add Github consumer key and secret to secrets.ini.example
+
+- mv secrets.ini.example secrets.ini
 
 - $venv/bin/pserve development.ini
