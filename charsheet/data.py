@@ -57,13 +57,17 @@ def handle_coderwall(request, username):
         cwc = CoderWall(username)
         return {
             'endorsements': cwc.endorsements,
-            'badges': len(cwc.badges),
-            'cwc': cwc,
+            'badges': [dict(name=badge.name,
+                            description=badge.description,
+                            image_uri=badge.image_uri)
+                        for badge in cwc.badges],
         }
     except NameError:
-        request.session.flash(
-            'Error: Unable to find username on Coderwall.')
-        return None
+        request.session.flash('Error: Unable to find username on Coderwall.')
+        return {
+            'endorsements': 0,
+            'badges': [],
+        }
 
 
 def handle_github(request, username):
