@@ -190,6 +190,17 @@ def handle_github(request, username):
 
 
 def handle_ohloh(request, username):
+    data = {
+        'age_months': 0,
+        'id': None,
+        'kudo_rank': 0,
+        'languages': [],
+        'lines': 0,
+        'position': 0,
+    }
+    if not username:
+        return data
+
     # Import ElementTree for XML parsing (Python 2.5+)
     import elementtree.ElementTree as ET
 
@@ -211,26 +222,21 @@ def handle_ohloh(request, username):
     error = element.find("error")
     if error:
         request.session.flash('Error: Unable to connect to Ohloh.')
-        return None
+        return data
     else:
         if element.find("result/account") != None:
             # If there's no error and we've got the account, let's get
             # some data.
-            ohloh_dict = {
-                'id': element.find("result/account/id").text,
-                'created_at': element.find(
-                        "result/account/created_at").text,
-            }
+            data['id'] = element.find("result/account/id").text
             for node in element.find("result/account/kudo_score"):
-                ohloh_dict[node.tag] = node.text
+                data[node.tag] = node.text
 
             # Get age of account, in months
-            ohloh_creation_datetime = parser.parse(
-                    ohloh_dict['created_at'])
+            ohloh_created_at = element.find("result/account/created_at").text
             ohloh_age_months = calculate_age_months(
-                    ohloh_creation_datetime,
+                    parser.parse(ohloh_created_at),
                     utc.localize(datetime.now()))
-            ohloh_dict['age_months'] = ohloh_age_months
+            data['age_months'] = ohloh_age_months
 
             # Obtain account language data
             ohloh_languages = []  # User languages
@@ -247,20 +253,17 @@ def handle_ohloh(request, username):
                         lines=lang_lines,
                         exp=lang_exp,
                         commits=lang_commits))
-            ohloh_dict['languages'] = ohloh_languages
-            ohloh_dict['num_languages'] = len(ohloh_languages)
-            ohloh_dict['lines'] = \
+            data['lines'] = \
                     sum([lang['lines'] for lang in ohloh_languages])
             # Sort languages by lines
-            sorted_ohloh_languages = sorted(ohloh_languages,
+            data['languages'] = sorted(ohloh_languages,
                     key=lambda lang: lang['lines'], reverse=True)
-            ohloh_dict['languages'] = sorted_ohloh_languages
 
-            return ohloh_dict
+            return data
         else:
             request.session.flash('Error: Unable to find username on \
                 Ohloh.')
-            return None
+            return data
 
 
 def get_gravatar_url(email):
