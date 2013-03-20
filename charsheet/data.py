@@ -149,6 +149,7 @@ def handle_github(request, username):
                     user_languages[language] += repo_languages[language]
                 else:
                     user_languages[language] = repo_languages[language]
+        data['forks'] = gh_forks
 
         # Sort languages by lines of code in repos
         data['sorted_languages'] = sorted(user_languages.iteritems(),
@@ -171,7 +172,8 @@ def handle_github(request, username):
         except AttributeError:
             data['blog'] = "?"
 
-        for tag in ['bio', 'company', 'email', 'hireable', 'location', 'name']:
+        for tag in ['bio', 'company', 'email', 'hireable', 'location', 'name',
+                    'followers']:
             try:
                 data[tag] = getattr(user, tag)
             except AttributeError:
