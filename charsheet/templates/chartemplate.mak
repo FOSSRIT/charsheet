@@ -196,7 +196,7 @@
                         </progress></td></tr>
                     <tr class="tooltip"
                         title="<strong>Dexterity</strong><br />
-                        5 * ${len(stats['ohloh']['languages'])} language(s)
+                        5 * ${len(stats['ohloh']['languages_by_lines'])} language(s)
                         <br />
                     <strong>${int((stats['stats']['dexterity'] % 1) * 100)}%</strong>
                     to next level">

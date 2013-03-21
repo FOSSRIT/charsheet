@@ -174,7 +174,7 @@ def handle_ohloh(request, username):
         'age_months': 0,
         'id': None,
         'kudo_rank': 0,
-        'languages': [],
+        'languages_by_lines': [],
         'lines': 0,
         'position': 0,
     }
