@@ -99,7 +99,7 @@ def handle_github(request, username):
     if not username:
         return data
     try:
-        user = gh.users.get()
+        user = gh.users.get(user=username)
 
         # Handle organizations, because everything breaks if one is
         # passed in, including but not limited to user.bio and
