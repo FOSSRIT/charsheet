@@ -61,7 +61,7 @@
                             <strong>${i}.</strong>
                             <a href='${request.route_url('charsheet', username=user[0])}'>${user[0]}</a>
                         </td>
-                        <td>${user[1]}</td>
+                        <td>${'%.2f' % user[1]}</td>
                     </tr>
                     <% i += 1 %>
                 % endfor
@@ -73,35 +73,35 @@
                 <table>
                 <tr>
                     <td>Average Foo</td>
-                    <td>${stats['avg_foo']}</td>
+                    <td>${'%.2f' % stats['avg_foo']}</td>
                 </tr>
                 <tr>
                     <td>Average Strength</td>
-                    <td>${stats['avg_strength']}</td>
+                    <td>${'%.2f' % stats['avg_strength']}</td>
                 </tr>
                 <tr>
                     <td>Average Dexterity</td>
-                    <td>${stats['avg_dexterity']}</td>
+                    <td>${'%.2f' % stats['avg_dexterity']}</td>
                 </tr>
                 <tr>
                     <td>Average Wisdom</td>
-                    <td>${stats['avg_wisdom']}</td>
+                    <td>${'%.2f' % stats['avg_wisdom']}</td>
                 </tr>
                 <tr>
                     <td>Average Leadership</td>
-                    <td>${stats['avg_leadership']}</td>
+                    <td>${'%.2f' % stats['avg_leadership']}</td>
                 </tr>
                 <tr>
                     <td>Average Determination</td>
-                    <td>${stats['avg_determination']}</td>
+                    <td>${'%.2f' % stats['avg_determination']}</td>
                 </tr>
                 <tr>
                     <td>Average Number of Languages</td>
-                    <td>${stats['avg_num_languages']}</td>
+                    <td>${'%.2f' % stats['avg_num_languages']}</td>
                 </tr>
                 <tr>
                     <td>Average Coderwall Badges</td>
-                    <td>${stats['avg_badges']}</td>
+                    <td>${'%.2f' % stats['avg_badges']}</td>
                 </tr>
                 </table>
             </div>
