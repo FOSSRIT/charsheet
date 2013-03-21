@@ -271,30 +271,27 @@ def inject_knowledge(username, data_dict):
 
 
 def global_stats():
-    data = {
-        'users': dict(),
-    }
+    usernames = DBSession.query(Entity).all()
+    user_data = dict()
 
-    users = DBSession.query(Entity).all()
-
-    for user in users:
-        data['users'][user.name] = dict()
+    for user in usernames:
+        user_data[user.name] = dict()
         for fact in user.facts.values():
-            data['users'][user.name][fact.key] = fact.value
+            user_data[user.name][fact.key] = fact.value
 
     stats = {
-        'avg_foo': average_value(data, 'foo'),
-        'avg_dexterity': average_value(data, 'dexterity'),
-        'avg_strength': average_value(data, 'strength'),
-        'avg_wisdom': average_value(data, 'wisdom'),
-        'avg_leadership': average_value(data, 'leadership'),
-        'avg_determination': average_value(data, 'determination'),
-        'avg_popularity': average_value(data, 'popularity'),
-        'avg_num_languages': average_value(data, 'num_languages'),
-        'avg_badges': average_value(data, 'badges'),
-        'top_foo': top_users(data, 'foo'),
-        'sheets_generated': len(users),
-        'sheets_unique': len(data['users']),
+        'avg_foo': average_value(user_data, 'foo'),
+        'avg_dexterity': average_value(user_data, 'dexterity'),
+        'avg_strength': average_value(user_data, 'strength'),
+        'avg_wisdom': average_value(user_data, 'wisdom'),
+        'avg_leadership': average_value(user_data, 'leadership'),
+        'avg_determination': average_value(user_data, 'determination'),
+        'avg_popularity': average_value(user_data, 'popularity'),
+        'avg_num_languages': average_value(user_data, 'languages_by_lines', 'ohloh'),
+        'avg_badges': average_value(user_data, 'badges', 'coderwall'),
+        'top_foo': top_users(user_data, 'foo'),
+        'sheets_generated': len(usernames),
+        'sheets_unique': len(user_data),
     }
 
     return stats

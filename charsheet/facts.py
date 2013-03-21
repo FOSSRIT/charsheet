@@ -12,8 +12,13 @@ def average_value(data, stat):
     in the db.
     """
     # TODO: Check if passed stat is average-able
-    values_sum = sum(data['users'][username]['stats'][stat] for username in data['users'])
-    return values_sum / len(data['users'])
+    values_sum = sum(data[username]['stats'][stat] for username in data)
+    return values_sum / len(data)
+
+
+def average_length(data, stat, location):
+    length_sum = sum(len(data[username][location][stat]) for username in data)
+    return length_sum / len(data)
 
 
 def top_users(data, stat):
@@ -22,7 +27,7 @@ def top_users(data, stat):
     """
     # TODO: Check if stat can be ranked
     # TODO: Hopefully use knowledge to pull sorted list soon
-    scoreboard = sorted([(username, data['users'][username]['stats'][stat])
-        for username in data['users']], key=operator.itemgetter(1), reverse=True)
+    scoreboard = sorted([(username, data[username]['stats'][stat])
+        for username in data], key=operator.itemgetter(1), reverse=True)
 
     return scoreboard[:10]
