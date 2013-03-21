@@ -10,50 +10,67 @@ import json
 import pytz
 import re
 import urllib
-import urllib2
+
+
+from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
+engine = create_engine('sqlite:///knowledge.db')
+init_model(engine)
+metadata.create_all(engine)
+
+from requests import HTTPError
+
+from facts import average_value, top_users
+import stats
 
 from requests import HTTPError
 
 utc = pytz.UTC  # For datetime handling
 
 
-def calculate_age_months(dt1, dt2):
-    """
-    Pass this function two tz-aware datetimes and get
-    the difference in months and fractions of a month!
-    """
-    age_delta = relativedelta.relativedelta(dt1, dt2)
-    # The below works well enough to get an approximate decimal.
-    fraction_of_month = float(age_delta.days) / 31
-    return abs((age_delta.years * 12) + age_delta.months + fraction_of_month)
+def handle_all(request, usernames):
+    """Handle looking at all of the backends."""
 
+    data = dict(
+        usernames=usernames,
+        timestamp=datetime.now().strftime("%Y.%m.%d %H:%M"),
+    )
 
-def get_gravatar_url(email):
-    # Gravatar
-    gravatar_url = 'http://www.gravatar.com/avatar/'
-    gravatar_size = 60  # in pixels
-    gravatar_url += hashlib.md5(email.lower()).hexdigest() + "?"
-    gravatar_url += urllib.urlencode({'s': str(gravatar_size)})
-    return gravatar_url
+    for backend, username in usernames.items():
+        data[backend] = globals()['handle_' + backend](request, username)
+
+    if data['github'].get('email'):
+        data['gravatar'] = get_gravatar_url(data['github']['email'])
+
+    data['stats'] =  stats.calculate_stats(
+        gh=data['github'],
+        oh=data['ohloh'],
+        cw=data['coderwall']
+    )
+
+    return data
 
 
 def handle_coderwall(request, username):
-    """
-    Get data from CoderWall.
-    """
-    from coderwall import CoderWall
+    """Get data from CoderWall."""
+    data = {
+        'endorsements': 0,
+        'badges': [],
+    }
+    if not username:
+        return data
 
+    from coderwall import CoderWall
     try:
         cwc = CoderWall(username)
-        return {
-            'endorsements': cwc.endorsements,
-            'badges': len(cwc.badges),
-            'cwc': cwc,
-        }
+        data['endorsements'] = cwc.endorsements
+        data['badges'] = [dict(name=badge.name,
+                               description=badge.description,
+                               image_uri=badge.image_uri)
+                          for badge in cwc.badges]
+        return data
     except NameError:
-        request.session.flash(
-            'Error: Unable to find username on Coderwall.')
-        return None
+        request.session.flash('Error: Unable to find username on Coderwall.')
+        return data
 
 
 def handle_github(request, username):
@@ -64,6 +81,23 @@ def handle_github(request, username):
     github_api = "https://api.github.com"
     token = request.session['token']
     gh = Github(token=token)
+    data = {
+        'age_months': 0,
+        'bio': '',
+        'blog': '',
+        'company': '',
+        'email': '',
+        'followers': 0,
+        'forks': 0,
+        'hireable': False,
+        'recent_events': [],
+        'language_by_repos': [],
+        'location': '',
+        'name': '',
+        'public_repos': [],
+     }
+    if not username:
+        return data
     try:
         user = gh.users.get()
 
@@ -74,148 +108,79 @@ def handle_github(request, username):
             request.session.flash(
                 'Error: Charsheet does not yet support \
                         GitHub organizations.')
-            return None
+            return data
 
         # Get user repos
-        user_repos = []
-        user_languages = {}  # Structured as language: lines
-        for page in gh.repos.list(user=username):
+        for page in gh.repos.list(user=username, type='public'):
             # Results are paginated.
             for repo in page:
-                user_repos.append(repo)
-        # TODO: Consolidate this loop into the loop a few blocks below
-        # Get number of repos per language
-        language_count = {}  # language: number of repos
-        for repo in user_repos:
-            if repo.language not in language_count.keys():
-                language_count[repo.language] = 1
-            else:
-                language_count[repo.language] += 1
-        # Don't want no None languages in mah language dict
-        if None in language_count.keys():
-            del language_count[None]
-
-        # Sort languages by number of repos
-        sorted_language_count = sorted(language_count.iteritems(),
-            key=operator.itemgetter(1), reverse=True)
+                data['public_repos'].append(repo)
 
         # Get lines written per language and number of times
         # language is used. Also get number of forks of user's original
         # repos.
-        gh_forks = 0
-        for repo in user_repos:
+        user_languages = {}
+        for repo in data['public_repos']:
             repo_languages = gh.repos.list_languages(
                 user=repo.owner.login, repo=repo.name)
-            # The owner of an original repo counts as having a fork it
-            # seems, so we want to make sure not to count that.
-            if repo.forks > 1:
-                gh_forks += repo.forks - 1
+            data['forks'] += repo.forks
             for language in repo_languages:
                 if language in user_languages.keys():
-                    user_languages[language] += repo_languages[language]
+                    user_languages[language] += 1
                 else:
-                    user_languages[language] = repo_languages[language]
+                    user_languages[language] = 1
 
         # Sort languages by lines of code in repos
-        sorted_languages = sorted(user_languages.iteritems(),
-            key=operator.itemgetter(1), reverse=True)
+        data['languages_by_repos'] = sorted(user_languages,
+            key=lambda lang: user_languages[lang], reverse=True)
 
         # Get age of account, in months
-        gh_age_months = calculate_age_months(
+        data['age_months'] = calculate_age_months(
                 user.created_at, user.created_at.now())
 
         # Get recent user activity
-        """ Commentin' this stuff out to use pygithub3 instead!
-        api_request = urllib2.Request("{0}/users/{1}/events/public".format(
-            github_api, username))
-        api_response = urllib2.urlopen(api_request, data=urllib.urlencode({
-            'access_token': token}))
-        events_json = json.load(gh.events.users.list_performed_public())
-        recent_events = events_json[:25]
-        """
         recent_events = list()
-        result = gh.events.users.list_performed_public(user='oddshocks')
+        result = gh.events.users.list_performed_public(user=username)
         for page in result:
             for event in page:
                 recent_events.append(event)
-        recent_events = recent_events[:25]
+        data['recent_events'] = recent_events[:25]
 
         # Blog/URL handling
         try:
-            if user.blog.startswith('http://'):
-                gh_blog_url = user.blog[7:]
-            elif user.blog.startswith('https://'):
-                gh_blog_url = user.blog[8:]
-            else:
-                gh_blog_url = user.blog
+            data['blog'] = user.blog.split('://')[-1]
         except AttributeError:
-            gh_blog_url = "?"
+            data['blog'] = "?"
 
-        # Bio handling
-        try:
-            gh_bio = user.bio
-        except AttributeError:
-            gh_bio = "?"
+        for tag in ['bio', 'company', 'email', 'hireable', 'location', 'name',
+                    'followers']:
+            try:
+                data[tag] = getattr(user, tag)
+            except AttributeError:
+                data[tag] = '?'
 
-        # Company handling
-        try:
-            gh_company = user.company
-        except AttributeError:
-            gh_company = "?"
-
-        # Email handling
-        try:
-            gh_email = user.email
-        except AttributeError:
-            gh_email = "?"
-
-        # Hirable handling
-        try:
-            gh_hireable = user.hireable
-        except AttributeError:
-            gh_hireable = "?"
-
-        # Location handling
-        try:
-            gh_location = user.location
-        except AttributeError:
-            gh_location = "?"
-
-        # Name handling
-        try:
-            gh_name = user.name
-        except AttributeError:
-            gh_name = "?"
-
-        return {
-            'age_months': gh_age_months,
-            'bio': gh_bio,
-            'blog': gh_blog_url,
-            'company': gh_company,
-            'email': gh_email,
-            'followers': user.followers,
-            'forks': gh_forks,
-            'hireable': gh_hireable,
-            'recent_events': recent_events,
-            'languages': sorted_languages,
-            'languages_count': sorted_language_count,
-            'languages_lines': user_languages,
-            'num_languages': len(user_languages),
-            'location': gh_location,
-            'name': gh_name,
-            'public_repos': user.public_repos,
-            'repos': gh.repos.list(username).all(),
-            }
+        return data
 
     except exceptions.NotFound:
         request.session.flash('Error: Unable to find username on GitHub.')
-        return None
+        return data
     except HTTPError:
         request.session.flash('Error: GitHub denied our request!')
-        return None
+        return data
 
 
 def handle_ohloh(request, username):
+    data = {
+        'age_months': 0,
+        'id': None,
+        'kudo_rank': 0,
+        'languages': [],
+        'lines': 0,
+        'position': 0,
+    }
+    if not username:
+        return data
+
     # Import ElementTree for XML parsing (Python 2.5+)
     import elementtree.ElementTree as ET
 
@@ -237,26 +202,21 @@ def handle_ohloh(request, username):
     error = element.find("error")
     if error:
         request.session.flash('Error: Unable to connect to Ohloh.')
-        return None
+        return data
     else:
         if element.find("result/account") != None:
             # If there's no error and we've got the account, let's get
             # some data.
-            ohloh_dict = {
-                'id': element.find("result/account/id").text,
-                'created_at': element.find(
-                        "result/account/created_at").text,
-            }
+            data['id'] = element.find("result/account/id").text
             for node in element.find("result/account/kudo_score"):
-                ohloh_dict[node.tag] = node.text
+                data[node.tag] = node.text
 
             # Get age of account, in months
-            ohloh_creation_datetime = parser.parse(
-                    ohloh_dict['created_at'])
+            ohloh_created_at = element.find("result/account/created_at").text
             ohloh_age_months = calculate_age_months(
-                    ohloh_creation_datetime,
+                    parser.parse(ohloh_created_at),
                     utc.localize(datetime.now()))
-            ohloh_dict['age_months'] = ohloh_age_months
+            data['age_months'] = ohloh_age_months
 
             # Obtain account language data
             ohloh_languages = []  # User languages
@@ -273,17 +233,83 @@ def handle_ohloh(request, username):
                         lines=lang_lines,
                         exp=lang_exp,
                         commits=lang_commits))
-            ohloh_dict['languages'] = ohloh_languages
-            ohloh_dict['num_languages'] = len(ohloh_languages)
-            ohloh_dict['lines'] = \
+            data['lines'] = \
                     sum([lang['lines'] for lang in ohloh_languages])
             # Sort languages by lines
-            sorted_ohloh_languages = sorted(ohloh_languages,
+            data['languages_by_lines'] = sorted(ohloh_languages,
                     key=lambda lang: lang['lines'], reverse=True)
-            ohloh_dict['languages'] = sorted_ohloh_languages
 
-            return ohloh_dict
+            return data
         else:
             request.session.flash('Error: Unable to find username on \
                 Ohloh.')
-            return None
+            return data
+
+
+def get_gravatar_url(email):
+    # Gravatar
+    gravatar_url = 'http://www.gravatar.com/avatar/'
+    gravatar_size = 60  # in pixels
+    gravatar_url += hashlib.md5(email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'s': str(gravatar_size)})
+    return gravatar_url
+
+
+def inject_knowledge(username, data_dict):
+    character = Entity.by_name(username)
+    if not character:
+        character = Entity(username)
+        character[u'name'] = username
+
+    for key, value in data_dict.items():
+        if isinstance(value, str):
+            value = value.decode('utf8')
+        character[key] = value
+    DBSession.add(character)
+    DBSession.commit()
+    return character
+
+
+def global_stats():
+    data = {
+        'users': dict(),
+    }
+
+    users = DBSession.query(Entity).all()
+
+    for user in users:
+        data['users'][user.name] = dict()
+        for fact in user.facts.values():
+            data['users'][user.name][fact.key] = fact.value
+
+    stats = {
+        'avg_foo': average_value(data, 'foo'),
+        'avg_dexterity': average_value(data, 'dexterity'),
+        'avg_strength': average_value(data, 'strength'),
+        'avg_wisdom': average_value(data, 'wisdom'),
+        'avg_leadership': average_value(data, 'leadership'),
+        'avg_determination': average_value(data, 'determination'),
+        'avg_popularity': average_value(data, 'popularity'),
+        'avg_num_languages': average_value(data, 'num_languages'),
+        'avg_badges': average_value(data, 'badges'),
+        'top_foo': top_users(data, 'foo'),
+        'sheets_generated': len(users),
+        'sheets_unique': len(data['users']),
+    }
+
+    return stats
+
+
+def get_user(username):
+    return Entity.by_name(username)
+
+
+def calculate_age_months(dt1, dt2):
+    """
+    Pass this function two tz-aware datetimes and get
+    the difference in months and fractions of a month!
+    """
+    age_delta = relativedelta.relativedelta(dt1, dt2)
+    # The below works well enough to get an approximate decimal.
+    fraction_of_month = float(age_delta.days) / 31
+    return abs((age_delta.years * 12) + age_delta.months + fraction_of_month)

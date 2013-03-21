@@ -7,10 +7,9 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
 requires = [
-    'pyramid_debugtoolbar',
     'coderwall',
     'elementtree',
-    'knowledge',
+    'knowledge>=0.3',
     'pyramid',
     'SQLAlchemy',
     'transaction',
@@ -21,6 +20,7 @@ requires = [
     'tw2.jqplugins.jqgrid',
     'pygithub3',
     'pyramid_tm',
+    'pyramid_debugtoolbar',
     'pyramid_openid',
     'python-dateutil',
     'pytz',

@@ -108,7 +108,7 @@ progress::-moz-progress-bar {
     margin: 15px 0;
 }
 
-input {
+.button, input#submit {
     padding: 4px;
     background: #e3e3e3;
     text-shadow: 0 1px 0 #fff;

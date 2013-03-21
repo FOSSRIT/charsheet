@@ -15,7 +15,7 @@ def average_value(data, stat):
     values = int()
     values_sum = float()
     for username in data['users']:
-        values_sum += float(data['users'][username][stat])
+        values_sum += float(data['users'][username]['stats'][stat])
         values += 1
     # Return average value rounded to two decimal places
     return round(values_sum / float(values), 2)
@@ -30,7 +30,7 @@ def top_users(data, stat):
     scoreboard = dict()
 
     for username in data['users']:
-        scoreboard[username] = round(data['users'][username][stat], 2)
+        scoreboard[username] = round(data['users'][username]['stats'][stat], 2)
 
     # sort users by stat value
     scoreboard_sorted = sorted(scoreboard.iteritems(),
