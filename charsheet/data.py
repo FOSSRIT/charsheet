@@ -19,7 +19,7 @@ metadata.create_all(engine)
 
 from requests import HTTPError
 
-from facts import average_value, top_users
+from facts import average_value, average_length, top_users
 import stats
 
 from requests import HTTPError
@@ -287,8 +287,8 @@ def global_stats():
         'avg_leadership': average_value(user_data, 'leadership'),
         'avg_determination': average_value(user_data, 'determination'),
         'avg_popularity': average_value(user_data, 'popularity'),
-        'avg_num_languages': average_value(user_data, 'languages_by_lines', 'ohloh'),
-        'avg_badges': average_value(user_data, 'badges', 'coderwall'),
+        'avg_num_languages': average_length(user_data, 'languages_by_lines', 'ohloh'),
+        'avg_badges': average_length(user_data, 'badges', 'coderwall'),
         'top_foo': top_users(user_data, 'foo'),
         'sheets_generated': len(usernames),
         'sheets_unique': len(user_data),
