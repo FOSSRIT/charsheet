@@ -501,6 +501,8 @@
                     % for event in stats['github'].get('recent_events'):
                         <% repo_url = "https://github.com/"+event.repo.name %>
                         <li class="event ${event.type}">
+                        <span class='timestamp'>${event.created_at}</span>
+                        <span class='details'>
                         % if event.type == 'PushEvent':
                             Pushed ${event.payload['size']} commit(s) to
                         % elif event.type == 'IssuesEvent':
@@ -561,6 +563,7 @@
                         % if not event.repo.name == '/':
                             <a href="${repo_url}">${event.repo.name}</a>.
                         % endif
+                        </span>
                         </li>
                     % endfor
                     </ul>

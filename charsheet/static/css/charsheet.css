@@ -157,6 +157,11 @@ table {
     color: #000;
 }
 
+.timestamp {
+    padding-left: 5px;
+    float:right;
+}
+
 #user-bio {
     list-style-type: none;
 }
