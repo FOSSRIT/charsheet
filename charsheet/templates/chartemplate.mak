@@ -503,26 +503,25 @@
                         <li class="event ${event.type}">
                         % if event.type == 'PushEvent':
                             Pushed ${event.payload['size']} commit(s)
-                            to <a href="${repo_url}">
-                            ${event.repo.name}</a>.
+                            to <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'IssuesEvent':
                             ${event.payload['action'].capitalize()} issue
                             <a href="${event.payload['issue']['html_url']}">
-                            ${event.payload['issue']['title']}</a> in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            ${event.payload['issue']['title']}</a>
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'IssueCommentEvent':
                             Commented on
                             <a href="${event.payload['issue']['html_url']}">
-                            ${event.payload['issue']['title']}</a> in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            ${event.payload['issue']['title']}</a>
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'CreateEvent':
                             Created ${event.payload['ref_type']}
-                            ${event.payload['ref']} in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            ${event.payload['ref']}
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'DeleteEvent':
                             Deleted ${event.payload['ref_type']}
-                            ${event.payload['ref']} in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            ${event.payload['ref']}
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'WatchEvent':
                             ${event.payload['action'].capitalize()} watching
                             <a href="${repo_url}">${event.repo.name}</a>.
@@ -540,36 +539,35 @@
                             ${action} pull request
                             <a href="${event.payload['pull_request']['_links']['html']['href']}">
                             ${event.payload['pull_request']['title']}</a>
-                            in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'CommitCommentEvent':
                             Commented on
                             <a href="${event.payload['comment']['html_url']}">
-                            a commit</a> in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            a commit</a>
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'DownloadEvent':
-                            Created a download in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            Created a download
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == "ForkEvent":
                             Forked
                             <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == 'ForkApplyEvent':
-                            Applied a patch in the fork queue for the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            Applied a patch in the fork queue for
+                            <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == "GollumEvent":
-                            Edited the wiki of the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            Edited the wiki of
+                            <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == "MemberEvent":
-                            Was added as a collaborator in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            Was added as a collaborator to
+                            <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == "PublicEvent":
-                            Open-sourced the
-                            <a href="${repo_url}">${event.repo.name}</a> repo!
+                            Open-sourced
+                            <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == "PullRequestReviewCommentEvent":
                             Commented on
                             <a href="${event.payload['comment']['_links']['html']['href']}">
-                            a pull request</a> in the
-                            <a href="${repo_url}">${event.repo.name}</a> repo.
+                            a pull request</a>
+                            in <a href="${repo_url}">${event.repo.name}</a>.
                         % elif event.type == "TeamAddEvent":
                             Modified a team.
                         % else:
