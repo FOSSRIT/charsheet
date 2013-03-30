@@ -13,14 +13,14 @@
     left: 0;
 }
 
-#charsheet_form {
+#home_form {
     width: 400px;
     margin-left: auto;
     margin-right: auto;
 }
 
-#charsheet_form > h1 {
-    font-size: 24px; /* Make h1 into an h2 b/c sets the title to be h1 */
+#home_form > h1 {
+    font-size: 24px; /* Make h1 into h2 size because, it sets title to be h1 */
 }
 
-#charsheetform\:master\:container { color: red; }
+#homeform\:master\:container { color: red; }

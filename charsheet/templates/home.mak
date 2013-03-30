@@ -56,8 +56,9 @@
 					<a href="https://github.com/FOSSRIT/charsheet/issues">
 					here</a>.
 				</p>
-				<h2>Status</h2>
-				<p>Charsheet is running fine!</p>
+				<div id="home_form">
+					${handle_search_form.display() | n}
+				</div>
 				<!-- SLIDESHOW COMMENTED OUT UNTIL I FINISH REDESIGN
 				<div class="slideshow">
 					<img
@@ -78,7 +79,7 @@
 				-->
 			</div>
 			<div class="grid_6">
-					<div id='charsheet_form'>
+					<div id='home_form'>
 					${charsheet_form.display() | n}
 					<form action="${github_login_url}" method="post">
 						<input class="button" type="submit"

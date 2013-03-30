@@ -18,3 +18,12 @@ class CharsheetForm(tw2.forms.FormPage):
         github_token = tw2.forms.HiddenField('github_token')
         ohloh = tw2.forms.TextField('ohloh', label='Ohloh')
         coderwall = tw2.forms.TextField('coderwall', label='Coderwall')
+
+
+class HandleSearchForm(tw2.forms.FormPage):
+    title = 'Handle Search'
+
+    class child(tw2.forms.TableForm):
+        buttons = [tw2.forms.SubmitButton(id='submit', value='Search')]
+        action = '/charsheet'
+        username = tw2.forms.TextField('handle', label='Handle')
