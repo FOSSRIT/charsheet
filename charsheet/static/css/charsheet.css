@@ -81,63 +81,86 @@ table {
     font-size: 1.6em;
 }
 
-li.event {
+.event {
     border: 1px outset #000;
     padding: 4px;
     margin: 2px 0px;
     line-height: 20px;
-}
-
-li.event a:hover { text-decoration: underline; }
-
-li.push-event {
-    color: green;
-    background: #C9FFC1;
-}
-
-li.push-event a, li.push-event a:visited { color: #006700; }
-
-li.issues-event {
-    color: purple;
-    background: #FFBAF9;
-}
-
-li.issues-event a, li.issues-event a:visited { color: #5B0067; }
-
-li.comment-event {
-    color: orange;
-    background: #FFDDBD;
-}
-
-li.comment-event a, li.comment-event a:visited { color: #636700; }
-
-li.create-event {
-    color: blue;
-    background: #C2C9FF;
-}
-
-li.create-event a, li.create-event a:visited { color: #001467; }
-
-li.delete-event {
-    color: red;
-    background: #FFC0C0;
-}
-
-li.delete-event a, li.delete-event a:visited { color: #670000; }
-
-li.social-event {
-    color: #4A4A4A;
-    background: #E3E3E3;
-}
-
-li.social-event a, li.social-event a:visited { color: #000; }
-
-li.other-event {
     color: #CCC;
     background: #000;
 }
 
-li.other-event a, li.other-event a:visited { color: #868686; }
+.event a, .event a:visited {
+    color: #868686;
+}
+
+.event a:hover { text-decoration: underline; }
+
+.PushEvent, .DownloadEvent {
+    color: green;
+    background: #C9FFC1;
+}
+
+.PushEvent a, .DownloadEvent a,
+.PushEvent a:visited, .DownloadEvent a:visited {
+    color: #006700;
+}
+
+.IssuesEvent {
+    color: purple;
+    background: #FFBAF9;
+}
+
+.IssuesEvent a, .IssuesEvent a:visited { color: #5B0067; }
+
+.IssueCommentEvent, .CommitCommentEvent, .GollumEvent,
+.PullRequestReviewCommentEvent {
+    color: orange;
+    background: #FFDDBD;
+}
+
+.IssueCommentEvent a, .CommitCommentEvent a, .GollumEvent a,
+.PullRequestReviewCommentEvent a,
+.IssueCommentEvent a:visited, .CommitCommentEvent a:visited,
+.GollumEvent a:visited, .PullRequestReviewCommentEvent a:visited {
+    color: #636700;
+}
+
+.CreateEvent, .GistEvent, .PullRequestEvent, .ForkEvent, .ForkApplyEvent,
+.PublicEvent {
+    color: blue;
+    background: #C2C9FF;
+}
+
+.CreateEvent a, .GistEvent a, .PullRequestEvent a, .ForkEvent a,
+.ForkApplyEvent a, .PublicEvent a,
+.CreateEvent a:visited, .GistEvent a:visited, .PullRequestEvent a:visited,
+.ForkEvent a:visited, .ForkApplyEvent a:visited, .PublicEvent a:visited {
+    color: #001467;
+}
+
+.DeleteEvent {
+    color: red;
+    background: #FFC0C0;
+}
+
+.DeleteEvent a, .DeleteEvent a:visited { color: #670000; }
+
+.WatchEvent, .FollowEvent, .MemberEvent, .TeamAddEvent {
+    color: #4A4A4A;
+    background: #E3E3E3;
+}
+
+.WatchEvent a, .FollowEvent a, .MemberEvent a, .TeamAddEvent a,
+.WatchEvent a:visited, .FollowEvent a:visited, .MemberEvent a:visited,
+.TeamAddEvent a:visited {
+    color: #000;
+}
+
+.timestamp {
+    padding-left: 5px;
+    float:right;
+}
 
 #user-bio {
     list-style-type: none;
