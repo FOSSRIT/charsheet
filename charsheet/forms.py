@@ -10,7 +10,11 @@ class CharsheetForm(tw2.forms.FormPage):
         action = '/submit'
         id = tw2.forms.HiddenField()
         master = tw2.forms.TextField('master', label='All')
-        github = tw2.forms.TextField('github', label='GitHub')
+        # I just made github a hidden field because removing it broke
+        # the code. I believe other code gets data from it. Anyway, the
+        # user doesn't need to fill it out anymore because OAuth has
+        # been implemented.
+        github = tw2.forms.HiddenField()
         github_token = tw2.forms.HiddenField('github_token')
         ohloh = tw2.forms.TextField('ohloh', label='Ohloh')
         coderwall = tw2.forms.TextField('coderwall', label='Coderwall')
