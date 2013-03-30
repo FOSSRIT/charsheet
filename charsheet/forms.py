@@ -25,5 +25,5 @@ class HandleSearchForm(tw2.forms.FormPage):
 
     class child(tw2.forms.TableForm):
         buttons = [tw2.forms.SubmitButton(id='submit', value='Search')]
-        action = '/charsheet'
+        action = '/handle_search'
         username = tw2.forms.TextField('handle', label='Handle')

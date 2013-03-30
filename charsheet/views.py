@@ -28,6 +28,7 @@ def home_view(request):
         'github_login_url': login_url(request, 'github'),
     }
 
+
 @view_config(context='velruse.AuthenticationComplete')
 def service_login_complete(request):
     context = request.context
@@ -38,8 +39,9 @@ def service_login_complete(request):
 
     request.session['token'] = request.context.credentials['oauthAccessToken']
 
-    response = HTTPFound(location=request.route_url('charsheet', username=username),
-                         headers=headers)
+    response = HTTPFound(location=request.route_url('charsheet',
+                                                    username=username),
+                                                    headers=headers)
 
     return response
 
@@ -121,7 +123,22 @@ def fetch_data(request):
 
     if username != '???':
         data.inject_knowledge(username, stats_dict)
-        return HTTPFound(location=request.route_url('charsheet', username=username))
+        return HTTPFound(location=request.route_url('charsheet',
+                                                    username=username))
+    return HTTPFound(location=request.route_url('home'))
+
+
+@view_config(route_name='handle_search')
+def handle_search(request):
+
+    # Get handle from form and strip it of hanging whitespace
+    handle = request.params['handlesearchform:handle'].strip()
+
+    # If a username was entered, look for it
+    if handle != '':
+        return HTTPFound(location=request.route_url('charsheet',
+                                                    username=handle))
+    # No handle was entered, so go back to home view
     return HTTPFound(location=request.route_url('home'))
 
 

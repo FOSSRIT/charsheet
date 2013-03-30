@@ -51,6 +51,7 @@ def main(global_config, **settings):
     # routes setup
     config.add_route('home', '/')
     config.add_route('submit', '/submit')
+    config.add_route('handle_search', '/handle_search')
     config.add_route('charsheet', '/charsheet/{username}')
     config.add_route('stats', '/stats')
     config.add_route('login', '/login')
