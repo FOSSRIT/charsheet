@@ -13,6 +13,9 @@ from pyramid.security import (
     forget,
 )
 
+from sqlalchemy import create_engine
+from knowledge.model import Entity, DBSession, init_model, metadata
+
 from velruse import login_url
 
 import data
