@@ -12,11 +12,17 @@ def average_value(data, stat):
     in the db.
     """
     # TODO: Check if passed stat is average-able
+    if len(data) < 1:
+        return 0
+
     values_sum = sum(data[username]['stats'][stat] for username in data)
     return values_sum / len(data)
 
 
 def average_length(data, stat, location):
+    if len(data) < 1:
+        return 0
+
     length_sum = sum(len(data[username][location][stat]) for username in data)
     return length_sum / len(data)
 

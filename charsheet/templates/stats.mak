@@ -55,16 +55,20 @@
                 <h3>Top Foo</h3>
                 <table>
                 <% i = 1 %>
-                % for user in stats['top_foo']:
-                    <tr>
-                        <td>
-                            <strong>${i}.</strong>
-                            <a href='${request.route_url('charsheet', username=user[0])}'>${user[0]}</a>
-                        </td>
-                        <td>${'%.2f' % user[1]}</td>
-                    </tr>
-                    <% i += 1 %>
-                % endfor
+				% if len(stats['top_foo']) < 1:
+					<p>No one has generated a charsheet yet!</p>
+				% else:
+					% for user in stats['top_foo']:
+						<tr>
+							<td>
+								<strong>${i}.</strong>
+								<a href='${request.route_url('charsheet', username=user[0])}'>${user[0]}</a>
+							</td>
+							<td>${'%.2f' % user[1]}</td>
+						</tr>
+						<% i += 1 %>
+					% endfor
+				% endif
                 </table>
             </div>
             <div class="clear"></div>

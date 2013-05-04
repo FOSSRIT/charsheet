@@ -17,6 +17,8 @@ engine = create_engine('sqlite:///knowledge.db')
 init_model(engine)
 metadata.create_all(engine)
 
+from sqlalchemy.exc import OperationalError
+
 from requests import HTTPError
 
 from facts import average_value, average_length, top_users
@@ -271,7 +273,28 @@ def inject_knowledge(username, data_dict):
 
 
 def global_stats():
-    usernames = DBSession.query(Entity).all()
+    # super janky code for still generating global stat page even
+    # if the database tables have not been generated yet
+    try:
+        usernames = DBSession.query(Entity).all()
+    except OperationalError:
+        stats = {
+            'avg_foo': 0,
+            'avg_dexterity': 0,
+            'avg_strength': 0,
+            'avg_wisdom': 0,
+            'avg_leadership': 0,
+            'avg_determination': 0,
+            'avg_popularity': 0,
+            'avg_num_languages': 0,
+            'avg_badges': 0,
+            'top_foo': dict(),
+            'sheets_generated': 0,
+            'sheets_unique': 0,
+        }
+
+        return stats
+
     user_data = dict()
 
     for user in usernames:
