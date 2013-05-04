@@ -83,7 +83,9 @@ def logout(request):
 
 def openid_success(context, request, *args, **kwargs):
     """
-    Incomplete OpenID attempt.
+    INCOMPLETE openID attempt! This function is not the one that is used.
+    I am keeping it here for a little bit for archival purposes. Will
+    delete when I am sure doing so will not break anything.
     """
     identity = request.params['openid.identity']
     email = request.params['openid.sreg.email']
