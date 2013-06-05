@@ -24,6 +24,7 @@ requires = [
     'pyramid_openid',
     'python-dateutil',
     'pytz',
+    'requests==0.14.0', # for something
     'waitress',
     'zope.sqlalchemy',
     'nose',
