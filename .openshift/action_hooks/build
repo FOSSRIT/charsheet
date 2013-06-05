@@ -9,9 +9,9 @@ fi
 source $venv/bin/activate
 
 # make egg cache writable
-export PYTHON_EGG_CACHE=$OPENSHIFT_DATA_DIR/eggcache
-if [ ! -d $PYTHON_EGG_CACHE ] ; then
-    mkdir $PYTHON_EGG_CACHE
-fi
+#export PYTHON_EGG_CACHE=$OPENSHIFT_DATA_DIR/eggcache
+#if [ ! -d $PYTHON_EGG_CACHE ] ; then
+#    mkdir $PYTHON_EGG_CACHE
+#fi
 
 python $OPENSHIFT_REPO_DIR/setup.py develop
