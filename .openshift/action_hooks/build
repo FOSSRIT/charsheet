@@ -14,4 +14,6 @@ source $venv/bin/activate
 #    mkdir $PYTHON_EGG_CACHE
 #fi
 
-python $OPENSHIFT_REPO_DIR/setup.py develop
+cd $OPENSHIFT_REPO_DIR
+
+python setup.py develop
