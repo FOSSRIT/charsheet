@@ -4,4 +4,4 @@ source $OPENSHIFT_DATA_DIR/venv/bin/activate
 
 export PYTHON_EGG_CACHE=$OPENSHIFT_DATA_DIR/eggcache
 
-nohup pserve $OPENSHIFT_REPO_DIR/production.ini
+nohup pserve $OPENSHIFT_REPO_DIR/openshift.ini
