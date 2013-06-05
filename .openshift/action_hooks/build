@@ -2,9 +2,13 @@
 
 export venv=$OPENSHIFT_DATA_DIR/venv
 
-if [ -d $venv ] ; then
-    echo "Not rebuilding virtualenv."
-else
+# make egg cache writable
+export PYTHON_EGG_CACHE=$OPENSHIFT_DATA_DIR/eggcache
+if [ ! -d $PYTHON_EGG_CACHE ] ; then
+    mkdir $PYTHON_EGG_CACHE
+fi
+
+if [ ! -d $venv ] ; then
     virtualenv $venv
 fi
 
