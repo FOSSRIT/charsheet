@@ -6,7 +6,7 @@ if [ -d $venv ] ; then
     echo "Not rebuilding virtualenv."
 else
     virtualenv $venv
-    source $venv/bin/activate
 fi
 
-$venv/bin/python $OPENSHIFT_REPO_DIR/setup.py develop
+source $venv/bin/activate
+python $OPENSHIFT_REPO_DIR/setup.py develop
