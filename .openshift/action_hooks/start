@@ -1,0 +1,4 @@
+#!/bin/bash
+
+nohup $OPENSHIFT_DATA_DIR/venv/bin/pserve \
+    $OPENSHIFT_REPO_DIR/production.ini --reload

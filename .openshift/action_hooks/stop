@@ -1,0 +1,4 @@
+!#/bin/bash
+
+kill `ps -ef | grep pserve | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
+exit 0
