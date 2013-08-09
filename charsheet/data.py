@@ -79,10 +79,7 @@ def handle_github(request, username):
     """
     Get data from GitHub.
     """
-    from pygithub3 import Github, exceptions
     github_api = "https://api.github.com"
-    token = request.session['token']
-    gh = Github(token=token)
     data = {
         'age_months': 0,
         'bio': '',
@@ -98,9 +95,12 @@ def handle_github(request, username):
         'name': '',
         'public_repos': [],
      }
-    if not username:
+    if not (username and request.session.get('token')):
         return data
     try:
+        from pygithub3 import Github, exceptions
+        token = request.session['token']
+        gh = Github(token=token)
         user = gh.users.get(user=username)
 
         # Handle organizations, because everything breaks if one is
