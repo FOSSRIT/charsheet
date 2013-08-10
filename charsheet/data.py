@@ -6,6 +6,7 @@ from datetime import datetime
 from dateutil import parser, relativedelta
 import hashlib
 import operator
+import os
 import json
 import pytz
 import re
@@ -13,7 +14,11 @@ import urllib
 
 
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
-engine = create_engine('sqlite:///knowledge.db')
+if os.environ.get('OPENSHIFT_MYSQL_DB_URL'):
+    engine = create_engine(os.environ['OPENSHIFT_MYSQL_DB_URL'] +
+                           os.environ['OPENSHIFT_APP_NAME'])
+else:
+    engine = create_engine('sqlite:///knowledge.db')
 init_model(engine)
 metadata.create_all(engine)
 
@@ -79,10 +84,7 @@ def handle_github(request, username):
     """
     Get data from GitHub.
     """
-    from pygithub3 import Github, exceptions
     github_api = "https://api.github.com"
-    token = request.session['token']
-    gh = Github(token=token)
     data = {
         'age_months': 0,
         'bio': '',
@@ -98,9 +100,12 @@ def handle_github(request, username):
         'name': '',
         'public_repos': [],
      }
-    if not username:
+    if not (username and request.session.get('token')):
         return data
     try:
+        from pygithub3 import Github, exceptions
+        token = request.session['token']
+        gh = Github(token=token)
         user = gh.users.get(user=username)
 
         # Handle organizations, because everything breaks if one is
