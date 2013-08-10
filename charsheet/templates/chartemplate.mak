@@ -491,14 +491,14 @@
             <!-- RECENT GITHUB ACTIVITY -->
 
             <div class="grid_12">
-                % if stats:
+                % if stats['github'].get('name'):
                     <h2>Recent GitHub Activity</h2>
                     <div class="activity-controls">
                     <a href="#" class="button less-activity">Less</a>
                     <a href="#" class="button more-activity">More</a>
                     </div>
                     <ul id="recent-activity">
-                    % for event in stats['github'].get('recent_events'):
+                    % for event in stats['github']['recent_events']:
                         <% repo_url = "https://github.com/"+event.repo.name %>
                         <li class="event ${event.type}">
                         <span class='timestamp'>${event.created_at}</span>
