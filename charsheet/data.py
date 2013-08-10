@@ -6,6 +6,7 @@ from datetime import datetime
 from dateutil import parser, relativedelta
 import hashlib
 import operator
+import os
 import json
 import pytz
 import re
@@ -13,7 +14,11 @@ import urllib
 
 
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
-engine = create_engine('sqlite:///knowledge.db')
+if os.environ.get('OPENSHIFT_MYSQL_DB_URL'):
+    engine = create_engine(os.environ['OPENSHIFT_MYSQL_DB_URL'] +
+                           os.environ['OPENSHIFT_APP_NAME'])
+else:
+    engine = create_engine('sqlite:///knowledge.db')
 init_model(engine)
 metadata.create_all(engine)
 

@@ -1,3 +1,5 @@
+import os
+
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.config import Configurator
@@ -21,9 +23,13 @@ def main(global_config, **settings):
 
     # load secret stuff from secret.ini (not provided in repo)
     try:
+        if os.environ.get('OPENSHIFT_DATA_DIR'):
+            path = os.environ['OPENSHIFT_DATA_DIR']
+        else:
+            path = '.'
         from paste.deploy.loadwsgi import appconfig
         secret_config = appconfig('config:secret.ini',
-                'charsheet', relative_to='.')
+                'charsheet', relative_to=path)
     except IOError:
         print 'Failed to load secret.ini'
         return 0
