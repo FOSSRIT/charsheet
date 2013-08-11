@@ -225,123 +225,11 @@
     <div class="grid_12">
         <h2>Skills</h2>
     </div>
-    <div class="clear"></div>
-    <div class="grid_4">
-        <table>
-            <tr><td>C</td>
-                <td>${int(stats['stats']['skills']['c'])}<progress max="1"
-                    value="${stats['stats']['skills']['c'] % 1}">
-                    </progress></td></tr>
-            <tr><td>C++</td>
-                <td>${int(stats['stats']['skills']['c++'])}<progress max="1"
-                    value="${stats['stats']['skills']['c++'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Java</td>
-                <td>${int(stats['stats']['skills']['java'])}<progress max="1"
-                    value="${stats['stats']['skills']['java'] % 1}">
-                    </progress></td></tr>
-            <tr><td>HTML</td>
-                <td>${int(stats['stats']['skills']['html'])}<progress max="1"
-                    value="${stats['stats']['skills']['html'] % 1}">
-                    </progress></td></tr>
-            <tr><td>XML</td>
-                <td>${int(stats['stats']['skills']['xml'])}<progress max="1"
-                    value="${stats['stats']['skills']['xml'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Python</td>
-                <td>${int(stats['stats']['skills']['python'])}<progress max="1"
-                    value="${stats['stats']['skills']['python'] % 1}">
-                    </progress></td></tr>
-            <tr><td>PHP</td>
-                <td>${int(stats['stats']['skills']['php'])}<progress max="1"
-                    value="${stats['stats']['skills']['php'] % 1}">
-                    </progress></td></tr>
-            <tr><td>JavaScript</td>
-                <td>${int(stats['stats']['skills']['javascript'])}
-                    <progress max="1"
-                    value="${stats['stats']['skills']['javascript'] % 1}">
-                    </progress></td></tr>
-        </table>
-    </div>
-    <div class="grid_4">
-        <table>
-            <tr><td>Perl</td>
-                <td>${int(stats['stats']['skills']['perl'])}<progress max="1"
-                    value="${stats['stats']['skills']['perl'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Shell</td>
-                <td>${int(stats['stats']['skills']['shell'])}<progress max="1"
-                    value="${stats['stats']['skills']['shell'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Objective-C</td>
-                <td>${int(stats['stats']['skills']['objective-c'])}
-                    <progress max="1"
-                    value="${stats['stats']['skills']['objective-c'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Ruby</td>
-                <td>${int(stats['stats']['skills']['ruby'])}<progress max="1"
-                    value="${stats['stats']['skills']['ruby'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Haskell</td>
-                <td>${int(stats['stats']['skills']['haskell'])}<progress max="1"
-                    value="${stats['stats']['skills']['haskell'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Lua</td>
-                <td>${int(stats['stats']['skills']['lua'])}<progress max="1"
-                    value="${stats['stats']['skills']['lua'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Assembly</td>
-                <td>${int(stats['stats']['skills']['assembly'])}<progress max="1"
-                    value="${stats['stats']['skills']['assembly'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Common Lisp</td>
-                <td>${int(stats['stats']['skills']['commonlisp'])}
-                    <progress max="1"
-                    value="${stats['stats']['skills']['commonlisp'] % 1}">
-                    </progress></td></tr>
-        </table>
-    </div>
-    <div class="grid_4">
-        <table>
-            <tr><td>Scala</td>
-                <td>${int(stats['stats']['skills']['scala'])}<progress max="1"
-                    value="${stats['stats']['skills']['scala'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Visual Basic</td>
-                <td>${int(stats['stats']['skills']['visualbasic'])}
-                    <progress max="1"
-                    value="${stats['stats']['skills']['visualbasic'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Arduino</td>
-                <td>${int(stats['stats']['skills']['arduino'])}<progress max="1"
-                    value="${stats['stats']['skills']['arduino'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Erlang</td>
-                <td>${int(stats['stats']['skills']['erlang'])}<progress max="1"
-                    value="${stats['stats']['skills']['erlang'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Go</td>
-                <td>${int(stats['stats']['skills']['go'])}<progress max="1"
-                    value="${stats['stats']['skills']['go'] % 1}">
-                    </progress></td></tr>
-            <tr><td>CoffeeScript</td>
-                <td>${int(stats['stats']['skills']['coffeescript'])}
-                    <progress max="1"
-                    value="${stats['stats']['skills']['coffeescript'] % 1}">
-                    </progress></td></tr>
-            <tr><td>Emacs Lisp</td>
-                <td>${int(stats['stats']['skills']['emacslisp'])}
-                    <progress max="1"
-                    value="${stats['stats']['skills']['emacslisp'] % 1}">
-                    </progress></td></tr>
-            <tr><td>VimL</td>
-                <td>${int(stats['stats']['skills']['viml'])}<progress max="1"
-                    value="${stats['stats']['skills']['viml'] % 1}">
-                    </progress></td></tr>
-        </table>
-    </div>
-    <div class="clear">
-    </div>
+        <div class="clear"></div>
+        ${self.skill_block(['C', 'C++', 'Java', 'HTML', 'XML', 'Python', 'PHP', 'JavaScript'])}
+        ${self.skill_block(['Perl', 'Shell', 'Objective-C', 'Ruby', 'Haskell', 'Lua', 'Assembly', 'Common Lisp'])}
+        ${self.skill_block(['Scala', 'Visual Basic', 'Arduino', 'Erlang', 'Go', 'CoffeeScript', 'Emacs Lisp', 'VimL'])}
+        <div class="clear"></div>
 
     <!-- STATISTICS  -->
 
@@ -563,3 +451,20 @@
 </%def>
 
 <%def name='title()'>Character Sheet for ${stats.name}</%def>
+
+<%def name='skill_block(skills)'>
+  <div class="grid_4">
+    <table>
+      % for skill in skills:
+        <% slugged_skill = skill.lower().replace(' ', '') %>
+        <tr>
+          <td>${skill}</td>
+          <td>${int(stats['stats']['skills'][slugged_skill])}
+            <progress max="1" value="${stats['stats']['skills'][slugged_skill] % 1}">
+            </progress>
+          </td>
+        </tr>
+      % endfor
+    </table>
+  </div>
+</%def>
