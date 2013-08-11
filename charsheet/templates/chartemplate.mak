@@ -215,33 +215,18 @@
             ])}
         <div class="clear"></div>
 
-    <!-- CODERWALL ACHIEVEMENTS -->
+        <!-- CODERWALL ACHIEVEMENTS -->
 
-    <div class="grid_12">
-        % if stats['coderwall'].get('badges'):
-        <h2>Coderwall Achievements</h2>
-        <table class="badge-list">
-            <% badges_printed = 0 %>
-            <tr>
-            % for badge in stats['coderwall']['badges']:
-                <td class="tooltip"
-                    title="<strong>${badge['name']}</strong>
-                    - ${badge['description']}.">
-                    <img src="${badge['image_uri']}"/></td>
-                <% badges_printed += 1 %>
-                % if (badges_printed % 8 == 0) and badges_printed > 0:
-                    </tr><tr>
-                % endif
-            % endfor
-            </tr>
-        </table>
-        % else:
-        <p>Add your Coderwall username to see your badges.</p>
-        % endif
-    </div>
-    <div class="clear"></div>
+        <div class="grid_12">
+            % if stats['coderwall'].get('badges'):
+              ${self.coderwall_block()}
+            % else:
+            <p>Add your Coderwall username to see your badges.</p>
+            % endif
+        </div>
+        <div class="clear"></div>
 
-    <!-- RECENT GITHUB ACTIVITY -->
+        <!-- RECENT GITHUB ACTIVITY -->
 
         <div class="grid_12">
             % if stats['github'].get('name'):
