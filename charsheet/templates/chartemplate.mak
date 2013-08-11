@@ -4,241 +4,243 @@
 <% flash = request.session.pop_flash() %>
 <% alert_y = 20 %>
 % for message in flash:
-    % if message.startswith('Error:'):
-        <div style="top: ${alert_y}px" class="alert alert-error">
-            <h4 class="alert-heading">Error</h4><p>${message[7:]}</p>
-        </div>
-    % else:
-        <div style="top: ${alert_y}px" class="alert alert-success">
-            <h4 class="alert-heading">Success</h4><p>${message}</p>
-        </div>
-        <% display_sheet = True %>
-    % endif
-    <% alert_y += 110 %>
+  % if message.startswith('Error:'):
+    <div style="top: ${alert_y}px" class="alert alert-error">
+      <h4 class="alert-heading">Error</h4><p>${message[7:]}</p>
+    </div>
+  % else:
+    <div style="top: ${alert_y}px" class="alert alert-success">
+      <h4 class="alert-heading">Success</h4><p>${message}</p>
+    </div>
+    <% display_sheet = True %>
+  % endif
+  <% alert_y += 110 %>
 % endfor
 
 <div class="container_12">
-    <div class="grid_6">
+  <div class="grid_6">
     <h2>Your Charsheet</h2>
-    <p>If all went well, your developer character sheet has been
-        generated below. In the future, you will be able easily save
-        and share your charsheet.</p>
-    </div>
-    <div class="grid_6">
+    <p>
+      If all went well, your developer character sheet has been
+      generated below. In the future, you will be able easily save
+      and share your charsheet.
+    </p>
+  </div>
+  <div class="grid_6">
     <h2>Information</h2>
     <p>Charsheet generated at ${stats['timestamp']}.</p>
     <p>
       <a class='button' href="/">Back</a>
-      <a
-        href='/submit?${'&'.join(['charsheetform:'+backend+'='+username for backend, username in stats['usernames'].items()])}'
-        class='button'>Refresh</a>
+      <a href='/submit?${'&'.join(['charsheetform:'+backend+'='+username for backend, username in stats['usernames'].items()])}'
+         class='button'>Refresh</a>
     </p>
-    </div>
+  </div>
 </div>
+
 % if display_sheet == True:
-<div class="container_12 sheet_parent">
-<div class="sheet">
-<h1>Character Record Sheet</h1>
-    <div class="clear"></div>
+  <div class="container_12 sheet_parent">
+    <div class="sheet">
+      <h1>Character Record Sheet</h1>
+      <div class="clear"></div>
 
-    <!-- GENERAL INFORMATION -->
+      <!-- GENERAL INFORMATION -->
 
-    <div class="grid_4">
+      <div class="grid_4">
         <table>
-        <tr>
-        <td>
-        % if stats:
-            <img class="avatar" src="${stats.get('gravatar')}" />
-        % else:
-            Username:
-        % endif
-        </td>
-            <td>${stats.name}</td>
-        </tr>
-        <tr class="tooltip" id="foo" title="<strong>Foo</strong>
-            - Foo is the average
-            of your six attribute scores.<br />
-            <strong>${int((stats['stats']['foo'] % 1) * 100)}%</strong>
-            to next level">
-            <td>Foo:</td><td>${int(stats['stats']['foo'])}</td></tr>
-        <tr class="tooltip" title="<strong>Foo Bar</strong>
-            - Your Foo Bar shows
-            your progress towards the next level of Foo.<br />
-            <strong>${int((stats['stats']['foo'] % 1) * 100)}%</strong>
-            to next level"><td>Foo Bar:</td>
+          <tr>
             <td>
-            <progress max="1" value="${stats['stats']['foo'] % 1}">
-                </progress></td></tr>
-        </table>
-    </div>
-    <div class="grid_4">
-        <table class="one-line">
-            <tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_003_user.png')}'/> Name:</td><td>
-                % if stats:
-                    ${stats['name']}
-                % else:
-                    ?
-                % endif
-            </td></tr>
-            <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
-                % if stats['github'].get('email'):
-                    ${stats['github']['email']}
-                % else:
-                    ?
-                % endif
-            </td></tr>
-            <tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
-                % if stats:
-                    % if stats['github'].get('blog'):
-                    <a href="http://${stats['github']['blog']}">
-                        ${stats['github']['blog'].strip('/')}</a>
-                    % else:
-                    None
-                    % endif
-                % else:
-                    ?
-                % endif
-                </td></tr>
-            <tr>
-            <td colspan="2">
-            Charsheet ${int(stats['stats']['percent_complete'] * 100)}% complete.
+            % if stats:
+              <img class="avatar" src="${stats.get('gravatar')}" />
+            % else:
+              Username:
+            % endif
             </td>
-            </tr>
+            <td>${stats.name}</td>
+          </tr>
+          <tr class="tooltip" id="foo" title="<strong>Foo</strong>
+              - Foo is the average
+              of your six attribute scores.<br />
+              <strong>${int((stats['stats']['foo'] % 1) * 100)}%</strong>
+              to next level">
+              <td>Foo:</td><td>${int(stats['stats']['foo'])}</td></tr>
+          <tr class="tooltip" title="<strong>Foo Bar</strong>
+              - Your Foo Bar shows
+              your progress towards the next level of Foo.<br />
+              <strong>${int((stats['stats']['foo'] % 1) * 100)}%</strong>
+              to next level"><td>Foo Bar:</td>
+              <td>
+              <progress max="1" value="${stats['stats']['foo'] % 1}">
+                  </progress></td></tr>
         </table>
-    </div>
-    <div class="grid_4">
+      </div>
+      <div class="grid_4">
         <table class="one-line">
-            <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_340_globe.png')}'/> Location:</td>
-                <td>
-                % if stats['github'].get('location'):
-                    ${stats['github']['location']}
-                % else:
-                    ?
-                % endif
-                </td></tr>
-            <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_341_briefcase.png')}'/> Company:</td><td>
-                % if stats['github'].get('company'):
-                    ${stats['github']['company']}
-                % else:
-                    ?
-                % endif
-                </td></tr>
-            <tr><td>Hireable?</td><td>
-                % if stats['github'].get('hireable'):
-                    Yes!
-                % else:
-                    No...
-                % endif
-                </td></tr>
-            <tr><td>GitTip:</td><td>
-                % if stats:
-                    <iframe style="vertical-align: middle;
-                            border: 0; margin: 0; padding: 0;"
-        src="https://www.gittip.com/${stats['usernames']['github']}/widget.html"
-                    width="48pt" height="20pt"></iframe>
-                % else:
-                    Unavailable
-                % endif
-            </td></tr>
-    </table>
-    </div>
-    <div class="clear"></div>
+          <tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_003_user.png')}'/> Name:</td><td>
+            % if stats:
+              ${stats['name']}
+            % else:
+              ?
+            % endif
+          </td></tr>
+          <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_010_envelope.png')}'/> Email:</td><td>
+            % if stats['github'].get('email'):
+              ${stats['github']['email']}
+            % else:
+              ?
+            % endif
+          </td></tr>
+          <tr><td><img src='${request.static_url('charsheet:static/icons/glyphicons_235_pen.png')}'/> Blog:</td><td>
+            % if stats:
+              % if stats['github'].get('blog'):
+                <a href="http://${stats['github']['blog']}">
+                  ${stats['github']['blog'].strip('/')}</a>
+              % else:
+                None
+              % endif
+            % else:
+              ?
+            % endif
+          </td></tr>
+          <tr>
+            <td colspan="2">
+              Charsheet ${int(stats['stats']['percent_complete'] * 100)}% complete.
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="grid_4">
+        <table class="one-line">
+          <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_340_globe.png')}'/> Location:</td>
+            <td>
+              % if stats['github'].get('location'):
+                ${stats['github']['location']}
+              % else:
+                ?
+              % endif
+            </td>
+          </tr>
+          <tr class="one-line"><td><img src='${request.static_url('charsheet:static/icons/glyphicons_341_briefcase.png')}'/> Company:</td><td>
+            % if stats['github'].get('company'):
+              ${stats['github']['company']}
+            % else:
+              ?
+            % endif
+          </td></tr>
+          <tr><td>Hireable?</td><td>
+            % if stats['github'].get('hireable'):
+              Yes!
+            % else:
+              No...
+            % endif
+          </td></tr>
+          <tr><td>GitTip:</td><td>
+            % if stats:
+              <iframe style="vertical-align: middle;
+                      border: 0; margin: 0; padding: 0;"
+                      src="https://www.gittip.com/${stats['usernames']['github']}/widget.html"
+                      width="48pt" height="20pt">
+              </iframe>
+            % else:
+              Unavailable
+            % endif
+          </td></tr>
+        </table>
+      </div>
+      <div class="clear"></div>
 
-    <!-- ATTRIBUTES  -->
-    <div class="grid_12">
+      <!-- ATTRIBUTES  -->
+      <div class="grid_12">
         <h2>Attributes</h2>
-    </div>
-    <div class="clear"></div>
-    ${self.attribute_block([('Strength', '{} lines / 1000000)<br />+ (2 * {}  badge(s)'.format(
+      </div>
+      <div class="clear"></div>
+      ${self.attribute_block([('Strength', '{} lines / 1000000)<br />+ (2 * {}  badge(s)'.format(
                                 stats['ohloh']['lines'],
                                 len(stats['coderwall']['badges']))),
                             ('Dexterity', '5 * {} language(s)'.format(
                                 len(stats['ohloh']['languages_by_lines']))),
                            ])}
-    ${self.attribute_block([('Wisdom', '{} month(s)'.format(
+      ${self.attribute_block([('Wisdom', '{} month(s)'.format(
                                 round(stats['stats']['age_months'], 2))),
                             ('Leadership', '{} fork(s)'.format(
                                 stats['github']['forks'])),
                            ])}
-    ${self.attribute_block([('Determination', '{} public repo(s)'.format(
+      ${self.attribute_block([('Determination', '{} public repo(s)'.format(
                                 len(stats['github']['public_repos']))),
                             ('Popularity', '{} follower(s)'.format(
                                 stats['github']['followers'])),
                            ])}
-    <div class="clear"></div>
+      <div class="clear"></div>
 
-    <!-- SKILLS  -->
+      <!-- SKILLS  -->
 
-    <div class="grid_12">
+      <div class="grid_12">
         <h2>Skills</h2>
-    </div>
-        <div class="clear"></div>
-        ${self.skill_block(['C', 'C++', 'Java', 'HTML', 'XML', 'Python', 'PHP', 'JavaScript'])}
-        ${self.skill_block(['Perl', 'Shell', 'Objective-C', 'Ruby', 'Haskell', 'Lua', 'Assembly', 'Common Lisp'])}
-        ${self.skill_block(['Scala', 'Visual Basic', 'Arduino', 'Erlang', 'Go', 'CoffeeScript', 'Emacs Lisp', 'VimL'])}
-        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+      ${self.skill_block(['C', 'C++', 'Java', 'HTML', 'XML', 'Python', 'PHP', 'JavaScript'])}
+      ${self.skill_block(['Perl', 'Shell', 'Objective-C', 'Ruby', 'Haskell', 'Lua', 'Assembly', 'Common Lisp'])}
+      ${self.skill_block(['Scala', 'Visual Basic', 'Arduino', 'Erlang', 'Go', 'CoffeeScript', 'Emacs Lisp', 'VimL'])}
+      <div class="clear"></div>
 
-    <!-- STATISTICS  -->
+      <!-- STATISTICS  -->
 
     <div class="grid_12">
         <h2>Statistics</h2>
+      </div>
+      <div class="clear"></div>
+      ${self.stat_block([
+        ('Public GitHub Repos',
+         len(stats['github']['public_repos']) if stats['github'].get('public_repos') else '?'),
+        ('Lines Committed', stats['ohloh'].get('lines') or '?'),
+        ('Most Repos',
+         ", ".join(stats['github']['languages_by_repos'][:3])
+            if stats['github'].get('languages_by_repos') else '?'),
+        ('Most Code',
+         ", ".join([lang['name'] for lang in stats['ohloh']['languages_by_lines'][:3]])
+            if stats['ohloh'].get('languages_by_lines') else '?'),
+        ])}
+      ${self.stat_block([
+        ('Ohloh Profile',
+         """<a href='http://www.ohloh.net/accounts/{0}?ref=Detailed'
+               target='_top'><img alt='Ohloh Profile' border='0' height='35'
+               src='http://www.ohloh.net/accounts/{0}/widgets/account_detailed.gif'
+               width='191' /></a>""".format(stats['ohloh']['id'])
+            if stats['ohloh'].get('id') else "Not available."),
+        ('Ohloh Rank',
+         stats['ohloh']['position'] if stats['ohloh'].get('position') else '?'),
+        ])}
+      ${self.stat_block([
+        ('Coderwall Endorsements',
+         """<a href='http://coderwall.com/{0}'>
+              <img alt='Endorse {0} on Coderwall'
+                   src='http://api.coderwall.com/{0}/endorsecount.png' />
+            </a>""".format(stats['usernames']['coderwall'])
+            if stats['usernames'].get('coderwall') else '?')
+        ])}
+      <div class="clear"></div>
+
+      <!-- CODERWALL ACHIEVEMENTS -->
+
+      <div class="grid_12">
+        % if stats['coderwall'].get('badges'):
+          ${self.coderwall_block()}
+        % else:
+        <p>Add your Coderwall username to see your badges.</p>
+        % endif
+      </div>
+      <div class="clear"></div>
+
+      <!-- RECENT GITHUB ACTIVITY -->
+
+      <div class="grid_12">
+        % if stats['github'].get('name'):
+          ${self.github_block()}
+        % else:
+            <p>Add your GitHub username to see your recent activity.</p>
+        % endif
+      </div>
     </div>
-    <div class="clear"></div>
-        ${self.stat_block([
-            ('Public GitHub Repos',
-             len(stats['github']['public_repos']) if stats['github'].get('public_repos') else '?'),
-            ('Lines Committed', stats['ohloh'].get('lines') or '?'),
-            ('Most Repos',
-             ", ".join(stats['github']['languages_by_repos'][:3])
-                if stats['github'].get('languages_by_repos') else '?'),
-            ('Most Code',
-             ", ".join([lang['name'] for lang in stats['ohloh']['languages_by_lines'][:3]])
-                if stats['ohloh'].get('languages_by_lines') else '?'),
-            ])}
-        ${self.stat_block([
-            ('Ohloh Profile',
-             """<a href='http://www.ohloh.net/accounts/{0}?ref=Detailed'
-                   target='_top'><img alt='Ohloh Profile' border='0' height='35'
-                   src='http://www.ohloh.net/accounts/{0}/widgets/account_detailed.gif'
-                   width='191' /></a>""".format(stats['ohloh']['id'])
-                if stats['ohloh'].get('id') else "Not available."),
-            ('Ohloh Rank',
-             stats['ohloh']['position'] if stats['ohloh'].get('position') else '?'),
-            ])}
-        ${self.stat_block([
-            ('Coderwall Endorsements',
-             """<a href='http://coderwall.com/{0}'>
-                  <img alt='Endorse {0} on Coderwall'
-                       src='http://api.coderwall.com/{0}/endorsecount.png' />
-                </a>""".format(stats['usernames']['coderwall'])
-                if stats['usernames'].get('coderwall') else '?')
-            ])}
-        <div class="clear"></div>
-
-        <!-- CODERWALL ACHIEVEMENTS -->
-
-        <div class="grid_12">
-            % if stats['coderwall'].get('badges'):
-              ${self.coderwall_block()}
-            % else:
-            <p>Add your Coderwall username to see your badges.</p>
-            % endif
-        </div>
-        <div class="clear"></div>
-
-        <!-- RECENT GITHUB ACTIVITY -->
-
-        <div class="grid_12">
-            % if stats['github'].get('name'):
-              ${self.github_block()}
-            % else:
-                <p>Add your GitHub username to see your recent activity.</p>
-            % endif
-        </div>
-    </div>
-</div>
-</div>
-</div>
+  </div>
 % endif
 
 <%def name='head()'>
