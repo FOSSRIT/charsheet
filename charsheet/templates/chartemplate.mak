@@ -184,85 +184,36 @@
         <h2>Statistics</h2>
     </div>
     <div class="clear"></div>
-    <div class="grid_4">
-        <table>
-            <tr><td>Public GitHub Repos:</td>
-                <td>
-                % if stats['github'].get('public_repos'):
-                    ${len(stats['github']['public_repos'])}
-                % else:
-                    ?
-                % endif
-                </td></tr>
-            <tr><td>Lines Committed:</td>
-                <td>
-                % if stats['ohloh'].get('lines'):
-                    ${stats['ohloh']['lines']}
-                % else:
-                    ?
-                % endif
-                </td></tr>
-            <tr><td>Most Repos:</td><td>
-                % if stats['github'].get('languages_by_repos'):
-    ${", ".join([lang for lang in stats['github']['languages_by_repos'][:3]])}
-                % else:
-                    ?
-                % endif
-                </td></tr>
-            <tr><td>Most Code:</td><td>
-                % if stats['ohloh'].get('languages_by_lines'):
-    ${", ".join([lang['name'] for lang in stats['ohloh']['languages_by_lines'][:3]])}
-                % else:
-                    ?
-                % endif
-                </td></tr>
-        </table>
-    </div>
-    <div class="grid_4">
-        <table>
-            <tr><td>Ohloh Profile:</td><td>
-                % if stats['ohloh'].get('id'):
-                    <a
-                        href='http://www.ohloh.net/accounts/${stats['ohloh']['id']}?ref=Detailed'
-                        target='_top'>
-                    <img
-                        alt='Ohloh Profile'
-                        border='0' height='35'
-                        src='http://www.ohloh.net/accounts/${stats['ohloh']['id']}/widgets/account_detailed.gif'
-                        width='191' />
-                    </a>
-                % else:
-                Not available.
-                % endif
-                </td></tr>
-            <tr><td>Ohloh Rank:</td>
-                <td>
-                % if stats['ohloh'].get('position'):
-                    ${stats['ohloh']['position']}
-                % else:
-                    ?
-                % endif
-                </td></tr>
-        </table>
-    </div>
-    <div class="grid_4">
-        <table>
-            <tr><td>Coderwall Endorsements:</td>
-                <td>
-                % if stats['usernames'].get('coderwall'):
-            <a href="http://coderwall.com/${stats['usernames']['coderwall']}">
-                <img alt="Endorse ${stats['usernames']['coderwall']}
-                        on Coderwall"
-                    src="http://api.coderwall.com/${stats['usernames']['coderwall']}/endorsecount.png" />
-                % else:
-                    ?
-                % endif
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="clear"></div>
+        ${self.stat_block([
+            ('Public GitHub Repos',
+             len(stats['github']['public_repos']) if stats['github'].get('public_repos') else '?'),
+            ('Lines Committed', stats['ohloh'].get('lines') or '?'),
+            ('Most Repos',
+             ", ".join(stats['github']['languages_by_repos'][:3])
+                if stats['github'].get('languages_by_repos') else '?'),
+            ('Most Code',
+             ", ".join([lang['name'] for lang in stats['ohloh']['languages_by_lines'][:3]])
+                if stats['ohloh'].get('languages_by_lines') else '?'),
+            ])}
+        ${self.stat_block([
+            ('Ohloh Profile',
+             """<a href='http://www.ohloh.net/accounts/{0}?ref=Detailed'
+                   target='_top'><img alt='Ohloh Profile' border='0' height='35'
+                   src='http://www.ohloh.net/accounts/{0}/widgets/account_detailed.gif'
+                   width='191' /></a>""".format(stats['ohloh']['id'])
+                if stats['ohloh'].get('id') else "Not available."),
+            ('Ohloh Rank',
+             stats['ohloh']['position'] if stats['ohloh'].get('position') else '?'),
+            ])}
+        ${self.stat_block([
+            ('Coderwall Endorsements',
+             """<a href='http://coderwall.com/{0}'>
+                  <img alt='Endorse {0} on Coderwall'
+                       src='http://api.coderwall.com/{0}/endorsecount.png' />
+                </a>""".format(stats['usernames']['coderwall'])
+                if stats['usernames'].get('coderwall') else '?')
+            ])}
+        <div class="clear"></div>
 
     <!-- CODERWALL ACHIEVEMENTS -->
 
@@ -292,90 +243,13 @@
 
     <!-- RECENT GITHUB ACTIVITY -->
 
-    <div class="grid_12">
-        % if stats['github'].get('name'):
-            <h2>Recent GitHub Activity</h2>
-            <div class="activity-controls">
-            <a href="#" class="button less-activity">Less</a>
-            <a href="#" class="button more-activity">More</a>
-            </div>
-            <ul id="recent-activity">
-            % for event in stats['github']['recent_events']:
-                <% repo_url = "https://github.com/"+event.repo.name %>
-                <li class="event ${event.type}">
-                <span class='timestamp'>${event.created_at}</span>
-                <span class='details'>
-                % if event.type == 'PushEvent':
-                    Pushed ${event.payload['size']} commit(s) to
-                % elif event.type == 'IssuesEvent':
-                    ${event.payload['action'].capitalize()} issue
-                    <a href="${event.payload['issue']['html_url']}">
-                    ${event.payload['issue']['title']}</a> in
-                % elif event.type == 'IssueCommentEvent':
-                    Commented on
-                    <a href="${event.payload['issue']['html_url']}">
-                    ${event.payload['issue']['title']}</a> in
-                % elif event.type == 'CreateEvent':
-                    Created ${event.payload['ref_type']}
-                    ${event.payload['ref']} in
-                % elif event.type == 'DeleteEvent':
-                    Deleted ${event.payload['ref_type']}
-                    ${event.payload['ref']} in
-                % elif event.type == 'WatchEvent':
-                    ${event.payload['action'].capitalize()} watching
-                % elif event.type == 'FollowEvent':
-                    Started following
-                    <a href="${event.payload['target']['html_url']}">
-                    ${event.payload['target']['login']}</a>.
-                % elif event.type == 'GistEvent':
-                    <% action = (event.payload['action'] + 'ed').capitalize() %>
-                    ${action} gist
-                    <a href="${event.payload['gist']['html_url']}">
-                    ${event.payload['gist']['description']}</a>.
-                % elif event.type == 'PullRequestEvent':
-                    <% action = (event.payload['action']).capitalize() %>
-                    ${action} pull request
-                    <a href="${event.payload['pull_request']['_links']['html']['href']}">
-                    ${event.payload['pull_request']['title']}</a> in
-                % elif event.type == 'CommitCommentEvent':
-                    Commented on
-                    <a href="${event.payload['comment']['html_url']}">
-                    a commit</a> in
-                % elif event.type == 'DownloadEvent':
-                    Created a download in
-                % elif event.type == "ForkEvent":
-                    Forked
-                % elif event.type == 'ForkApplyEvent':
-                    Applied a patch in the fork queue for
-                % elif event.type == "GollumEvent":
-                    Edited the wiki of
-                % elif event.type == "MemberEvent":
-                    Was added as a collaborator to
-                % elif event.type == "PublicEvent":
-                    Open-sourced
-                % elif event.type == "PullRequestReviewCommentEvent":
-                    Commented on
-                    <a href="${event.payload['comment']['_links']['html']['href']}">
-                    a pull request</a> in
-                % elif event.type == "TeamAddEvent":
-                    Modified a team.
-                % else:
-                    Performed ${event.type} on
-                % endif
-                % if not event.repo.name == '/':
-                    <a href="${repo_url}">${event.repo.name}</a>.
-                % endif
-                </span>
-                </li>
-            % endfor
-            </ul>
-            <div class="activity-controls">
-            <a href="#" class="button less-activity">Less</a>
-            <a href="#" class="button more-activity">More</a>
-            </div>
-        % else:
-            <p>Add your GitHub username to see your recent activity.</p>
-        % endif
+        <div class="grid_12">
+            % if stats['github'].get('name'):
+              ${self.github_block()}
+            % else:
+                <p>Add your GitHub username to see your recent activity.</p>
+            % endif
+        </div>
     </div>
 </div>
 </div>
@@ -434,5 +308,119 @@
         </tr>
       % endfor
     </table>
+  </div>
+</%def>
+
+<%def name='stat_block(stats)'>
+  <div class="grid_4">
+    <table>
+      % for display, stat in stats:
+        <tr>
+          <td>${display}:</td>
+          <td>${str(stat) | n}</td>
+        </tr>
+      % endfor
+    </table>
+  </div>
+</%def>
+
+<%def name='coderwall_block()'>
+  <h2>Coderwall Achievements</h2>
+  <table class="badge-list">
+    <% badges_printed = 0 %>
+    <tr>
+      % for badge in stats['coderwall']['badges']:
+        <td class="tooltip"
+            title="<strong>${badge['name']}</strong> - ${badge['description']}.">
+          <img src="${badge['image_uri']}"/>
+        </td>
+        <% badges_printed += 1 %>
+        % if (badges_printed % 8 == 0):
+          </tr><tr>
+        % endif
+      % endfor
+    </tr>
+  </table>
+</%def>
+
+<%def name='github_block()'>
+  <h2>Recent GitHub Activity</h2>
+  <div class="activity-controls">
+    <a href="#" class="button less-activity">Less</a>
+    <a href="#" class="button more-activity">More</a>
+  </div>
+  <ul id="recent-activity">
+    % for event in stats['github']['recent_events']:
+      <% repo_url = "https://github.com/"+event.repo.name %>
+      <li class="event ${event.type}">
+        <span class='timestamp'>${event.created_at}</span>
+        <span class='details'>
+        % if event.type == 'PushEvent':
+            Pushed ${event.payload['size']} commit(s) to
+        % elif event.type == 'IssuesEvent':
+            ${event.payload['action'].capitalize()} issue
+            <a href="${event.payload['issue']['html_url']}">
+            ${event.payload['issue']['title']}</a> in
+        % elif event.type == 'IssueCommentEvent':
+            Commented on
+            <a href="${event.payload['issue']['html_url']}">
+            ${event.payload['issue']['title']}</a> in
+        % elif event.type == 'CreateEvent':
+            Created ${event.payload['ref_type']}
+            ${event.payload['ref']} in
+        % elif event.type == 'DeleteEvent':
+            Deleted ${event.payload['ref_type']}
+            ${event.payload['ref']} in
+        % elif event.type == 'WatchEvent':
+            ${event.payload['action'].capitalize()} watching
+        % elif event.type == 'FollowEvent':
+            Started following
+            <a href="${event.payload['target']['html_url']}">
+            ${event.payload['target']['login']}</a>.
+        % elif event.type == 'GistEvent':
+            <% action = (event.payload['action'] + 'ed').capitalize() %>
+            ${action} gist
+            <a href="${event.payload['gist']['html_url']}">
+            ${event.payload['gist']['description']}</a>.
+        % elif event.type == 'PullRequestEvent':
+            <% action = (event.payload['action']).capitalize() %>
+            ${action} pull request
+            <a href="${event.payload['pull_request']['_links']['html']['href']}">
+            ${event.payload['pull_request']['title']}</a> in
+        % elif event.type == 'CommitCommentEvent':
+            Commented on
+            <a href="${event.payload['comment']['html_url']}">
+            a commit</a> in
+        % elif event.type == 'DownloadEvent':
+            Created a download in
+        % elif event.type == "ForkEvent":
+            Forked
+        % elif event.type == 'ForkApplyEvent':
+            Applied a patch in the fork queue for
+        % elif event.type == "GollumEvent":
+            Edited the wiki of
+        % elif event.type == "MemberEvent":
+            Was added as a collaborator to
+        % elif event.type == "PublicEvent":
+            Open-sourced
+        % elif event.type == "PullRequestReviewCommentEvent":
+            Commented on
+            <a href="${event.payload['comment']['_links']['html']['href']}">
+            a pull request</a> in
+        % elif event.type == "TeamAddEvent":
+            Modified a team.
+        % else:
+            Performed ${event.type} on
+        % endif
+        % if not event.repo.name == '/':
+            <a href="${repo_url}">${event.repo.name}</a>.
+        % endif
+        </span>
+      </li>
+    % endfor
+  </ul>
+  <div class="activity-controls">
+    <a href="#" class="button less-activity">Less</a>
+    <a href="#" class="button more-activity">More</a>
   </div>
 </%def>
