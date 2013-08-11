@@ -149,76 +149,23 @@
         <h2>Attributes</h2>
     </div>
     <div class="clear"></div>
-    <div class="grid_4">
-        <table>
-            <tr class="tooltip"
-                title="<strong>Strength</strong><br />
-                (${stats['ohloh']['lines']} lines / 1000000)
-                    <br />+ (2 * ${len(stats['coderwall']['badges'])} badge(s))<br />
-                <strong>${int((stats['stats']['strength'] % 1) * 100)}%</strong>
-                to next level">
-                <td>Strength:</td>
-                <td>${int(stats['stats']['strength'])}<progress max="1"
-                        value="${stats['stats']['strength'] % 1}">%
-                </progress></td></tr>
-            <tr class="tooltip"
-                title="<strong>Dexterity</strong><br />
-                5 * ${len(stats['ohloh']['languages_by_lines'])} language(s)
-                <br />
-            <strong>${int((stats['stats']['dexterity'] % 1) * 100)}%</strong>
-            to next level">
-                <td>Dexterity:</td>
-                <td>${int(stats['stats']['dexterity'])}<progress max="1"
-                        value="${stats['stats']['dexterity'] % 1}">
-                </progress></td></tr>
-        </table>
-    </div>
-    <div class="grid_4">
-        <table>
-            <tr class="tooltip"
-                title="<strong>Wisdom</strong><br />
-                ${round(stats['stats']['age_months'], 2)} month(s)
-                <br />
-            <strong>${int((stats['stats']['wisdom'] % 1) * 100)}%</strong>
-            to next level">
-                <td>Wisdom:</td>
-                <td>${int(stats['stats']['wisdom'])}<progress max="1"
-                        value="${stats['stats']['wisdom'] % 1}">
-                </progress></td></tr>
-            <tr class="tooltip"
-                title="<strong>Leadership</strong><br />
-                ${stats['github']['forks']} fork(s)<br />
-            <strong>${int((stats['stats']['leadership'] % 1) * 100)}%</strong>
-            to next level">
-                <td>Leadership:</td>
-                <td>${int(stats['stats']['leadership'])}<progress max="1"
-                        value="${stats['stats']['leadership'] % 1}">
-                </progress></td></tr>
-        </table>
-    </div>
-    <div class="grid_4">
-        <table>
-            <tr class="tooltip"
-                title="<strong>Determination</strong><br />
-                ${len(stats['github']['public_repos'])} public repo(s)<br />
-            <strong>${int((stats['stats']['determination'] % 1) * 100)}%</strong>
-            to next level">
-                <td>Determination:</td>
-                <td>${int(stats['stats']['determination'])}<progress max="1"
-                        value="${stats['stats']['determination'] % 1}">
-                </progress></td></tr>
-            <tr class="tooltip"
-                title="<strong>Popularity</strong><br />
-                ${stats['github']['followers']} follower(s)<br />
-            <strong>${int((stats['stats']['popularity'] % 1) * 100)}%</strong>
-            to next level"><td>Popularity:</td>
-                <td>${int(stats['stats']['popularity'])}<progress max="1"
-                        value="${stats['stats']['popularity'] % 1}">
-                </progress></td></tr>
-        </table>
-    </div>
-    <div class="clear">
-    </div>
+    ${self.attribute_block([('Strength', '{} lines / 1000000)<br />+ (2 * {}  badge(s)'.format(
+                                stats['ohloh']['lines'],
+                                len(stats['coderwall']['badges']))),
+                            ('Dexterity', '5 * {} language(s)'.format(
+                                len(stats['ohloh']['languages_by_lines']))),
+                           ])}
+    ${self.attribute_block([('Wisdom', '{} month(s)'.format(
+                                round(stats['stats']['age_months'], 2))),
+                            ('Leadership', '{} fork(s)'.format(
+                                stats['github']['forks'])),
+                           ])}
+    ${self.attribute_block([('Determination', '{} public repo(s)'.format(
+                                len(stats['github']['public_repos']))),
+                            ('Popularity', '{} follower(s)'.format(
+                                stats['github']['followers'])),
+                           ])}
+    <div class="clear"></div>
 
     <!-- SKILLS  -->
 
@@ -451,6 +398,27 @@
 </%def>
 
 <%def name='title()'>Character Sheet for ${stats.name}</%def>
+
+<%def name='attribute_block(attributes)'>
+  <div class="grid_4">
+    <table>
+      % for attribute, algo in attributes:
+        <% slugged_attribute = attribute.lower().replace(' ', '') %>
+        <tr class="tooltip"
+            title="<strong>${attribute}</strong><br />
+                   (${algo})<br /><strong>
+                   ${int((stats['stats'][slugged_attribute] % 1) * 100)}%
+                   </strong> to next level">
+          <td>${attribute}:</td>
+          <td>${int(stats['stats'][slugged_attribute])}
+            <progress max="1" value="${stats['stats'][slugged_attribute] % 1}">%
+            </progress>
+          </td>
+            </tr>
+      % endfor
+    </table>
+  </div>
+</%def>
 
 <%def name='skill_block(skills)'>
   <div class="grid_4">
