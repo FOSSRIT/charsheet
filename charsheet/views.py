@@ -111,19 +111,13 @@ def fetch_data(request):
             'ohloh': request.params['charsheetform:ohloh'],
             'coderwall': request.params['charsheetform:coderwall'],
         }
-
-        username = '???'  # Set default username
-        # Cycle through usernames available, use first one that exists
-        for name in usernames:
-            if usernames[name]:
-                username = usernames[name]
-                break
     except KeyError:
         return HTTPFound(location=request.route_url('home'))
 
     stats_dict = data.handle_all(request, usernames)
 
-    if username != '???':
+    if any(usernames.values()):
+        username = [name for name in usernames.values() if name][0]
         data.inject_knowledge(username, stats_dict)
         return HTTPFound(location=request.route_url('charsheet',
                                                     username=username))
