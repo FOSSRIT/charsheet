@@ -13,11 +13,11 @@
     <title>${self.title()}</title>
   </head>
   <body>
-	<!-- Header logo -->
-	<a href=".."><h1 class="logo-text"><img class='logo' alt='Charsheet logo'
-		src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
-	Charsheet</h1></a>
-	<!-- End header logo -->
+    <!-- Header logo -->
+    <a href=".."><h1 class="logo-text"><img class='logo' alt='Charsheet logo'
+        src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
+    Charsheet</h1></a>
+    <!-- End header logo -->
 
     ${self.body()}
 
