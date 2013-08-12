@@ -23,14 +23,10 @@ init_model(engine)
 metadata.create_all(engine)
 
 from sqlalchemy.exc import OperationalError
-
 from requests import HTTPError
 
 from facts import average_value, average_length, top_users
 import stats
-
-from requests import HTTPError
-
 utc = pytz.UTC  # For datetime handling
 
 
