@@ -244,10 +244,10 @@
 % endif
 
 <%def name='head()'>
-  <link href='${request.static_url('charsheet:static/css/charsheet.css')}' rel='stylesheet' type='text/css'>
+  <link href='${request.static_url('charsheet:static/css/charsheet.css')}'
+        rel='stylesheet' type='text/css'>
   <script src='${request.static_url('charsheet:static/js/charsheet.js')}'></script>
-  <script src='${request.static_url('charsheet:static/js/jquery.tipTip.js')}'>
-  </script>
+  <script src='${request.static_url('charsheet:static/js/jquery.tipTip.js')}'></script>
   <link href='${request.static_url('charsheet:static/css/tipTip.css')}'
         media='all' rel='stylesheet' type='text/css'>
   % if coderwall_data:
