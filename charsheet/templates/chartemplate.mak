@@ -153,20 +153,20 @@
         <h2>Attributes</h2>
       </div>
       <div class="clear"></div>
-      ${self.attribute_block([('Strength', '{} lines / 1000000)<br />+ (2 * {}  badge(s)'.format(
+      ${self.attribute_block([('Strength', '{0} lines / 1000000)<br />+ (2 * {1}  badge(s)'.format(
                                 stats['ohloh']['lines'],
                                 len(stats['coderwall']['badges']))),
-                            ('Dexterity', '5 * {} language(s)'.format(
+                            ('Dexterity', '5 * {0} language(s)'.format(
                                 len(stats['ohloh']['languages_by_lines']))),
                            ])}
-      ${self.attribute_block([('Wisdom', '{} month(s)'.format(
+      ${self.attribute_block([('Wisdom', '{0} month(s)'.format(
                                 round(stats['stats']['age_months'], 2))),
-                            ('Leadership', '{} fork(s)'.format(
+                            ('Leadership', '{0} fork(s)'.format(
                                 stats['github']['forks'])),
                            ])}
-      ${self.attribute_block([('Determination', '{} public repo(s)'.format(
+      ${self.attribute_block([('Determination', '{0} public repo(s)'.format(
                                 len(stats['github']['public_repos']))),
-                            ('Popularity', '{} follower(s)'.format(
+                            ('Popularity', '{0} follower(s)'.format(
                                 stats['github']['followers'])),
                            ])}
       <div class="clear"></div>
