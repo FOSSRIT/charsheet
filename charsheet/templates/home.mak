@@ -29,7 +29,7 @@
        here</a>.
     </p>
     <div id="home_form">
-      ${handle_search_form.display() | n}
+      ${self.search_form()}
     </div>
     <!-- SLIDESHOW COMMENTED OUT UNTIL I FINISH REDESIGN
     <div class="slideshow">
@@ -46,7 +46,7 @@
   </div>
   <div class="grid_6">
     <div id='home_form'>
-      ${charsheet_form.display() | n}
+      ${self.generate_form()}
       <form action="${github_login_url}" method="post">
         <input class="button" type="submit"
                value="Login with GitHub" />
@@ -66,3 +66,78 @@
 </%def>
 
 <%def name='title()'>Charsheet</%def>
+
+<%def name='search_form()'>
+  <link media="all" href="/resources/tw2.forms/static/forms.css"
+        type="text/css" rel="stylesheet">
+  <title>Handle Search</title>
+  <h1>Handle Search</h1>
+  <form method="post" enctype="multipart/form-data"
+        id="handlesearchform:form" action="/handle_search">
+    <span class="error"></span>
+    <table id="handlesearchform">
+      <tbody>
+        <tr id="handlesearchform:handle:container" class="odd">
+          <th><label for="handle">Handle</label></th>
+          <td>
+            <input type="text" id="handlesearchform:handle" name="handlesearchform:handle">
+
+            <span id="handlesearchform:handle:error"></span>
+          </td>
+        </tr>
+        <tr class="error"><td colspan="2">
+          <span id="handlesearchform:error"></span>
+        </td></tr>
+      </tbody>
+    </table>
+
+	<input type="submit" id="submit" value="Search">
+  </form>
+</%def>
+
+<%def name='generate_form()'>
+  <link media="all" href="/resources/tw2.forms/static/forms.css"
+        type="text/css" rel="stylesheet">
+  <title>Accounts</title>
+  <h1>Accounts</h1>
+  <form method="post" enctype="multipart/form-data"
+        id="charsheetform:form" action="/submit">
+    <span class="error"></span>
+    <table id="charsheetform">
+      <tbody>
+        <tr id="charsheetform:master:container" class="odd">
+          <th><label for="master">All</label></th>
+          <td>
+            <input type="text" id="charsheetform:master" name="charsheetform:master">
+
+            <span id="charsheetform:master:error"></span>
+          </td>
+        </tr>
+		<tr id="charsheetform:ohloh:container" class="even">
+          <th><label for="ohloh">Ohloh</label></th>
+          <td>
+            <input type="text" id="charsheetform:ohloh" name="charsheetform:ohloh">
+
+            <span id="charsheetform:ohloh:error"></span>
+          </td>
+		</tr>
+		<tr id="charsheetform:coderwall:container" class="odd">
+          <th><label for="coderwall">Coderwall</label></th>
+          <td>
+            <input type="text" id="charsheetform:coderwall" name="charsheetform:coderwall">
+
+            <span id="charsheetform:coderwall:error"></span>
+          </td>
+		</tr>
+		<tr class="error"><td colspan="2">
+          <input type="hidden" id="charsheetform:id" name="charsheetform:id">
+          <input type="hidden" id="charsheetform:github" name="charsheetform:github">
+          <input type="hidden" id="charsheetform:github_token" name="charsheetform:github_token">
+          <span id="charsheetform:error"></span>
+		</td></tr>
+	  </tbody>
+	</table>
+
+	<input type="submit" id="submit" value="Generate">
+  </form>
+</%def>

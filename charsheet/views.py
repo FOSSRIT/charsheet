@@ -15,16 +15,12 @@ from pyramid.security import (
 from velruse import login_url
 
 import datetime
-import forms
-
 import data
 
 
 @view_config(route_name='home', renderer='home.mak')
 def home_view(request):
     return {
-        'handle_search_form': forms.HandleSearchForm,
-        'charsheet_form': forms.CharsheetForm,
         'github_login_url': login_url(request, 'github'),
     }
 
