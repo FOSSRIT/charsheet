@@ -40,3 +40,5 @@
     </div>
   </body>
 </html>
+
+<%def name='head()'></%def>
