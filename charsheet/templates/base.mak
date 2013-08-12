@@ -14,7 +14,7 @@
   </head>
   <body>
     <!-- Header logo -->
-    <a href=".."><h1 class="logo-text"><img class='logo' alt='Charsheet logo'
+    <a href=".."><h1 class='logo-text'><img class='logo' alt='Charsheet logo'
         src='${request.static_url('charsheet:static/img/icon_64x64.png')}' />
     Charsheet</h1></a>
     <!-- End header logo -->
@@ -32,7 +32,8 @@
           </a>
           <br />This work is licensed under a
           <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">
-          Creative Commons Attribution 3.0 Unported License</a>.
+            Creative Commons Attribution 3.0 Unported License
+		  </a>.
           Code freely available
           <a href="https://github.com/FOSSRIT/charsheet">on GitHub</a>.
         </div>
