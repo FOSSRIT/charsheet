@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import datetime
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -14,7 +15,6 @@ from pyramid.security import (
 
 from velruse import login_url
 
-import datetime
 import data
 
 
