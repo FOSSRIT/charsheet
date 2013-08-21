@@ -45,13 +45,16 @@
     -->
   </div>
   <div class="grid_6">
-    <div id='home_form'>
-      ${self.generate_form()}
+    % if request.session.get('token'):
       <form action="${github_login_url}" method="post">
-        <input class="button" type="submit"
-               value="Login with GitHub" />
+        <input class="button" type="submit" value="Login with GitHub" />
       </form>
-    </div>
+    % else:
+      Already logged into Github!
+    % endif
+  </div>
+  <div class="grid_6" id='home_form'>
+    ${self.generate_form()}
   </div>
   <div class="clear"></div>
 </div>
@@ -91,7 +94,7 @@
       </tbody>
     </table>
 
-	<input type="submit" id="submit" value="Search">
+    <input type="submit" id="submit" value="Search">
   </form>
 </%def>
 
