@@ -116,31 +116,31 @@
             <span id="charsheetform:master:error"></span>
           </td>
         </tr>
-		<tr id="charsheetform:ohloh:container" class="even">
+        <tr id="charsheetform:ohloh:container" class="even">
           <th><label for="ohloh">Ohloh</label></th>
           <td>
             <input type="text" id="charsheetform:ohloh" name="charsheetform:ohloh">
 
             <span id="charsheetform:ohloh:error"></span>
           </td>
-		</tr>
-		<tr id="charsheetform:coderwall:container" class="odd">
+        </tr>
+        <tr id="charsheetform:coderwall:container" class="odd">
           <th><label for="coderwall">Coderwall</label></th>
           <td>
             <input type="text" id="charsheetform:coderwall" name="charsheetform:coderwall">
 
             <span id="charsheetform:coderwall:error"></span>
           </td>
-		</tr>
-		<tr class="error"><td colspan="2">
+        </tr>
+        <tr class="error"><td colspan="2">
           <input type="hidden" id="charsheetform:id" name="charsheetform:id">
           <input type="hidden" id="charsheetform:github" name="charsheetform:github">
           <input type="hidden" id="charsheetform:github_token" name="charsheetform:github_token">
           <span id="charsheetform:error"></span>
-		</td></tr>
-	  </tbody>
-	</table>
+        </td></tr>
+      </tbody>
+    </table>
 
-	<input type="submit" id="submit" value="Generate">
+    <input type="submit" id="submit" value="Generate">
   </form>
 </%def>
