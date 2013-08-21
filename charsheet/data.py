@@ -14,9 +14,12 @@ import urllib
 
 
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
-if os.environ.get('OPENSHIFT_MYSQL_DB_URL'):
-    engine = create_engine(os.environ['OPENSHIFT_MYSQL_DB_URL'] +
-                           os.environ['OPENSHIFT_APP_NAME'])
+if os.environ.get('OPENSHIFT_APP_NAME'):
+    if os.environ.get('OPENSHIFT_MYSQL_DB_URL'):
+        engine = create_engine(os.environ['OPENSHIFT_MYSQL_DB_URL'] +
+                               os.environ['OPENSHIFT_APP_NAME'])
+    else:
+        engine = create_engine('sqlite:///{}knowledge.db'.format(os.environ['OPENSHIFT_DATA_DIR']))
 else:
     engine = create_engine('sqlite:///knowledge.db')
 init_model(engine)
