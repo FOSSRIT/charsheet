@@ -19,7 +19,7 @@ if os.environ.get('OPENSHIFT_APP_NAME'):
         engine = create_engine(os.environ['OPENSHIFT_MYSQL_DB_URL'] +
                                os.environ['OPENSHIFT_APP_NAME'])
     else:
-        engine = create_engine('sqlite:///{}knowledge.db'.format(os.environ['OPENSHIFT_DATA_DIR']))
+        engine = create_engine('sqlite:///{0}knowledge.db'.format(os.environ['OPENSHIFT_DATA_DIR']))
 else:
     engine = create_engine('sqlite:///knowledge.db')
 init_model(engine)
