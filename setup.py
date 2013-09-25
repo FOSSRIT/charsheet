@@ -13,7 +13,6 @@ requires = [
     'pyramid',
     'SQLAlchemy',
     'transaction',
-    'tw2.forms',
     'pygithub',
     'pyramid_tm',
     'pyramid_debugtoolbar',
