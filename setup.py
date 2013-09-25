@@ -10,7 +10,7 @@ requires = [
     'coderwall',
     'elementtree',
     'knowledge>=0.3',
-    'pyramid',
+    'pyramid<=1.4.5',
     'SQLAlchemy',
     'transaction',
     'pygithub',
