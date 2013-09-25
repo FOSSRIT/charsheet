@@ -45,6 +45,9 @@ def main(global_config, **settings):
             settings=settings,
             session_factory=session_factory)
 
+    # use Mako templates
+    config.include('pyramid_mako')
+
     # static view setup
     config.add_static_view('static', 'static', cache_max_age=3600)
 

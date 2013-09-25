@@ -11,6 +11,7 @@ requires = [
     'elementtree',
     'knowledge>=0.3',
     'pyramid<=1.4.5',
+    'pyramid_mako',
     'SQLAlchemy',
     'transaction',
     'pygithub',
