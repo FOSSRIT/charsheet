@@ -45,7 +45,7 @@
     -->
   </div>
   <div class="grid_6">
-    % if request.session.get('token'):
+    % if not request.session.get('token'):
       <form action="${github_login_url}" method="post">
         <input class="button" type="submit" value="Login with GitHub" />
       </form>
