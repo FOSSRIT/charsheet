@@ -100,23 +100,21 @@ def openid_success(context, request, *args, **kwargs):
 
 @view_config(route_name='submit')
 def fetch_data(request):
-    try:
-        usernames = {
-            'github': request.params['charsheetform:github'],
-            'ohloh': request.params['charsheetform:ohloh'],
-            'coderwall': request.params['charsheetform:coderwall'],
-        }
-    except KeyError:
+    usernames = {
+        'github': request.params.get('charsheetform:github'),
+        'ohloh': request.params.get('charsheetform:ohloh'),
+        'coderwall': request.params.get('charsheetform:coderwall'),
+    }
+    if not any(usernames.values()):
+        # No usable usernames given, failing.
         return HTTPFound(location=request.route_url('home'))
 
+    # build stats given known backends
     stats_dict = data.handle_all(request, usernames)
 
-    if any(usernames.values()):
-        username = [name for name in usernames.values() if name][0]
-        data.inject_knowledge(username, stats_dict)
-        return HTTPFound(location=request.route_url('charsheet',
-                                                    username=username))
-    return HTTPFound(location=request.route_url('home'))
+    username = [name for name in usernames.values() if name][0]
+    data.inject_knowledge(username, stats_dict)
+    return HTTPFound(location=request.route_url('charsheet', username=username))
 
 
 @view_config(route_name='handle_search')
