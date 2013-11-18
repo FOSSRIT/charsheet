@@ -22,13 +22,11 @@ $(document).ready(function() {
     // quickly enough to handle anything but slow typing. May attempt rewrite
     // later.
     var master_field = $('input#charsheetform\\:master');
-    var github_field = $('input#charsheetform\\:github');
     var ohloh_field = $('input#charsheetform\\:ohloh');
     var coderwall_field = $('input#charsheetform\\:coderwall');
-    
+
     // Have master account input field update all other field
     master_field.keyup(function () {
-        github_field.val($(this).val());
         ohloh_field.val($(this).val());
         coderwall_field.val($(this).val());
     });
