@@ -14,7 +14,6 @@ from pyramid.security import (
 )
 
 from velruse import login_url
-
 import data
 
 
@@ -34,10 +33,10 @@ def service_login_complete(request):
     headers = remember(request, username)
 
     request.session['token'] = request.context.credentials['oauthAccessToken']
+    request.session['username'] = username
 
-    response = HTTPFound(location=request.route_url('charsheet',
-                                                    username=username),
-                                                    headers=headers)
+    response = HTTPFound(location=request.route_url('home'),
+                            headers=headers)
 
     return response
 
