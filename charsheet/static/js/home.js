@@ -31,3 +31,8 @@ $(document).ready(function() {
         coderwall_field.val($(this).val());
     });
 });
+
+$(window).on('unload', function() {
+    // Re-hide GNU-cat when we leave.
+    $('loading').hide();
+});
