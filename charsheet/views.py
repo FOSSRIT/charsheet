@@ -106,7 +106,7 @@ def fetch_data(request):
         'coderwall': request.params.get('charsheetform:coderwall'),
     }
     if not any(usernames.values()):
-        # No usable usernames given, failing.
+        request.session.flash("Error: No usable usernames given, failing.")
         return HTTPFound(location=request.route_url('home'))
 
     # build stats given known backends
@@ -128,6 +128,7 @@ def handle_search(request):
         return HTTPFound(location=request.route_url('charsheet',
                                                     username=handle))
     # No handle was entered, so go back to home view
+    request.session.flash("Error: No user could be matched")
     return HTTPFound(location=request.route_url('home'))
 
 
