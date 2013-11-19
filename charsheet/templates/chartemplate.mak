@@ -1,21 +1,6 @@
 <%inherit file="base.mak"/>
 
 <% display_sheet = False %>
-<% flash = request.session.pop_flash() %>
-<% alert_y = 20 %>
-% for message in flash:
-  % if message.startswith('Error:'):
-    <div style="top: ${alert_y}px" class="alert alert-error">
-      <h4 class="alert-heading">Error</h4><p>${message[7:]}</p>
-    </div>
-  % else:
-    <div style="top: ${alert_y}px" class="alert alert-success">
-      <h4 class="alert-heading">Success</h4><p>${message}</p>
-    </div>
-    <% display_sheet = True %>
-  % endif
-  <% alert_y += 110 %>
-% endfor
 
 <div class="container_12">
   <div class="grid_6">
