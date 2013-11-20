@@ -28,7 +28,8 @@ requires = [
     ]
 
 if os.environ.get("OPENSHIFT_APP_NAME"):
-    requires.append('mysql-python')
+    requires.append("gevent")
+    requires.append('mysql-python == 1.2.3')
 
 setup(name='charsheet',
       version='0.1',
