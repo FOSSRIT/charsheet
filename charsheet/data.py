@@ -14,23 +14,22 @@ import urllib
 
 
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
-if os.environ.get('OPENSHIFT_MYSQL_DB_URL'):
-    engine = create_engine(os.environ['OPENSHIFT_MYSQL_DB_URL'] +
-                           os.environ['OPENSHIFT_APP_NAME'])
+if os.environ.get('OPENSHIFT_APP_NAME'):
+    if os.environ.get('OPENSHIFT_MYSQL_DB_URL'):
+        engine = create_engine(os.environ['OPENSHIFT_MYSQL_DB_URL'] +
+                               os.environ['OPENSHIFT_APP_NAME'])
+    else:
+        engine = create_engine('sqlite:///{0}knowledge.db'.format(os.environ['OPENSHIFT_DATA_DIR']))
 else:
     engine = create_engine('sqlite:///knowledge.db')
 init_model(engine)
 metadata.create_all(engine)
 
 from sqlalchemy.exc import OperationalError
-
 from requests import HTTPError
 
 from facts import average_value, average_length, top_users
 import stats
-
-from requests import HTTPError
-
 utc = pytz.UTC  # For datetime handling
 
 
@@ -103,10 +102,10 @@ def handle_github(request, username):
     if not (username and request.session.get('token')):
         return data
     try:
-        from pygithub3 import Github, exceptions
+        from github import Github
         token = request.session['token']
-        gh = Github(token=token)
-        user = gh.users.get(user=username)
+        gh = Github(token)
+        user = gh.get_user()
 
         # Handle organizations, because everything breaks if one is
         # passed in, including but not limited to user.bio and
@@ -118,20 +117,16 @@ def handle_github(request, username):
             return data
 
         # Get user repos
-        for page in gh.repos.list(user=username, type='public'):
-            # Results are paginated.
-            for repo in page:
-                data['public_repos'].append(repo)
+        for repo in user.get_repos(type='public'):
+            data['public_repos'].append(repo)
 
         # Get lines written per language and number of times
         # language is used. Also get number of forks of user's original
         # repos.
         user_languages = {}
         for repo in data['public_repos']:
-            repo_languages = gh.repos.list_languages(
-                user=repo.owner.login, repo=repo.name)
             data['forks'] += repo.forks
-            for language in repo_languages:
+            for language in repo.get_languages():
                 if language in user_languages.keys():
                     user_languages[language] += 1
                 else:
@@ -144,14 +139,6 @@ def handle_github(request, username):
         # Get age of account, in months
         data['age_months'] = calculate_age_months(
                 user.created_at, user.created_at.now())
-
-        # Get recent user activity
-        recent_events = list()
-        result = gh.events.users.list_performed_public(user=username)
-        for page in result:
-            for event in page:
-                recent_events.append(event)
-        data['recent_events'] = recent_events[:25]
 
         # Blog/URL handling
         try:
@@ -166,11 +153,13 @@ def handle_github(request, username):
             except AttributeError:
                 data[tag] = '?'
 
+        # get_events() on an AuthenticatedUser gives us global events...
+        # downgrade to a NamedUser to get personal events.
+        user = gh.get_user(user.login)
+        data['recent_events'] = list(user.get_public_events()[:25])
+
         return data
 
-    except exceptions.NotFound:
-        request.session.flash('Error: Unable to find username on GitHub.')
-        return data
     except HTTPError:
         request.session.flash('Error: GitHub denied our request!')
         return data

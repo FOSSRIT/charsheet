@@ -45,6 +45,9 @@ def main(global_config, **settings):
             settings=settings,
             session_factory=session_factory)
 
+    # use Mako templates
+    config.include('pyramid_mako')
+
     # static view setup
     config.add_static_view('static', 'static', cache_max_age=3600)
 
@@ -62,8 +65,9 @@ def main(global_config, **settings):
     config.add_route('stats', '/stats')
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
-    config.add_route('verify_openid', pattern="/dologin.html",
-            view='pyramid_openid.verify_openid')
+    config.add_route('verify_openid', pattern="/dologin.html")
+    config.add_view(view='pyramid_openid.verify_openid',
+                      route_name='verify_openid')
     # TODO: make this service-agnostic
     config.scan()
     return config.make_wsgi_app()

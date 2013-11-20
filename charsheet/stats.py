@@ -94,6 +94,27 @@ def calculate_foo(stats):
     ]
     return sum(stats_to_average) / float(len(stats_to_average))
 
+def determine_class(stats):
+    """
+    Given a user's high-level stats (strength, wisdom, etc.), assign a
+    class name for them.
+    """
+
+    stat_key = ['strength', 'wisdom', 'determination',
+                'dexterity', 'leadership', 'popularity']
+    class_names = ['Battlemage', 'Barbarian', 'Monk', 'Paladin', 'Knight',
+                   'Wizard', 'Sorcerer', 'Cleric', 'Bard', 'Ranger',
+                   'Meister', 'Tourist', 'Druid', 'Rogue', 'Heirophant']
+    top = sorted(((magnitude, stat) for stat, magnitude in stats.items()
+                     if stat in stat_key), reverse=True)
+    # Put those stats in order of listing in stat_key
+    top = sorted(stat_key.index(stat[1]) for stat in top[:2])
+    class_index = top[1] - top[0] - 1 + sum(range(len(stat_key)-top[0],
+                                                  len(stat_key)))
+
+    top_language = sorted(((magnitude, skill) for skill, magnitude in
+                          stats['skills'].items()), reverse=True)[0][1]
+    return ' '.join([top_language, class_names[class_index]])
 
 def calculate_stats(gh, oh, cw):
     """
@@ -185,5 +206,6 @@ def calculate_stats(gh, oh, cw):
 
     # Foo
     stats['foo'] = calculate_foo(stats)
+    stats['class'] = determine_class(stats)
 
     return stats

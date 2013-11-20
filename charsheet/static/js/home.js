@@ -21,15 +21,18 @@ $(document).ready(function() {
     // it was altered by the user. Unfortunately, the JS cannot seem to react
     // quickly enough to handle anything but slow typing. May attempt rewrite
     // later.
-    var master_field = $('input#charsheetform\\:master');
-    var github_field = $('input#charsheetform\\:github');
-    var ohloh_field = $('input#charsheetform\\:ohloh');
-    var coderwall_field = $('input#charsheetform\\:coderwall');
-    
+    var master_field = $('input#master');
+    var ohloh_field = $('input#ohloh');
+    var coderwall_field = $('input#coderwall');
+
     // Have master account input field update all other field
     master_field.keyup(function () {
-        github_field.val($(this).val());
         ohloh_field.val($(this).val());
         coderwall_field.val($(this).val());
     });
+});
+
+$(window).on('unload', function() {
+    // Re-hide GNU-cat when we leave.
+    $('loading').hide();
 });

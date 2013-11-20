@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import datetime
 
 from pyramid.httpexceptions import (
     HTTPFound,
@@ -14,17 +15,12 @@ from pyramid.security import (
 
 from velruse import login_url
 
-import datetime
-import forms
-
 import data
 
 
 @view_config(route_name='home', renderer='home.mak')
 def home_view(request):
     return {
-        'handle_search_form': forms.HandleSearchForm,
-        'charsheet_form': forms.CharsheetForm,
         'github_login_url': login_url(request, 'github'),
     }
 
@@ -38,10 +34,10 @@ def service_login_complete(request):
     headers = remember(request, username)
 
     request.session['token'] = request.context.credentials['oauthAccessToken']
+    request.session['username'] = username
 
-    response = HTTPFound(location=request.route_url('charsheet',
-                                                    username=username),
-                                                    headers=headers)
+    response = HTTPFound(location=request.route_url('home'),
+                            headers=headers)
 
     return response
 
@@ -105,29 +101,21 @@ def openid_success(context, request, *args, **kwargs):
 
 @view_config(route_name='submit')
 def fetch_data(request):
-    try:
-        usernames = {
-            'github': request.params['charsheetform:github'],
-            'ohloh': request.params['charsheetform:ohloh'],
-            'coderwall': request.params['charsheetform:coderwall'],
-        }
-
-        username = '???'  # Set default username
-        # Cycle through usernames available, use first one that exists
-        for name in usernames:
-            if usernames[name]:
-                username = usernames[name]
-                break
-    except KeyError:
+    usernames = {
+        'github': request.params.get('github'),
+        'ohloh': request.params.get('ohloh'),
+        'coderwall': request.params.get('coderwall'),
+    }
+    if not any(usernames.values()):
+        request.session.flash("Error: No usable usernames given, failing.")
         return HTTPFound(location=request.route_url('home'))
 
+    # build stats given known backends
     stats_dict = data.handle_all(request, usernames)
 
-    if username != '???':
-        data.inject_knowledge(username, stats_dict)
-        return HTTPFound(location=request.route_url('charsheet',
-                                                    username=username))
-    return HTTPFound(location=request.route_url('home'))
+    username = [name for name in usernames.values() if name][0]
+    data.inject_knowledge(username, stats_dict)
+    return HTTPFound(location=request.route_url('charsheet', username=username))
 
 
 @view_config(route_name='handle_search')
@@ -141,6 +129,7 @@ def handle_search(request):
         return HTTPFound(location=request.route_url('charsheet',
                                                     username=handle))
     # No handle was entered, so go back to home view
+    request.session.flash("Error: No user could be matched")
     return HTTPFound(location=request.route_url('home'))
 
 

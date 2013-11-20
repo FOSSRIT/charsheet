@@ -11,20 +11,15 @@ requires = [
     'elementtree',
     'knowledge>=0.3',
     'pyramid',
+    'pyramid_mako',
     'SQLAlchemy',
     'transaction',
-    'tw2.core',
-    'tw2.forms',
-    'tw2.dynforms',
-    'tw2.sqla',
-    'tw2.jqplugins.jqgrid',
-    'pygithub3',
+    'pygithub',
     'pyramid_tm',
     'pyramid_debugtoolbar',
     'pyramid_openid',
     'python-dateutil',
     'pytz',
-    'requests==0.14.0', # for something
     'waitress',
     'zope.sqlalchemy',
     'nose',
@@ -33,7 +28,8 @@ requires = [
     ]
 
 if os.environ.get("OPENSHIFT_APP_NAME"):
-    requires.append('mysql-python')
+    requires.append("gevent")
+    requires.append('mysql-python == 1.2.3')
 
 setup(name='charsheet',
       version='0.1',
