@@ -90,60 +90,48 @@
 </%def>
 
 <%def name='generate_form()'>
-  <link media="all" href="/resources/tw2.forms/static/forms.css"
-        type="text/css" rel="stylesheet">
   <h1>Accounts</h1>
   <form method="post" enctype="multipart/form-data"
-        id="charsheetform:form" action="/submit">
-    <span class="error"></span>
+        id="charsheetform" action="/submit">
     <table id="charsheetform">
       <tbody>
-        <tr id="charsheetform:master:container" class="odd">
+        <tr>
           <th><label for="master">All</label></th>
           <td>
-            <input type="text" id="charsheetform:master" name="charsheetform:master">
-
-            <span id="charsheetform:master:error"></span>
+            <input type="text" id="master" name="master">
           </td>
         </tr>
 
-        <tr id="charsheetform:github:container" class="even">
+        <tr>
           <th><label for="github">Github</label></th>
           <td>
-           % if not request.session.get('token'):
-             <a href="${github_login_url}" class="button">Login with GitHub</a>
-           % else:
-             <input type="text" readonly id="charsheetform:github" name="charsheetform:github"
-              value="${request.session.get('username')}"></input>
-           % endif
+            % if not request.session.get('token'):
+              <a href="${github_login_url}" class="button">Login with GitHub</a>
+            % else:
+              <input type="text" readonly id="github" name="github"
+                     value="${request.session.get('username')}"></input>
+              <input type="hidden" id="github_token" name="github_token"
+                     value=${request.session.get('token')}>
+            % endif
           </td>
         </tr>
 
-        <tr id="charsheetform:ohloh:container" class="odd">
+        <tr>
           <th><label for="ohloh">Ohloh</label></th>
           <td>
-            <input type="text" id="charsheetform:ohloh" name="charsheetform:ohloh">
-
-            <span id="charsheetform:ohloh:error"></span>
+            <input type="text" id="ohloh" name="ohloh">
           </td>
         </tr>
-        <tr id="charsheetform:coderwall:container" class="even">
+
+        <tr>
           <th><label for="coderwall">Coderwall</label></th>
           <td>
-            <input type="text" id="charsheetform:coderwall" name="charsheetform:coderwall">
-
-            <span id="charsheetform:coderwall:error"></span>
+            <input type="text" id="coderwall" name="coderwall">
           </td>
         </tr>
-        <tr class="error"><td colspan="2">
-          <input type="hidden" id="charsheetform:id" name="charsheetform:id">
-          <input type="hidden" id="charsheetform:github_token"
-           name="charsheetform:github_token" value=${request.session.get('token')}>
-          <span id="charsheetform:error"></span>
-        </td></tr>
       </tbody>
     </table>
-
     <input type="submit" id="submit" value="Generate">
+
   </form>
 </%def>

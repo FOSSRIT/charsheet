@@ -16,9 +16,8 @@
     <p>Charsheet generated at ${stats['timestamp']}.</p>
     <p>
       <a class='button' href="/">Back</a>
-      <a href='/submit?${'&'.join(['charsheetform:'+backend+'='+username for
-                                   backend, username in stats['usernames'].items()
-                                   if username])}'
+      <a href='/submit?${'&'.join([backend+'='+username for backend, username
+                                   in stats['usernames'].items() if username])}'
          class='button'>Refresh</a>
     </p>
   </div>
