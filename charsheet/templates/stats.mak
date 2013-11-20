@@ -58,9 +58,6 @@
             % endfor
           % endif
         </table>
-      </div>
-      <div class="clear"></div>
-      <div class="grid_6">
         <h3>Average Stats</h3>
         <table>
           <tr>
