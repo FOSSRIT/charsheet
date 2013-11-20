@@ -14,6 +14,7 @@ from pyramid.security import (
 )
 
 from velruse import login_url
+
 import data
 
 
@@ -101,9 +102,9 @@ def openid_success(context, request, *args, **kwargs):
 @view_config(route_name='submit')
 def fetch_data(request):
     usernames = {
-        'github': request.params.get('charsheetform:github'),
-        'ohloh': request.params.get('charsheetform:ohloh'),
-        'coderwall': request.params.get('charsheetform:coderwall'),
+        'github': request.params.get('github'),
+        'ohloh': request.params.get('ohloh'),
+        'coderwall': request.params.get('coderwall'),
     }
     if not any(usernames.values()):
         request.session.flash("Error: No usable usernames given, failing.")
