@@ -37,3 +37,14 @@ def top_users(data, stat):
         for username in data], key=operator.itemgetter(1), reverse=True)
 
     return scoreboard[:10]
+
+
+def sheets_by_class(data):
+    """
+    Return dict() of total users per class name.
+    """
+    classes = dict()
+    for user_data in data.values():
+        class_name = user_data['stats']['class']
+        classes[class_name] = classes.get(class_name, 0) + 1
+    return classes
