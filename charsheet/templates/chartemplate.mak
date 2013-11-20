@@ -6,9 +6,8 @@
   <div class="grid_6">
     <h2>Your Charsheet</h2>
     <p>
-      If all went well, your developer character sheet has been
-      generated below. In the future, you will be able easily save
-      and share your charsheet.
+      Your developer character sheet has been generated below. You can share
+      this link to show other people your character sheet.
     </p>
   </div>
   <div class="grid_6">
