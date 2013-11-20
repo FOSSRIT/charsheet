@@ -26,6 +26,7 @@
 <div class="container_12 sheet_parent">
   <div class="sheet">
     <h1>Character Record Sheet</h1>
+    <h3>${stats.name} is a ${stats.stats['class']}</h3>
     <div class="clear"></div>
 
     <!-- GENERAL INFORMATION -->
