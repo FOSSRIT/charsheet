@@ -32,7 +32,7 @@ if os.environ.get("OPENSHIFT_APP_NAME"):
     requires.append('mysql-python == 1.2.3')
 
 setup(name='charsheet',
-      version='0.1',
+      version='1.0',
       description='charsheet',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
