@@ -122,15 +122,14 @@ def fetch_data(request):
 def handle_search(request):
 
     # Get handle from form and strip it of hanging whitespace
-    handle = request.params['handlesearchform:handle'].strip()
+    handle = request.params['handle'].strip()
 
-    # If a username was entered, look for it
-    if handle != '':
-        return HTTPFound(location=request.route_url('charsheet',
-                                                    username=handle))
-    # No handle was entered, so go back to home view
-    request.session.flash("Error: No user could be matched")
-    return HTTPFound(location=request.route_url('home'))
+    if not handle:
+        # No handle was entered, so go back to home view
+        request.session.flash("Error: Please enter a username to search")
+        return HTTPFound(location=request.route_url('home'))
+
+    return HTTPFound(location=request.route_url('charsheet', username=handle))
 
 
 @view_config(route_name='charsheet', renderer='chartemplate.mak')
@@ -142,6 +141,7 @@ def charsheet_view(request):
         request.session.flash("Character sheet generated.")
         return dict(stats=user)
     else:
+        request.session.flash("Error: No user could be matched")
         return HTTPFound(location=request.route_url('home'))
 
 

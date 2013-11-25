@@ -62,26 +62,18 @@
 <%def name='title()'>Charsheet</%def>
 
 <%def name='search_form()'>
-  <link media="all" href="/resources/tw2.forms/static/forms.css"
-        type="text/css" rel="stylesheet">
-  <title>Handle Search</title>
   <h1>Handle Search</h1>
   <form method="post" enctype="multipart/form-data"
-        id="handlesearchform:form" action="/handle_search">
+        id="searchform" action="/handle_search">
     <span class="error"></span>
-    <table id="handlesearchform">
+    <table>
       <tbody>
-        <tr id="handlesearchform:handle:container" class="odd">
+        <tr>
           <th><label for="handle">Handle</label></th>
           <td>
-            <input type="text" id="handlesearchform:handle" name="handlesearchform:handle">
-
-            <span id="handlesearchform:handle:error"></span>
+            <input type="text" id="handle" name="handle">
           </td>
         </tr>
-        <tr class="error"><td colspan="2">
-          <span id="handlesearchform:error"></span>
-        </td></tr>
       </tbody>
     </table>
 
