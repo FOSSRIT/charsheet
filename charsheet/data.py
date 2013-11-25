@@ -28,7 +28,7 @@ metadata.create_all(engine)
 from sqlalchemy.exc import OperationalError
 from requests import HTTPError
 
-from facts import average_value, average_length, top_users
+from facts import average_value, average_length, top_users, sheets_by_class
 import stats
 utc = pytz.UTC  # For datetime handling
 
@@ -296,6 +296,7 @@ def global_stats():
         for fact in user.facts.values():
             user_data[user.name][fact.key] = fact.value
 
+    languages, classes = sheets_by_class(user_data)
     stats = {
         'avg_foo': average_value(user_data, 'foo'),
         'avg_dexterity': average_value(user_data, 'dexterity'),
@@ -309,6 +310,8 @@ def global_stats():
         'top_foo': top_users(user_data, 'foo'),
         'sheets_generated': len(usernames),
         'sheets_unique': len(user_data),
+        'class_sheets': classes,
+        'language_sheets': languages,
     }
 
     return stats
