@@ -284,7 +284,6 @@ def global_stats():
             'avg_badges': 0,
             'top_foo': dict(),
             'sheets_generated': 0,
-            'sheets_unique': 0,
         }
 
         return stats
@@ -309,7 +308,6 @@ def global_stats():
         'avg_badges': average_length(user_data, 'badges', 'coderwall'),
         'top_foo': top_users(user_data, 'foo'),
         'sheets_generated': len(usernames),
-        'sheets_unique': len(user_data),
         'class_sheets': classes,
         'language_sheets': languages,
     }
