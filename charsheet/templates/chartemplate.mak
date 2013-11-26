@@ -340,7 +340,8 @@
             ${event.payload['issue']['title']}</a> in
         % elif event.type == 'CreateEvent':
             Created ${event.payload['ref_type']}
-            ${event.payload['ref']} in
+            % if not ${event.payload['ref_type']} == 'repository':
+              ${event.payload['ref']} in
         % elif event.type == 'DeleteEvent':
             Deleted ${event.payload['ref_type']}
             ${event.payload['ref']} in
