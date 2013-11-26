@@ -97,7 +97,7 @@ def handle_github(request, username):
         'languages_by_repos': [],
         'location': '',
         'name': '',
-        'public_repos': [],
+        'public_repos': 0,
      }
     if not (username and request.session.get('token')):
         return data
@@ -116,15 +116,12 @@ def handle_github(request, username):
                         GitHub organizations.')
             return data
 
-        # Get user repos
-        for repo in user.get_repos(type='public'):
-            data['public_repos'].append(repo)
-
         # Get lines written per language and number of times
         # language is used. Also get number of forks of user's original
         # repos.
         user_languages = {}
-        for repo in data['public_repos']:
+        for repo in user.get_repos(type='public'):
+            data['public_repos'] += 1
             data['forks'] += repo.forks
             for language in repo.get_languages():
                 if language in user_languages.keys():

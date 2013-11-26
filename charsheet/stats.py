@@ -54,7 +54,7 @@ def calculate_determination(projects=0):
     Determination is determined (ha-ha) by the number of projects the
     user has worked on.
     """
-    return len(projects)
+    return projects
 
 
 def calculate_popularity(followers=0):

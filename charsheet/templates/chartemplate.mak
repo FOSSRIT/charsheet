@@ -152,7 +152,7 @@
                               stats['github']['forks'])),
                          ])}
     ${self.attribute_block([('Determination', '{0} public repo(s)'.format(
-                              len(stats['github']['public_repos']))),
+                              stats['github']['public_repos'])),
                           ('Popularity', '{0} follower(s)'.format(
                               stats['github']['followers'])),
                          ])}
@@ -177,7 +177,7 @@
     <div class="clear"></div>
     ${self.stat_block([
       ('Public GitHub Repos',
-       len(stats['github']['public_repos']) if stats['github'].get('public_repos') else '?'),
+       stats['github']['public_repos'] if stats['github'].get('public_repos') else '?'),
       ('Lines Committed', stats['ohloh'].get('lines') or '?'),
       ('Most Repos',
        ", ".join(stats['github']['languages_by_repos'][:3])
