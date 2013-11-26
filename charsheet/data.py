@@ -94,7 +94,7 @@ def handle_github(request, username):
         'forks': 0,
         'hireable': False,
         'recent_events': [],
-        'language_by_repos': [],
+        'languages_by_repos': [],
         'location': '',
         'name': '',
         'public_repos': [],
