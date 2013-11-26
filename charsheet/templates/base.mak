@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link href='${request.static_url('charsheet:static/css/reset.css')}'
+    <link href='${request.static_path('charsheet:static/css/reset.css')}'
           rel='stylesheet' type='text/css' media='all'>
-    <link href='${request.static_url('charsheet:static/css/960_12_col.css')}'
+    <link href='${request.static_path('charsheet:static/css/960_12_col.css')}'
           rel='stylesheet' type='text/css' media="all">
-    <link href='${request.static_url('charsheet:static/css/app.css')}'
+    <link href='${request.static_path('charsheet:static/css/app.css')}'
           rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     ${self.head()}
