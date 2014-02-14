@@ -87,12 +87,14 @@
         id="charsheetform" action="/submit">
     <table id="charsheetform">
       <tbody>
+	  <!-- Disabling this for now. Not very useful.
         <tr>
           <th><label for="master">All</label></th>
           <td>
             <input type="text" id="master" name="master">
           </td>
         </tr>
+	  End field disable -->
 
         <tr>
           <th><label for="github">Github</label></th>
