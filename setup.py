@@ -19,12 +19,13 @@ requires = [
     'pyramid_openid',
     'python-dateutil',
     'pytz',
+    'requests',
     'waitress',
     'zope.sqlalchemy',
     'nose',
     'coverage',
     'velruse',
-    ]
+]
 
 if os.environ.get("OPENSHIFT_APP_NAME"):
     requires.append("gevent")
