@@ -11,6 +11,7 @@ import json
 import pytz
 import re
 import urllib
+import xml.etree.ElementTree as ET
 
 
 from knowledge.model import Fact, Entity, DBSession, init_model, metadata, create_engine
@@ -173,9 +174,6 @@ def handle_ohloh(request, username):
     }
     if not username:
         return data
-
-    # Import ElementTree for XML parsing (Python 2.5+)
-    import elementtree.ElementTree as ET
 
     # Ohloh requires an API key and the account email, and returns
     # account information in name: value pairs.

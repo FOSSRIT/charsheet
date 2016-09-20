@@ -8,7 +8,6 @@ CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
 
 requires = [
     'coderwall',
-    'elementtree',
     'knowledge>=0.3',
     'pyramid',
     'pyramid_mako',
