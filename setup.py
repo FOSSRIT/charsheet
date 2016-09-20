@@ -22,8 +22,6 @@ requires = [
     'requests',
     'waitress',
     'zope.sqlalchemy',
-    'nose',
-    'coverage',
     'velruse',
 ]
 
@@ -50,6 +48,8 @@ setup(name='charsheet',
       zip_safe=False,
       tests_require=[
           'zope.interface',
+          'nose',
+          'coverage',
       ],
       test_suite='charsheet',
       install_requires=requires,
